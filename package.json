@@ -1,12 +1,12 @@
 {
-  "name": "snek-package-template",
+  "name": "snek-intel",
   "version": "1.0.0",
   "private": true,
   "homepage": "http://snek.at",
   "license": "EUPL-1.2",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/snek-at/package-template.git"
+    "url": "git+https://github.com/snek-at/intel.git"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -22,13 +22,14 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "description": "A tiny snek template.",
+  "description": "A not so tiny snek intel.",
   "bugs": {
-    "url": "https://github.com/snek-at/package-template/issues"
+    "url": "https://github.com/snek-at/intel/issues"
   },
   "main": "src/index.js",
   "author": "schettn",
   "dependencies": {
     "react-scripts": "^3.3.1"
-  }
+  },
+  "devDependencies": {}
 }
