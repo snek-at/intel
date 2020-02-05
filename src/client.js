@@ -5,14 +5,14 @@ class Github{
         var url = "https://api.github.com/graphql";
         let client = new Graphql(url, {
             authorization
-        })
+        });
         this.get = async (query, variables) => client.send(query, variables);
     }
 }
 
 export {
     Github
-}
+};
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
