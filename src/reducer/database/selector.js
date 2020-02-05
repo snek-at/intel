@@ -1,12 +1,8 @@
-class Selecter{
-    constructor(){
-
-    }
+class Selector {
+  constructor() {}
 }
 
-export {
-    Selecter
-}
+export { Selector };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

@@ -8,7 +8,7 @@ class Reducer {
 
     this.get = () => {};
     this.getRecent = () => {};
-    this.getBySource = source => {};
+    this.getBySource = (source) => {};
   }
 }
 

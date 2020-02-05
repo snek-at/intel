@@ -6,56 +6,55 @@ class Inserter {
   }
 
   platform(fields) {
-    this.db.exec(insert.platform, fields)
+    this.db.exec(insert.platform, fields);
   }
 
-  organization(fields) {
-    this.db.exec(insert.organization, fields)
+  organization(fields) {
+    this.db.exec(insert.organization, fields);
   }
 
   member(fields) {
-    this.db.exec(insert.member, fields)
+    this.db.exec(insert.member, fields);
   }
 
   organizationHasMember(fields) {
-    this.db.exec(insert.organizationHasMember, fields)
+    this.db.exec(insert.organizationHasMember, fields);
   }
 
   repositoryHasMember(fields) {
-    this.db.exec(insert.repositoryHasMember, fields)
+    this.db.exec(insert.repositoryHasMember, fields);
   }
 
   platformHasOrganization(fields) {
-    this.db.exec(insert.platformHasOrganization, fields)
+    this.db.exec(insert.platformHasOrganization, fields);
   }
 
   calendar(fields) {
-    this.db.exec(insert.calendar, fields)
+    this.db.exec(insert.calendar, fields);
   }
 
   language(fields) {
-    this.db.exec(insert.language, fields)
+    this.db.exec(insert.language, fields);
   }
 
   repository(fields) {
-    this.db.exec(insert.repository, fields)
+    this.db.exec(insert.repository, fields);
   }
 
   platformHasRepository(fields) {
-    this.db.exec(insert.platformHasRepository, fields)
+    this.db.exec(insert.platformHasRepository, fields);
   }
 
   statistic(fields) {
-    this.db.exec(insert.statistic, fields)
+    this.db.exec(insert.statistic, fields);
   }
 
   streak(fields) {
-    this.db.exec(insert.streak, fields)
+    this.db.exec(insert.streak, fields);
   }
-
 }
 
-export { Inserter }
+export { Inserter };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

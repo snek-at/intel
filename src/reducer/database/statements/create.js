@@ -175,7 +175,7 @@ export {
   repositoryHasMember,
   platformHasOrganization,
   platformHasRepository,
-}
+};
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

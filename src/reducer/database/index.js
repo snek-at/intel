@@ -1,6 +1,6 @@
-import { Database as alasqlDB } from "alasql"
+import { Database as AlasqlDB } from "alasql";
 import { Inserter } from "./inserter";
-import { Selecter } from "./selector";
+import { Selector } from "./selector";
 import * as create from "./statements/create";
 
 const tables = `
@@ -21,21 +21,20 @@ const tables = `
 
 class Database {
   constructor(name) {
-    try{
-        let database = new alasqlDB(name);
-        database.exec(tables)
+    try {
+      let database = new AlasqlDB(name);
+      database.exec(tables);
 
-        // Access sql statements
-        this.insert = new Inserter(database);
-        this.select = new Selecter(database);
-    }
-    catch(err){
-      throw err //new Error("Error occurred when initializing database")
+      // Access sql statements
+      this.insert = new Inserter(database);
+      this.select = new Selector(database);
+    } catch (err) {
+      throw err; //new Error("Error occurred when initializing database")
     }
   }
 }
 
-export { Database }
+export { Database };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
