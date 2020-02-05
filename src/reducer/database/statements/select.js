@@ -11,8 +11,8 @@ const platformTypes = `
 `;
 
 export {
- basePlatform,
- platformTypes
+  basePlatform,
+  platformTypes
 };
 
 /**

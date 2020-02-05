@@ -38,26 +38,26 @@ const member = `
 
 const organizationHasMember = `
   INSERT INTO organization_has_member(
-      organization_id,
-      member_id
+    organization_id,
+    member_id
   )
-VALUES (?,?);
+  VALUES (?,?);
 `;
 
 const repositoryHasMember = `
   INSERT INTO repository_has_member(
-      repository_id,
-      member_id
+    repository_id,
+    member_id
   )
-VALUES (?,?);
+  VALUES (?,?);
 `;
 
 const platformHasOrganization = `
   INSERT INTO platform_has_organization(
-      platform_id,
-      organization_id
+    platform_id,
+    organization_id
   )
-VALUES (?,?);
+  VALUES (?,?);
 `;
 
 const calendar = `
@@ -94,10 +94,10 @@ const repository = `
 
 const platformHasRepository = `
   INSERT INTO platform_has_repository(
-      platform_id,
-      repository_id
+    platform_id,
+    repository_id
   )
-VALUES (?,?);
+  VALUES (?,?);
 `;
 
 const statistic = `
