@@ -2,10 +2,6 @@ function squeezer(database, input) {}
 
 class Reducer {
   constructor(database) {
-    this.squeeze = input => {
-      squeezer(database, input);
-    };
-
     this.get = () => {};
     this.getRecent = () => {};
   }

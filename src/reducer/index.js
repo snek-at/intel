@@ -3,8 +3,8 @@ import { Reducer as SampleReducer } from "./sample.js";
 
 class Reducer {
   constructor() {
-    let database = new Database("Developer");
-    this.sample = new SampleReducer(database);
+    this.database = new Database("Developer");
+    this.sample = new SampleReducer(this.database);
 
     this.get = () => {};
     this.getRecent = () => {};
