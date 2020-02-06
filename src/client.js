@@ -4,7 +4,9 @@ class Github{
     constructor(authorization){
         var url = "https://api.github.com/graphql";
         let client = new Graphql(url, {
-            authorization
+            headers: {
+                authorization
+            }
         });
         this.get = async (query, variables) => client.send(query, variables);
     }
