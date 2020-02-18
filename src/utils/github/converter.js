@@ -16,15 +16,15 @@ function run(models, rawData) {
     statusEmojiHTML: rawData.profile.status.emojiHTML
   });
 
-  rawData.profile.organizations.edges.forEach(edge => {
+  rawData.profile.organizations.edges.forEach((edge) => {
     let organization = platform.createOrganization({
       avatarUrl: edge.node.avatarUrl,
       url: edge.node.url,
       name: edge.node.login,
-      fullname: edge.node.name,
+      fullname: edge.node.name
     });
 
-    edge.node.membersWithRole.nodes.forEach(node => {
+    edge.node.membersWithRole.nodes.forEach((node) => {
       organization.createMember({
         avatarUrl: node.avatarUrl,
         url: node.url,
@@ -41,13 +41,13 @@ function run(models, rawData) {
   let repositories = {};
   // Calendar
   for (let [index, year] of Object.entries(rawData.calendar)) {
-    if (index != "__typename") {
+    if (index !== "__typename") {
       let yearCount = "0";
       if (index !== "current") {
         yearCount = index.split("T")[1];
 
-        year.contributionCalendar.weeks.forEach(week => {
-          week.contributionDays.forEach(day => {
+        year.contributionCalendar.weeks.forEach((week) => {
+          week.contributionDays.forEach((day) => {
             if (day.contributionCount > 0) {
               // Insert Calendar days
               platform.createCalendarEntry({
@@ -60,18 +60,18 @@ function run(models, rawData) {
 
         // Store Repositories in variable
 
-        year.commitContributionsByRepository.forEach(node => {
+        year.commitContributionsByRepository.forEach((node) => {
           repositories[node.repository.nameWithOwner] = node.repository;
         });
-        year.issueContributionsByRepository.forEach(node => {
+        year.issueContributionsByRepository.forEach((node) => {
           repositories[node.repository.nameWithOwner] = node.repository;
         });
-        year.pullRequestContributionsByRepository.forEach(node => {
+        year.pullRequestContributionsByRepository.forEach((node) => {
           repositories[node.repository.nameWithOwner] = node.repository;
         });
       }
 
-      let statistic = platform.createStatistic({
+      platform.createStatistic({
         year: yearCount,
         totalIssueContributions: year.totalIssueContributions,
         totalCommitContributions: year.totalCommitContributions,
@@ -86,14 +86,12 @@ function run(models, rawData) {
         totalRepositoriesWithContributedPullRequests:
           year.totalRepositoriesWithContributedPullRequests
       });
-      // console.log(statistic.getStreaks());
-      // console.log(year);
     }
   }
 
   // Process Repositories
   // console.log(repositories);
-  Object.values(repositories).forEach(node => {
+  Object.values(repositories).forEach((node) => {
     // Create repository owner
     let owner = models.Member.objects.create({
       avatarUrl: node.owner.avatarUrl,
@@ -116,25 +114,24 @@ function run(models, rawData) {
       owner_id: owner.id
     });
 
-    node.assignableUsers.nodes.forEach(member => {
+    node.assignableUsers.nodes.forEach((member) => {
       repository.createMember({
         avatarUrl: member.avatarUrl,
         url: member.url,
         fullname: member.name,
         username: member.login,
         platform_id: platform.id
-      })
-    })
+      });
+    });
 
-    node.languages.edges.forEach(edge => {
+    node.languages.edges.forEach((edge) => {
       repository.createLanguage({
         color: edge.node.color,
         name: edge.node.name,
         size: edge.size
-      })
-    })
+      });
+    });
   });
-
 }
 
 export { run };

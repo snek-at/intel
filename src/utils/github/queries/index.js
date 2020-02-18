@@ -6,15 +6,12 @@ function profile() {
 }
 
 function calendar(profile) {
-  // console.log(profile)
   let date = moment(profile.createdAt);
-  // console.log(date)
-
   let fragments = "";
   let runtime = moment().year() - date.year();
 
   for (let index = 0; index <= runtime; index++) {
-    fragments += queries.CALENDAR_FRAGMENT(
+    fragments += queries.calendar_fragment(
       date.year(),
       moment(date)
         .month(0)
@@ -27,10 +24,10 @@ function calendar(profile) {
     );
     date.add(1, "year");
   }
-  return queries.CALENDAR(fragments);
+  return queries.calendar(fragments);
 }
 
-export { profile, calendar}
+export { profile, calendar };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
