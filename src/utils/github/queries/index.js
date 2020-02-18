@@ -2,7 +2,7 @@ import moment from "moment";
 import * as queries from "./data";
 
 function profile() {
-  return queries.PROFILE();
+  return queries.profile();
 }
 
 function calendar(profile) {
