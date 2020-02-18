@@ -16,7 +16,13 @@ function mergedStatistic() {
 
   statistic.forEach(entry => {
     entry.contributions = entry.getContributions();
-    entry.streaks = entry.getStreaks().map(streak => { return streak.render()});
+    let streaks = entry.getStreaks().map(streak => { return streak.render()});
+    let {longest, current} = entry.getStreakDetail(streaks)
+    entry.streak = {
+      longest,
+      current,
+      streaks
+    }
     entry.busiestDay = entry.getBusiestDay();
 
     if(entry.busiestDay){

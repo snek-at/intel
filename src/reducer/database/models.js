@@ -294,29 +294,41 @@ class Statistic extends osm.models.StatisticSO {
     return streak;
   }
 
-  getStreaks() {
+  getDates() {
     let from, to;
 
-    if (this.year) {
-      if (this.year === 0) {
-        from = moment()
-          .subtract(1, "years")
-          .day(0)
-          .format();
-        to = moment().format();
-      } else {
-        from = moment()
-          .year(this.year)
-          .month(0)
-          .day(0)
-          .date(1)
-          .format();
-        to = moment()
-          .year(this.year)
-          .month(11)
-          .day(31)
-          .format();
-      }
+    if (this.year === 0) {
+      from = moment()
+        .subtract(1, "years")
+        .day(0)
+        .format();
+      to = moment().format();
+    } else {
+      from = moment()
+        .year(this.year)
+        .month(0)
+        .day(0)
+        .date(1)
+        .format();
+      to = moment()
+        .year(this.year)
+        .month(11)
+        .day(31)
+        .format();
+    }
+    
+    return {
+      from,
+      to
+    }
+  }
+
+  getStreaks() {
+    console.log(this.year)
+    if (this.year || this.year === 0) {
+      console.log(this.year)
+
+      let { from , to} = this.getDates();
       let response = Calendar.getDaysBetweenDate(this, {
         from,
         to
@@ -335,29 +347,32 @@ class Statistic extends osm.models.StatisticSO {
     return [];
   }
 
-  getBusiestDay() {
-    let from, to;
-    if (this.year) {
-      if (this.year === 0) {
-        from = moment()
-          .subtract(1, "years")
-          .day(0)
-          .format();
-        to = moment().format();
-      } else {
-        from = moment()
-          .year(this.year)
-          .month(0)
-          .day(0)
-          .date(1)
-          .format();
-        to = moment()
-          .year(this.year)
-          .month(11)
-          .day(31)
-          .format();
+  getStreakDetail(streaks) {
+    let longest = {
+      totalDays: 0
+    };
+    let current = {};
+
+    streaks.forEach(streak => {
+      if(streak.totalDays >= longest.totalDays){
+        longest = streak;
       }
 
+      if(moment().diff(streak.endDate, "days") === 0){
+        current = streak;
+      }
+    })
+
+    return {
+      longest,
+      current
+    };
+  }
+
+  getBusiestDay() {
+    if (this.year || this.year === 0) {
+
+      let { from , to} = this.getDates();
       let response = Calendar.getBusiestDay({
         from,
         to
