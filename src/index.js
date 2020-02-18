@@ -53,8 +53,8 @@ class Intel {
         throw errorList;
       }
     };
-    this.testGet = () => {
-      console.log(reducer.get());
+    this.get = () => {
+      return reducer.get();
     };
   }
 }
