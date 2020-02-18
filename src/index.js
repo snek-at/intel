@@ -5,7 +5,7 @@ import * as github from "./utils/github/index";
 class Intel {
   constructor() {
     let reducer = new Reducer();
-    this.append = async source => {
+    this.append = async (source) => {
       if (source.platform.toLowerCase() === "github") {
         // Init github client
         let c = new client.Github(source.authorization);
@@ -29,7 +29,7 @@ class Intel {
         github.converter.run(models, data);
       }
     };
-    this.appendList = async sourceList => {
+    this.appendList = async (sourceList) => {
       const errorList = [];
       async function retry(maxRetries, fn, params) {
         return await fn(...params).catch(() => {
@@ -45,20 +45,21 @@ class Intel {
       for (let index = 0; index < sourceList.length; index++) {
         const source = sourceList[index];
         const maxRetries = 5;
-          await retry(maxRetries, this.append, [source]).catch(() => {
-            errorList.push(source)
-          });
+        await retry(maxRetries, this.append, [source]).catch(() => {
+          errorList.push(source);
+        });
       }
-      if(errorList.length > 0){
-        throw errorList
+      if (errorList.length > 0) {
+        throw errorList;
       }
-
     };
     this.testGet = () => {
       console.log(reducer.get());
     };
   }
 }
+
+export { Intel };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
