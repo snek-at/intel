@@ -68,7 +68,15 @@ const dayByDate = `
     FROM calendar
     WHERE date = ?
 `;
-export { initialize, create, get, all, betweenDate, busiestDayBetweenDate, dayByDate }
+export {
+  initialize,
+  create,
+  get,
+  all,
+  betweenDate,
+  busiestDayBetweenDate,
+  dayByDate
+};
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

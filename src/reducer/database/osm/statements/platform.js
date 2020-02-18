@@ -60,7 +60,7 @@ const lowestCreatedAtYear = `
     platform  
 `;
 
-export { initialize, create, get, all, lowestCreatedAtYear }
+export { initialize, create, get, all, lowestCreatedAtYear };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

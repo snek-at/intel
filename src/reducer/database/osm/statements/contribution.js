@@ -38,7 +38,7 @@ const all = `
     contribution
 `;
 
-export { initialize, create, get, all }
+export { initialize, create, get, all };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

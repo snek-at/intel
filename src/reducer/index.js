@@ -10,7 +10,7 @@ class Reducer {
         calendar: helper.calendar.mergedCalendar(),
         statistic: helper.statistic.mergedStatistic(),
         language: helper.language.mergedLanguage(),
-      }
+      };
     };
     // Get Last Added Values
     this.getRecent = () => {};

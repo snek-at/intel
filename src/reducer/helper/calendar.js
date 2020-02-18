@@ -13,7 +13,6 @@ function mergedCalendar() {
 
   if (current.success !== false) {
     const { createdAt } = models.Platform.getLowestCreatedAtYear();
-    console.log(createdAt);
     let years = [];
 
     for (let year = createdAt; year <= moment().year(); year++) {

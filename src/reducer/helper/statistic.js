@@ -7,36 +7,37 @@ function mergedStatistic() {
   // createContributions
 
   let statistic = models.Statistic.getMerged();
-  console.log(statistic)
 
   let response = {
     current: {},
     years: []
   };
 
-  statistic.forEach(entry => {
+  statistic.forEach((entry) => {
     entry.contributions = entry.getContributions();
-    let streaks = entry.getStreaks().map(streak => { return streak.render()});
-    let {longest, current} = entry.getStreakDetail(streaks)
-    entry.streak = {
+    let streaks = entry.getStreaks().map((streak) => {
+      return streak.render();
+    });
+    let { longest, current } = entry.getStreakDetail(streaks);
+    entry.streak = {
       longest,
       current,
       streaks
-    }
+    };
     entry.busiestDay = entry.getBusiestDay();
 
-    if(entry.busiestDay){
+    if (entry.busiestDay) {
       entry.busiestDay = entry.busiestDay.render();
     }
 
     entry.render();
 
-    if(entry.year === 0){
+    if (entry.year === 0) {
       response.current = entry;
-    }else{
-      response.years.push(entry)
+    } else {
+      response.years.push(entry);
     }
-  })
+  });
 
   return response;
 }

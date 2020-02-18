@@ -28,8 +28,8 @@ function generateCalendarStructure(startDate, endDate) {
 }
 
 function fillCalendarWithColors(calendar, busiestDay) {
-  calendar.weeks.forEach(week => {
-    week.days.forEach(day => {
+  calendar.weeks.forEach((week) => {
+    week.days.forEach((day) => {
       let precision = day.total / busiestDay;
       if (precision > 0.8 && precision <= 1) {
         day.color = "#196127";
@@ -48,10 +48,7 @@ function fillCalendarWithColors(calendar, busiestDay) {
   return calendar;
 }
 
-export {
-  generateCalendarStructure,
-  fillCalendarWithColors
-};
+export { generateCalendarStructure, fillCalendarWithColors };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

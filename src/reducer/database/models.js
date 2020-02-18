@@ -193,7 +193,7 @@ class Language extends osm.models.LanguageSO {
 
   static getLanguages() {
     let response = super.getLanguages();
-    response = response.map(entry => {
+    response = response.map((entry) => {
       return new Language(entry);
     });
     return response;
@@ -316,19 +316,19 @@ class Statistic extends osm.models.StatisticSO {
         .day(31)
         .format();
     }
-    
+
     return {
       from,
       to
-    }
+    };
   }
 
   getStreaks() {
-    console.log(this.year)
-    if (this.year || this.year === 0) {
-      console.log(this.year)
+    console.log(this.year);
+    if (this.year || this.year === 0) {
+      console.log(this.year);
 
-      let { from , to} = this.getDates();
+      let { from, to } = this.getDates();
       let response = Calendar.getDaysBetweenDate(this, {
         from,
         to
@@ -339,7 +339,7 @@ class Statistic extends osm.models.StatisticSO {
       // response.push({date: "2019-12-03", total:5})
 
       response = helper.statistic.calculateStreaks(response);
-      response = response.map(entry => {
+      response = response.map((entry) => {
         return new Streak(entry);
       });
       return response;
@@ -353,15 +353,15 @@ class Statistic extends osm.models.StatisticSO {
     };
     let current = {};
 
-    streaks.forEach(streak => {
-      if(streak.totalDays >= longest.totalDays){
+    streaks.forEach((streak) => {
+      if (streak.totalDays >= longest.totalDays) {
         longest = streak;
       }
 
-      if(moment().diff(streak.endDate, "days") === 0){
+      if (moment().diff(streak.endDate, "days") === 0) {
         current = streak;
       }
-    })
+    });
 
     return {
       longest,
@@ -371,13 +371,12 @@ class Statistic extends osm.models.StatisticSO {
 
   getBusiestDay() {
     if (this.year || this.year === 0) {
-
-      let { from , to} = this.getDates();
+      let { from, to } = this.getDates();
       let response = Calendar.getBusiestDay({
         from,
         to
       });
-      if(response){
+      if (response) {
         response = new Calendar(response);
       }
       return response;

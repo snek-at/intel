@@ -158,7 +158,7 @@ class StatisticSO extends BaseSO {
     let response = SOAssambler.database.exec(StatisticSO.statements.allMerged);
 
     // Parse to class objects
-    response = response.map(entry => {
+    response = response.map((entry) => {
       return new cls(entry);
     });
 
@@ -234,8 +234,8 @@ class CalendarSO extends BaseSO {
       dates.to
     );
     // fill totals
-    calendar.weeks.forEach(week => {
-      week.days.forEach(day => {
+    calendar.weeks.forEach((week) => {
+      week.days.forEach((day) => {
         let entries = SOAssambler.database.exec(
           CalendarSO.statements.dayByDate,
           [day.date]

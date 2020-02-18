@@ -1,42 +1,42 @@
 import moment from "moment";
 
 function calculateStreaks(values) {
-  if (values === undefined) {
+  if (!values) {
     throw new Error("An error occurred due to an invalid input parameters!");
-  }
+  } else {
+    let list = [];
+    let streak = {};
 
-  let list = [];
-  let streak = {};
-
-  for (let index = 0; index < values.length; index++) {
-    const day = values[index];
-    const nextDay = {};
-    if (values[values.length - 1] === day) {
-      nextDay = values[index];
-    } else {
-      nextDay = values[index + 1];
-    }
-
-    if (!streak.startDate) {
-      streak = {
-        startDate: moment(day.date).format("YYYY-MM-DD"),
-        endDate: undefined,
-        totalDays: 0,
-        totalContributions: 0
-      };
-    }
-    const dayDiff = moment(nextDay.date).diff(moment(day.date), "days");
-    if (dayDiff === 1) {
-      streak.totalDays += 1;
-      streak.totalContributions += day.total;
-    } else {
-      if (streak.totalDays > 0) {
-        streak.endDate = moment(day.date).format("YYYY-MM-DD");
-        streak.totalContributions += day.total;
-        list.push({ ...streak });
+    for (let index = 0; index < values.length; index++) {
+      const day = values[parseInt(index)];
+      let nextDay = {};
+      if (values[values.length - 1] === day) {
+        nextDay = values[parseInt(index)];
+      } else {
+        nextDay = values[parseInt(index) + 1];
       }
 
-      streak = {};
+      if (!streak.startDate) {
+        streak = {
+          startDate: moment(day.date).format("YYYY-MM-DD"),
+          endDate: null,
+          totalDays: 0,
+          totalContributions: 0
+        };
+      }
+      const dayDiff = moment(nextDay.date).diff(moment(day.date), "days");
+      if (dayDiff === 1) {
+        streak.totalDays += 1;
+        streak.totalContributions += day.total;
+      } else {
+        if (streak.totalDays > 0) {
+          streak.endDate = moment(day.date).format("YYYY-MM-DD");
+          streak.totalContributions += day.total;
+          list.push({ ...streak });
+        }
+
+        streak = {};
+      }
     }
   }
   return list;

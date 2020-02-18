@@ -2,7 +2,7 @@ import alasql from "alasql";
 
 class SOAssambler {
   static database = new alasql.Database();
-  constructor(base) {
+  constructor(Base) {
     if (base.statements.initialize) {
       // Create table
       // console.log(SOAssambler.database)
@@ -11,13 +11,16 @@ class SOAssambler {
     }
 
     // The fields have to be in the correct order!
-    this.create = fields => {
+    this.create = (fields) => {
       try {
-        let tablename = new base({}).constructor.name.toLowerCase();
-        SOAssambler.database.exec(base.statements.create, Object.values(fields));
+        let tablename = new Base({}).constructor.name.toLowerCase();
+        SOAssambler.database.exec(
+          base.statements.create,
+          Object.values(fields)
+        );
         fields.id = SOAssambler.database.autoval(tablename, "id");
 
-        let obj = new base(fields);
+        let obj = new Base(fields);
         return obj;
       } catch (err) {
         return {
@@ -26,18 +29,18 @@ class SOAssambler {
         };
       }
     };
-    this.get = fields => {
+    this.get = (fields) => {
       try {
         let response = SOAssambler.database.exec(
           base.statements.get,
           Object.values(fields)
         );
-        console.log({...response})
+        console.log({ ...response });
 
         if (response.length === 1) {
           response = response[0];
         }
-        let obj = new base(response);
+        let obj = new Base(response);
         return obj;
       } catch (err) {
         return {
@@ -50,10 +53,10 @@ class SOAssambler {
       try {
         let response;
         response = SOAssambler.database.exec(base.statements.all, fields);
-        console.log(response)
-        response = response.map(entry => {
-          return new base(entry)
-        })
+        console.log(response);
+        response = response.map((entry) => {
+          return new Base(entry);
+        });
 
         return response;
       } catch (err) {
@@ -63,41 +66,39 @@ class SOAssambler {
         };
       }
     };
-    this.filter = (filter, cls, filterStatement) => {
+    this.filter = (filter, Cls, filterStatement) => {
       try {
         if (!filterStatement) {
           filterStatement = base.statements.all;
         }
         let response = SOAssambler.database.exec(filterStatement);
-        // console.log({...response})
         for (let entry in response) {
-          for (let f in filter) {
-            if (response[entry]) {
-              if (filter[f] !== response[entry][f]) {
-                delete response[entry];
+          if ({}.hasOwnProperty.call(response, entry)) {
+            for (let f in filter) {
+              if ({}.hasOwnProperty.call(filter, f)){
+                if (response[entry]) {
+                  if (filter[f] !== response[entry][f]) {
+                    delete response[entry];
+                  }
+                }
               }
             }
           }
         }
 
-
-        var filtered = response.filter(el => {
+        var filtered = response.filter((el) => {
           return el != null;
         });
-        // console.log(filtered)
 
-        //filtered.map(entry => entry = new base({...entry}))
-        // console.log(filtered);
-        let objects = filtered.map(entry => {
+        let objects = filtered.map((entry) => {
           let o;
           if (cls) {
-            o = new cls(entry);
+            o = new Cls(entry);
           } else {
-            o = new base(entry);
+            o = new Base(entry);
           }
           return o;
         });
-        // console.log(objects);
 
         return objects;
       } catch (err) {
@@ -110,16 +111,11 @@ class SOAssambler {
     };
     this.custom = (query) => {
       try {
-        // console.log(query)
-        let response = SOAssambler.database.exec(
-          query
-        );
-        // console.log({...response})
+        let response = SOAssambler.database.exec(query);
 
-        response = response.map(entry => {
-          return new base(entry)
-        })
-        // console.log(response)
+        response = response.map((entry) => {
+          return new Base(entry);
+        });
         return response;
       } catch (err) {
         return {
@@ -127,13 +123,13 @@ class SOAssambler {
           message: err.message
         };
       }
-    }
+    };
   }
 
   reload() {
     SOAssambler.database = new alasql.Database();
   }
-}
+};
 
 export { SOAssambler };
 

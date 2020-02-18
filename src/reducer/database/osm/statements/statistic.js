@@ -77,8 +77,9 @@ const a = `
   GROUP BY year;
 `;
 
-const contributionSumFragment = `sum(totalCommitContributions) + sum(totalIssueContributions) + sum(totalPullRequestContributions) + sum(totalPullRequestReviewContributions)`;
-const contributionOfYearFragment = type => `
+const contributionSumFragment =
+  "sum(totalCommitContributions) + sum(totalIssueContributions) + sum(totalPullRequestContributions) + sum(totalPullRequestReviewContributions)";
+const contributionOfYearFragment = (type) => `
   SELECT
   sum(${type}) as total,
   ROUND(sum(${type}) / (${contributionSumFragment}) * 100, 2) as share

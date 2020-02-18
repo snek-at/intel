@@ -51,7 +51,7 @@ const withOwner = `
       ON r.owner_id = m.id
 `;
 
-export { initialize, create, get, all, withOwner }
+export { initialize, create, get, all, withOwner };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

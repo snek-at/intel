@@ -59,7 +59,7 @@ const merged = `
     ORDER BY size DESC
 `;
 
-export { initialize, create, get, all, byRepository, merged }
+export { initialize, create, get, all, byRepository, merged };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
