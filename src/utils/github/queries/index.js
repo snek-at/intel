@@ -11,7 +11,7 @@ function calendar(profile) {
   let runtime = moment().year() - date.year();
 
   for (let index = 0; index <= runtime; index++) {
-    fragments += queries.calendar_fragment(
+    fragments += queries.calendarFragment(
       date.year(),
       moment(date)
         .month(0)

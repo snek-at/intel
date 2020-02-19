@@ -69,7 +69,7 @@ const calendar = (fragments) =>
 
 // Fragments
 
-const calendar_fragment = (c, fromYear, toYear) => `
+const calendarFragment = (c, fromYear, toYear) => `
   calendarT${c}: contributionsCollection(from:"${fromYear}", to:"${toYear}" ){
     totalIssueContributions
     totalCommitContributions
@@ -89,18 +89,18 @@ const calendar_fragment = (c, fromYear, toYear) => `
       }
     }
     commitContributionsByRepository {
-      ${contribution_by_repository_fragment}
+      ${contributionByRepositoryFragment}
     }
     issueContributionsByRepository {
-      ${contribution_by_repository_fragment}
+      ${contributionByRepositoryFragment}
     }
     pullRequestContributionsByRepository {
-      ${contribution_by_repository_fragment}
+      ${contributionByRepositoryFragment}
     }
   }
 `;
 
-const contribution_by_repository_fragment = `
+const contributionByRepositoryFragment = `
   repository {
     openGraphImageUrl
     name
@@ -134,7 +134,7 @@ const contribution_by_repository_fragment = `
   }
 `;
 
-export { profile, calendar, calendar_fragment };
+export { profile, calendar, calendarFragment };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
