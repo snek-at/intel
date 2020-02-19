@@ -34,12 +34,11 @@ function calculateStreaks(values) {
           streak.totalContributions += day.total;
           list.push({ ...streak });
         }
-
         streak = {};
       }
     }
+    return list;
   }
-  return list;
 }
 
 export { calculateStreaks };

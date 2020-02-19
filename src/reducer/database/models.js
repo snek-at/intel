@@ -324,9 +324,7 @@ class Statistic extends osm.models.StatisticSO {
   }
 
   getStreaks() {
-    console.log(this.year);
     if (this.year || this.year === 0) {
-      console.log(this.year);
 
       let { from, to } = this.getDates();
       let response = Calendar.getDaysBetweenDate(this, {

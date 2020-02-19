@@ -154,12 +154,12 @@ class StatisticSO extends BaseSO {
 
   getStreaks() {}
 
-  static getMerged(cls) {
+  static getMerged(Cls) {
     let response = SOAssambler.database.exec(StatisticSO.statements.allMerged);
 
     // Parse to class objects
     response = response.map((entry) => {
-      return new cls(entry);
+      return new Cls(entry);
     });
 
     return response;
