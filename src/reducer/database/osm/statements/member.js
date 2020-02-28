@@ -39,8 +39,6 @@ const all = `
     member
 `;
 
-
-
 export { initialize, create, get, all };
 
 /**

@@ -55,7 +55,7 @@ const busiestDayBetweenDate = `
   WHERE 
       total = (
           SELECT 
-              MAX(total )
+              MAX(total)
           FROM
               calendar
           WHERE date >= ?

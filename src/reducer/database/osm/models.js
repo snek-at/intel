@@ -18,7 +18,6 @@ import * as contribution from "./statements/contribution";
 import * as helper from "../helper";
 
 class BaseSO {
-  //static objects = SOAssambler;
 
   static getObjects(self) {
     return new SOAssambler(self);
@@ -38,10 +37,13 @@ class PlatformSO extends BaseSO {
   createRepository(fields) {}
   createOrganization(fields) {}
   createStatistic(fields) {}
+  createCalendarEntry(fields) {}
 
   getOrganizations(fields) {}
   getRepositories(fields) {}
   getStatistics(fields) {}
+  getCalendar(fields) {}
+  getActivity(fields) {}
 
   static getLowestCreatedAtYear() {
     return SOAssambler.database.exec(

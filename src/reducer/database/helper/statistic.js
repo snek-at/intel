@@ -1,10 +1,8 @@
 import moment from "moment";
 
 function calculateStreaks(values) {
-  if (!values) {
-    throw new Error("An error occurred due to an invalid input parameters!");
-  } else {
-    let list = [];
+  let list = [];
+  if (values) {
     let streak = {};
 
     for (let index = 0; index < values.length; index++) {
@@ -24,6 +22,7 @@ function calculateStreaks(values) {
           totalContributions: 0
         };
       }
+
       const dayDiff = moment(nextDay.date).diff(moment(day.date), "days");
       if (dayDiff === 1) {
         streak.totalDays += 1;
@@ -37,8 +36,8 @@ function calculateStreaks(values) {
         streak = {};
       }
     }
-    return list;
   }
+  return list;
 }
 
 export { calculateStreaks };

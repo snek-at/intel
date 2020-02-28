@@ -108,10 +108,10 @@ class SOAssambler {
     this.custom = (query) => {
       try {
         let response = SOAssambler.database.exec(query);
-
         response = response.map((entry) => {
           return new Base(entry);
         });
+
         return response;
       } catch (err) {
         return {

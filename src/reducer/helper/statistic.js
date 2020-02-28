@@ -1,11 +1,6 @@
 import * as models from "../database/models";
 
 function mergedStatistic() {
-  // busiest day
-  // streaks
-  // contributions
-  // createContributions
-
   let statistic = models.Statistic.getMerged();
 
   let response = {

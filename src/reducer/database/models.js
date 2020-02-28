@@ -1,6 +1,5 @@
 import * as osm from "./osm";
-import moment, { lang } from "moment";
-// import * as helper from "./helper";
+import moment from "moment";
 import * as helper from "./helper";
 
 class Platform extends osm.models.PlatformSO {
@@ -331,10 +330,6 @@ class Statistic extends osm.models.StatisticSO {
         from,
         to
       });
-
-      // response.push({date: "2019-12-01", total:5})
-      // response.push({date: "2019-12-02", total:55})
-      // response.push({date: "2019-12-03", total:5})
 
       response = helper.statistic.calculateStreaks(response);
       response = response.map((entry) => {
