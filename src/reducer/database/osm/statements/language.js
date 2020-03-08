@@ -36,14 +36,14 @@ const all = `
     language
 `;
 
-const byRepository = (repository_id) => `
+const byRepository = (repositoryId) => `
   SELECT
   L1.color,
   L1.name,
   sum(L1.size) as size,
-  ROUND(sum(L1.size) / (SELECT sum(size) FROM language L2 WHERE repository_id = ${repository_id}) * 100, 2) as share
+  ROUND(sum(L1.size) / (SELECT sum(size) FROM language L2 WHERE repositoryId = ${repositoryId}) * 100, 2) as share
   FROM language L1
-  WHERE repository_id = ${repository_id}
+  WHERE repositoryId = ${repositoryId}
   GROUP BY name, color
   ORDER BY size DESC
 `;

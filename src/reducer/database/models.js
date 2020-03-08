@@ -31,8 +31,8 @@ class Platform extends osm.models.PlatformSO {
     }
     PlatformHasRepository.objects.create(
       {
-        platform_id: this.id,
-        repository_id: repository.id
+        platformId: this.id,
+        repositoryId: repository.id
       },
       Repository
     );
@@ -49,8 +49,8 @@ class Platform extends osm.models.PlatformSO {
 
     PlatformHasOrganization.objects.create(
       {
-        platform_id: this.id,
-        organization_id: organization.id
+        platformId: this.id,
+        organizationId: organization.id
       },
       Organization
     );
@@ -58,14 +58,14 @@ class Platform extends osm.models.PlatformSO {
   }
 
   createStatistic(fields) {
-    fields.platform_id = this.id;
+    fields.platformId = this.id;
     let statistic = Statistic.objects.create(fields);
 
     return statistic;
   }
 
   createCalendarEntry(fields) {
-    fields.platform_id = this.id;
+    fields.platformId = this.id;
     let calendar = Calendar.objects.create(fields);
 
     return calendar;
@@ -74,7 +74,7 @@ class Platform extends osm.models.PlatformSO {
   getRepositories() {
     let repositories = PlatformHasRepository.objects.filter(
       {
-        platform_id: this.id
+        platformId: this.id
       },
       Repository
     );
@@ -85,7 +85,7 @@ class Platform extends osm.models.PlatformSO {
   getOrganizations() {
     let organizations = PlatformHasOrganization.objects.filter(
       {
-        platform_id: this.id
+        platformId: this.id
       },
       Organization
     );
@@ -112,7 +112,7 @@ class Member extends osm.models.MemberSO {
     this.url = args["url"];
     this.fullname = args["fullname"];
     this.username = args["username"];
-    this.platform_id = args["platform_id"];
+    this.platformId = args["platformId"];
   }
 }
 
@@ -125,7 +125,7 @@ class Repository extends osm.models.RepositorySO {
     this.avatarUrl = args["avatarUrl"];
     this.url = args["url"];
     this.name = args["name"];
-    this.owner_id = args["owner_id"];
+    this.ownerId = args["ownerId"];
   }
 
   createMember(fields) {
@@ -134,24 +134,24 @@ class Repository extends osm.models.RepositorySO {
       url: fields.url,
       fullname: fields.fullname,
       username: fields.username,
-      platform_id: fields.platform_id
+      platformId: fields.platformId
     });
     if (member.success === false) {
       member = Member.objects.filter({
         username: fields.username,
-        platform_id: fields.platform_id
+        platformId: fields.platformId
       })[0];
     }
     RepositoryHasMember.objects.create({
-      repository_id: this.id,
-      member_id: member.id
+      repositoryId: this.id,
+      memberId: member.id
     });
 
     return member;
   }
 
   createLanguage(fields) {
-    fields.repository_id = this.id;
+    fields.repositoryId = this.id;
     let language = Language.objects.create(fields);
 
     return language;
@@ -160,7 +160,7 @@ class Repository extends osm.models.RepositorySO {
   getMembers() {
     let members = RepositoryHasMember.objects.filter(
       {
-        repository_id: this.id
+        repositoryId: this.id
       },
       Member
     );
@@ -187,7 +187,7 @@ class Language extends osm.models.LanguageSO {
     this.name = args["name"];
     this.size = args["size"];
     this.share = args["share"];
-    this.repository_id = args["repository_id"];
+    this.repositoryId = args["repositoryId"];
   }
 
   static getLanguages() {
@@ -223,18 +223,18 @@ class Organization extends osm.models.OrganizationSO {
       url: fields.url,
       fullname: fields.fullname,
       username: fields.username,
-      platform_id: fields.platform_id
+      platformId: fields.platformId
     });
 
     if (member.success === false) {
       member = Member.objects.filter({
         username: fields.username,
-        platform_id: fields.platform_id
+        platformId: fields.platformId
       })[0];
     }
     OrganizationHasMember.objects.create({
-      organization_id: this.id,
-      member_id: member.id
+      organizationId: this.id,
+      memberId: member.id
     });
     return member;
   }
@@ -242,7 +242,7 @@ class Organization extends osm.models.OrganizationSO {
   getMembers() {
     let members = OrganizationHasMember.objects.filter(
       {
-        organization_id: this.id
+        organizationId: this.id
       },
       Member
     );
@@ -282,11 +282,11 @@ class Statistic extends osm.models.StatisticSO {
       args["totalRepositoriesWithContributedCommits"];
     this.totalRepositoriesWithContributedPullRequests =
       args["totalRepositoriesWithContributedPullRequests"];
-    this.platform_id = args["platform_id"];
+    this.platformId = args["platformId"];
   }
 
   createStreak(fields) {
-    fields.statistic_id = this.id;
+    fields.statisticId = this.id;
 
     let streak = Streak.objects.create(fields);
 
@@ -395,7 +395,7 @@ class Streak extends osm.models.StreakSO {
     this.endDate = args["endDate"];
     this.totalDays = args["totalDays"];
     this.totalContributions = args["totalContributions"];
-    this.statistic_id = args["statistic_id"];
+    this.statisticId = args["statisticId"];
   }
 }
 
@@ -407,7 +407,7 @@ class Calendar extends osm.models.CalendarSO {
     this.id = args["id"];
     this.date = args["date"];
     this.total = args["total"];
-    this.platform_id = args["platform_id"];
+    this.platformId = args["platformId"];
   }
 
   createContribution(fields) {
@@ -417,7 +417,7 @@ class Calendar extends osm.models.CalendarSO {
       datetime: fields.datetime,
       nameWithOwner: fields.nameWithOwner,
       type: fields.type,
-      calendar_id: this.id
+      calendarId: this.id
     });
 
     return contribution;
@@ -434,7 +434,7 @@ class Contribution extends osm.models.ContributionSO {
     this.datetime = args["datetime"];
     this.nameWithOwner = args["nameWithOwner"];
     this.type = args["type"];
-    this.calendar_id = args["calendar_id"];
+    this.calendarId = args["calendarId"];
   }
 }
 
