@@ -30,7 +30,7 @@ function run(models, rawData) {
         url: node.url,
         fullname: node.name,
         username: node.login,
-        platform_id: platform.id
+        platformId: platform.id
       });
     });
   });
@@ -96,12 +96,12 @@ function run(models, rawData) {
       url: node.owner.url,
       fullname: node.owner.login, // Fullname is not present
       username: node.owner.login,
-      platform_id: platform.id
+      platformId: platform.id
     });
     if (owner.success === false) {
       owner = models.Member.objects.filter({
         username: node.owner.login,
-        platform_id: platform.id
+        platformId: platform.id
       })[0];
     }
 
@@ -109,7 +109,7 @@ function run(models, rawData) {
       avatarUrl: node.openGraphImageUrl,
       url: node.url,
       name: node.nameWithOwner,
-      owner_id: owner.id
+      ownerId: owner.id
     });
 
     node.assignableUsers.nodes.forEach((member) => {
@@ -118,7 +118,7 @@ function run(models, rawData) {
         url: member.url,
         fullname: member.name,
         username: member.login,
-        platform_id: platform.id
+        platformId: platform.id
       });
     });
 
