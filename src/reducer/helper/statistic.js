@@ -2,7 +2,6 @@ import * as models from "../database/models";
 
 function mergedStatistic() {
   let statistic = models.Statistic.getMerged();
-
   let response = {
     current: {},
     years: []

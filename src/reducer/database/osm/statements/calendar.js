@@ -68,6 +68,7 @@ const dayByDate = `
     FROM calendar
     WHERE date = ?
 `;
+
 export {
   initialize,
   create,

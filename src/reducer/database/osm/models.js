@@ -17,8 +17,12 @@ import * as contribution from "./statements/contribution";
 // Statement Objects => SO
 import * as helper from "../helper";
 
+/*
+  Comment
+*/
+//> Classes
 class BaseSO {
-
+  //> Methods
   static getObjects(self) {
     return new SOAssambler(self);
   }
@@ -28,94 +32,167 @@ class BaseSO {
   }
 }
 
+/*
+  Comment
+*/
 class PlatformSO extends BaseSO {
+  //> Fields
   static statements = platform;
 
+  //> Constructor
   constructor() {
     super();
   }
-  createRepository(fields) {}
-  createOrganization(fields) {}
-  createStatistic(fields) {}
-  createCalendarEntry(fields) {}
 
-  getOrganizations(fields) {}
-  getRepositories(fields) {}
-  getStatistics(fields) {}
-  getCalendar(fields) {}
-  getActivity(fields) {}
-
+  //> Methods
   static getLowestCreatedAtYear() {
     return SOAssambler.database.exec(
       PlatformSO.statements.lowestCreatedAtYear
     )[0];
   }
+
+  //> Abstract Methods
+  createRepository(fields) {
+    // Comment
+    // Abstract
+  }
+  createOrganization(fields) {
+    // Comment
+    // Abstract
+  }
+  createStatistic(fields) {
+    // Comment
+    // Abstract
+  }
+  createCalendarEntry(fields) {
+    // Comment
+    // Abstract
+  }
+
+  getOrganizations(fields) {
+    // Comment
+    // Abstract
+  }
+  getRepositories(fields) {
+    // Comment
+    // Abstract
+  }
+  getStatistics(fields) {
+    // Comment
+    // Abstract
+  }
+  getCalendar(fields) {
+    // Comment
+    // Abstract
+  }
+  getActivity(fields) {
+    // Comment
+    // Abstract
+  }
 }
 
+/*
+  Comment
+*/
 class MemberSO extends BaseSO {
   static statements = member;
 
+  //> Constructor
   constructor() {
     super();
   }
 }
 
+/*
+  Comment
+*/
 class RepositorySO extends BaseSO {
+  //> Fields
   static statements = repository;
 
+  //> Constructor
   constructor() {
     super();
   }
 
-  createMember(fields) {}
-  createLanguage(fields) {}
-
-  getMembers() {}
+  //> Methods
   getLanguages(cls, self) {
     let response = cls.objects.custom(language.byRepository(self.id));
     return response;
   }
+
+  //> Abstract Methods
+  createMember(fields) {
+    // Comment
+    // Abstract
+  }
+  createLanguage(fields) {
+    // Comment
+    // Abstract
+  }
+
+  getMembers() {
+    // Comment
+    // Abstract
+  }
 }
 
+/*
+  Comment
+*/
 class RepositoryHasMemberSO extends BaseSO {
   static statements = repositoryHasMember;
 
+  //> Constructor
   constructor() {
     super();
   }
 }
 
+/*
+  Comment
+*/
 class LanguageSO extends BaseSO {
+  //> Fields
   static statements = language;
 
+  //> Constructor
   constructor() {
     super();
   }
 
+  //> Methods
   static getLanguages() {
     return SOAssambler.database.exec(LanguageSO.statements.merged);
   }
 }
 
+/*
+  Comment
+*/
 class PlatformHasRepositorySO extends BaseSO {
+  //> Fields
   static statements = platformHasRepository;
 
+  //> Constructor
   constructor() {
     super();
   }
 }
 
+/*
+  Comment
+*/
 class OrganizationSO extends BaseSO {
+  //> Fields
   static statements = organization;
 
+  //> Constructor
   constructor() {
     super();
   }
 
-  createMember(fields) {}
-
-  getMembers(fields) {}
-
+  //> Methods
   getRepositories(cls, self) {
     let response = cls.objects.filter(
       {
@@ -127,35 +204,52 @@ class OrganizationSO extends BaseSO {
 
     return response;
   }
+
+  //> Abstract Methods
+  createMember(fields) {}
+
+  getMembers(fields) {}
 }
 
+/*
+  Comment
+*/
 class OrganizationHasMemberSO extends BaseSO {
+  //> Fields
   static statements = organizationHasMember;
 
+  //> Constructor
   constructor() {
     super();
   }
 }
 
+/*
+  Comment
+*/
 class PlatformHasOrganizationSO extends BaseSO {
+  //> Fields
   static statements = platformHasOrganization;
 
+  //> Constructor
   constructor() {
     super();
   }
 }
 
+/*
+  Comment
+*/
 class StatisticSO extends BaseSO {
+  //> Fields
   static statements = statistic;
 
+  //> Constructor
   constructor() {
     super();
   }
 
-  createStreak(fields) {}
-
-  getStreaks() {}
-
+  //> Methods
   static getMerged(Cls) {
     let response = SOAssambler.database.exec(StatisticSO.statements.allMerged);
 
@@ -169,6 +263,7 @@ class StatisticSO extends BaseSO {
 
   getContributions(self) {
     let response;
+
     if (self.id) {
       // If valid object
     } else {
@@ -192,32 +287,48 @@ class StatisticSO extends BaseSO {
         )[0]
       };
     }
+
     return response;
   }
+
+  //> Abstract Methods
+  createStreak(fields) {}
+
+  getStreaks() {}
 }
 
+/*
+  Comment
+*/
 class StreakSO extends BaseSO {
+  //> Fields
   static statements = streak;
 
+  //> Constructor
   constructor() {
     super();
   }
 }
 
+/*
+  Comment
+*/
 class CalendarSO extends BaseSO {
+  //> Fields
   static statements = calendar;
 
+  //> Constructor
   constructor() {
     super();
   }
 
-  createContribution(fields) {}
-
+  //> Methods
   static getDaysBetweenDate(self, dates) {
     let days = SOAssambler.database.exec(CalendarSO.statements.betweenDate, [
       dates.from,
       dates.to
     ]);
+
     return days;
   }
 
@@ -226,6 +337,7 @@ class CalendarSO extends BaseSO {
       CalendarSO.statements.busiestDayBetweenDate,
       [dates.from, dates.to]
     )[0];
+
     return response;
   }
 
@@ -235,6 +347,7 @@ class CalendarSO extends BaseSO {
       dates.from,
       dates.to
     );
+
     // fill totals
     calendar.weeks.forEach((week) => {
       week.days.forEach((day) => {
@@ -242,8 +355,10 @@ class CalendarSO extends BaseSO {
           CalendarSO.statements.dayByDate,
           [day.date]
         );
+
         //let entries = db.exec(query, [day.date]);
         let total = 0;
+
         if (entries.length > 0) {
           let selectedDay = entries[0];
           total = selectedDay.total;
@@ -265,11 +380,19 @@ class CalendarSO extends BaseSO {
       };
     }
   }
+
+  //> Abstract Methods
+  createContribution(fields) {}
 }
 
+/*
+  Comment
+*/
 class ContributionSO extends BaseSO {
+  //> Fields
   static statements = contribution;
 
+  //> Constructor
   constructor() {
     super();
   }

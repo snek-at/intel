@@ -79,6 +79,7 @@ const a = `
 
 const contributionSumFragment =
   "sum(totalCommitContributions) + sum(totalIssueContributions) + sum(totalPullRequestContributions) + sum(totalPullRequestReviewContributions)";
+
 const contributionOfYearFragment = (type) => `
   SELECT
   sum(${type}) as total,

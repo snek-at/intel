@@ -2,6 +2,7 @@ import alasql from "alasql";
 
 class SOAssambler {
   static database = new alasql.Database();
+
   constructor(Base) {
     if (Base.statements.initialize) {
       // Create table
@@ -12,13 +13,15 @@ class SOAssambler {
     this.create = (fields) => {
       try {
         let tablename = new Base({}).constructor.name.toLowerCase();
+
         SOAssambler.database.exec(
           Base.statements.create,
           Object.values(fields)
         );
-        fields.id = SOAssambler.database.autoval(tablename, "id");
 
+        fields.id = SOAssambler.database.autoval(tablename, "id");
         let obj = new Base(fields);
+
         return obj;
       } catch (err) {
         return {
@@ -37,7 +40,9 @@ class SOAssambler {
         if (response.length === 1) {
           response = response[0];
         }
+
         let obj = new Base(response);
+
         return obj;
       } catch (err) {
         return {
@@ -67,11 +72,13 @@ class SOAssambler {
         if (!filterStatement) {
           filterStatement = Base.statements.all;
         }
+
         let response = SOAssambler.database.exec(filterStatement);
+
         for (let entry in response) {
           if ({}.hasOwnProperty.call(response, entry)) {
             for (let f in filter) {
-              if ({}.hasOwnProperty.call(filter, f)){
+              if ({}.hasOwnProperty.call(filter, f)) {
                 if (response[entry]) {
                   if (filter[f] !== response[entry][f]) {
                     delete response[entry];
@@ -88,11 +95,13 @@ class SOAssambler {
 
         let objects = filtered.map((entry) => {
           let o;
+
           if (Cls) {
             o = new Cls(entry);
           } else {
             o = new Base(entry);
           }
+
           return o;
         });
 

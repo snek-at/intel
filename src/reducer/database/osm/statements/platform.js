@@ -50,7 +50,6 @@ const all = `
     *
   FROM
     platform
-
 `;
 
 const lowestCreatedAtYear = `

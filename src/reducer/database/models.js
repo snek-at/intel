@@ -7,6 +7,7 @@ class Platform extends osm.models.PlatformSO {
 
   constructor(args) {
     super();
+
     this.id = args["id"];
     this.platformName = args["platformName"];
     this.platformUrl = args["platformUrl"];
@@ -24,11 +25,13 @@ class Platform extends osm.models.PlatformSO {
 
   createRepository(fields) {
     let repository = Repository.objects.create(fields);
+
     if (repository.success === false) {
       repository = Repository.objects.filter({
         url: fields.url
       })[0];
     }
+
     PlatformHasRepository.objects.create(
       {
         platformId: this.id,
@@ -36,11 +39,13 @@ class Platform extends osm.models.PlatformSO {
       },
       Repository
     );
+
     return repository;
   }
 
   createOrganization(fields) {
     let organization = Organization.objects.create(fields);
+
     if (organization.success === false) {
       organization = Organization.objects.filter({
         url: fields.url
@@ -54,6 +59,7 @@ class Platform extends osm.models.PlatformSO {
       },
       Organization
     );
+
     return organization;
   }
 
@@ -92,6 +98,7 @@ class Platform extends osm.models.PlatformSO {
 
     return organizations;
   }
+
   // Implement calendar by platform
   getCalendar(dates) {
     Calendar.getCalendar(dates);
@@ -107,6 +114,7 @@ class Member extends osm.models.MemberSO {
 
   constructor(args) {
     super();
+
     this.id = args["id"];
     this.avatarUrl = args["avatarUrl"];
     this.url = args["url"];
@@ -121,6 +129,7 @@ class Repository extends osm.models.RepositorySO {
 
   constructor(args) {
     super();
+
     this.id = args["id"];
     this.avatarUrl = args["avatarUrl"];
     this.url = args["url"];
@@ -136,12 +145,14 @@ class Repository extends osm.models.RepositorySO {
       username: fields.username,
       platformId: fields.platformId
     });
+
     if (member.success === false) {
       member = Member.objects.filter({
         username: fields.username,
         platformId: fields.platformId
       })[0];
     }
+
     RepositoryHasMember.objects.create({
       repositoryId: this.id,
       memberId: member.id
@@ -182,6 +193,7 @@ class Language extends osm.models.LanguageSO {
 
   constructor(args) {
     super();
+
     this.id = args["id"];
     this.color = args["color"];
     this.name = args["name"];
@@ -195,6 +207,7 @@ class Language extends osm.models.LanguageSO {
     response = response.map((entry) => {
       return new Language(entry);
     });
+
     return response;
   }
 }
@@ -208,12 +221,12 @@ class Organization extends osm.models.OrganizationSO {
 
   constructor(args) {
     super();
+
     this.id = args["id"];
     this.avatarUrl = args["avatarUrl"];
     this.url = args["url"];
     this.name = args["name"];
     this.fullname = args["fullname"];
-
     this.member = Member;
   }
 
@@ -232,10 +245,12 @@ class Organization extends osm.models.OrganizationSO {
         platformId: fields.platformId
       })[0];
     }
+
     OrganizationHasMember.objects.create({
       organizationId: this.id,
       memberId: member.id
     });
+
     return member;
   }
 
@@ -268,6 +283,7 @@ class Statistic extends osm.models.StatisticSO {
 
   constructor(args) {
     super();
+
     this.id = args["id"];
     this.year = args["year"];
     this.totalIssueContributions = args["totalIssueContributions"];
@@ -287,7 +303,6 @@ class Statistic extends osm.models.StatisticSO {
 
   createStreak(fields) {
     fields.statisticId = this.id;
-
     let streak = Streak.objects.create(fields);
 
     return streak;
@@ -324,17 +339,16 @@ class Statistic extends osm.models.StatisticSO {
 
   getStreaks() {
     if (this.year || this.year === 0) {
-
       let { from, to } = this.getDates();
       let response = Calendar.getDaysBetweenDate(this, {
         from,
         to
       });
-
       response = helper.statistic.calculateStreaks(response);
       response = response.map((entry) => {
         return new Streak(entry);
       });
+
       return response;
     }
     return [];
@@ -369,9 +383,11 @@ class Statistic extends osm.models.StatisticSO {
         from,
         to
       });
+
       if (response) {
         response = new Calendar(response);
       }
+
       return response;
     }
   }
@@ -390,6 +406,7 @@ class Streak extends osm.models.StreakSO {
 
   constructor(args) {
     super();
+
     this.id = args["id"];
     this.startDate = args["startDate"];
     this.endDate = args["endDate"];
@@ -404,6 +421,7 @@ class Calendar extends osm.models.CalendarSO {
 
   constructor(args) {
     super();
+
     this.id = args["id"];
     this.date = args["date"];
     this.total = args["total"];
@@ -429,6 +447,7 @@ class Contribution extends osm.models.ContributionSO {
 
   constructor(args) {
     super();
+
     this.id = args["id"];
     this.repoUrl = args["repoUrl"];
     this.datetime = args["datetime"];

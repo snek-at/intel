@@ -36,6 +36,7 @@ function mergedProfile() {
   });
 
   platform.render();
+
   return platform;
 }
 

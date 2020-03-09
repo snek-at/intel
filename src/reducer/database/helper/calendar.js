@@ -17,6 +17,7 @@ function generateCalendarStructure(startDate, endDate) {
         days: []
       });
     }
+
     weeks[weeks.length - 1].days.push({
       date: m.format("YYYY-MM-DD")
     });
@@ -31,6 +32,7 @@ function fillCalendarWithColors(calendar, busiestDay) {
   calendar.weeks.forEach((week) => {
     week.days.forEach((day) => {
       let precision = day.total / busiestDay;
+
       if (precision > 0.8 && precision <= 1) {
         day.color = "#196127";
       } else if (precision > 0.6 && precision <= 0.8) {
