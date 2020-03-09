@@ -1,5 +1,6 @@
 import { gql } from "apollo-boost";
 
+//> Queries
 const profile = () => gql`
   query profile($username: String!) {
     user(login: $username) {
@@ -67,8 +68,7 @@ const calendar = (fragments) =>
   }
 `);
 
-// Fragments
-
+//> Fragments
 const calendarFragment = (c, fromYear, toYear) => `
   calendarT${c}: contributionsCollection(from:"${fromYear}", to:"${toYear}" ){
     totalIssueContributions
