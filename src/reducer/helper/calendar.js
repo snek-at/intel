@@ -1,8 +1,10 @@
 import * as models from "../database/models";
 import moment from "moment";
 
+/*
+  Providing a merged calendar of all platforms over all years.
+*/
 function mergedCalendar() {
-  // Maybe the from date is invalid!
   let current = models.Calendar.getCalendar({
     from: moment()
       .subtract(1, "years")

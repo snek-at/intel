@@ -1,4 +1,6 @@
-// Reduce object fields by using a key schema
+/*
+  Reducing object fields by using a key schema.
+*/
 function squeezer(obj, keys) {
   if (keys && keys.length > 0) {
     let keysToRemove = Object.keys(obj).filter((x) => !keys.includes(x));

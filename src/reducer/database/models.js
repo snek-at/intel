@@ -2,9 +2,16 @@ import * as osm from "./osm";
 import moment from "moment";
 import * as helper from "./helper";
 
+//> Classes
+/*
+  A model which uses the platform statement
+  objects and the getObjects of the base statement
+  object.
+*/
 class Platform extends osm.models.PlatformSO {
   static objects = this.getObjects(this);
 
+  //> Constructor
   constructor(args) {
     super();
 
@@ -23,6 +30,7 @@ class Platform extends osm.models.PlatformSO {
     this.statusEmojiHTML = args["statusEmojiHTML"];
   }
 
+  //> Methods
   createRepository(fields) {
     let repository = Repository.objects.create(fields);
 
@@ -99,19 +107,20 @@ class Platform extends osm.models.PlatformSO {
     return organizations;
   }
 
-  // Implement calendar by platform
   getCalendar(dates) {
     Calendar.getCalendar(dates);
   }
-
-  getActivity() {
-    return Calendar.getActivity();
-  }
 }
 
+/*
+  A model which uses the member statement
+  objects and the getObjects of the base statement
+  object.
+*/
 class Member extends osm.models.MemberSO {
   static objects = this.getObjects(this);
 
+  //> Constructor
   constructor(args) {
     super();
 
@@ -124,9 +133,15 @@ class Member extends osm.models.MemberSO {
   }
 }
 
+/*
+  A model which uses the repository statement
+  objects and the getObjects of the base statement
+  object.
+*/
 class Repository extends osm.models.RepositorySO {
   static objects = this.getObjects(this);
 
+  //> Constructor
   constructor(args) {
     super();
 
@@ -137,6 +152,7 @@ class Repository extends osm.models.RepositorySO {
     this.ownerId = args["ownerId"];
   }
 
+  //> Methods
   createMember(fields) {
     let member = Member.objects.create({
       avatarUrl: fields.avatarUrl,
@@ -184,13 +200,24 @@ class Repository extends osm.models.RepositorySO {
   }
 }
 
+/*
+  A model which uses the repositoryHasMember
+  statement objects and the getObjects of
+  the base statement object.
+*/
 class RepositoryHasMember extends osm.models.RepositoryHasMemberSO {
   static objects = this.getObjects(this);
 }
 
+/*
+  A model which uses the language statement
+  objects and the getObjects of the base statement
+  object.
+*/
 class Language extends osm.models.LanguageSO {
   static objects = this.getObjects(this);
 
+  //> Constructor
   constructor(args) {
     super();
 
@@ -202,6 +229,7 @@ class Language extends osm.models.LanguageSO {
     this.repositoryId = args["repositoryId"];
   }
 
+  //> Static methods
   static getLanguages() {
     let response = super.getLanguages();
     response = response.map((entry) => {
@@ -212,13 +240,24 @@ class Language extends osm.models.LanguageSO {
   }
 }
 
+/*
+  A model which uses the platformHasRepository
+  statement objects and the getObjects of
+  the base statement object.
+*/
 class PlatformHasRepository extends osm.models.PlatformHasRepositorySO {
   static objects = this.getObjects(this);
 }
 
+/*
+  A model which uses the organization statement
+  objects and the getObjects of the base statement
+  object.
+*/
 class Organization extends osm.models.OrganizationSO {
   static objects = this.getObjects(this);
 
+  //> Constructor
   constructor(args) {
     super();
 
@@ -230,6 +269,7 @@ class Organization extends osm.models.OrganizationSO {
     this.member = Member;
   }
 
+  //> Methods
   createMember(fields) {
     let member = Member.objects.create({
       avatarUrl: fields.avatarUrl,
@@ -270,17 +310,33 @@ class Organization extends osm.models.OrganizationSO {
   }
 }
 
+/*
+  A model which uses the organizationHasMember
+  statement objects and the getObjects of
+  the base statement object.
+*/
 class OrganizationHasMember extends osm.models.OrganizationHasMemberSO {
   static objects = this.getObjects(this);
 }
 
+/*
+  A model which uses the platformHasOrganization
+  statement objects and the getObjects of
+  the base statement object.
+*/
 class PlatformHasOrganization extends osm.models.PlatformHasOrganizationSO {
   static objects = this.getObjects(this);
 }
 
+/*
+  A model which uses the statistic statement
+  objects and the getObjects of the base statement
+  object.
+*/
 class Statistic extends osm.models.StatisticSO {
   static objects = this.getObjects(this);
 
+  //> Constructor
   constructor(args) {
     super();
 
@@ -301,6 +357,7 @@ class Statistic extends osm.models.StatisticSO {
     this.platformId = args["platformId"];
   }
 
+  //> Methods
   createStreak(fields) {
     fields.statisticId = this.id;
     let streak = Streak.objects.create(fields);
@@ -401,9 +458,15 @@ class Statistic extends osm.models.StatisticSO {
   }
 }
 
+/*
+  A model which uses the streak statement
+  objects and the getObjects of the base statement
+  object.
+*/
 class Streak extends osm.models.StreakSO {
   static objects = this.getObjects(this);
 
+  //> Constructor
   constructor(args) {
     super();
 
@@ -416,9 +479,15 @@ class Streak extends osm.models.StreakSO {
   }
 }
 
+/*
+  A model which uses the calendar statement
+  objects and the getObjects of the base statement
+  object.
+*/
 class Calendar extends osm.models.CalendarSO {
   static objects = this.getObjects(this);
 
+  //> Constructor
   constructor(args) {
     super();
 
@@ -428,6 +497,7 @@ class Calendar extends osm.models.CalendarSO {
     this.platformId = args["platformId"];
   }
 
+  //> Methods
   createContribution(fields) {
     let contribution = Contribution.objects.create({
       id: fields.id,
@@ -442,6 +512,11 @@ class Calendar extends osm.models.CalendarSO {
   }
 }
 
+/*
+  A model which uses the contribution statement
+  objects and the getObjects of the base statement
+  object.
+*/
 class Contribution extends osm.models.ContributionSO {
   static objects = this.getObjects(this);
 

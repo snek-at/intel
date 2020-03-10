@@ -17,10 +17,12 @@ import * as contribution from "./statements/contribution";
 // Statement Objects => SO
 import * as helper from "../helper";
 
-/*
-  Comment
-*/
 //> Classes
+/*
+  A general underlying statement object on which
+  all statement objects are based.
+  SOAssembler and squeezer are provided.
+*/
 class BaseSO {
   //> Methods
   static getObjects(self) {
@@ -33,7 +35,8 @@ class BaseSO {
 }
 
 /*
-  Comment
+  A statement object with connection to platform
+  sql statements. 
 */
 class PlatformSO extends BaseSO {
   //> Fields
@@ -53,41 +56,111 @@ class PlatformSO extends BaseSO {
 
   //> Abstract Methods
   createRepository(fields) {
-    // Comment
-    // Abstract
-  }
-  createOrganization(fields) {
-    // Comment
-    // Abstract
-  }
-  createStatistic(fields) {
-    // Comment
-    // Abstract
-  }
-  createCalendarEntry(fields) {
-    // Comment
-    // Abstract
+    //> Usage
+    // Creates a repository within a platform.
+
+    //> Implementation example
+    //let repository = Repository.objects.create(fields);
+
+    //if (repository.success === false) {
+    //  repository = Repository.objects.filter({
+    //    url: fields.url
+    //  })[0];
+    //}
+
+    //PlatformHasRepository.objects.create(
+    //  {
+    //    platformId: this.id,
+    //    repositoryId: repository.id
+    //  },
+    //  Repository
+    //);
+
+    //return repository;
   }
 
-  getOrganizations(fields) {
-    // Comment
-    // Abstract
+  createOrganization(fields) {
+    //> Usage
+    // Creates a organization within a platform.
+
+    //> Implementation example
+    //let organization = Organization.objects.create(fields);
+
+    //if (organization.success === false) {
+    //  organization = Organization.objects.filter({
+    //    url: fields.url
+    //  })[0];
+    //}
+
+    //PlatformHasOrganization.objects.create(
+    //  {
+    //    platformId: this.id,
+    //    organizationId: organization.id
+    //  },
+    //  Organization
+    //);
+
+    //return organization;
   }
-  getRepositories(fields) {
-    // Comment
-    // Abstract
+
+  createStatistic(fields) {
+    //> Usage
+    // Creates a statistic within a platform.
+
+    //> Implementation example
+    //fields.platformId = this.id;
+    //let statistic = Statistic.objects.create(fields);
+
+    //return statistic;
   }
-  getStatistics(fields) {
-    // Comment
-    // Abstract
+
+  createCalendarEntry(fields) {
+    //> Usage
+    // Creates a calendar entry within a platform.
+
+    //> Implementation example
+    //fields.platformId = this.id;
+    //let calendar = Calendar.objects.create(fields);
+
+    //return calendar;
   }
-  getCalendar(fields) {
-    // Comment
-    // Abstract
+
+  getRepositories() {
+    //> Usage
+    // Get all repositories within a platform.
+
+    //> Implementation example
+    //let repositories = PlatformHasRepository.objects.filter(
+    //  {
+    //    platformId: this.id
+    //  },
+    //  Repository
+    //);
+
+    //return repositories;
   }
-  getActivity(fields) {
-    // Comment
-    // Abstract
+
+  getOrganizations() {
+    //> Usage
+    // Get all organizations within a platform.
+
+    //> Implementation example
+    //let organizations = PlatformHasOrganization.objects.filter(
+    //  {
+    //    platformId: this.id
+    //  },
+    //  Organization
+    //);
+
+    //return organizations;
+  }
+
+  getCalendar(dates) {
+    //> Usage
+    // Get merged calendar
+
+    //> Implementation example
+    //Calendar.getCalendar(dates);
   }
 }
 
@@ -104,7 +177,8 @@ class MemberSO extends BaseSO {
 }
 
 /*
-  Comment
+  A statement object with connection to repository
+  sql statements. 
 */
 class RepositorySO extends BaseSO {
   //> Fields
@@ -123,22 +197,62 @@ class RepositorySO extends BaseSO {
 
   //> Abstract Methods
   createMember(fields) {
-    // Comment
-    // Abstract
+    //> Usage
+    // Create a member within a repository.
+
+    //> Implementation example
+    //let member = Member.objects.create({
+    //  avatarUrl: fields.avatarUrl,
+    //  url: fields.url,
+    //  fullname: fields.fullname,
+    //  username: fields.username,
+    //  platformId: fields.platformId
+    //});
+
+    //if (member.success === false) {
+    //  member = Member.objects.filter({
+    //    username: fields.username,
+    //    platformId: fields.platformId
+    //  })[0];
+    //}
+
+    //RepositoryHasMember.objects.create({
+    //  repositoryId: this.id,
+    //  memberId: member.id
+    //});
+
+    //return member;
   }
   createLanguage(fields) {
-    // Comment
-    // Abstract
+    //> Usage
+    // Create a languages within a repository.
+
+    //> Implementation example
+    //fields.repositoryId = this.id;
+    //let language = Language.objects.create(fields);
+
+    //return language;
   }
 
   getMembers() {
-    // Comment
-    // Abstract
+    //> Usage
+    // Get all members of repository.
+
+    //> Implementation example
+    //let members = RepositoryHasMember.objects.filter(
+    //  {
+    //    repositoryId: this.id
+    //  },
+    //  Member
+    //);
+
+    //return members;
   }
 }
 
 /*
-  Comment
+  A statement object with connection to repositoryHasMember
+  sql statements. 
 */
 class RepositoryHasMemberSO extends BaseSO {
   static statements = repositoryHasMember;
@@ -150,7 +264,8 @@ class RepositoryHasMemberSO extends BaseSO {
 }
 
 /*
-  Comment
+  A statement object with connection to language
+  sql statements. 
 */
 class LanguageSO extends BaseSO {
   //> Fields
@@ -168,7 +283,8 @@ class LanguageSO extends BaseSO {
 }
 
 /*
-  Comment
+  A statement object with connection to platformHasRepository
+  sql statements. 
 */
 class PlatformHasRepositorySO extends BaseSO {
   //> Fields
@@ -181,7 +297,8 @@ class PlatformHasRepositorySO extends BaseSO {
 }
 
 /*
-  Comment
+  A statement object with connection to organization
+  sql statements. 
 */
 class OrganizationSO extends BaseSO {
   //> Fields
@@ -206,13 +323,53 @@ class OrganizationSO extends BaseSO {
   }
 
   //> Abstract Methods
-  createMember(fields) {}
+  createMember(fields) {
+    //> Usage
+    // Create a member within a repository.
 
-  getMembers(fields) {}
+    //> Implementation example
+    //let member = Member.objects.create({
+    //  avatarUrl: fields.avatarUrl,
+    //  url: fields.url,
+    //  fullname: fields.fullname,
+    //  username: fields.username,
+    //  platformId: fields.platformId
+    //});
+
+    //if (member.success === false) {
+    //  member = Member.objects.filter({
+    //    username: fields.username,
+    //    platformId: fields.platformId
+    //  })[0];
+    //}
+
+    //OrganizationHasMember.objects.create({
+    //  organizationId: this.id,
+    //  memberId: member.id
+    //});
+
+    //return member;
+  }
+
+  getMembers(fields) {
+    //> Usage
+    // Get all members of a repository.
+
+    //> Implementation example
+    //let members = OrganizationHasMember.objects.filter(
+    //  {
+    //    organizationId: this.id
+    //  },
+    //  Member
+    //);
+
+    //return members;
+  }
 }
 
 /*
-  Comment
+  A statement object with connection to organizationHasMember
+  sql statements. 
 */
 class OrganizationHasMemberSO extends BaseSO {
   //> Fields
@@ -225,7 +382,8 @@ class OrganizationHasMemberSO extends BaseSO {
 }
 
 /*
-  Comment
+  A statement object with connection to platformHasOrganization
+  sql statements. 
 */
 class PlatformHasOrganizationSO extends BaseSO {
   //> Fields
@@ -238,7 +396,8 @@ class PlatformHasOrganizationSO extends BaseSO {
 }
 
 /*
-  Comment
+  A statement object with connection to statistic
+  sql statements. 
 */
 class StatisticSO extends BaseSO {
   //> Fields
@@ -292,13 +451,121 @@ class StatisticSO extends BaseSO {
   }
 
   //> Abstract Methods
-  createStreak(fields) {}
+  createStreak(fields) {
+    //> Usage
+    // Create a streak within a statistic.
 
-  getStreaks() {}
+    //> Implementation example
+    //fields.statisticId = this.id;
+    //let streak = Streak.objects.create(fields);
+
+    //return streak;
+  }
+
+  getStreaks() {
+    //> Usage
+    // Get all streaks of a statistic.
+
+    //> Implementation example
+    //if (this.year || this.year === 0) {
+    //  let { from, to } = this.getDates();
+    //  let response = Calendar.getDaysBetweenDate(this, {
+    //    from,
+    //    to
+    //  });
+    //  response = helper.statistic.calculateStreaks(response);
+    //  response = response.map((entry) => {
+    //    return new Streak(entry);
+    //  });
+
+    //  return response;
+    //}
+    //return [];
+  }
+
+  getBusiestDay() {
+    //> Usage
+    // Get the busiest day between the result of getDates().
+
+    //> Implementation example
+    //if (this.year || this.year === 0) {
+    //  let { from, to } = this.getDates();
+    //  let response = Calendar.getBusiestDay({
+    //    from,
+    //    to
+    //  });
+
+    //  if (response) {
+    //    response = new Calendar(response);
+    //  }
+
+    //  return response;
+    //}
+  }
+
+  getDates(){
+    //> Usage
+    // Get the correct from and to date based on the year.
+
+    //> Implementation example
+    //let from, to;
+
+    //if (this.year === 0) {
+    //  from = moment()
+    //    .subtract(1, "years")
+    //    .day(0)
+    //    .format();
+    //  to = moment().format();
+    //} else {
+    //  from = moment()
+    //    .year(this.year)
+    //    .month(0)
+    //    .day(0)
+    //    .date(1)
+    //    .format();
+    //  to = moment()
+    //    .year(this.year)
+    //    .month(11)
+    //    .day(31)
+    //    .format();
+    //}
+
+    //return {
+    //  from,
+    //  to
+    //};
+  }
+  
+  getStreakDetails(streaks){
+    //> Usage
+    // Get the current and longest streak of streaks.
+
+    //> Implementation example
+    //let longest = {
+    //  totalDays: 0
+    //};
+    //let current = {};
+
+    //streaks.forEach((streak) => {
+    //  if (streak.totalDays >= longest.totalDays) {
+    //    longest = streak;
+    //  }
+
+    //  if (moment().diff(streak.endDate, "days") === 0) {
+    //    current = streak;
+    //  }
+    //});
+
+    //return {
+    //  longest,
+    //  current
+    //};
+  }
 }
 
 /*
-  Comment
+  A statement object with connection to streak
+  sql statements. 
 */
 class StreakSO extends BaseSO {
   //> Fields
@@ -311,7 +578,8 @@ class StreakSO extends BaseSO {
 }
 
 /*
-  Comment
+  A statement object with connection to calendar
+  sql statements. 
 */
 class CalendarSO extends BaseSO {
   //> Fields
@@ -342,13 +610,11 @@ class CalendarSO extends BaseSO {
   }
 
   static getCalendar(dates) {
-    // generate calendar
     let calendar = helper.calendar.generateCalendarStructure(
       dates.from,
       dates.to
     );
 
-    // fill totals
     calendar.weeks.forEach((week) => {
       week.days.forEach((day) => {
         let entries = SOAssambler.database.exec(
@@ -356,7 +622,6 @@ class CalendarSO extends BaseSO {
           [day.date]
         );
 
-        //let entries = db.exec(query, [day.date]);
         let total = 0;
 
         if (entries.length > 0) {
@@ -382,11 +647,29 @@ class CalendarSO extends BaseSO {
   }
 
   //> Abstract Methods
-  createContribution(fields) {}
+  createContribution(fields) {
+    //> Usage
+    // Create a contribution within a calendar entry.
+
+    //> Implementation example
+    //let contribution = Contribution.objects.create({
+    //  id: fields.id,
+    //  repoUrl: fields.repoUrl,
+    //  datetime: fields.datetime,
+    //  nameWithOwner: fields.nameWithOwner,
+    //  type: fields.type,
+    //  calendarId: this.id
+    //});
+
+    //return contribution;
+  }
 }
 
 /*
-  Comment
+  A statement object with connection to contribution
+  sql statements.
+  Currently the contribution statement object is not
+  fully developed due to it is not used yet.
 */
 class ContributionSO extends BaseSO {
   //> Fields

@@ -2,6 +2,10 @@ import * as models from "../database/models";
 
 // Currently there is much redundant code due to the future integration of the playbook.
 
+/*
+  Providing a merged profile including repositories
+  and organizations.
+*/
 function mergedProfile() {
   let platform = models.Platform.objects.get({ id: 1 });
   let repositories = models.Repository.objects.all();

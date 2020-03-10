@@ -1,5 +1,12 @@
 import alasql from "alasql";
 
+//> Classes
+/*
+  A tool to hand over basic osm operations 
+  (init, create, get, all, filter, custom) for
+  all statement objects to the database.
+  Alasql is used as database.
+*/
 class SOAssambler {
   static database = new alasql.Database();
 
@@ -9,7 +16,6 @@ class SOAssambler {
       SOAssambler.database.exec(Base.statements.initialize);
     }
 
-    // The fields have to be in the correct order!
     this.create = (fields) => {
       try {
         let tablename = new Base({}).constructor.name.toLowerCase();
@@ -131,6 +137,7 @@ class SOAssambler {
     };
   }
 
+  //> Methods
   reload() {
     SOAssambler.database = new alasql.Database();
   }
