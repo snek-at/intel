@@ -1,18 +1,18 @@
 import moment from "moment";
 import * as queries from "./data";
 
-/*
-  Providing the static profile query.
-*/
+/**
+ * Providing the static profile query.
+ */
 function profile() {
   return queries.profile();
 }
 
-/*
-  Providing the dynamically generated calendar query.
-  A successfully resolved profile is needed in order
-  to generate the query.
-*/
+/**
+ * Providing the dynamically generated calendar query.
+ * A successfully resolved profile is needed in order
+ * to generate the query.
+ */
 function calendar(profile) {
   let date = moment(profile.createdAt);
   let fragments = "";

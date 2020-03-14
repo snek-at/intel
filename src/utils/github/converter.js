@@ -1,9 +1,9 @@
 import moment from "moment";
 
-/*
-  Converting the rawData provided by github. Then
-  the data is stored using the models.
-*/
+/**
+ * Converting the rawData provided by github. Then
+ * the data is stored using the models.
+ */
 function run(models, rawData) {
   let platform = models.Platform.objects.create({
     platformName: "github",
