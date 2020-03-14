@@ -2,14 +2,14 @@ import { Reducer, models } from "./reducer";
 import * as client from "./client";
 import * as github from "./utils/github";
 
-/*
-  The intel. A place where everything becomes onething.
-  By using the snek-client, utils and the brand new snek-reducer we
-  created a new way of life.
-  Some might say that this is not perfect in every way. But they are just fools.
-  We know every single mistake, every single scratch.
-  Although we can frankly say, we love it!
-*/
+/**
+ * The intel. A place where everything becomes onething.
+ * By using the snek-client, utils and the brand new snek-reducer we
+ * created a new way of life.
+ * Some might say that this is not perfect in every way. But they are just fools.
+ * We know every single mistake, every single scratch.
+ * Although we can frankly say, we love it!
+ */
 class Intel {
   constructor() {
     let reducer = new Reducer();
