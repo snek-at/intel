@@ -1,8 +1,8 @@
 import * as models from "../database/models";
 
-/*
-  Providing merged language statistics of all platforms.
-*/
+/**
+ * Providing merged language statistics of all platforms.
+ */
 function mergedLanguage() {
   let languages = models.Language.getLanguages();
 

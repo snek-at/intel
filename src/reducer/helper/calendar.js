@@ -1,9 +1,9 @@
 import * as models from "../database/models";
 import moment from "moment";
 
-/*
-  Providing a merged calendar of all platforms over all years.
-*/
+/**
+ * Providing a merged calendar of all platforms over all years.
+ */
 function mergedCalendar() {
   let current = models.Calendar.getCalendar({
     from: moment()

@@ -1,8 +1,8 @@
 import moment from "moment";
 
-/*
-  Calculating streaks based on a list of calendar days.
-*/
+/**
+ *  Calculating streaks based on a list of calendar days.
+ */
 function calculateStreaks(values) {
   let list = [];
 

@@ -1,9 +1,9 @@
 import * as models from "./database/models";
 import * as helper from "./helper";
 
-/*
-  Providing model data using helper classes.
-*/
+/**
+ * Providing model data using helper classes.
+ */
 class Reducer {
   constructor() {
     // Merging All Entries

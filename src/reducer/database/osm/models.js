@@ -18,11 +18,11 @@ import * as contribution from "./statements/contribution";
 import * as helper from "../helper";
 
 //> Classes
-/*
-  A general underlying statement object on which
-  all statement objects are based.
-  SOAssembler and squeezer are provided.
-*/
+/**
+ * A general underlying statement object on which
+ * all statement objects are based.
+ * SOAssembler and squeezer are provided.
+ */
 class BaseSO {
   //> Methods
   static getObjects(self) {
@@ -35,9 +35,9 @@ class BaseSO {
 }
 
 /*
-  A statement object with connection to platform
-  sql statements. 
-*/
+ * A statement object with connection to platform
+ * sql statements. 
+ */
 class PlatformSO extends BaseSO {
   //> Fields
   static statements = platform;
@@ -164,9 +164,9 @@ class PlatformSO extends BaseSO {
   }
 }
 
-/*
-  Comment
-*/
+/**
+ * Comment
+ */
 class MemberSO extends BaseSO {
   static statements = member;
 
@@ -177,9 +177,9 @@ class MemberSO extends BaseSO {
 }
 
 /*
-  A statement object with connection to repository
-  sql statements. 
-*/
+ * A statement object with connection to repository
+ * sql statements. 
+ */
 class RepositorySO extends BaseSO {
   //> Fields
   static statements = repository;
@@ -250,10 +250,10 @@ class RepositorySO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to repositoryHasMember
-  sql statements. 
-*/
+/**
+ * A statement object with connection to repositoryHasMember
+ * sql statements. 
+ */
 class RepositoryHasMemberSO extends BaseSO {
   static statements = repositoryHasMember;
 
@@ -263,10 +263,10 @@ class RepositoryHasMemberSO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to language
-  sql statements. 
-*/
+/**
+ * A statement object with connection to language
+ * sql statements. 
+ */
 class LanguageSO extends BaseSO {
   //> Fields
   static statements = language;
@@ -282,10 +282,10 @@ class LanguageSO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to platformHasRepository
-  sql statements. 
-*/
+/**
+ * A statement object with connection to platformHasRepository
+ * sql statements. 
+ */
 class PlatformHasRepositorySO extends BaseSO {
   //> Fields
   static statements = platformHasRepository;
@@ -296,10 +296,10 @@ class PlatformHasRepositorySO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to organization
-  sql statements. 
-*/
+/**
+ * A statement object with connection to organization
+ * sql statements. 
+ */
 class OrganizationSO extends BaseSO {
   //> Fields
   static statements = organization;
@@ -367,10 +367,10 @@ class OrganizationSO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to organizationHasMember
-  sql statements. 
-*/
+/**
+ * A statement object with connection to organizationHasMember
+ * sql statements. 
+ */
 class OrganizationHasMemberSO extends BaseSO {
   //> Fields
   static statements = organizationHasMember;
@@ -381,10 +381,10 @@ class OrganizationHasMemberSO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to platformHasOrganization
-  sql statements. 
-*/
+/**
+ * A statement object with connection to platformHasOrganization
+ * sql statements. 
+ */
 class PlatformHasOrganizationSO extends BaseSO {
   //> Fields
   static statements = platformHasOrganization;
@@ -395,10 +395,10 @@ class PlatformHasOrganizationSO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to statistic
-  sql statements. 
-*/
+/**
+ * A statement object with connection to statistic
+ * sql statements. 
+ */
 class StatisticSO extends BaseSO {
   //> Fields
   static statements = statistic;
@@ -563,10 +563,10 @@ class StatisticSO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to streak
-  sql statements. 
-*/
+/**
+ * A statement object with connection to streak
+ * sql statements. 
+ */
 class StreakSO extends BaseSO {
   //> Fields
   static statements = streak;
@@ -577,10 +577,10 @@ class StreakSO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to calendar
-  sql statements. 
-*/
+/**
+ * A statement object with connection to calendar
+ * sql statements. 
+ */
 class CalendarSO extends BaseSO {
   //> Fields
   static statements = calendar;
@@ -665,12 +665,12 @@ class CalendarSO extends BaseSO {
   }
 }
 
-/*
-  A statement object with connection to contribution
-  sql statements.
-  Currently the contribution statement object is not
-  fully developed due to it is not used yet.
-*/
+/**
+ * A statement object with connection to contribution
+ * sql statements.
+ * Currently the contribution statement object is not
+ * fully developed due to it is not used yet.
+ */
 class ContributionSO extends BaseSO {
   //> Fields
   static statements = contribution;

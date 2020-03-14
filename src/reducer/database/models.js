@@ -3,11 +3,11 @@ import moment from "moment";
 import * as helper from "./helper";
 
 //> Classes
-/*
-  A model which uses the platform statement
-  objects and the getObjects of the base statement
-  object.
-*/
+/**
+ * A model which uses the platform statement
+ * objects and the getObjects of the base statement
+ * object.
+ */
 class Platform extends osm.models.PlatformSO {
   static objects = this.getObjects(this);
 
@@ -112,11 +112,11 @@ class Platform extends osm.models.PlatformSO {
   }
 }
 
-/*
-  A model which uses the member statement
-  objects and the getObjects of the base statement
-  object.
-*/
+/**
+ * A model which uses the member statement
+ * objects and the getObjects of the base statement
+ * object.
+ */
 class Member extends osm.models.MemberSO {
   static objects = this.getObjects(this);
 
@@ -133,11 +133,11 @@ class Member extends osm.models.MemberSO {
   }
 }
 
-/*
-  A model which uses the repository statement
-  objects and the getObjects of the base statement
-  object.
-*/
+/**
+ * A model which uses the repository statement
+ * objects and the getObjects of the base statement
+ * object.
+ */
 class Repository extends osm.models.RepositorySO {
   static objects = this.getObjects(this);
 
@@ -200,20 +200,20 @@ class Repository extends osm.models.RepositorySO {
   }
 }
 
-/*
-  A model which uses the repositoryHasMember
-  statement objects and the getObjects of
-  the base statement object.
-*/
+/**
+ * A model which uses the repositoryHasMember
+ * statement objects and the getObjects of
+ * the base statement object.
+ */
 class RepositoryHasMember extends osm.models.RepositoryHasMemberSO {
   static objects = this.getObjects(this);
 }
 
-/*
-  A model which uses the language statement
-  objects and the getObjects of the base statement
-  object.
-*/
+/**
+ * A model which uses the language statement
+ * objects and the getObjects of the base statement
+ * object.
+ */
 class Language extends osm.models.LanguageSO {
   static objects = this.getObjects(this);
 
@@ -240,20 +240,20 @@ class Language extends osm.models.LanguageSO {
   }
 }
 
-/*
-  A model which uses the platformHasRepository
-  statement objects and the getObjects of
-  the base statement object.
-*/
+/**
+ * A model which uses the platformHasRepository
+ * statement objects and the getObjects of
+ * the base statement object.
+ */
 class PlatformHasRepository extends osm.models.PlatformHasRepositorySO {
   static objects = this.getObjects(this);
 }
 
-/*
-  A model which uses the organization statement
-  objects and the getObjects of the base statement
-  object.
-*/
+/**
+ * A model which uses the organization statement
+ * objects and the getObjects of the base statement
+ * object.
+ */
 class Organization extends osm.models.OrganizationSO {
   static objects = this.getObjects(this);
 
@@ -310,29 +310,29 @@ class Organization extends osm.models.OrganizationSO {
   }
 }
 
-/*
-  A model which uses the organizationHasMember
-  statement objects and the getObjects of
-  the base statement object.
-*/
+/**
+ * A model which uses the organizationHasMember
+ * statement objects and the getObjects of
+ * the base statement object.
+ */
 class OrganizationHasMember extends osm.models.OrganizationHasMemberSO {
   static objects = this.getObjects(this);
 }
 
-/*
-  A model which uses the platformHasOrganization
-  statement objects and the getObjects of
-  the base statement object.
-*/
+/**
+ * A model which uses the platformHasOrganization
+ * statement objects and the getObjects of
+ * the base statement object.
+ */
 class PlatformHasOrganization extends osm.models.PlatformHasOrganizationSO {
   static objects = this.getObjects(this);
 }
 
-/*
-  A model which uses the statistic statement
-  objects and the getObjects of the base statement
-  object.
-*/
+/**
+ * A model which uses the statistic statement
+ * objects and the getObjects of the base statement
+ * object.
+ */
 class Statistic extends osm.models.StatisticSO {
   static objects = this.getObjects(this);
 
@@ -458,11 +458,11 @@ class Statistic extends osm.models.StatisticSO {
   }
 }
 
-/*
-  A model which uses the streak statement
-  objects and the getObjects of the base statement
-  object.
-*/
+/**
+ * A model which uses the streak statement
+ * objects and the getObjects of the base statement
+ * object.
+ */
 class Streak extends osm.models.StreakSO {
   static objects = this.getObjects(this);
 
@@ -479,11 +479,11 @@ class Streak extends osm.models.StreakSO {
   }
 }
 
-/*
-  A model which uses the calendar statement
-  objects and the getObjects of the base statement
-  object.
-*/
+/**
+ * A model which uses the calendar statement
+ * objects and the getObjects of the base statement
+ * object.
+ */
 class Calendar extends osm.models.CalendarSO {
   static objects = this.getObjects(this);
 
@@ -512,11 +512,11 @@ class Calendar extends osm.models.CalendarSO {
   }
 }
 
-/*
-  A model which uses the contribution statement
-  objects and the getObjects of the base statement
-  object.
-*/
+/**
+ * A model which uses the contribution statement
+ * objects and the getObjects of the base statement
+ * object.
+ */
 class Contribution extends osm.models.ContributionSO {
   static objects = this.getObjects(this);
 

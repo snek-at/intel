@@ -1,8 +1,8 @@
 import * as models from "../database/models";
 
-/*
-  Providing a merged statistic including streaks and busiest day.
-*/
+/**
+ * Providing a merged statistic including streaks and busiest day.
+ */
 function mergedStatistic() {
   let statistic = models.Statistic.getMerged();
   let response = {
