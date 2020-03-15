@@ -1,3 +1,5 @@
+//> Apollo
+// Contains gql to pass a string to a query
 import { gql } from "apollo-boost";
 
 //> Queries

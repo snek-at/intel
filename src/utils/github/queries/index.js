@@ -1,4 +1,6 @@
 import moment from "moment";
+//> Queries
+// Contains raw static queries 
 import * as queries from "./data";
 
 /**
