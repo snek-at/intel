@@ -1,3 +1,5 @@
+//> Models
+// Contains all models
 import * as models from "./models";
 
 export { models };

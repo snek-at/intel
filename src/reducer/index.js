@@ -1,4 +1,8 @@
+//> Database models
+// Contains all database models
 import * as models from "./database/models";
+//> Helper
+// Contains all database helper functions
 import * as helper from "./helper";
 
 /**

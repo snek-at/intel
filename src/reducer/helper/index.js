@@ -1,3 +1,5 @@
+//> Helper
+// Contains all helper functions
 import * as calendar from "./calendar";
 import * as profile from "./profile";
 import * as statistic from "./statistic";

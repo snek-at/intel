@@ -1,3 +1,5 @@
+//> Database models
+// Contains all database models
 import * as models from "../database/models";
 
 // Currently there is much redundant code due to the future integration of the playbook.

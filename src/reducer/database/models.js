@@ -1,5 +1,9 @@
+//> Object Statement Mapping
+// Contains all models 
 import * as osm from "./osm";
 import moment from "moment";
+//> Helper
+// Contains all database helper functions
 import * as helper from "./helper";
 
 //> Classes

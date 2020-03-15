@@ -1,5 +1,9 @@
+//> Reconstructor
+// SOAssambler for SO objects
 import { SOAssambler } from "./reconstructor";
 
+//> Statements
+// Contains SQL statements
 import * as platform from "./statements/platform";
 import * as member from "./statements/member";
 import * as repository from "./statements/repository";
