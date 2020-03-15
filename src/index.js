@@ -1,7 +1,12 @@
+//> Reducer
+// Contains Reducer and database models
 import { Reducer, models } from "./reducer";
+//> snek-client
+// Contains a interface for the snek-client
 import * as client from "./client";
+//> Utils
+// Contains the github utils
 import * as github from "./utils/github";
-
 /**
  * The intel. A place where everything becomes onething.
  * By using the snek-client, utils and the brand new snek-reducer we
