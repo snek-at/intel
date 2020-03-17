@@ -1,5 +1,5 @@
-//> Database models
-// Contains all database models
+//> Database Models
+// Contains all database Models
 import * as models from "../database/models";
 
 /**

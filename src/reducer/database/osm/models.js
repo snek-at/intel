@@ -63,7 +63,7 @@ class PlatformSO extends BaseSO {
     //> Usage
     // Creates a repository within a platform.
 
-    //> Implementation example
+    //> Implementation Example
     //let repository = Repository.objects.create(fields);
 
     //if (repository.success === false) {
@@ -87,7 +87,7 @@ class PlatformSO extends BaseSO {
     //> Usage
     // Creates a organization within a platform.
 
-    //> Implementation example
+    //> Implementation Example
     //let organization = Organization.objects.create(fields);
 
     //if (organization.success === false) {
@@ -111,7 +111,7 @@ class PlatformSO extends BaseSO {
     //> Usage
     // Creates a statistic within a platform.
 
-    //> Implementation example
+    //> Implementation Example
     //fields.platformId = this.id;
     //let statistic = Statistic.objects.create(fields);
 
@@ -122,7 +122,7 @@ class PlatformSO extends BaseSO {
     //> Usage
     // Creates a calendar entry within a platform.
 
-    //> Implementation example
+    //> Implementation Example
     //fields.platformId = this.id;
     //let calendar = Calendar.objects.create(fields);
 
@@ -133,7 +133,7 @@ class PlatformSO extends BaseSO {
     //> Usage
     // Get all repositories within a platform.
 
-    //> Implementation example
+    //> Implementation Example
     //let repositories = PlatformHasRepository.objects.filter(
     //  {
     //    platformId: this.id
@@ -148,7 +148,7 @@ class PlatformSO extends BaseSO {
     //> Usage
     // Get all organizations within a platform.
 
-    //> Implementation example
+    //> Implementation Example
     //let organizations = PlatformHasOrganization.objects.filter(
     //  {
     //    platformId: this.id
@@ -163,7 +163,7 @@ class PlatformSO extends BaseSO {
     //> Usage
     // Get merged calendar
 
-    //> Implementation example
+    //> Implementation Example
     //Calendar.getCalendar(dates);
   }
 }
@@ -205,7 +205,7 @@ class RepositorySO extends BaseSO {
     //> Usage
     // Create a member within a repository.
 
-    //> Implementation example
+    //> Implementation Example
     //let member = Member.objects.create({
     //  avatarUrl: fields.avatarUrl,
     //  url: fields.url,
@@ -232,7 +232,7 @@ class RepositorySO extends BaseSO {
     //> Usage
     // Create a languages within a repository.
 
-    //> Implementation example
+    //> Implementation Example
     //fields.repositoryId = this.id;
     //let language = Language.objects.create(fields);
 
@@ -243,7 +243,7 @@ class RepositorySO extends BaseSO {
     //> Usage
     // Get all members of repository.
 
-    //> Implementation example
+    //> Implementation Example
     //let members = RepositoryHasMember.objects.filter(
     //  {
     //    repositoryId: this.id
@@ -332,7 +332,7 @@ class OrganizationSO extends BaseSO {
     //> Usage
     // Create a member within a repository.
 
-    //> Implementation example
+    //> Implementation Example
     //let member = Member.objects.create({
     //  avatarUrl: fields.avatarUrl,
     //  url: fields.url,
@@ -360,7 +360,7 @@ class OrganizationSO extends BaseSO {
     //> Usage
     // Get all members of a repository.
 
-    //> Implementation example
+    //> Implementation Example
     //let members = OrganizationHasMember.objects.filter(
     //  {
     //    organizationId: this.id
@@ -460,7 +460,7 @@ class StatisticSO extends BaseSO {
     //> Usage
     // Create a streak within a statistic.
 
-    //> Implementation example
+    //> Implementation Example
     //fields.statisticId = this.id;
     //let streak = Streak.objects.create(fields);
 
@@ -471,7 +471,7 @@ class StatisticSO extends BaseSO {
     //> Usage
     // Get all streaks of a statistic.
 
-    //> Implementation example
+    //> Implementation Example
     //if (this.year || this.year === 0) {
     //  let { from, to } = this.getDates();
     //  let response = Calendar.getDaysBetweenDate(this, {
@@ -492,7 +492,7 @@ class StatisticSO extends BaseSO {
     //> Usage
     // Get the busiest day between the result of getDates().
 
-    //> Implementation example
+    //> Implementation Example
     //if (this.year || this.year === 0) {
     //  let { from, to } = this.getDates();
     //  let response = Calendar.getBusiestDay({
@@ -512,7 +512,7 @@ class StatisticSO extends BaseSO {
     //> Usage
     // Get the correct from and to date based on the year.
 
-    //> Implementation example
+    //> Implementation Example
     //let from, to;
 
     //if (this.year === 0) {
@@ -545,7 +545,7 @@ class StatisticSO extends BaseSO {
     //> Usage
     // Get the current and longest streak of streaks.
 
-    //> Implementation example
+    //> Implementation Example
     //let longest = {
     //  totalDays: 0
     //};
@@ -656,7 +656,7 @@ class CalendarSO extends BaseSO {
     //> Usage
     // Create a contribution within a calendar entry.
 
-    //> Implementation example
+    //> Implementation Example
     //let contribution = Contribution.objects.create({
     //  id: fields.id,
     //  repoUrl: fields.repoUrl,

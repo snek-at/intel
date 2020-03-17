@@ -1,4 +1,4 @@
-//> Database models
+//> Database Models
 // Contains all database models
 import * as models from "../database/models";
 

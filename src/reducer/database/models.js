@@ -237,7 +237,7 @@ class Language extends osm.models.LanguageSO {
     this.repositoryId = args["repositoryId"];
   }
 
-  //> Static methods
+  //> Static Methods
   static getLanguages() {
     let response = super.getLanguages();
     response = response.map((entry) => {
