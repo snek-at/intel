@@ -1,7 +1,10 @@
+//> Moment
+// A lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.
+import moment from "moment";
+
 //> Database models
 // Contains all database models
 import * as models from "../database/models";
-import moment from "moment";
 
 /**
  * Providing a merged calendar of all platforms over all years.

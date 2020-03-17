@@ -1,6 +1,9 @@
+//> Moment
+// A lightweight JavaScript date library for parsing,
+// validating, manipulating, and formatting dates.
 import moment from "moment";
 
-/** 
+/**
  * Generating a raw calendar structure by start end end dates.
  * No colors or totals are being filled.
  */
@@ -33,7 +36,7 @@ function generateCalendarStructure(startDate, endDate) {
 }
 
 /**
- * Fill calendar structure with the correct colors 
+ * Fill calendar structure with the correct colors
  * based on the busiest day. The calendar structure
  * must be already filled with totals.
  */

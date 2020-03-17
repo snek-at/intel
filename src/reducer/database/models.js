@@ -1,7 +1,11 @@
-//> Object Statement Mapping
-// Contains all models 
-import * as osm from "./osm";
+//> Moment
+// A lightweight JavaScript date library for parsing,
+// validating, manipulating, and formatting dates.
 import moment from "moment";
+
+//> Object Statement Mapping
+// Contains all models
+import * as osm from "./osm";
 //> Helper
 // Contains all database helper functions
 import * as helper from "./helper";

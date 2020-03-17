@@ -38,9 +38,9 @@ class BaseSO {
   }
 }
 
-/*
+/**
  * A statement object with connection to platform
- * sql statements. 
+ * sql statements.
  */
 class PlatformSO extends BaseSO {
   //> Fields
@@ -169,7 +169,8 @@ class PlatformSO extends BaseSO {
 }
 
 /**
- * Comment
+ * A statement object with connection to member
+ * sql statements.
  */
 class MemberSO extends BaseSO {
   static statements = member;
@@ -180,9 +181,9 @@ class MemberSO extends BaseSO {
   }
 }
 
-/*
+/**
  * A statement object with connection to repository
- * sql statements. 
+ * sql statements.
  */
 class RepositorySO extends BaseSO {
   //> Fields
@@ -256,7 +257,7 @@ class RepositorySO extends BaseSO {
 
 /**
  * A statement object with connection to repositoryHasMember
- * sql statements. 
+ * sql statements.
  */
 class RepositoryHasMemberSO extends BaseSO {
   static statements = repositoryHasMember;
@@ -269,7 +270,7 @@ class RepositoryHasMemberSO extends BaseSO {
 
 /**
  * A statement object with connection to language
- * sql statements. 
+ * sql statements.
  */
 class LanguageSO extends BaseSO {
   //> Fields
@@ -288,7 +289,7 @@ class LanguageSO extends BaseSO {
 
 /**
  * A statement object with connection to platformHasRepository
- * sql statements. 
+ * sql statements.
  */
 class PlatformHasRepositorySO extends BaseSO {
   //> Fields
@@ -302,7 +303,7 @@ class PlatformHasRepositorySO extends BaseSO {
 
 /**
  * A statement object with connection to organization
- * sql statements. 
+ * sql statements.
  */
 class OrganizationSO extends BaseSO {
   //> Fields
@@ -373,7 +374,7 @@ class OrganizationSO extends BaseSO {
 
 /**
  * A statement object with connection to organizationHasMember
- * sql statements. 
+ * sql statements.
  */
 class OrganizationHasMemberSO extends BaseSO {
   //> Fields
@@ -387,7 +388,7 @@ class OrganizationHasMemberSO extends BaseSO {
 
 /**
  * A statement object with connection to platformHasOrganization
- * sql statements. 
+ * sql statements.
  */
 class PlatformHasOrganizationSO extends BaseSO {
   //> Fields
@@ -401,7 +402,7 @@ class PlatformHasOrganizationSO extends BaseSO {
 
 /**
  * A statement object with connection to statistic
- * sql statements. 
+ * sql statements.
  */
 class StatisticSO extends BaseSO {
   //> Fields
@@ -569,7 +570,7 @@ class StatisticSO extends BaseSO {
 
 /**
  * A statement object with connection to streak
- * sql statements. 
+ * sql statements.
  */
 class StreakSO extends BaseSO {
   //> Fields
@@ -583,7 +584,7 @@ class StreakSO extends BaseSO {
 
 /**
  * A statement object with connection to calendar
- * sql statements. 
+ * sql statements.
  */
 class CalendarSO extends BaseSO {
   //> Fields
