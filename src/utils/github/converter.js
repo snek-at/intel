@@ -1,3 +1,6 @@
+//> Moment
+// A lightweight JavaScript date library for parsing,
+// validating, manipulating, and formatting dates.
 import moment from "moment";
 
 /**
@@ -40,12 +43,13 @@ function run(models, rawData) {
   });
 
   // Store repositories with key: nameWithOwner in order to prevent duplicates
-
   let repositories = {};
+
   // Calendar
   for (let [index, year] of Object.entries(rawData.calendar)) {
     if (index !== "__typename") {
       let yearCount = "0";
+
       if (index !== "current") {
         yearCount = index.split("T")[1];
 
@@ -62,7 +66,6 @@ function run(models, rawData) {
         });
 
         // Store Repositories in variable
-
         year.commitContributionsByRepository.forEach((node) => {
           repositories[node.repository.nameWithOwner] = node.repository;
         });
@@ -102,6 +105,7 @@ function run(models, rawData) {
       username: node.owner.login,
       platformId: platform.id
     });
+
     if (owner.success === false) {
       owner = models.Member.objects.filter({
         username: node.owner.login,

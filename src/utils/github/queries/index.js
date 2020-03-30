@@ -1,6 +1,10 @@
+//> Moment
+// A lightweight JavaScript date library for parsing,
+// validating, manipulating, and formatting dates.
+import moment from "moment";
 import moment from "moment";
 //> Queries
-// Contains raw static queries 
+// Contains raw static queries
 import * as queries from "./data";
 
 /**
