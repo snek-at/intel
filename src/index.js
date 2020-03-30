@@ -7,6 +7,7 @@ import * as client from "./client";
 //> Utils
 // Contains the github utils
 import * as github from "./utils/github";
+
 /**
  * The intel. A place where everything becomes onething.
  * By using the snek-client, utils and the brand new snek-reducer we
@@ -18,22 +19,20 @@ import * as github from "./utils/github";
 class Intel {
   constructor() {
     let reducer = new Reducer();
+
     this.append = async (source) => {
       if (source.platform.toLowerCase() === "github") {
         // Init github client
         let c = new client.Github(source.authorization);
-
         let profileData = await c.get(github.queries.profile(), {
           username: source.user
         });
-
         let calendarData = await c.get(
           github.queries.calendar(profileData.data.user),
           {
             username: source.user
           }
         );
-
         const data = {
           profile: profileData.data.user,
           calendar: calendarData.data.user
@@ -44,6 +43,7 @@ class Intel {
     };
     this.appendList = async (sourceList) => {
       const errorList = [];
+
       async function retry(maxRetries, fn, params) {
         return await fn(...params).catch(() => {
           if (maxRetries <= 0) {
@@ -58,10 +58,12 @@ class Intel {
       for (let index = 0; index < sourceList.length; index++) {
         const source = sourceList[index];
         const maxRetries = 5;
+
         await retry(maxRetries, this.append, [source]).catch(() => {
           errorList.push(source);
         });
       }
+
       if (errorList.length > 0) {
         throw errorList;
       }

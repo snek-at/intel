@@ -1,7 +1,9 @@
+//> snek-client
+// A Graphql and REST client for fetching data
 import { Graphql } from "snek-client";
 
 /**
- * Implementation of the snek-client.
+ * Implementation of the snek-client
  */
 class Github{
     constructor(authorization){
