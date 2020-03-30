@@ -2,6 +2,7 @@
 // A Graphql and REST client for fetching data
 import { Graphql } from "snek-client";
 
+//> Classes
 /**
  * Implementation of the snek-client
  */

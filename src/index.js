@@ -8,8 +8,9 @@ import * as client from "./client";
 // Contains the github utils
 import * as github from "./utils/github";
 
+//> Classes
 /**
- * The intel. A place where everything becomes onething.
+ * The intel. A place where everything becomes one thing.
  * By using the snek-client, utils and the brand new snek-reducer we
  * created a new way of life.
  * Some might say that this is not perfect in every way. But they are just fools.
