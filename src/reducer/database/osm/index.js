@@ -1,8 +1,8 @@
-class Selector {
-  constructor() {}
-}
+//> Models
+// Contains all models
+import * as models from "./models";
 
-export { Selector };
+export { models };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

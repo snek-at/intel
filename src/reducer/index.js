@@ -1,18 +1,33 @@
-import { Database } from "./database";
-import { Reducer as SampleReducer } from "./sample.js";
+//> Database Models
+// Contains all database models
+import * as models from "./database/models";
+//> Helper
+// Contains all database helper functions
+import * as helper from "./helper";
 
+//> Classes
+/**
+ * Providing model data using helper classes.
+ */
 class Reducer {
   constructor() {
-    this.database = new Database("Developer");
-    this.sample = new SampleReducer(this.database);
-
-    this.get = () => {};
+    // Merging All Entries
+    this.get = () => {
+      return {
+        profile: helper.profile.mergedProfile(),
+        calendar: helper.calendar.mergedCalendar(),
+        statistic: helper.statistic.mergedStatistic(),
+        language: helper.language.mergedLanguage()
+      };
+    };
+    // Get Last Added Values
     this.getRecent = () => {};
+    // Merging By Source
     this.getBySource = (source) => {};
   }
 }
 
-export { Reducer };
+export { Reducer, models };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
