@@ -20,7 +20,7 @@ import * as github from "./utils/github";
  */
 class Intel {
   constructor() {
-    this.reducer = new Reducer();
+    let reducer = new Reducer();
     // this.snekclient = new Client({
     //   url: "https://engine.snek.at/api/graphiql",
     //   type: "graphql",
@@ -77,48 +77,48 @@ class Intel {
         github.converter.run(models, data);
       }
     };
-    // this.appendList = async (sourceList) => {
-    //   const errorList = [];
+    this.appendList = async (sourceList) => {
+      const errorList = [];
 
-    //   async function retry(maxRetries, fn, params) {
-    //     return await fn(...params).catch(() => {
-    //       if (maxRetries <= 0) {
-    //         throw new Error(
-    //           `Could not fetch data after ${maxRetries} retries... Please try again later!`
-    //         );
-    //       }
-    //       return retry(maxRetries - 1, fn, params);
-    //     });
-    //   }
+      async function retry(maxRetries, fn, params) {
+        return await fn(...params).catch(() => {
+          if (maxRetries <= 0) {
+            throw new Error(
+              `Could not fetch data after ${maxRetries} retries... Please try again later!`
+            );
+          }
+          return retry(maxRetries - 1, fn, params);
+        });
+      }
 
-    //   for (let index = 0; index < sourceList.length; index++) {
-    //     const source = sourceList[index];
-    //     const maxRetries = 5;
+      for (let index = 0; index < sourceList.length; index++) {
+        const source = sourceList[index];
+        const maxRetries = 5;
 
-    //     await retry(maxRetries, this.append, [source]).catch(() => {
-    //       errorList.push(source);
-    //     });
-    //   }
+        await retry(maxRetries, this.append, [source]).catch(() => {
+          errorList.push(source);
+        });
+      }
 
-    //   if (errorList.length > 0) {
-    //     throw errorList;
-    //   }
-    // };
-    // this.get = () => {
-    //   return reducer.get();
-    // };
+      if (errorList.length > 0) {
+        throw errorList;
+      }
+    };
+    this.get = () => {
+      return reducer.get();
+    };
   }
 }
 
-console.log("dasd");
-let l = new Intel();
-l.append({
-  user: "schettn",
-  platform: "github",
-  authorization: "token 1109d533eec6cbbce9d801131dcfc5583fbc4be1",
-}).then(res => {
-  console.log(l.reducer.get())
-})
+// console.log("dasd");
+// let l = new Intel();
+// l.append({
+//   user: "schettn",
+//   platform: "github",
+//   authorization: "token 1109d533eec6cbbce9d801131dcfc5583fbc4be1",
+// }).then(res => {
+//   console.log(l.get())
+// })
 
 export { Intel };
 
