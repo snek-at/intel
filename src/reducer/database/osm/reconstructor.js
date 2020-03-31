@@ -3,11 +3,11 @@ import alasql from "alasql";
 class SOAssambler {
   static database = new alasql.Database();
   constructor(Base) {
-    if (base.statements.initialize) {
+    if (Base.statements.initialize) {
       // Create table
       // console.log(SOAssambler.database)
       // console.log(base.statements.initialize)
-      SOAssambler.database.exec(base.statements.initialize);
+      SOAssambler.database.exec(Base.statements.initialize);
     }
 
     // The fields have to be in the correct order!
@@ -15,7 +15,7 @@ class SOAssambler {
       try {
         let tablename = new Base({}).constructor.name.toLowerCase();
         SOAssambler.database.exec(
-          base.statements.create,
+          Base.statements.create,
           Object.values(fields)
         );
         fields.id = SOAssambler.database.autoval(tablename, "id");
@@ -32,7 +32,7 @@ class SOAssambler {
     this.get = (fields) => {
       try {
         let response = SOAssambler.database.exec(
-          base.statements.get,
+          Base.statements.get,
           Object.values(fields)
         );
         console.log({ ...response });
@@ -52,7 +52,7 @@ class SOAssambler {
     this.all = (...fields) => {
       try {
         let response;
-        response = SOAssambler.database.exec(base.statements.all, fields);
+        response = SOAssambler.database.exec(Base.statements.all, fields);
         console.log(response);
         response = response.map((entry) => {
           return new Base(entry);
@@ -69,7 +69,7 @@ class SOAssambler {
     this.filter = (filter, Cls, filterStatement) => {
       try {
         if (!filterStatement) {
-          filterStatement = base.statements.all;
+          filterStatement = Base.statements.all;
         }
         let response = SOAssambler.database.exec(filterStatement);
         for (let entry in response) {
@@ -92,7 +92,7 @@ class SOAssambler {
 
         let objects = filtered.map((entry) => {
           let o;
-          if (cls) {
+          if (Cls) {
             o = new Cls(entry);
           } else {
             o = new Base(entry);

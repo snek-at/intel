@@ -1,10 +1,10 @@
 import moment from "moment";
 
 function calculateStreaks(values) {
+  let list = [];
   if (!values) {
     throw new Error("An error occurred due to an invalid input parameters!");
   } else {
-    let list = [];
     let streak = {};
 
     for (let index = 0; index < values.length; index++) {

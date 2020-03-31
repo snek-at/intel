@@ -30,9 +30,14 @@
   "author": "schettn",
   "dependencies": {
     "alasql": "^0.5.5",
+    "apollo-boost": "^0.4.7",
+    "graphql": "^14.6.0",
+    "moment": "^2.24.0",
     "react-scripts": "^3.3.1",
-    "snek-client": "1.0.0"
+    "snek-client": "file:../client"
   },
   "devDependencies": {},
-  "prettier": { "arrowParens": "always" }
+  "prettier": {
+    "arrowParens": "always"
+  }
 }
