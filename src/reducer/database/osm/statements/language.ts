@@ -36,7 +36,7 @@ const all = `
     language
 `;
 
-const byRepository = (repository_id) => `
+const byRepository = (repository_id: number) => `
   SELECT
   L1.color,
   L1.name,

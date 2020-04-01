@@ -17,14 +17,14 @@ import * as contribution from "./statements/contribution";
 // Statement Objects => SO
 import * as helper from "../helper";
 
-class BaseSO {
+export class BaseSO {
   //static objects = SOAssambler;
 
-  static getObjects(self) {
+  static getObjects(self: any) {
     return new SOAssambler(self);
   }
 
-  render(filter) {
+  render(filter: string[]) {
     return helper.general.squeezer(this, filter);
   }
 }
@@ -35,13 +35,13 @@ class PlatformSO extends BaseSO {
   constructor() {
     super();
   }
-  createRepository(fields) {}
-  createOrganization(fields) {}
-  createStatistic(fields) {}
+  createRepository(fields:any) {}
+  createOrganization(fields:any) {}
+  createStatistic(fields:any) {}
 
-  getOrganizations(fields) {}
-  getRepositories(fields) {}
-  getStatistics(fields) {}
+  getOrganizations(fields:any) {}
+  getRepositories(fields:any) {}
+  getStatistics(fields:any) {}
 
   static getLowestCreatedAtYear() {
     return SOAssambler.database.exec(
@@ -65,11 +65,11 @@ class RepositorySO extends BaseSO {
     super();
   }
 
-  createMember(fields) {}
-  createLanguage(fields) {}
+  createMember(fields:any) {}
+  createLanguage(fields:any) {}
 
   getMembers() {}
-  getLanguages(cls, self) {
+  getLanguages(cls:any, self:any) {
     let response = cls.objects.custom(language.byRepository(self.id));
     return response;
   }
@@ -110,11 +110,11 @@ class OrganizationSO extends BaseSO {
     super();
   }
 
-  createMember(fields) {}
+  createMember(fields:any) {}
 
-  getMembers(fields) {}
+  getMembers(fields:any) {}
 
-  getRepositories(cls, self) {
+  getRepositories(cls:any, self:any) {
     let response = cls.objects.filter(
       {
         owner: self.name
@@ -150,22 +150,22 @@ class StatisticSO extends BaseSO {
     super();
   }
 
-  createStreak(fields) {}
+  createStreak(fields:any) {}
 
   getStreaks() {}
 
-  static getMerged(cls) {
+  static getMerged(cls: any) {
     let response = SOAssambler.database.exec(StatisticSO.statements.allMerged);
 
     // Parse to class objects
-    response = response.map((entry) => {
+    response = response.map((entry:any) => {
       return new cls(entry);
     });
 
     return response;
   }
 
-  getContributions(self) {
+  getContributions(self:any) {
     let response;
     if (self.id) {
       // If valid object
@@ -209,9 +209,9 @@ class CalendarSO extends BaseSO {
     super();
   }
 
-  createContribution(fields) {}
+  createContribution(fields:any) {}
 
-  static getDaysBetweenDate(self, dates) {
+  static getDaysBetweenDate(self:any, dates:any) {
     let days = SOAssambler.database.exec(CalendarSO.statements.betweenDate, [
       dates.from,
       dates.to
@@ -219,7 +219,7 @@ class CalendarSO extends BaseSO {
     return days;
   }
 
-  static getBusiestDay(dates) {
+  static getBusiestDay(dates:any) {
     let response = SOAssambler.database.exec(
       CalendarSO.statements.busiestDayBetweenDate,
       [dates.from, dates.to]
@@ -227,7 +227,7 @@ class CalendarSO extends BaseSO {
     return response;
   }
 
-  static getCalendar(dates) {
+  static getCalendar(dates:any) {
     // generate calendar
     let calendar = helper.calendar.generateCalendarStructure(
       dates.from,

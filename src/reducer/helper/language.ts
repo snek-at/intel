@@ -2,8 +2,8 @@ import * as models from "../database/models";
 
 function mergedLanguage() {
   let languages = models.Language.getLanguages();
-  languages.map((language) => {
-    return language.render();
+  languages.map((language:models.Language) => {
+    return language.render([]);
   });
 
   return languages;

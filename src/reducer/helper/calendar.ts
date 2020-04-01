@@ -1,5 +1,6 @@
 import * as models from "../database/models";
 import moment from "moment";
+import { ICalendar } from '../database/helper/calendar';
 
 function mergedCalendar() {
   // Maybe the from date is invalid!
@@ -11,7 +12,7 @@ function mergedCalendar() {
     to: moment().format()
   });
 
-  if (current.success !== false) {
+  if (current instanceof Object) {
     const { createdAt } = models.Platform.getLowestCreatedAtYear();
     let years = [];
 

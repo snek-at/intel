@@ -5,7 +5,7 @@ function profile() {
   return queries.profile();
 }
 
-function calendar(profile) {
+function calendar(profile: any) {
   let date = moment(profile.createdAt);
   let fragments = "";
   let runtime = moment().year() - date.year();

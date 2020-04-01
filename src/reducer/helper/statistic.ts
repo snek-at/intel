@@ -8,14 +8,15 @@ function mergedStatistic() {
 
   let statistic = models.Statistic.getMerged();
 
+  let yearsList : any[] = []
   let response = {
     current: {},
-    years: []
+    years: yearsList
   };
 
-  statistic.forEach((entry) => {
+  statistic.forEach((entry:any) => {
     entry.contributions = entry.getContributions();
-    let streaks = entry.getStreaks().map((streak) => {
+    let streaks = entry.getStreaks().map((streak:any) => {
       return streak.render();
     });
     let { longest, current } = entry.getStreakDetail(streaks);

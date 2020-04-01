@@ -1,19 +1,37 @@
-import moment from "moment";
+import moment, { Moment } from "moment";
 
-function calculateStreaks(values) {
+interface IStreak {
+  startDate?: string;
+  endDate?: string | null;
+  totalDays: number ;
+  totalContributions: number;
+}
+
+interface IDay {
+  date?: string;
+  color?: string;
+  total: number;
+}
+
+function calculateStreaks(values: IDay[]) {
   let list = [];
   if (!values) {
     throw new Error("An error occurred due to an invalid input parameters!");
   } else {
-    let streak = {};
+    let streak : IStreak = {
+      totalDays: 0,
+      totalContributions: 0
+    };
 
-    for (let index = 0; index < values.length; index++) {
-      const day = values[parseInt(index)];
-      let nextDay = {};
+    for (let index : number = 0; index < values.length; index++) {
+      const day : IDay = values[index];
+      let nextDay : IDay = {
+        total: 0
+      };
       if (values[values.length - 1] === day) {
-        nextDay = values[parseInt(index)];
+        nextDay = values[index];
       } else {
-        nextDay = values[parseInt(index) + 1];
+        nextDay = values[index + 1];
       }
 
       if (!streak.startDate) {
@@ -35,7 +53,10 @@ function calculateStreaks(values) {
           list.push({ ...streak });
         }
 
-        streak = {};
+        streak = {
+          totalDays: 0,
+          totalContributions: 0
+        };;
       }
     }
   }

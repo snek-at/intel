@@ -48,7 +48,7 @@ const profile = () => gql`
   }
 `;
 
-const calendar = (fragments) =>
+const calendar = (fragments:string) =>
   gql(String.raw`
   query calendar ($username: String!){
     user(login: $username) {
@@ -69,7 +69,7 @@ const calendar = (fragments) =>
 
 // Fragments
 
-const calendar_fragment = (c, fromYear, toYear) => `
+const calendar_fragment = (c:number, fromYear:any, toYear:any) => `
   calendarT${c}: contributionsCollection(from:"${fromYear}", to:"${toYear}" ){
     totalIssueContributions
     totalCommitContributions

@@ -1,5 +1,5 @@
 // Reduce object fields by using a key schema
-function squeezer(obj, keys) {
+function squeezer(obj: any, keys?: string[]) {
   //let t = Object.keys(obj).concat(keys)
   if (keys && keys.length > 0) {
     let keysToRemove = Object.keys(obj).filter((x) => !keys.includes(x));

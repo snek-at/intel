@@ -1,9 +1,24 @@
 import moment from "moment";
 
-function generateCalendarStructure(startDate, endDate) {
+// interface ICalendar {
+//   [index:number]: IDay[];
+// }
+
+export interface ICalendar {
+  weeks: { days: IDay[] }[];
+}
+
+interface IDay {
+  date: string;
+  color: string;
+  total: number;
+}
+
+function generateCalendarStructure(startDate: string, endDate: string) {
+  let days: IDay[] = [];
   let weeks = [
     {
-      days: []
+      days
     }
   ];
 
@@ -17,20 +32,18 @@ function generateCalendarStructure(startDate, endDate) {
         days: []
       });
     }
-    weeks[weeks.length - 1].days.push({
-      date: m.format("YYYY-MM-DD")
-    });
+    let day: IDay = { date: m.format("YYYY-MM-DD"), color: "#ffffff", total: 0 }
+    weeks[weeks.length - 1].days.push(day);
   }
 
-  return {
-    weeks
-  };
+  let calendar = <ICalendar>{ weeks };
+  return calendar;
 }
 
-function fillCalendarWithColors(calendar, busiestDay) {
+function fillCalendarWithColors(calendar: ICalendar, busiestDayTotal: number) {
   calendar.weeks.forEach((week) => {
     week.days.forEach((day) => {
-      let precision = day.total / busiestDay;
+      let precision = day.total / busiestDayTotal;
       if (precision > 0.8 && precision <= 1) {
         day.color = "#196127";
       } else if (precision > 0.6 && precision <= 0.8) {
