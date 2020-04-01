@@ -253,10 +253,15 @@ class CalendarSO extends BaseSO {
 
     try {
       let busiestDay = CalendarSO.getBusiestDay(dates);
-      helper.calendar.fillCalendarWithColors(calendar, busiestDay.total);
+      let busiestDayTotal = 0;
+      if(busiestDay){
+        busiestDayTotal = busiestDay.total;
+      }
+      helper.calendar.fillCalendarWithColors(calendar, busiestDayTotal);
 
       return calendar;
-    } catch {
+    } catch(err){
+      console.error(err);
       return {
         success: false,
         message: "Check for data in the calendar table."
