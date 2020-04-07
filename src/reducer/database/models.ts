@@ -1,5 +1,5 @@
 import * as osm from "./osm";
-import moment, { lang } from "moment";
+import moment from "moment";
 // import * as helper from "./helper";
 import * as helper from "./helper";
 
