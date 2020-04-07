@@ -1,7 +1,16 @@
+//> Imports
+// Contains all reducer database models
 import * as models from "../../reducer/database/models";
+// Contains momentJS
 import moment from "moment";
 
-function run(models: any, rawData: any) {
+/**
+ * Converter for data from the github api.
+ *
+ * @param rawData
+ * @description Fill the database with data provided by "rawData".
+ */
+function run(rawData: any) {
   let platform = models.Platform.objects.create({
     platformName: "github",
     platformUrl: "https://github.com",
