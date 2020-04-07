@@ -8,3 +8,8 @@ export const activity = (username: string) => root + username + "?limit=21474836
 export const atom = (username: string) => root + username + ".atom?limit=2147483647";
 export const groups = (username: string) => home(username) + "/groups.json";
 export const projects = (username: string) => home(username) + "/projects.json";
+
+/**
+ * SPDX-License-Identifier: (EUPL-1.2)
+ * Copyright © Simon Prast
+ */
