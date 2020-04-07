@@ -94,7 +94,7 @@ export class Intel implements IIntel {
         calendar: calendarData.data.user
       };
 
-      github.converter.run(models, data);
+      github.converter.run(data);
     }
   }
 

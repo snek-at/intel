@@ -1,3 +1,4 @@
+import * as models from "../../reducer/database/models";
 import moment from "moment";
 
 function run(models: any, rawData: any) {
