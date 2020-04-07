@@ -79,8 +79,7 @@ const a = `
 
 const contributionSumFragment =
   "sum(totalCommitContributions) + sum(totalIssueContributions) + sum(totalPullRequestContributions) + sum(totalPullRequestReviewContributions)";
-
-const contributionOfYearFragment = (type) => `
+const contributionOfYearFragment = (type: string) => `
   SELECT
   sum(${type}) as total,
   ROUND(sum(${type}) / (${contributionSumFragment}) * 100, 2) as share

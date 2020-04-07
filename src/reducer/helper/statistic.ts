@@ -1,20 +1,22 @@
-//> Database Models
-// Contains all database Models
 import * as models from "../database/models";
 
-/**
- * Providing a merged statistic including streaks and busiest day.
- */
 function mergedStatistic() {
+  // busiest day
+  // streaks
+  // contributions
+  // createContributions
+
   let statistic = models.Statistic.getMerged();
+
+  let yearsList : any[] = []
   let response = {
     current: {},
-    years: []
+    years: yearsList
   };
 
-  statistic.forEach((entry) => {
+  statistic.forEach((entry:any) => {
     entry.contributions = entry.getContributions();
-    let streaks = entry.getStreaks().map((streak) => {
+    let streaks = entry.getStreaks().map((streak:any) => {
       return streak.render();
     });
     let { longest, current } = entry.getStreakDetail(streaks);

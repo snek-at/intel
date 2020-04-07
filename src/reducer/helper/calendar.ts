@@ -1,16 +1,9 @@
-//> Moment
-// A lightweight JavaScript date library for parsing,
-// validating, manipulating, and formatting dates.
-import moment from "moment";
-
-//> Database Models
-// Contains all database models
 import * as models from "../database/models";
+import moment from "moment";
+import { ICalendar } from '../database/helper/calendar';
 
-/**
- * Providing a merged calendar of all platforms over all years.
- */
 function mergedCalendar() {
+  // Maybe the from date is invalid!
   let current = models.Calendar.getCalendar({
     from: moment()
       .subtract(1, "years")
@@ -19,7 +12,7 @@ function mergedCalendar() {
     to: moment().format()
   });
 
-  if (current.success !== false) {
+  if (current instanceof Object) {
     const { createdAt } = models.Platform.getLowestCreatedAtYear();
     let years = [];
 

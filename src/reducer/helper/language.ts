@@ -1,15 +1,9 @@
-//> Database Models
-// Contains all database models
 import * as models from "../database/models";
 
-/**
- * Providing merged language statistics of all platforms.
- */
 function mergedLanguage() {
   let languages = models.Language.getLanguages();
-
-  languages.map((language) => {
-    return language.render();
+  languages.map((language:models.Language) => {
+    return language.render([]);
   });
 
   return languages;

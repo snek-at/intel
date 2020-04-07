@@ -1,8 +1,5 @@
-//> Apollo
-// Contains gql to pass a string to a query
 import { gql } from "apollo-boost";
 
-//> Queries
 const profile = () => gql`
   query profile($username: String!) {
     user(login: $username) {
@@ -51,7 +48,7 @@ const profile = () => gql`
   }
 `;
 
-const calendar = (fragments) =>
+const calendar = (fragments:string) =>
   gql(String.raw`
   query calendar ($username: String!){
     user(login: $username) {
@@ -70,8 +67,9 @@ const calendar = (fragments) =>
   }
 `);
 
-//> Fragments
-const calendarFragment = (c, fromYear, toYear) => `
+// Fragments
+
+const calendar_fragment = (c:number, fromYear:string, toYear:string) => `
   calendarT${c}: contributionsCollection(from:"${fromYear}", to:"${toYear}" ){
     totalIssueContributions
     totalCommitContributions
@@ -91,18 +89,18 @@ const calendarFragment = (c, fromYear, toYear) => `
       }
     }
     commitContributionsByRepository {
-      ${contributionByRepositoryFragment}
+      ${contribution_by_repository_fragment}
     }
     issueContributionsByRepository {
-      ${contributionByRepositoryFragment}
+      ${contribution_by_repository_fragment}
     }
     pullRequestContributionsByRepository {
-      ${contributionByRepositoryFragment}
+      ${contribution_by_repository_fragment}
     }
   }
 `;
 
-const contributionByRepositoryFragment = `
+const contribution_by_repository_fragment = `
   repository {
     openGraphImageUrl
     name
@@ -136,7 +134,7 @@ const contributionByRepositoryFragment = `
   }
 `;
 
-export { profile, calendar, calendarFragment };
+export { profile, calendar, calendar_fragment };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

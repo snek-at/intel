@@ -1,25 +1,37 @@
-//> Moment
-// A lightweight JavaScript date library for parsing,
-// validating, manipulating, and formatting dates.
-import moment from "moment";
+import moment, { Moment } from "moment";
 
-/**
- *  Calculating streaks based on a list of calendar days.
- */
-function calculateStreaks(values) {
+interface IStreak {
+  startDate?: string;
+  endDate?: string | null;
+  totalDays: number ;
+  totalContributions: number;
+}
+
+interface IDay {
+  date?: string;
+  color?: string;
+  total: number;
+}
+
+function calculateStreaks(values: IDay[]) {
   let list = [];
+  if (!values) {
+    throw new Error("An error occurred due to an invalid input parameters!");
+  } else {
+    let streak : IStreak = {
+      totalDays: 0,
+      totalContributions: 0
+    };
 
-  if (values) {
-    let streak = {};
-
-    for (let index = 0; index < values.length; index++) {
-      const day = values[parseInt(index)];
-      let nextDay = {};
-
+    for (let index : number = 0; index < values.length; index++) {
+      const day : IDay = values[index];
+      let nextDay : IDay = {
+        total: 0
+      };
       if (values[values.length - 1] === day) {
-        nextDay = values[parseInt(index)];
+        nextDay = values[index];
       } else {
-        nextDay = values[parseInt(index) + 1];
+        nextDay = values[index + 1];
       }
 
       if (!streak.startDate) {
@@ -30,9 +42,7 @@ function calculateStreaks(values) {
           totalContributions: 0
         };
       }
-
       const dayDiff = moment(nextDay.date).diff(moment(day.date), "days");
-
       if (dayDiff === 1) {
         streak.totalDays += 1;
         streak.totalContributions += day.total;
@@ -43,7 +53,10 @@ function calculateStreaks(values) {
           list.push({ ...streak });
         }
 
-        streak = {};
+        streak = {
+          totalDays: 0,
+          totalContributions: 0
+        };;
       }
     }
   }

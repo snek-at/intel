@@ -1,39 +1,33 @@
-//> Database Models
-// Contains all database models
 import * as models from "../database/models";
 
 // Currently there is much redundant code due to the future integration of the playbook.
 
-/**
- * Providing a merged profile including repositories
- * and organizations.
- */
 function mergedProfile() {
   let platform = models.Platform.objects.get({ id: 1 });
   let repositories = models.Repository.objects.all();
   let organizations = models.Organization.objects.all();
 
-  platform.repositories = repositories.map((repository) => {
-    repository.members = repository.getMembers().map((member) => {
+  platform.repositories = repositories.map((repository:any) => {
+    repository.members = repository.getMembers().map((member:any) => {
       return member.render();
     });
-    repository.languages = repository.getLanguages().map((language) => {
+    repository.languages = repository.getLanguages().map((language: any) => {
       return language.render();
     });
     return repository.render();
   });
 
-  platform.organizations = organizations.map((organization) => {
-    organization.members = organization.getMembers().map((member) => {
+  platform.organizations = organizations.map((organization: any) => {
+    organization.members = organization.getMembers().map((member: any) => {
       return member.render();
     });
     organization.repositories = organization
       .getRepositories()
-      .map((repository) => {
-        repository.members = repository.getMembers().map((member) => {
+      .map((repository: any) => {
+        repository.members = repository.getMembers().map((member:any) => {
           return member.render();
         });
-        repository.languages = repository.getLanguages().map((language) => {
+        repository.languages = repository.getLanguages().map((language:any) => {
           return language.render();
         });
         return repository.render();
@@ -42,7 +36,6 @@ function mergedProfile() {
   });
 
   platform.render();
-
   return platform;
 }
 

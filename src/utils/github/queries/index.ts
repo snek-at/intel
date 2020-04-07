@@ -1,31 +1,21 @@
-//> Moment
-// A lightweight JavaScript date library for parsing,
-// validating, manipulating, and formatting dates.
 import moment from "moment";
-import moment from "moment";
-//> Queries
-// Contains raw static queries
 import * as queries from "./data";
 
-/**
- * Providing the static profile query.
- */
+export interface IProfile{
+  createdAt: string;
+}
+
 function profile() {
   return queries.profile();
 }
 
-/**
- * Providing the dynamically generated calendar query.
- * A successfully resolved profile is needed in order
- * to generate the query.
- */
-function calendar(profile) {
+function calendar(profile: IProfile) {
   let date = moment(profile.createdAt);
   let fragments = "";
   let runtime = moment().year() - date.year();
 
   for (let index = 0; index <= runtime; index++) {
-    fragments += queries.calendarFragment(
+    fragments += queries.calendar_fragment(
       date.year(),
       moment(date)
         .month(0)

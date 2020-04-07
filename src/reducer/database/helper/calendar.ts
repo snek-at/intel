@@ -1,16 +1,24 @@
-//> Moment
-// A lightweight JavaScript date library for parsing,
-// validating, manipulating, and formatting dates.
 import moment from "moment";
 
-/**
- * Generating a raw calendar structure by start end end dates.
- * No colors or totals are being filled.
- */
-function generateCalendarStructure(startDate, endDate) {
+// interface ICalendar {
+//   [index:number]: IDay[];
+// }
+
+export interface ICalendar {
+  weeks: { days: IDay[] }[];
+}
+
+interface IDay {
+  date: string;
+  color: string;
+  total: number;
+}
+
+function generateCalendarStructure(startDate: string, endDate: string) {
+  let days: IDay[] = [];
   let weeks = [
     {
-      days: []
+      days
     }
   ];
 
@@ -24,27 +32,18 @@ function generateCalendarStructure(startDate, endDate) {
         days: []
       });
     }
-
-    weeks[weeks.length - 1].days.push({
-      date: m.format("YYYY-MM-DD")
-    });
+    let day: IDay = { date: m.format("YYYY-MM-DD"), color: "#ffffff", total: 0 }
+    weeks[weeks.length - 1].days.push(day);
   }
 
-  return {
-    weeks
-  };
+  let calendar = <ICalendar>{ weeks };
+  return calendar;
 }
 
-/**
- * Fill calendar structure with the correct colors
- * based on the busiest day. The calendar structure
- * must be already filled with totals.
- */
-function fillCalendarWithColors(calendar, busiestDay) {
+function fillCalendarWithColors(calendar: ICalendar, busiestDayTotal: number) {
   calendar.weeks.forEach((week) => {
     week.days.forEach((day) => {
-      let precision = day.total / busiestDay;
-
+      let precision = day.total / busiestDayTotal;
       if (precision > 0.8 && precision <= 1) {
         day.color = "#196127";
       } else if (precision > 0.6 && precision <= 0.8) {

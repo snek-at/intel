@@ -1,11 +1,8 @@
-//> Helper
-// Contains all helper functions
 import * as calendar from "./calendar";
-import * as profile from "./profile";
+import * as general from "./general";
 import * as statistic from "./statistic";
-import * as language from "./language";
 
-export { calendar, profile, statistic, language };
+export { calendar, general, statistic };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
