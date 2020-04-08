@@ -68,44 +68,53 @@ export class Intel implements IIntel {
 
   async append(source: ISource) {
     let platform = source.platform.name.toLowerCase();
-    if (platform === "github") {
-      // Init github client
-      let githubClient = new GithubClient(source.platform.url);
-
-      let profileData = <IDataUser>await githubClient.endpoint.send(
-        source.authorization,
-        github.queries.profile(),
-        {
-          username: source.user
-        }
-      );
-
-      let calendarData = <IDataUser>await githubClient.endpoint.send(
-        source.authorization,
-        github.queries.calendar(<IProfile>profileData.data.user),
-        {
-          username: source.user
-        }
-      );
-
-      const data: IData = {
-        profile: profileData.data.user,
-        calendar: calendarData.data.user
-      };
-
-      github.converter.run(data);
+    try{
+      if (platform === "github") {
+        // Init github client
+        let githubClient = new GithubClient(source.platform.url);
+        let profileData = <IDataUser>await githubClient.endpoint.send(
+          "query",
+          github.queries.profile(),
+          {
+            username: source.user,
+          },
+          {
+            authorization: source.authorization,
+          }
+        );
+  
+        let calendarData = <IDataUser>await githubClient.endpoint.send(
+          "query",
+          github.queries.calendar(<IProfile>profileData.data.user),
+          {
+            username: source.user
+          },
+          {
+            authorization: source.authorization,
+          }
+        );
+  
+        const data: IData = {
+          profile: profileData.data.user,
+          calendar: calendarData.data.user
+        };
+  
+        github.converter.run(data);
+      }
+    } catch (err){
+      console.error(err)
     }
   }
 
   async appendList(sources: ISource[]) {
     for (let source in sources) {
-      await this.append(sources[source])
+      await this.append(sources[source]);
     }
   }
 
   get() {
     return <IReducedData>this.reducer.get();
-  };
+  }
 }
 
 /**
