@@ -1,4 +1,12 @@
 // Reduce object fields by using a key schema
+/**
+ * Squeeze object by keys.
+ * 
+ * @param obj A object to squeeze.
+ * @param keys A list of object keys to filter by.
+ * @returns The filtered object.
+ * @description Removes every key of an object that does not appear in the key list.
+ */
 function squeezer(obj: any, keys?: string[]) {
   //let t = Object.keys(obj).concat(keys)
   if (keys && keys.length > 0) {

@@ -62,10 +62,15 @@ export class Intel implements IIntel {
      * Init clients
      */
     this.snekclient = new SnekClient();
-
     this.reducer = new Reducer();
   }
 
+  /**
+   * Get gitlab or github data and fill the models.
+   * 
+   * @param source A source object of type ISoruce.
+   * @description Fill the models with data of github or gitlab. The type and username is specified by the source param.
+   */
   async append(source: ISource) {
     let platform = source.platform.name.toLowerCase();
     try{
@@ -106,12 +111,24 @@ export class Intel implements IIntel {
     }
   }
 
+  /**
+   * Append a list of source objects
+   * 
+   * @param sources List of source objects.
+   * @description Calls .append() for each source object in the provided list.
+   */ 
   async appendList(sources: ISource[]) {
     for (let source in sources) {
       await this.append(sources[source]);
     }
   }
 
+  /**
+   * Get a reduced object.
+   * 
+   * @returns A reduced object.
+   * @description Get a reduced object which contains profile, calendar, statistic and language information.
+   */
   get() {
     return <IReducedData>this.reducer.get();
   }

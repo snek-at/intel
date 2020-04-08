@@ -1,9 +1,12 @@
+//> Imports
+// Contains all statement objects.
 import * as osm from "./osm";
-import moment from "moment";
-// import * as helper from "./helper";
+// Contains helper functions for the models.
 import * as helper from "./helper";
+// Contains a lightweight framework for time management.
+import moment from "moment";
 
-export interface IPlatform {
+interface IPlatform {
   id: number;
   platformName: string;
   platformUrl: string;
@@ -19,6 +22,10 @@ export interface IPlatform {
   statusEmojiHTML: string;
 }
 
+/**
+ * @class A platform model.
+ * @extends osm.models.PlatformSO Statement object.
+ */
 class Platform extends osm.models.PlatformSO implements IPlatform {
   public static objects = osm.models.PlatformSO.getObjects(Platform);
 
@@ -65,8 +72,7 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
       {
         platform_id: this.id,
         repository_id: repository.id
-      },
-      Repository
+      }
     );
     return repository;
   }
@@ -83,8 +89,7 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
       {
         platform_id: this.id,
         organization_id: organization.id
-      },
-      Organization
+      }
     );
     return organization;
   }
@@ -130,7 +135,7 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
   }
 }
 
-export interface IMember {
+interface IMember {
   id: number;
   avatarUrl: string;
   url: string;
@@ -139,6 +144,10 @@ export interface IMember {
   platform_id: number;
 }
 
+/**
+ * @class A member model.
+ * @extends osm.models.MemberSO Statement object.
+ */
 class Member extends osm.models.MemberSO {
   public static objects = osm.models.MemberSO.getObjects(Member);
 
@@ -167,6 +176,11 @@ interface IRepository {
   name: string;
   owner_id: number;
 }
+
+/**
+ * @class A repository model.
+ * @extends osm.models.RepositorySO Statement object.
+ */
 class Repository extends osm.models.RepositorySO implements IRepository {
   public static objects = osm.models.RepositorySO.getObjects(Repository);
 
@@ -214,7 +228,7 @@ class Repository extends osm.models.RepositorySO implements IRepository {
     return language;
   }
 
-  getMembers() : Member[] {
+  getMembers(): Member[] {
     let members = RepositoryHasMember.objects.filter(
       {
         repository_id: this.id
@@ -230,11 +244,17 @@ class Repository extends osm.models.RepositorySO implements IRepository {
   }
 }
 
+/**
+ * @class A repositoryHasMember model.
+ * @extends osm.models.RepositoryHasMemberSO Statement object.
+ */
 class RepositoryHasMember extends osm.models.RepositoryHasMemberSO {
-  public static objects = osm.models.RepositoryHasMemberSO.getObjects(RepositoryHasMember);
+  public static objects = osm.models.RepositoryHasMemberSO.getObjects(
+    RepositoryHasMember
+  );
 }
 
-export interface ILanguage {
+interface ILanguage {
   id: number;
   color: string;
   name: string;
@@ -243,7 +263,11 @@ export interface ILanguage {
   repository_id: number;
 }
 
-class Language extends osm.models.LanguageSO implements ILanguage{
+/**
+ * @class A language model.
+ * @extends osm.models.LanguageSO Statement object.
+ */
+class Language extends osm.models.LanguageSO implements ILanguage {
   public static objects = osm.models.LanguageSO.getObjects(Language);
 
   public id = 0;
@@ -253,7 +277,7 @@ class Language extends osm.models.LanguageSO implements ILanguage{
   public share = 0;
   public repository_id = 0;
 
-  constructor(args:ILanguage) {
+  constructor(args: ILanguage) {
     super();
     this.id = args["id"];
     this.color = args["color"];
@@ -265,15 +289,21 @@ class Language extends osm.models.LanguageSO implements ILanguage{
 
   static getLanguages() {
     let response = super.getLanguages();
-    response = response.map((entry:any) => {
+    response = response.map((entry: any) => {
       return new Language(entry);
     });
     return response;
   }
 }
 
+/**
+ * @class A platformHasRepository model.
+ * @extends osm.models.PlatformHasRepositorySO Statement object.
+ */
 class PlatformHasRepository extends osm.models.PlatformHasRepositorySO {
-  public static objects = osm.models.PlatformHasRepositorySO.getObjects(PlatformHasRepository);
+  public static objects = osm.models.PlatformHasRepositorySO.getObjects(
+    PlatformHasRepository
+  );
 }
 
 interface IOrganization {
@@ -284,6 +314,10 @@ interface IOrganization {
   fullname: string;
 }
 
+/**
+ * @class A organization model.
+ * @extends osm.models.OrganizationSO Statement object.
+ */
 class Organization extends osm.models.OrganizationSO implements IOrganization {
   public static objects = osm.models.OrganizationSO.getObjects(Organization);
 
@@ -293,7 +327,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
   public name = "";
   public fullname = "";
 
-  constructor(args:any) {
+  constructor(args: any) {
     super();
     this.id = args["id"];
     this.avatarUrl = args["avatarUrl"];
@@ -302,7 +336,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
     this.fullname = args["fullname"];
   }
 
-  createMember(fields:any) {
+  createMember(fields: any) {
     let member = Member.objects.create({
       avatarUrl: fields.avatarUrl,
       url: fields.url,
@@ -340,15 +374,27 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
   }
 }
 
+/**
+ * @class A organizationHasMember model.
+ * @extends osm.models.OrganizationHasMemberSO Statement object.
+ */
 class OrganizationHasMember extends osm.models.OrganizationHasMemberSO {
-  public static objects = osm.models.OrganizationHasMemberSO.getObjects(OrganizationHasMember);
+  public static objects = osm.models.OrganizationHasMemberSO.getObjects(
+    OrganizationHasMember
+  );
 }
 
+/**
+ * @class A platformHasOrganization model.
+ * @extends osm.models.PlatformHasOrganizationSO Statement object.
+ */
 class PlatformHasOrganization extends osm.models.PlatformHasOrganizationSO {
-  public static objects = osm.models.PlatformHasOrganizationSO.getObjects(PlatformHasOrganization);
+  public static objects = osm.models.PlatformHasOrganizationSO.getObjects(
+    PlatformHasOrganization
+  );
 }
 
-interface IStatistic{
+interface IStatistic {
   id: number;
   year: number;
   totalIssueContributions: number;
@@ -362,7 +408,11 @@ interface IStatistic{
   platform_id: number;
 }
 
-class Statistic extends osm.models.StatisticSO implements IStatistic{
+/**
+ * @class A statistic model.
+ * @extends osm.models.StatisticSO Statement object.
+ */
+class Statistic extends osm.models.StatisticSO implements IStatistic {
   public static objects = osm.models.StatisticSO.getObjects(Statistic);
 
   public id = 0;
@@ -372,12 +422,12 @@ class Statistic extends osm.models.StatisticSO implements IStatistic{
   public totalRepositoryContributions = 0;
   public totalPullRequestContributions = 0;
   public totalPullRequestReviewContributions = 0;
-  public totalRepositoriesWithContributedIssues = 0;;
-  public totalRepositoriesWithContributedCommits = 0;;
+  public totalRepositoriesWithContributedIssues = 0;
+  public totalRepositoriesWithContributedCommits = 0;
   public totalRepositoriesWithContributedPullRequests = 0;
   public platform_id = 0;
 
-  constructor(args:any) {
+  constructor(args: any) {
     super();
 
     this.id = args["id"];
@@ -397,7 +447,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic{
     this.platform_id = args["platform_id"];
   }
 
-  createStreak(fields:any) {
+  createStreak(fields: any) {
     fields.statistic_id = this.id;
 
     let streak = Streak.objects.create(fields);
@@ -436,7 +486,6 @@ class Statistic extends osm.models.StatisticSO implements IStatistic{
 
   getStreaks() {
     if (this.year || this.year === 0) {
-
       let { from, to } = this.getDates();
       let response = Calendar.getDaysBetweenDate({
         from,
@@ -506,6 +555,10 @@ interface IStreak {
   statistic_id: number;
 }
 
+/**
+ * @class A streak model.
+ * @extends osm.models.StreakSO Statement object.
+ */
 class Streak extends osm.models.StreakSO implements IStreak {
   public static objects = osm.models.StreakSO.getObjects(Streak);
 
@@ -516,7 +569,7 @@ class Streak extends osm.models.StreakSO implements IStreak {
   public totalContributions = 0;
   public statistic_id = 0;
 
-  constructor(args:any) {
+  constructor(args: any) {
     super();
     this.id = args["id"];
     this.startDate = args["startDate"];
@@ -534,6 +587,10 @@ interface ICalendar {
   platform_id: number;
 }
 
+/**
+ * @class A calendar model.
+ * @extends osm.models.CalendarSO Statement object.
+ */
 class Calendar extends osm.models.CalendarSO implements ICalendar {
   public static objects = osm.models.CalendarSO.getObjects(Calendar);
 
@@ -542,7 +599,7 @@ class Calendar extends osm.models.CalendarSO implements ICalendar {
   public total = 0;
   public platform_id = 0;
 
-  constructor(args:any) {
+  constructor(args: any) {
     super();
     this.id = args["id"];
     this.date = args["date"];
@@ -550,7 +607,7 @@ class Calendar extends osm.models.CalendarSO implements ICalendar {
     this.platform_id = args["platform_id"];
   }
 
-  createContribution(fields:any) {
+  createContribution(fields: any) {
     let contribution = Contribution.objects.create({
       repoUrl: fields.repoUrl,
       datetime: fields.datetime,
@@ -569,10 +626,14 @@ interface IContribution {
   datetime: string;
   nameWithOwner: string;
   type: string;
-  calendar_id: number
+  calendar_id: number;
 }
 
-class Contribution extends osm.models.ContributionSO implements IContribution{
+/**
+ * @class A contribution model.
+ * @extends osm.models.ContributionSO Statement object.
+ */
+class Contribution extends osm.models.ContributionSO implements IContribution {
   public static objects = osm.models.ContributionSO.getObjects(Contribution);
 
   public id = 0;
@@ -582,7 +643,7 @@ class Contribution extends osm.models.ContributionSO implements IContribution{
   public type = "";
   public calendar_id = 0;
 
-  constructor(args:any) {
+  constructor(args: any) {
     super();
     this.id = args["id"];
     this.repoUrl = args["repoUrl"];

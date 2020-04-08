@@ -1,4 +1,4 @@
-import moment, { Moment } from "moment";
+import moment from "moment";
 
 interface IStreak {
   startDate?: string;
@@ -13,6 +13,13 @@ interface IDay {
   total: number;
 }
 
+/**
+ * Calculate contribution streaks.
+ * 
+ * @param values A list of days.
+ * @returns A list of streaks.
+ * @description Determines the contribution streaks from a list of days. 
+ */
 function calculateStreaks(values: IDay[]) {
   let list = [];
   if (!values) {

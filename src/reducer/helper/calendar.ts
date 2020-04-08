@@ -1,7 +1,15 @@
+//> Imports
+// Contains all models of the database.
 import * as models from "../database/models";
+// Contains a lightweight framework for time management.
 import moment from "moment";
-import { ICalendar } from '../database/helper/calendar';
 
+/**
+ * Get a merged calendar.
+ * 
+ * @retruns The calendar of the current and all years.
+ * @description Get merged contribution calendears over all platforms by year.
+ */
 function mergedCalendar() {
   // Maybe the from date is invalid!
   let current = models.Calendar.getCalendar({

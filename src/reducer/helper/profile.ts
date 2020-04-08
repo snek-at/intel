@@ -1,7 +1,15 @@
+//> Imports
+// Contains all models of the database.
 import * as models from "../database/models";
 
 // Currently there is much redundant code due to the future integration of the playbook.
 
+/**
+ * Get merged profile.
+ * 
+ * @returns A merged profile.
+ * @description Get all profile information. Platform nr. 1 is used for general information.
+ */
 function mergedProfile() {
   let platform = models.Platform.objects.get({ id: 1 });
   let repositories = models.Repository.objects.all();

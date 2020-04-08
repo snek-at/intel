@@ -1,11 +1,14 @@
+//> Imports
+// Contains all models of the database.
 import * as models from "../database/models";
 
+/**
+ * A merged statistic.
+ * 
+ * @returns A statistic object.
+ * @description Returns a object containing e.g busiest day and streaks of current and each year.
+ */
 function mergedStatistic() {
-  // busiest day
-  // streaks
-  // contributions
-  // createContributions
-
   let statistic = models.Statistic.getMerged();
 
   let yearsList : any[] = []

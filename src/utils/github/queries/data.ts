@@ -1,3 +1,5 @@
+//> Imports
+// DocumentNode neede for queries.
 import { gql } from "apollo-boost";
 
 const profile = () => gql`
@@ -68,7 +70,6 @@ const calendar = (fragments:string) =>
 `);
 
 // Fragments
-
 const calendar_fragment = (c:number, fromYear:string, toYear:string) => `
   calendarT${c}: contributionsCollection(from:"${fromYear}", to:"${toYear}" ){
     totalIssueContributions
