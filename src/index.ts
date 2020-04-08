@@ -1,6 +1,6 @@
 //> Reducer
 // Contains Reducer and database models
-import { Reducer, models } from "./reducer";
+import { Reducer } from "./reducer";
 //> snek-client
 // Contains a interface for the snek-client
 //import * as client from "./client";
