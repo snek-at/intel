@@ -5,8 +5,6 @@ class SOAssambler {
   constructor(private Base: any) {
     if (Base.statements.initialize) {
       // Create table
-      // console.log(SOAssambler.database)
-      // console.log(base.statements.initialize)
       SOAssambler.database.exec(Base.statements.initialize);
     }
 
@@ -39,7 +37,6 @@ class SOAssambler {
         this.Base.statements.get,
         Object.values(fields)
       );
-      console.log({ ...response });
 
       if (response.length === 1) {
         response = response[0];
@@ -57,7 +54,6 @@ class SOAssambler {
     try {
       let response;
       response = SOAssambler.database.exec(this.Base.statements.all, fields);
-      console.log(response);
       response = response.map((entry: any) => {
         return new this.Base(entry);
       });

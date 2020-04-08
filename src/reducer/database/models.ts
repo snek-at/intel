@@ -435,19 +435,13 @@ class Statistic extends osm.models.StatisticSO implements IStatistic{
   }
 
   getStreaks() {
-    console.log(this.year);
     if (this.year || this.year === 0) {
-      console.log(this.year);
 
       let { from, to } = this.getDates();
-      let response = Calendar.getDaysBetweenDate(this, {
+      let response = Calendar.getDaysBetweenDate({
         from,
         to
       });
-
-      // response.push({date: "2019-12-01", total:5})
-      // response.push({date: "2019-12-02", total:55})
-      // response.push({date: "2019-12-03", total:5})
 
       response = helper.statistic.calculateStreaks(response);
       response = response.map((entry: any) => {

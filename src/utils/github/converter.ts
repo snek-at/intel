@@ -43,7 +43,6 @@ function run(rawData: any) {
         platform_id: platform.id,
       });
     });
-    // console.log(organization.getMembers());
   });
 
   // Store repositories with key: nameWithOwner in order to prevent duplicates
@@ -100,7 +99,6 @@ function run(rawData: any) {
   }
 
   // Process Repositories
-  // console.log(repositories);
   Object.values(repositories).forEach((node: any) => {
     // Create repository owner
     let owner = models.Member.objects.create({

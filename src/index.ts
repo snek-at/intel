@@ -8,14 +8,13 @@ import { SnekClient, GithubClient } from "snek-client";
 //> Utils
 // Contains the github utils
 import * as github from "./utils/github/index";
-import { IProfile } from './utils/github/queries/index';
-
+import { IProfile } from "./utils/github/queries/index";
 
 interface IReducedData {
   profile: object;
   calendar: object;
   statistic: object;
-  language: object
+  language: object;
 }
 
 interface IIntel {
@@ -37,7 +36,7 @@ interface ISource {
 interface IDataUser {
   data: {
     user: object;
-  }
+  };
 }
 
 interface IData {
