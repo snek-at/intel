@@ -14,9 +14,16 @@ class SOAssambler {
    * @description Creates a instance of SOAssambler.
    */
   constructor(private Base: any) {
+    /**
+     * Initialize the table if the if the necessary statement exists.
+     */
+    console.log(Base)
     if (Base.statements.initialize) {
-      // Create table
       SOAssambler.database.exec(Base.statements.initialize);
+    } else {
+      /**
+       * @todo Error handling.
+       */
     }
   }
 
