@@ -10,18 +10,10 @@ import { SnekClient, GithubClient } from "snek-client";
 import * as github from "./utils/github/index";
 import { IProfile } from "./utils/github/queries/index";
 
-interface IReducedData {
-  profile: object;
-  calendar: object;
-  statistic: object;
-  language: object;
-}
-
 interface IIntel {
   snekclient: SnekClient;
   append(source: ISource): Promise<void>;
   appendList?(sources: ISource[]): Promise<void>;
-  get(): IReducedData;
 }
 
 interface ISource {
@@ -140,7 +132,7 @@ export class Intel implements IIntel {
    * @description Get a reduced object which contains profile, calendar, statistic and language information.
    */
   get() {
-    return <IReducedData>this.reducer.get();
+    return this.reducer.get();
   }
 }
 

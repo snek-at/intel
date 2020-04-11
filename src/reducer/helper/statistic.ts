@@ -2,22 +2,39 @@
 // Contains all models of the database.
 import * as models from "../database/models";
 
+export interface IStatisticResponse {
+  current: IStatistic | null;
+  years: IStatistic[];
+}
+
+export interface IStatistic extends models.Statistic {
+  busiestDay: models.Calendar;
+  contributions: {
+    commit: number;
+    issue: number;
+    pullRequest: number;
+    pullRequestReview: number;
+  }
+  streak: {
+    longest: models.Streak;
+    current: models.Streak;
+    streaks: models.Streak[];
+  }
+}
+
 /**
  * A merged statistic.
  *
  * @returns A statistic object.
  * @description Returns a object containing e.g busiest day and streaks of current and each year.
  */
-function mergedStatistic() {
-  let statistic = models.Statistic.getMerged();
+function mergedStatistic() : IStatisticResponse {
+  let statistic = models.Statistic.getMerged() as IStatistic[];
+  
+  let currentYear: IStatistic | null = null;
+  let yearsList: IStatistic[] = [];
 
-  let yearsList: any[] = [];
-  let response = {
-    current: {},
-    years: yearsList,
-  };
-
-  statistic.forEach((entry: any) => {
+  statistic.forEach((entry) => {
     entry.contributions = entry.getContributions();
     let streaks = entry.getStreaks().map((streak: any) => {
       return streak.render();
@@ -31,19 +48,19 @@ function mergedStatistic() {
     entry.busiestDay = entry.getBusiestDay();
 
     if (entry.busiestDay) {
-      entry.busiestDay = entry.busiestDay.render();
+      entry.busiestDay = entry.busiestDay.render([]);
     }
 
-    entry.render();
+    entry.render([]);
 
     if (entry.year === 0) {
-      response.current = entry;
+      currentYear = entry;
     } else {
-      response.years.push(entry);
+      yearsList.push(entry);
     }
   });
 
-  return response;
+  return {current: currentYear, years: yearsList};
 }
 
 export { mergedStatistic };

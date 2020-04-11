@@ -298,19 +298,19 @@ class StatisticSO extends BaseSO {
         commit: SOAssambler.database.exec(
           StatisticSO.statements.commitContributionsOfYear,
           [self.year]
-        )[0],
+        )[0] as number,
         issue: SOAssambler.database.exec(
           StatisticSO.statements.issueContributionsOfYear,
           [self.year]
-        )[0],
+        )[0] as number,
         pullRequest: SOAssambler.database.exec(
           StatisticSO.statements.issueContributionsOfYear,
           [self.year]
-        )[0],
+        )[0] as number,
         pullRequestReview: SOAssambler.database.exec(
           StatisticSO.statements.pullRequestReviewContributionsOfYear,
           [self.year]
-        )[0],
+        )[0] as number,
       };
     }
     return response;
@@ -415,11 +415,18 @@ class CalendarSO extends BaseSO {
       }
       helper.calendar.fillCalendarWithColors(calendar, busiestDayTotal);
 
-      return calendar;
+      return {
+        success: true,
+        data: calendar
+      };
     } catch (err) {
       console.error(err);
       return {
         success: false,
+        data: helper.calendar.generateCalendarStructure(
+          dates.from,
+          dates.to
+        ),
         message: "Check for data in the calendar table.",
       };
     }
