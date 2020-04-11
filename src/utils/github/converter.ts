@@ -50,7 +50,7 @@ function run(rawData: any) {
   let repositories: any = {};
   // Calendar
   for (let [index, year2] of Object.entries(rawData.calendar)) {
-    let year = <any>year2;
+    let year = year2 as any;
     if (index !== "__typename") {
       let yearCount = "0";
       if (index !== "current") {

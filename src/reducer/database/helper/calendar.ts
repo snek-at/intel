@@ -46,7 +46,7 @@ function generateCalendarStructure(startDate: string, endDate: string) {
     weeks[weeks.length - 1].days.push(day);
   }
 
-  let calendar = <ICalendar>{ weeks };
+  let calendar = { weeks } as ICalendar;
   return calendar;
 }
 

@@ -78,7 +78,7 @@ export class Intel implements IIntel {
           githubClient = new GithubClient();
         }
        
-        let profileData = <IDataUser>await githubClient.endpoint.send(
+        let profileData = await githubClient.endpoint.send(
           "query",
           github.queries.profile(),
           {
@@ -87,18 +87,18 @@ export class Intel implements IIntel {
           {
             authorization: source.authorization,
           }
-        );
+        ) as IDataUser;
 
-        let calendarData = <IDataUser>await githubClient.endpoint.send(
+        let calendarData = await githubClient.endpoint.send(
           "query",
-          github.queries.calendar(<IProfile>profileData.data.user),
+          github.queries.calendar(profileData.data.user as IProfile),
           {
             username: source.user,
           },
           {
             authorization: source.authorization,
           }
-        );
+        ) as IDataUser;
 
         const data: IData = {
           profile: profileData.data.user,
