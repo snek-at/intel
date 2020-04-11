@@ -65,18 +65,6 @@ const allMerged = `
   GROUP BY year
 `;
 
-const a = `
-  SELECT
-    sum(totalIssueContributions) as totalIssueContributions,
-    sum(totalCommitContributions) as totalCommitContributions,
-    sum(totalPullRequestContributions) as totalPullRequestContributions,
-    sum(totalPullRequestReviewContributions) as totalPullRequestReviewContributions,
-    ROUND(sum(S1.size) / (SELECT sum(size) FROM statistic S2 ) * 100, 2) as share
-  FROM
-    statistic S1
-  GROUP BY year;
-`;
-
 const contributionSumFragment =
   "sum(totalCommitContributions) + sum(totalIssueContributions) + sum(totalPullRequestContributions) + sum(totalPullRequestReviewContributions)";
 const contributionOfYearFragment = (type: string) => `
