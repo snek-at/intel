@@ -20,7 +20,7 @@ function profile() {
 
 /**
  * Calendar query.
- * 
+ *
  * @param profile The resolved profile query of the github api.
  * @returns A query in DocumentNode format.
  * @description Get a query used for github profile data.
@@ -33,14 +33,8 @@ function calendar(profile: IProfile) {
   for (let index = 0; index <= runtime; index++) {
     fragments += queries.calendar_fragment(
       date.year(),
-      moment(date)
-        .month(0)
-        .date(1)
-        .format(),
-      moment(date)
-        .month(11)
-        .date(31)
-        .format()
+      moment(date).month(0).date(1).format(),
+      moment(date).month(11).date(31).format()
     );
     date.add(1, "year");
   }

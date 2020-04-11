@@ -67,13 +67,13 @@ export class Intel implements IIntel {
 
   /**
    * Get gitlab or github data and fill the models.
-   * 
+   *
    * @param source A source object of type ISoruce.
    * @description Fill the models with data of github or gitlab. The type and username is specified by the source param.
    */
   async append(source: ISource) {
     let platform = source.platform.name.toLowerCase();
-    try{
+    try {
       if (platform === "github") {
         // Init github client
         let githubClient = new GithubClient(source.platform.url);
@@ -87,36 +87,37 @@ export class Intel implements IIntel {
             authorization: source.authorization,
           }
         );
-  
+
         let calendarData = <IDataUser>await githubClient.endpoint.send(
           "query",
           github.queries.calendar(<IProfile>profileData.data.user),
           {
-            username: source.user
+            username: source.user,
           },
           {
             authorization: source.authorization,
           }
         );
-  
+
         const data: IData = {
           profile: profileData.data.user,
-          calendar: calendarData.data.user
+          calendar: calendarData.data.user,
         };
-  
+
         github.converter.run(data);
       }
-    } catch (err){
-      console.error(err)
+    } catch (err) {
+      console.error(err);
     }
   }
 
   /**
    * Append a list of source objects
-   * 
+   *
    * @param sources List of source objects.
    * @description Calls .append() for each source object in the provided list.
-   */ 
+   */
+
   async appendList(sources: ISource[]) {
     for (let source in sources) {
       await this.append(sources[source]);
@@ -125,7 +126,7 @@ export class Intel implements IIntel {
 
   /**
    * Get a reduced object.
-   * 
+   *
    * @returns A reduced object.
    * @description Get a reduced object which contains profile, calendar, statistic and language information.
    */

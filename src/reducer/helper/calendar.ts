@@ -6,18 +6,15 @@ import moment from "moment";
 
 /**
  * Get a merged calendar.
- * 
+ *
  * @retruns The calendar of the current and all years.
  * @description Get merged contribution calendears over all platforms by year.
  */
 function mergedCalendar() {
   // Maybe the from date is invalid!
   let current = models.Calendar.getCalendar({
-    from: moment()
-      .subtract(1, "years")
-      .day(0)
-      .format(),
-    to: moment().format()
+    from: moment().subtract(1, "years").day(0).format(),
+    to: moment().format(),
   });
 
   if (current instanceof Object) {
@@ -27,29 +24,20 @@ function mergedCalendar() {
     for (let year = createdAt; year <= moment().year(); year++) {
       years.push(
         models.Calendar.getCalendar({
-          from: moment()
-            .year(year)
-            .month(0)
-            .date(1)
-            .day(0)
-            .format(),
-          to: moment()
-            .year(year)
-            .month(11)
-            .date(31)
-            .format()
+          from: moment().year(year).month(0).date(1).day(0).format(),
+          to: moment().year(year).month(11).date(31).format(),
         })
       );
     }
 
     return {
       current,
-      years
+      years,
     };
   } else {
     return {
       current: {},
-      years: {}
+      years: {},
     };
   }
 }

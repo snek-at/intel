@@ -21,6 +21,12 @@ import * as contribution from "./statements/contribution";
 // Statement Objects => SO
 import * as helper from "../helper";
 
+/**
+ * Implementaion examples of the statement objects defined below.
+ *
+ * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/models.ts|SNEK Models} for implementation examples.
+ */
+
 /**@class A basic statement object class which provides access to the SOAssambler and squeezer. */
 export class BaseSO {
   /**
@@ -61,7 +67,9 @@ class PlatformSO extends BaseSO {
     super();
   }
 
+  //> Static methods
   /**
+   * @static
    * @description Get the platform with the lowest createdAt.
    * @return The first created platform.
    */
@@ -103,6 +111,7 @@ class RepositorySO extends BaseSO {
     super();
   }
 
+  //> Methods
   /**
    * @param cls A extended class of RepositorySO.
    * @param self A object of the extended class.
@@ -146,7 +155,9 @@ class LanguageSO extends BaseSO {
     super();
   }
 
+  //> Static methods
   /**
+   * @static
    * @description Get merged languages over all platforms.
    * @return Languages.
    */
@@ -186,6 +197,7 @@ class OrganizationSO extends BaseSO {
     super();
   }
 
+  //> Methods
   /**
    * @param cls A extended class of OrganizationSO.
    * @param self A object of the extended class.
@@ -252,7 +264,9 @@ class StatisticSO extends BaseSO {
     super();
   }
 
+  //> Static methods
   /**
+   * @static
    * @param cls A extended class of StatisticSO.
    * @description Get a merged statistic over all platforms.
    * @return Statistic.
@@ -268,6 +282,7 @@ class StatisticSO extends BaseSO {
     return response;
   }
 
+  //> Methods
   /**
    * @param self A object of the extended class of StatisticSO.
    * @description Get a merged contributions over all platforms.
@@ -333,7 +348,9 @@ class CalendarSO extends BaseSO {
     super();
   }
 
+  //> Static methods
   /**
+   * @static
    * @param dates From and to date.
    * @description Get all days between two dates.
    * @return List of days.
@@ -347,6 +364,7 @@ class CalendarSO extends BaseSO {
   }
 
   /**
+   * @static
    * @param dates From and to date.
    * @description Get the busiest day between two dates.
    * @return List of days.
@@ -360,6 +378,7 @@ class CalendarSO extends BaseSO {
   }
 
   /**
+   * @static
    * @param dates From and to date.
    * @description Get a generated calendar containing days between from and to date.
    * @return A complete calendar.

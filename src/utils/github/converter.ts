@@ -122,27 +122,23 @@ function run(rawData: any) {
       owner_id: owner.id,
     });
 
-    node.assignableUsers.nodes.forEach(
-      (member : any) => {
-        repository.createMember({
-          avatarUrl: member.avatarUrl,
-          url: member.url,
-          fullname: member.name,
-          username: member.login,
-          platform_id: platform.id,
-        });
-      }
-    );
+    node.assignableUsers.nodes.forEach((member: any) => {
+      repository.createMember({
+        avatarUrl: member.avatarUrl,
+        url: member.url,
+        fullname: member.name,
+        username: member.login,
+        platform_id: platform.id,
+      });
+    });
 
-    node.languages.edges.forEach(
-      (edge: any) => {
-        repository.createLanguage({
-          color: edge.node.color,
-          name: edge.node.name,
-          size: edge.size,
-        });
-      }
-    );
+    node.languages.edges.forEach((edge: any) => {
+      repository.createLanguage({
+        color: edge.node.color,
+        name: edge.node.name,
+        size: edge.size,
+      });
+    });
   });
 }
 

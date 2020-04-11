@@ -6,7 +6,7 @@ import * as models from "../database/models";
 
 /**
  * Get merged profile.
- * 
+ *
  * @returns A merged profile.
  * @description Get all profile information. Platform nr. 1 is used for general information.
  */
@@ -15,8 +15,8 @@ function mergedProfile() {
   let repositories = models.Repository.objects.all();
   let organizations = models.Organization.objects.all();
 
-  platform.repositories = repositories.map((repository:any) => {
-    repository.members = repository.getMembers().map((member:any) => {
+  platform.repositories = repositories.map((repository: any) => {
+    repository.members = repository.getMembers().map((member: any) => {
       return member.render();
     });
     repository.languages = repository.getLanguages().map((language: any) => {
@@ -32,12 +32,14 @@ function mergedProfile() {
     organization.repositories = organization
       .getRepositories()
       .map((repository: any) => {
-        repository.members = repository.getMembers().map((member:any) => {
+        repository.members = repository.getMembers().map((member: any) => {
           return member.render();
         });
-        repository.languages = repository.getLanguages().map((language:any) => {
-          return language.render();
-        });
+        repository.languages = repository
+          .getLanguages()
+          .map((language: any) => {
+            return language.render();
+          });
         return repository.render();
       });
     return organization.render();

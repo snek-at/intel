@@ -60,40 +60,56 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
     this.statusMessage = args["statusMessage"];
     this.statusEmojiHTML = args["statusEmojiHTML"];
   }
-
+  /**
+   * Create a repository.
+   *
+   * @param fields Repository data.
+   * @returns {Repository} A repository object.
+   * @description Creates a repository within this platform.
+   */
   createRepository(fields: any) {
     let repository = Repository.objects.create(fields);
     if (repository.success === false) {
       repository = Repository.objects.filter({
-        url: fields.url
+        url: fields.url,
       })[0];
     }
-    PlatformHasRepository.objects.create(
-      {
-        platform_id: this.id,
-        repository_id: repository.id
-      }
-    );
+    PlatformHasRepository.objects.create({
+      platform_id: this.id,
+      repository_id: repository.id,
+    });
     return repository;
   }
 
+  /**
+   * Create a organization.
+   *
+   * @param fields Organization data.
+   * @returns {Organization} A organization.
+   * @description Creates a organization within this platform.
+   */
   createOrganization(fields: any) {
     let organization = Organization.objects.create(fields);
     if (organization.success === false) {
       organization = Organization.objects.filter({
-        url: fields.url
+        url: fields.url,
       })[0];
     }
 
-    PlatformHasOrganization.objects.create(
-      {
-        platform_id: this.id,
-        organization_id: organization.id
-      }
-    );
+    PlatformHasOrganization.objects.create({
+      platform_id: this.id,
+      organization_id: organization.id,
+    });
     return organization;
   }
 
+  /**
+   * Create a organization.
+   *
+   * @param fields Statistic data.
+   * @returns {Statistic} A statistic.
+   * @description Creates a statistic of a year within this platform.
+   */
   createStatistic(fields: any) {
     fields.platform_id = this.id;
     let statistic = Statistic.objects.create(fields);
@@ -101,6 +117,13 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
     return statistic;
   }
 
+  /**
+   * Create a calendar entry.
+   *
+   * @param fields Calendar entry data.
+   * @returns {Statistic} A calendar entry.
+   * @description Create a day of a calendar with the given fields within this platform.
+   */
   createCalendarEntry(fields: any) {
     fields.platform_id = this.id;
     let calendar = Calendar.objects.create(fields);
@@ -108,10 +131,16 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
     return calendar;
   }
 
+  /**
+   * Get all repositories.
+   *
+   * @returns {Repository[]} A list of repositories.
+   * @description Get all repositories within this platform.
+   */
   getRepositories() {
     let repositories = PlatformHasRepository.objects.filter(
       {
-        platform_id: this.id
+        platform_id: this.id,
       },
       Repository
     );
@@ -119,17 +148,29 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
     return repositories;
   }
 
+  /**
+   * Get all organizations.
+   *
+   * @returns {Organization[]} A list of organizations.
+   * @description Get all organizations within this platform.
+   */
   getOrganizations() {
     let organizations = PlatformHasOrganization.objects.filter(
       {
-        platform_id: this.id
+        platform_id: this.id,
       },
       Organization
     );
 
     return organizations;
   }
-  // Implement calendar by platform
+
+  /**
+   * Get a calendar.
+   *
+   * @returns A contribution calendar.
+   * @description Get a merged contribution calendar from all platform data.
+   */
   getCalendar(dates: any) {
     Calendar.getCalendar(dates);
   }
@@ -199,28 +240,42 @@ class Repository extends osm.models.RepositorySO implements IRepository {
     this.owner_id = args["owner_id"];
   }
 
+  /**
+   * Create a member.
+   *
+   * @param fields Member data.
+   * @returns {Member} A member.
+   * @description Create a member within this repository.
+   */
   createMember(fields: any) {
     let member = Member.objects.create({
       avatarUrl: fields.avatarUrl,
       url: fields.url,
       fullname: fields.fullname,
       username: fields.username,
-      platform_id: fields.platform_id
+      platform_id: fields.platform_id,
     });
     if (member.success === false) {
       member = Member.objects.filter({
         username: fields.username,
-        platform_id: fields.platform_id
+        platform_id: fields.platform_id,
       })[0];
     }
     RepositoryHasMember.objects.create({
       repository_id: this.id,
-      member_id: member.id
+      member_id: member.id,
     });
 
     return member;
   }
 
+  /**
+   * Create a language entry.
+   *
+   * @param fields Language data.
+   * @returns {Language} A language entry.
+   * @description Create a language entry within this repository.
+   */
   createLanguage(fields: any) {
     fields.repository_id = this.id;
     let language = Language.objects.create(fields);
@@ -228,10 +283,16 @@ class Repository extends osm.models.RepositorySO implements IRepository {
     return language;
   }
 
+  /**
+   * Get all members.
+   *
+   * @returns {Member[]} A list of members.
+   * @description Get all members within this repository.
+   */
   getMembers(): Member[] {
     let members = RepositoryHasMember.objects.filter(
       {
-        repository_id: this.id
+        repository_id: this.id,
       },
       Member
     );
@@ -239,6 +300,12 @@ class Repository extends osm.models.RepositorySO implements IRepository {
     return members;
   }
 
+  /**
+   * Get language evaluation.
+   *
+   * @returns A language evaluation.
+   * @description Get the analysis of all language data of this repository.
+   */
   getLanguages() {
     return super.getLanguages(Language, this);
   }
@@ -287,6 +354,12 @@ class Language extends osm.models.LanguageSO implements ILanguage {
     this.repository_id = args["repository_id"];
   }
 
+  /**
+   * Get general language evaluation.
+   *
+   * @returns {Language[]} A list of language entries.
+   * @description Get a language analysis of all language data.
+   */
   static getLanguages() {
     let response = super.getLanguages();
     response = response.map((entry: any) => {
@@ -327,7 +400,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
   public name = "";
   public fullname = "";
 
-  constructor(args: any) {
+  constructor(args: IOrganization) {
     super();
     this.id = args["id"];
     this.avatarUrl = args["avatarUrl"];
@@ -336,32 +409,45 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
     this.fullname = args["fullname"];
   }
 
+  /**
+   * Create a member.
+   *
+   * @param fields Member data.
+   * @returns {Member} A member.
+   * @description Create a member within this organization.
+   */
   createMember(fields: any) {
     let member = Member.objects.create({
       avatarUrl: fields.avatarUrl,
       url: fields.url,
       fullname: fields.fullname,
       username: fields.username,
-      platform_id: fields.platform_id
+      platform_id: fields.platform_id,
     });
 
     if (member.success === false) {
       member = Member.objects.filter({
         username: fields.username,
-        platform_id: fields.platform_id
+        platform_id: fields.platform_id,
       })[0];
     }
     OrganizationHasMember.objects.create({
       organization_id: this.id,
-      member_id: member.id
+      member_id: member.id,
     });
     return member;
   }
 
+  /**
+   * Get all members.
+   *
+   * @returns {Member[]} A list of members.
+   * @description Get all members within this organization.
+   */
   getMembers() {
     let members = OrganizationHasMember.objects.filter(
       {
-        organization_id: this.id
+        organization_id: this.id,
       },
       Member
     );
@@ -369,6 +455,12 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
     return members;
   }
 
+  /**
+   * Get all repositories.
+   *
+   * @returns {Repository[]} A list of repositories.
+   * @description Get all repositories which belongs to this organization.
+   */
   getRepositories() {
     return super.getRepositories(Repository, this);
   }
@@ -427,7 +519,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
   public totalRepositoriesWithContributedPullRequests = 0;
   public platform_id = 0;
 
-  constructor(args: any) {
+  constructor(args: IStatistic) {
     super();
 
     this.id = args["id"];
@@ -447,6 +539,13 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
     this.platform_id = args["platform_id"];
   }
 
+  /**
+   * Create streak.
+   *
+   * @param fields Streak data.
+   * @returns {Streak} A streak.
+   * @description Create a streak within this statistic.
+   */
   createStreak(fields: any) {
     fields.statistic_id = this.id;
 
@@ -455,41 +554,41 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
     return streak;
   }
 
+  /**
+   * Get dates of statistic.
+   * @returns From and to date.
+   * @description Get the correct from and to date.
+   * The calculation is based of wether this statistic is the current year or not.
+   */
   getDates() {
     let from, to;
 
     if (this.year === 0) {
-      from = moment()
-        .subtract(1, "years")
-        .day(0)
-        .format();
+      from = moment().subtract(1, "years").day(0).format();
       to = moment().format();
     } else {
-      from = moment()
-        .year(this.year)
-        .month(0)
-        .day(0)
-        .date(1)
-        .format();
-      to = moment()
-        .year(this.year)
-        .month(11)
-        .day(31)
-        .format();
+      from = moment().year(this.year).month(0).day(0).date(1).format();
+      to = moment().year(this.year).month(11).day(31).format();
     }
 
     return {
       from,
-      to
+      to,
     };
   }
 
+  /**
+   * Get all streaks.
+   *
+   * @returns {Streak[]} A list of streaks.
+   * @description Get all streaks within this statistic.
+   */
   getStreaks() {
     if (this.year || this.year === 0) {
       let { from, to } = this.getDates();
       let response = Calendar.getDaysBetweenDate({
         from,
-        to
+        to,
       });
 
       response = helper.statistic.calculateStreaks(response);
@@ -501,9 +600,16 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
     return [];
   }
 
+  /**
+   * Get streak details.
+   *
+   * @param streaks A list of streaks.
+   * @returns Current and longest streak.
+   * @description Calculate the current and longest streak of a list of streaks.
+   */
   getStreakDetail(streaks: any) {
     let longest = {
-      totalDays: 0
+      totalDays: 0,
     };
     let current = {};
 
@@ -519,16 +625,23 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
 
     return {
       longest,
-      current
+      current,
     };
   }
 
+  /**
+   * Get the busiest day.
+   *
+   * @returns {Calendar} A calendar entry.
+   * @description Get the entry with the most contributions per day within
+   * the date range of this statistic.
+   */
   getBusiestDay() {
     if (this.year || this.year === 0) {
       let { from, to } = this.getDates();
       let response = Calendar.getBusiestDay({
         from,
-        to
+        to,
       });
       if (response) {
         response = new Calendar(response);
@@ -537,10 +650,22 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
     }
   }
 
+  /**
+   * Get all contributions.
+   *
+   * @returns A contribtion type statistic.
+   * @description Get a merged contribution over all platforms whithin this statstic year.
+   */
   getContributions() {
     return super.getContributions(this);
   }
 
+  /**
+   * Get merged statistic.
+   *
+   * @returns {Statistic[]} A list of merged statistic years.
+   * @description Get a list of statistic years from merged data of all platforms.
+   */
   static getMerged() {
     return super.getMerged(Statistic);
   }
@@ -569,7 +694,7 @@ class Streak extends osm.models.StreakSO implements IStreak {
   public totalContributions = 0;
   public statistic_id = 0;
 
-  constructor(args: any) {
+  constructor(args: IStreak) {
     super();
     this.id = args["id"];
     this.startDate = args["startDate"];
@@ -599,7 +724,7 @@ class Calendar extends osm.models.CalendarSO implements ICalendar {
   public total = 0;
   public platform_id = 0;
 
-  constructor(args: any) {
+  constructor(args: ICalendar) {
     super();
     this.id = args["id"];
     this.date = args["date"];
@@ -607,13 +732,20 @@ class Calendar extends osm.models.CalendarSO implements ICalendar {
     this.platform_id = args["platform_id"];
   }
 
+  /**
+   * Create a contribution.
+   *
+   * @param fields Contribution data.
+   * @returns {Contribution} A contribution.
+   * @description Create a contribution within this calendar entry.
+   */
   createContribution(fields: any) {
     let contribution = Contribution.objects.create({
       repoUrl: fields.repoUrl,
       datetime: fields.datetime,
       nameWithOwner: fields.nameWithOwner,
       type: fields.type,
-      calendar_id: this.id
+      calendar_id: this.id,
     });
 
     return contribution;
@@ -643,7 +775,7 @@ class Contribution extends osm.models.ContributionSO implements IContribution {
   public type = "";
   public calendar_id = 0;
 
-  constructor(args: any) {
+  constructor(args: IContribution) {
     super();
     this.id = args["id"];
     this.repoUrl = args["repoUrl"];
@@ -663,7 +795,7 @@ export {
   Organization,
   Member,
   RepositoryHasMember,
-  Calendar
+  Calendar,
 };
 
 /**

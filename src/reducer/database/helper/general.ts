@@ -1,7 +1,7 @@
 // Reduce object fields by using a key schema
 /**
  * Squeeze object by keys.
- * 
+ *
  * @param obj A object to squeeze.
  * @param keys A list of object keys to filter by.
  * @returns The filtered object.

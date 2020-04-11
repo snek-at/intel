@@ -3,7 +3,7 @@ import moment from "moment";
 interface IStreak {
   startDate?: string;
   endDate?: string | null;
-  totalDays: number ;
+  totalDays: number;
   totalContributions: number;
 }
 
@@ -15,25 +15,25 @@ interface IDay {
 
 /**
  * Calculate contribution streaks.
- * 
+ *
  * @param values A list of days.
  * @returns A list of streaks.
- * @description Determines the contribution streaks from a list of days. 
+ * @description Determines the contribution streaks from a list of days.
  */
 function calculateStreaks(values: IDay[]) {
   let list = [];
   if (!values) {
     throw new Error("An error occurred due to an invalid input parameters!");
   } else {
-    let streak : IStreak = {
+    let streak: IStreak = {
       totalDays: 0,
-      totalContributions: 0
+      totalContributions: 0,
     };
 
-    for (let index : number = 0; index < values.length; index++) {
-      const day : IDay = values[index];
-      let nextDay : IDay = {
-        total: 0
+    for (let index: number = 0; index < values.length; index++) {
+      const day: IDay = values[index];
+      let nextDay: IDay = {
+        total: 0,
       };
       if (values[values.length - 1] === day) {
         nextDay = values[index];
@@ -46,7 +46,7 @@ function calculateStreaks(values: IDay[]) {
           startDate: moment(day.date).format("YYYY-MM-DD"),
           endDate: null,
           totalDays: 0,
-          totalContributions: 0
+          totalContributions: 0,
         };
       }
       const dayDiff = moment(nextDay.date).diff(moment(day.date), "days");
@@ -62,8 +62,8 @@ function calculateStreaks(values: IDay[]) {
 
         streak = {
           totalDays: 0,
-          totalContributions: 0
-        };;
+          totalContributions: 0,
+        };
       }
     }
   }

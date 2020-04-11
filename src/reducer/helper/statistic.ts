@@ -4,29 +4,29 @@ import * as models from "../database/models";
 
 /**
  * A merged statistic.
- * 
+ *
  * @returns A statistic object.
  * @description Returns a object containing e.g busiest day and streaks of current and each year.
  */
 function mergedStatistic() {
   let statistic = models.Statistic.getMerged();
 
-  let yearsList : any[] = []
+  let yearsList: any[] = [];
   let response = {
     current: {},
-    years: yearsList
+    years: yearsList,
   };
 
-  statistic.forEach((entry:any) => {
+  statistic.forEach((entry: any) => {
     entry.contributions = entry.getContributions();
-    let streaks = entry.getStreaks().map((streak:any) => {
+    let streaks = entry.getStreaks().map((streak: any) => {
       return streak.render();
     });
     let { longest, current } = entry.getStreakDetail(streaks);
     entry.streak = {
       longest,
       current,
-      streaks
+      streaks,
     };
     entry.busiestDay = entry.getBusiestDay();
 

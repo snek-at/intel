@@ -5,15 +5,14 @@ import * as models from "./database/models";
 import * as helper from "./helper";
 
 /**@class Reduce the data of the models. */
-export class Reducer{
-
+export class Reducer {
   /**
    * Get data of the models.
-   * 
+   *
    * @returns A object with profile, calendar, statistic and language information.
    * @description Get a object which contains profile, calendar, statistic and language information.
    */
-  get(){
+  get() {
     return {
       profile: helper.profile.mergedProfile(),
       calendar: helper.calendar.mergedCalendar(),

@@ -25,7 +25,7 @@ const all = `
       ON organization_id = o.id
 `;
 
-export {initialize, create, all};
+export { initialize, create, all };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

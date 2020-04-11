@@ -41,7 +41,7 @@ class SOAssambler {
     } catch (err) {
       return {
         success: false,
-        message: err.message
+        message: err.message,
       };
     }
   }
@@ -68,14 +68,14 @@ class SOAssambler {
     } catch (err) {
       return {
         success: false,
-        message: err.message
+        message: err.message,
       };
     }
   }
 
   /**
    * Get all objects of the table specifed by type of Base.
-   * 
+   *
    * @deprecated The fields parameter my be useless and should be removed!
    * @param fields The data to get a object by.
    * @retruns A list of objects of the initialized Base class.
@@ -93,13 +93,13 @@ class SOAssambler {
     } catch (err) {
       return {
         success: false,
-        message: err.message
+        message: err.message,
       };
     }
   }
   /**
    * Get filtered objects of the table specifed by type of Base.
-   * 
+   *
    * @param filter A filterset.
    * @param Cls A optional model. When not provided Base is chosen.
    * @param filterStatement A optional filter statement. When not provided .all() is chosen.
@@ -145,14 +145,14 @@ class SOAssambler {
       return {
         success: false,
         response: null,
-        message: err.message
+        message: err.message,
       };
     }
   }
 
   /**
    * Send a custom query to the database.
-   * 
+   *
    * @param query A custom SQL statement.
    * @returns A object of the initialized Base class.
    * @description Get a object out of the database and convert in to type of Base.
@@ -168,14 +168,14 @@ class SOAssambler {
     } catch (err) {
       return {
         success: false,
-        message: err.message
+        message: err.message,
       };
     }
   }
 
   /**
    * Reset the database.
-   * 
+   *
    * @description Reinitialize the database. This will reset all datasets!
    */
   reload() {

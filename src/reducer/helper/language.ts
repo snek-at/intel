@@ -4,13 +4,13 @@ import * as models from "../database/models";
 
 /**
  * Get merged language statistic.
- * 
+ *
  * @return A merged langauge statistic.
  * @description Get a language statistic over all platforms.
  */
 function mergedLanguage() {
   let languages = models.Language.getLanguages();
-  languages.map((language:models.Language) => {
+  languages.map((language: models.Language) => {
     return language.render([]);
   });
 
