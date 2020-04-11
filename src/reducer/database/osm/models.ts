@@ -61,14 +61,7 @@ class PlatformSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of PlatformSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Static methods
   /**
@@ -104,7 +97,7 @@ class PlatformSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -115,7 +108,7 @@ class PlatformSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -124,7 +117,7 @@ class PlatformSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -139,14 +132,7 @@ class MemberSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of MemberSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Model implementation example
   // class MemberModel extends MemberSO{
@@ -170,7 +156,7 @@ class MemberSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -181,7 +167,7 @@ class MemberSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -190,7 +176,7 @@ class MemberSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -205,14 +191,7 @@ class RepositorySO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of RepositorySO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Methods
   /**
@@ -248,7 +227,7 @@ class RepositorySO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -259,7 +238,7 @@ class RepositorySO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -268,7 +247,7 @@ class RepositorySO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -283,14 +262,7 @@ class RepositoryHasMemberSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of RepositoryHasMemberSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Model implementation example
   // class RepositoryHasMemberModel extends RepositoryHasMemberSO{
@@ -314,7 +286,7 @@ class RepositoryHasMemberSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -325,7 +297,7 @@ class RepositoryHasMemberSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -334,7 +306,7 @@ class RepositoryHasMemberSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -349,14 +321,7 @@ class LanguageSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of LanguageSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Static methods
   /**
@@ -390,7 +355,7 @@ class LanguageSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -401,7 +366,7 @@ class LanguageSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -410,7 +375,7 @@ class LanguageSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -425,14 +390,7 @@ class PlatformHasRepositorySO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of PlatformHasRepositorySO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Model implementation example
   // class PlatformHasRepositoryModel extends PlatformHasRepositorySO{
@@ -456,7 +414,7 @@ class PlatformHasRepositorySO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -467,7 +425,7 @@ class PlatformHasRepositorySO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -476,7 +434,7 @@ class PlatformHasRepositorySO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -491,14 +449,7 @@ class OrganizationSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of OrganizationSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Methods
   /**
@@ -541,7 +492,7 @@ class OrganizationSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -552,7 +503,7 @@ class OrganizationSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -561,7 +512,7 @@ class OrganizationSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -576,14 +527,7 @@ class OrganizationHasMemberSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of OrganizationHasMemberSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Model implementation example
 
@@ -608,7 +552,7 @@ class OrganizationHasMemberSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -619,7 +563,7 @@ class OrganizationHasMemberSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -628,7 +572,7 @@ class OrganizationHasMemberSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -643,14 +587,7 @@ class PlatformHasOrganizationSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of PlatformHasOrganizationSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Model implementation example
 
@@ -675,7 +612,7 @@ class PlatformHasOrganizationSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -686,7 +623,7 @@ class PlatformHasOrganizationSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -695,7 +632,7 @@ class PlatformHasOrganizationSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -710,14 +647,7 @@ class StatisticSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of StatisticSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Static methods
   /**
@@ -771,56 +701,56 @@ class StatisticSO extends BaseSO {
     return response;
   }
 
-    //> Model implementation example
+  //> Model implementation example
 
-    // class StatisticModel extends StreakSO{
-    //   /**
-    //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-    //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
-    //    */
-    //   public static objects = PlatformSO.getObjects(StatisticModel);
-  
-    //   /**
-    //    * Fields may contain all fields defined by the database table.
-    //    * Notice!: The NOT NULL fields are strictly required!
-    //    * Also custom fields are possible too.
-    //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-    //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/statistic.ts |Statistic SQL statements} for further information.
-    //    */
-    //   constructor(fields: StatisticFields){
-    //     super();
-    //     this.id = fields.id;
-    //   }
-  
-    //   /**
-    //    * Example method:
-    //    * 
-    //    * @description A method to save the object to the database.
-    //    * Only fields defined in the constructor will be saved!
-    //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
-    //    */
-    //   save(){
-    //     StatisticModel.objects.create({id: this.id});
-    //   }
-  
-    //   /**
-    //    * Example method:
-    //    * 
-    //    * @description A method to filter the database for id=0.
-    //    */
-    //   getFirstItem(){
-    //     return StatisticModel.objects.filter({id: 0}) as StatisticModel;
-    //   }
-  
-    //   /**
-    //    * Example method:
-    //    * 
-    //    * @description A method to get all entries and parse it to a list of models.
-    //    */
-    //   getAll(){
-    //     return StatisticModel.objects.all() as StatisticModel[];
-    //   }
-    // }
+  // class StatisticModel extends StreakSO{
+  //   /**
+  //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    */
+  //   public static objects = PlatformSO.getObjects(StatisticModel);
+
+  //   /**
+  //    * Fields may contain all fields defined by the database table.
+  //    * Notice!: The NOT NULL fields are strictly required!
+  //    * Also custom fields are possible too.
+  //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/statistic.ts |Statistic SQL statements} for further information.
+  //    */
+  //   constructor(fields: StatisticFields){
+  //     super();
+  //     this.id = fields.id;
+  //   }
+
+  //   /**
+  //    * Example method:
+  //    *
+  //    * @description A method to save the object to the database.
+  //    * Only fields defined in the constructor will be saved!
+  //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
+  //    */
+  //   save(){
+  //     StatisticModel.objects.create({id: this.id});
+  //   }
+
+  //   /**
+  //    * Example method:
+  //    *
+  //    * @description A method to filter the database for id=0.
+  //    */
+  //   getFirstItem(){
+  //     return StatisticModel.objects.filter({id: 0}) as StatisticModel;
+  //   }
+
+  //   /**
+  //    * Example method:
+  //    *
+  //    * @description A method to get all entries and parse it to a list of models.
+  //    */
+  //   getAll(){
+  //     return StatisticModel.objects.all() as StatisticModel[];
+  //   }
+  // }
 }
 
 /**@class A statement object which implements the streak sql statements. */
@@ -829,14 +759,7 @@ class StreakSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of StreakSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Model implementation example
 
@@ -861,7 +784,7 @@ class StreakSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -872,7 +795,7 @@ class StreakSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -881,7 +804,7 @@ class StreakSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -896,14 +819,7 @@ class CalendarSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of CalendarSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Static methods
   /**
@@ -974,16 +890,13 @@ class CalendarSO extends BaseSO {
 
       return {
         success: true,
-        data: calendar
+        data: calendar,
       };
     } catch (err) {
       console.error(err);
       return {
         success: false,
-        data: helper.calendar.generateCalendarStructure(
-          dates.from,
-          dates.to
-        ),
+        data: helper.calendar.generateCalendarStructure(dates.from, dates.to),
         message: "Check for data in the calendar table.",
       };
     }
@@ -1012,7 +925,7 @@ class CalendarSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -1023,7 +936,7 @@ class CalendarSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -1032,7 +945,7 @@ class CalendarSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
@@ -1047,14 +960,7 @@ class ContributionSO extends BaseSO {
 
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
-   *
-   * @constructor
-   * @author: schettn
-   * @description Creates a instance of ContributionSO and init BaseSO.
-   */
-  constructor() {
-    super();
-  }
+   * /
 
   //> Model implementation example
 
@@ -1079,7 +985,7 @@ class ContributionSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to save the object to the database.
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL insert statement! Therefore unused fields have to be set to null!
@@ -1090,7 +996,7 @@ class ContributionSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to filter the database for id=0.
   //    */
   //   getFirstItem(){
@@ -1099,7 +1005,7 @@ class ContributionSO extends BaseSO {
 
   //   /**
   //    * Example method:
-  //    * 
+  //    *
   //    * @description A method to get all entries and parse it to a list of models.
   //    */
   //   getAll(){
