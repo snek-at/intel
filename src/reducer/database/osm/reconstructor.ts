@@ -17,7 +17,6 @@ class SOAssambler {
     /**
      * Initialize the table if the if the necessary statement exists.
      */
-    console.log(Base)
     if (Base.statements.initialize) {
       SOAssambler.database.exec(Base.statements.initialize);
     } else {

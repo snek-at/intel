@@ -27,7 +27,6 @@ interface IOrganization extends models.Organization {
  */
 function mergedProfile() {
   let platform = models.Platform.objects.get({ id: 1 }) as IPlatform;
-  console.log(platform);
   let repositories = models.Repository.objects.all() as IRepository[];
   let organizations = models.Organization.objects.all() as IOrganization[];
 
