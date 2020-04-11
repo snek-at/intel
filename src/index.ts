@@ -27,7 +27,7 @@ interface IIntel {
 interface ISource {
   user: string;
   platform: {
-    url: string;
+    url?: string;
     name: string;
   };
   authorization: string;
@@ -76,7 +76,16 @@ export class Intel implements IIntel {
     try {
       if (platform === "github") {
         // Init github client
-        let githubClient = new GithubClient(source.platform.url);
+        /**
+         * Use default client url if there is no optinal one.
+         */
+        let githubClient : GithubClient;
+        if(source.platform.url){
+          githubClient = new GithubClient(source.platform.url);
+        }else{
+          githubClient = new GithubClient();
+        }
+       
         let profileData = <IDataUser>await githubClient.endpoint.send(
           "query",
           github.queries.profile(),
