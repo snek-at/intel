@@ -1,3 +1,4 @@
+//#region > Statements
 const initialize = `
   DROP TABLE IF EXISTS language;
   CREATE TABLE IF NOT EXISTS language (
@@ -5,7 +6,7 @@ const initialize = `
     color VARCHAR(80) NULL,
     name VARCHAR(80) NOT NULL,
     size INT NOT NULL,
-    repository_id INT NULL REFERENCES repository (id),
+    repositoryId INT NULL REFERENCES repository (id),
     PRIMARY KEY (id)
   );
 `;
@@ -15,7 +16,7 @@ const create = `
     color,
     name,
     size,
-    repository_id
+    repositoryId
   )
   VALUES (?,?,?,?);
 `;
@@ -36,16 +37,20 @@ const all = `
     language
 `;
 
-const byRepository = (repository_id: number) => `
+const byRepository = (repositoryId: number) => `
   SELECT
-  L1.color,
-  L1.name,
-  sum(L1.size) as size,
-  ROUND(sum(L1.size) / (SELECT sum(size) FROM language L2 WHERE repository_id = ${repository_id}) * 100, 2) as share
-  FROM language L1
-  WHERE repository_id = ${repository_id}
-  GROUP BY name, color
-  ORDER BY size DESC
+    L1.color,
+    L1.name,
+    sum(L1.size) as size,
+    ROUND(sum(L1.size) / (SELECT sum(size) FROM language L2 WHERE repositoryId = ${repositoryId}) * 100, 2) as share
+  FROM
+    language L1
+  WHERE
+    repositoryId = ${repositoryId}
+  GROUP BY 
+    name, color
+  ORDER BY
+    size DESC
 `;
 
 const merged = `
@@ -54,12 +59,19 @@ const merged = `
     L1.name,
     sum(L1.size) as size,
     ROUND(sum(L1.size) / (SELECT sum(size) FROM language L2) * 100, 2) as share
-    FROM language L1
-    GROUP BY name, color
-    ORDER BY size DESC
+  FROM
+    language L1
+  GROUP BY
+    name, color
+  ORDER BY
+    size DESC
 `;
+//#endregion
 
+
+//#region > Exports
 export { initialize, create, get, all, byRepository, merged };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

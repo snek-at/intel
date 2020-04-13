@@ -1,3 +1,5 @@
+//#region > Imports
+
 //> Reconstructor
 // SOAssambler for SO objects
 import { SOAssambler } from "./reconstructor";
@@ -22,22 +24,24 @@ import * as contribution from "./statements/contribution";
 // Contains all helper
 import * as helper from "../helper";
 
-// Statement Objects => SO
-
 /**
  * Implementaion examples of the statement objects defined below.
  *
  * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/models.ts |SNEK Models} for implementation examples.
  */
+//#endregion
 
-/**@class A basic statement object class which provides access to the SOAssambler and squeezer. */
-export class BaseSO {
+//#region > Classes
+/** @class A basic statement object class which provides access to the SOAssambler and squeezer. */
+class BaseSO {
+  
+//> Static Methods
   /**
    * The implementation of the getObjects is necessary for any statement object implementation!
    *
    * @param self A implementation of a statement object.
-   * @return Connection to the SOAssambler.
-   * @description Enables access to the SOAssambler to provide functionality like create, all, filter, ...
+   * @returns {SOAssambler} A SOAssambler object.
+   * @description Enables access to the SOAssambler to provide functionality like create, all, filter,...
    */
   static getObjects(self: any) {
     return new SOAssambler(self);
@@ -47,7 +51,7 @@ export class BaseSO {
    * Render object.
    *
    * @param filter List of keys to filter by.
-   * @return The filtered object.
+   * @returns {object} The filtered object.
    * @description Filter the object by a list of keys.
    */
   render(filter: string[]) {
@@ -55,7 +59,7 @@ export class BaseSO {
   }
 }
 
-/**@class A statement object which implements the platform sql statements. */
+/** @class A statement object which implements the platform sql statements. */
 class PlatformSO extends BaseSO {
   static statements = platform;
 
@@ -63,11 +67,12 @@ class PlatformSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Static methods
+  
+//> Static Methods
   /**
    * @static
    * @description Get the platform with the lowest createdAt.
-   * @return The first created platform.
+   * @returns {object} A object containing platform data with the lowest creation date.
    */
   static getLowestCreatedAtYear() {
     return SOAssambler.database.exec(
@@ -75,7 +80,8 @@ class PlatformSO extends BaseSO {
     )[0];
   }
 
-  //> Model implementation example
+  
+//> Model Implementation Example
   // class PlatformModel extends PlatformSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
@@ -92,6 +98,7 @@ class PlatformSO extends BaseSO {
   //    */
   //   constructor(fields: PlatformFields){
   //     super();
+  //  //
   //     this.id = fields.id;
   //   }
 
@@ -126,7 +133,7 @@ class PlatformSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the member sql statements. */
+/** @class A statement object which implements the member sql statements. */
 class MemberSO extends BaseSO {
   static statements = member;
 
@@ -134,7 +141,8 @@ class MemberSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Model implementation example
+  
+//> Model Implementation Example
   // class MemberModel extends MemberSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
@@ -151,6 +159,7 @@ class MemberSO extends BaseSO {
   //    */
   //   constructor(fields: MemberFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -185,7 +194,7 @@ class MemberSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the repository sql statements. */
+/** @class A statement object which implements the repository sql statements. */
 class RepositorySO extends BaseSO {
   static statements = repository;
 
@@ -193,19 +202,21 @@ class RepositorySO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Methods
+  
+//> Methods
   /**
    * @param cls A extended class of RepositorySO.
    * @param self A object of the extended class.
    * @description Get languages of a repository.
-   * @return Languages.
+   * @returns {object[]} A list of objects containing repository data.
    */
   getLanguages(cls: any, self: any) {
     let response = cls.objects.custom(language.byRepository(self.id));
     return response;
   }
 
-  //> Model implementation example
+  
+//> Model Implementation Example
   // class RepositoryModel extends RepositorySO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
@@ -222,6 +233,7 @@ class RepositorySO extends BaseSO {
   //    */
   //   constructor(fields: RepositoryFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -256,7 +268,7 @@ class RepositorySO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the platformHasMember sql statements. */
+/** @class A statement object which implements the platformHasMember sql statements. */
 class RepositoryHasMemberSO extends BaseSO {
   static statements = repositoryHasMember;
 
@@ -264,7 +276,8 @@ class RepositoryHasMemberSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Model implementation example
+  
+//> Model Implementation Example
   // class RepositoryHasMemberModel extends RepositoryHasMemberSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
@@ -281,6 +294,7 @@ class RepositoryHasMemberSO extends BaseSO {
   //    */
   //   constructor(fields: RepositoryHasMemberFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -315,7 +329,7 @@ class RepositoryHasMemberSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the language sql statements. */
+/** @class A statement object which implements the language sql statements. */
 class LanguageSO extends BaseSO {
   static statements = language;
 
@@ -323,17 +337,19 @@ class LanguageSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Static methods
+  
+//> Static Methods
   /**
    * @static
    * @description Get merged languages over all platforms.
-   * @return Languages.
+   * @returns {object[]} A list of objects containing languages data.
    */
   static getLanguages() {
     return SOAssambler.database.exec(LanguageSO.statements.merged);
   }
 
-  //> Model implementation example
+  
+//> Model Implementation Example
   // class LanguageModel extends LanguageSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
@@ -350,6 +366,7 @@ class LanguageSO extends BaseSO {
   //    */
   //   constructor(fields: LanguageFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -384,7 +401,7 @@ class LanguageSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the platformHasRepository sql statements. */
+/** @class A statement object which implements the platformHasRepository sql statements. */
 class PlatformHasRepositorySO extends BaseSO {
   static statements = platformHasRepository;
 
@@ -392,7 +409,8 @@ class PlatformHasRepositorySO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Model implementation example
+  
+//> Model Implementation Example
   // class PlatformHasRepositoryModel extends PlatformHasRepositorySO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
@@ -409,6 +427,7 @@ class PlatformHasRepositorySO extends BaseSO {
   //    */
   //   constructor(fields: PlatformHasRepositoryFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -443,7 +462,7 @@ class PlatformHasRepositorySO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the organization sql statements. */
+/** @class A statement object which implements the organization sql statements. */
 class OrganizationSO extends BaseSO {
   static statements = organization;
 
@@ -451,17 +470,18 @@ class OrganizationSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Methods
+  
+//> Methods
   /**
    * @param cls A extended class of OrganizationSO.
    * @param self A object of the extended class.
    * @description Get all repositories belonging to a organization.
-   * @return Languages.
+   * @returns {object[]} A list of objects containing repository data.
    */
   getRepositories(cls: any, self: any) {
     let response = cls.objects.filter(
       {
-        owner: self.name,
+        owner: self.name
       },
       cls,
       repository.withOwner
@@ -470,7 +490,8 @@ class OrganizationSO extends BaseSO {
     return response;
   }
 
-  //> Model implementation example
+  
+//> Model Implementation Example
   // class OrganizationModel extends OrganizationSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
@@ -487,6 +508,7 @@ class OrganizationSO extends BaseSO {
   //    */
   //   constructor(fields: OrganizationFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -521,7 +543,7 @@ class OrganizationSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the organizationHasMember sql statements. */
+/** @class A statement object which implements the organizationHasMember sql statements. */
 class OrganizationHasMemberSO extends BaseSO {
   static statements = organizationHasMember;
 
@@ -529,7 +551,8 @@ class OrganizationHasMemberSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Model implementation example
+  
+//> Model Implementation Example
 
   // class OrganizationHasMemberModel extends OrganizationHasMemberSO{
   //   /**
@@ -547,6 +570,7 @@ class OrganizationHasMemberSO extends BaseSO {
   //    */
   //   constructor(fields: OrganizationHasMemberFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -581,7 +605,7 @@ class OrganizationHasMemberSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the platformHasOrganization sql statements. */
+/** @class A statement object which implements the platformHasOrganization sql statements. */
 class PlatformHasOrganizationSO extends BaseSO {
   static statements = platformHasOrganization;
 
@@ -589,7 +613,8 @@ class PlatformHasOrganizationSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Model implementation example
+  
+//> Model Implementation Example
 
   // class PlatformHasOrganizationModel extends PlatformHasOrganizationSO{
   //   /**
@@ -607,6 +632,7 @@ class PlatformHasOrganizationSO extends BaseSO {
   //    */
   //   constructor(fields: StatisticFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -641,7 +667,7 @@ class PlatformHasOrganizationSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the statistic sql statements. */
+/** @class A statement object which implements the statistic sql statements. */
 class StatisticSO extends BaseSO {
   static statements = statistic;
 
@@ -649,12 +675,13 @@ class StatisticSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Static methods
+  
+//> Static Methods
   /**
    * @static
    * @param cls A extended class of StatisticSO.
    * @description Get a merged statistic over all platforms.
-   * @return Statistic.
+   * @returns {object[]} A list of objects containing statistic data.
    */
   static getMerged(cls: any) {
     let response = SOAssambler.database.exec(StatisticSO.statements.allMerged);
@@ -667,17 +694,17 @@ class StatisticSO extends BaseSO {
     return response;
   }
 
-  //> Methods
+  
+//> Methods
   /**
    * @param self A object of the extended class of StatisticSO.
    * @description Get a merged contributions over all platforms.
-   * @return Statistic.
+   * @returns {object[]} A list of objects containing contribution data.
    */
   getContributions(self: any) {
     let response;
-    if (self.id) {
-      // If valid object
-    } else {
+
+    if (!self.id) {
       // maybe merged object?
       response = {
         commit: SOAssambler.database.exec(
@@ -695,13 +722,15 @@ class StatisticSO extends BaseSO {
         pullRequestReview: SOAssambler.database.exec(
           StatisticSO.statements.pullRequestReviewContributionsOfYear,
           [self.year]
-        )[0] as number,
+        )[0] as number
       };
     }
+
     return response;
   }
 
-  //> Model implementation example
+  
+//> Model Implementation Example
 
   // class StatisticModel extends StreakSO{
   //   /**
@@ -719,6 +748,7 @@ class StatisticSO extends BaseSO {
   //    */
   //   constructor(fields: StatisticFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -753,7 +783,7 @@ class StatisticSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the streak sql statements. */
+/** @class A statement object which implements the streak sql statements. */
 class StreakSO extends BaseSO {
   static statements = streak;
 
@@ -761,7 +791,8 @@ class StreakSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Model implementation example
+  
+//> Model Implementation Example
 
   // class StreakModel extends StreakSO{
   //   /**
@@ -779,6 +810,7 @@ class StreakSO extends BaseSO {
   //    */
   //   constructor(fields: StreakFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -813,7 +845,7 @@ class StreakSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the calendar sql statements. */
+/** @class A statement object which implements the calendar sql statements. */
 class CalendarSO extends BaseSO {
   static statements = calendar;
 
@@ -821,18 +853,20 @@ class CalendarSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Static methods
+  
+//> Static Methods
   /**
    * @static
    * @param dates From and to date.
    * @description Get all days between two dates.
-   * @return List of days.
+   * @returns {object[]} A list of objects containing day data.
    */
   static getDaysBetweenDate(dates: { from: string; to: string }) {
     let days = SOAssambler.database.exec(CalendarSO.statements.betweenDate, [
       dates.from,
       dates.to,
     ]);
+
     return days;
   }
 
@@ -840,13 +874,14 @@ class CalendarSO extends BaseSO {
    * @static
    * @param dates From and to date.
    * @description Get the busiest day between two dates.
-   * @return List of days.
+   * @returns {object} A objects containing day data.
    */
   static getBusiestDay(dates: { from: string; to: string }) {
     let response = SOAssambler.database.exec(
       CalendarSO.statements.busiestDayBetweenDate,
       [dates.from, dates.to]
     )[0];
+
     return response;
   }
 
@@ -854,7 +889,7 @@ class CalendarSO extends BaseSO {
    * @static
    * @param dates From and to date.
    * @description Get a generated calendar containing days between from and to date.
-   * @return A complete calendar.
+   * @returns {object} A object containg a success and calendar data.
    */
   static getCalendar(dates: { from: string; to: string }) {
     // generate calendar
@@ -862,6 +897,7 @@ class CalendarSO extends BaseSO {
       dates.from,
       dates.to
     );
+
     // fill totals
     calendar.weeks.forEach((week) => {
       week.days.forEach((day) => {
@@ -869,10 +905,12 @@ class CalendarSO extends BaseSO {
           CalendarSO.statements.dayByDate,
           [day.date]
         );
-        //let entries = db.exec(query, [day.date]);
+
         let total = 0;
+  
         if (entries.length > 0) {
           let selectedDay = entries[0];
+
           total = selectedDay.total;
         }
 
@@ -883,26 +921,30 @@ class CalendarSO extends BaseSO {
     try {
       let busiestDay = CalendarSO.getBusiestDay(dates);
       let busiestDayTotal = 0;
+
       if (busiestDay) {
         busiestDayTotal = busiestDay.total;
       }
+
       helper.calendar.fillCalendarWithColors(calendar, busiestDayTotal);
 
       return {
         success: true,
-        data: calendar,
+        data: calendar
       };
     } catch (err) {
       console.error(err);
+
       return {
         success: false,
         data: helper.calendar.generateCalendarStructure(dates.from, dates.to),
-        message: "Check for data in the calendar table.",
+        message: "Check for data in the calendar table."
       };
     }
   }
 
-  //> Model implementation example
+  
+//> Model Implementation Example
 
   // class CalendarModel extends CalendarSO{
   //   /**
@@ -920,6 +962,7 @@ class CalendarSO extends BaseSO {
   //    */
   //   constructor(fields: CalendarFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -954,7 +997,7 @@ class CalendarSO extends BaseSO {
   // }
 }
 
-/**@class A statement object which implements the contribution sql statements. */
+/** @class A statement object which implements the contribution sql statements. */
 class ContributionSO extends BaseSO {
   static statements = contribution;
 
@@ -962,7 +1005,8 @@ class ContributionSO extends BaseSO {
    * The implementation of the getObjects is necessary for any statement object implementation!
    * /
 
-  //> Model implementation example
+  
+//> Model Implementation Example
 
   // class ContributionModel extends ContributionSO{
   //   /**
@@ -980,6 +1024,7 @@ class ContributionSO extends BaseSO {
   //    */
   //   constructor(fields: ContributionFields){
   //     super();
+  //
   //     this.id = fields.id;
   //   }
 
@@ -1013,8 +1058,11 @@ class ContributionSO extends BaseSO {
   //   }
   // }
 }
+//#endregion
 
+//#region > Exports
 export {
+  BaseSO,
   PlatformSO,
   MemberSO,
   RepositorySO,
@@ -1027,8 +1075,9 @@ export {
   StatisticSO,
   StreakSO,
   CalendarSO,
-  ContributionSO,
+  ContributionSO
 };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

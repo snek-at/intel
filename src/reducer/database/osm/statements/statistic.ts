@@ -1,3 +1,4 @@
+//#region > Statementss
 const initialize = `
   DROP TABLE IF EXISTS statistic;
   CREATE TABLE IF NOT EXISTS statistic (
@@ -11,8 +12,8 @@ const initialize = `
     totalRepositoriesWithContributedIssues INT NOT NULL,
     totalRepositoriesWithContributedCommits INT NOT NULL,
     totalRepositoriesWithContributedPullRequests INT NOT NULL,
-    platform_id INT NOT NULL REFERENCES platform (id),
-    UNIQUE(year, platform_id),
+    platformId INT NOT NULL REFERENCES platform (id),
+    UNIQUE(year, platformId),
     PRIMARY KEY (id)
   );
 `;
@@ -28,7 +29,7 @@ const create = `
     totalRepositoriesWithContributedIssues,
     totalRepositoriesWithContributedCommits,
     totalRepositoriesWithContributedPullRequests,
-    platform_id
+    platformId
   )
   VALUES (?,?,?,?,?,?,?,?,?,?);
 `;
@@ -92,7 +93,9 @@ const pullRequestContributionsOfYear = `
 const pullRequestReviewContributionsOfYear = `
   ${contributionOfYearFragment("totalPullRequestReviewContributions")}
 `;
+//#endregion
 
+//#region > Exports
 export {
   initialize,
   create,
@@ -102,8 +105,9 @@ export {
   commitContributionsOfYear,
   issueContributionsOfYear,
   pullRequestContributionsOfYear,
-  pullRequestReviewContributionsOfYear,
+  pullRequestReviewContributionsOfYear
 };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

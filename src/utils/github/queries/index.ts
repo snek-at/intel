@@ -1,17 +1,33 @@
-//> Imports
-// Contains all queries for github graphql api.
-import * as queries from "./data";
-// Contains helper functions for the models.
+//#region > Imports
+
+//> Moment
+// A lightweight JavaScript date library for parsing,
+// validating, manipulating, and formatting dates.
 import moment from "moment";
 
-export interface IProfile {
+
+//> Queries
+// Contains all queries for github graphql api.
+import * as queries from "./data";//#endregion//#endregion
+
+//#region > Interfaces
+/**
+ * @interface Profile defines the structure of the profile object which is requiered to generate the calendar query.
+ * @description Only createdAt is defined due to no more information is needed to generate the calendar query. 
+*/
+interface IProfile {
+  /**
+   * CreatedAt: A datetime string which defines the day where a account of a provided platform was created.
+   */
   createdAt: string;
 }
+//#endregion
 
+//#region > Functions
 /**
  * Profile query.
  *
- * @returns A query in DocumentNode format.
+ * @returns {DocumentNode} A query in DocumentNode format.
  * @description Get a query used for github profile data.
  */
 function profile() {
@@ -22,7 +38,7 @@ function profile() {
  * Calendar query.
  *
  * @param profile The resolved profile query of the github api.
- * @returns A query in DocumentNode format.
+ * @returns {DocumentNode} A query in DocumentNode format.
  * @description Get a query used for github profile data.
  */
 function calendar(profile: IProfile) {
@@ -38,10 +54,15 @@ function calendar(profile: IProfile) {
     );
     date.add(1, "year");
   }
+
   return queries.calendar(fragments);
 }
+//#endregion
 
+//#region > Exports
+export type { IProfile };
 export { profile, calendar };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

@@ -1,3 +1,4 @@
+//#region > Statements
 const initialize = `
   DROP TABLE IF EXISTS contribution;
   CREATE TABLE IF NOT EXISTS contribution (
@@ -6,7 +7,7 @@ const initialize = `
     datetime DATETIME NOT NULL,
     nameWithOwner VARCHAR(80) NOT NULL,
     type VARCHAR(80) NOT NULL,
-    calendar_id INT NOT NULL REFERENCES calendar (id),
+    calendarId INT NOT NULL REFERENCES calendar (id),
     PRIMARY KEY (id)
   );
 `;
@@ -17,7 +18,7 @@ const create = `
     datetime,
     nameWithOwner,
     type,
-    calendar_id
+    calendarId
   )
   VALUES (?,?,?,?,?);
 `;
@@ -37,8 +38,11 @@ const all = `
   FROM
     contribution
 `;
+//#endregion
 
+//#region > Exports
 export { initialize, create, get, all };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

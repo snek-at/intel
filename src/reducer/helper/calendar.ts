@@ -1,13 +1,25 @@
-//> Imports
-// Contains all models of the database.
-import * as models from "../database/models";
-// Contains a lightweight framework for time management.
+//#region > Imports
+
+//> Moment
+// A lightweight JavaScript date library for parsing,
+// validating, manipulating, and formatting dates.
 import moment from "moment";
 
+
+//> Models
+// Contains all models of the database.
+import * as models from "../database/models";
+
+//> Interfaces
+// Contains a calendar interface
+import { ICalendar } from "../database/helper/calendar";
+//#endregion
+
+//#region > Functions
 /**
- * Get a merged calendar.
+ * Get a merged calendar object.
  *
- * @retruns The calendar of the current and all years.
+ * @returns {object} A calendar object containing the current calendar structure object and the calendar structure objects of all years.
  * @description Get merged contribution calendears over all platforms by year.
  */
 function mergedCalendar() {
@@ -20,9 +32,8 @@ function mergedCalendar() {
     to: moment().format(),
   }).data;
 
-  if (current instanceof Object) {
-    const { createdAt } = models.Platform.getLowestCreatedAtYear();
-    let years = [];
+  const { createdAt } = models.Platform.getLowestCreatedAtYear();
+    let years: ICalendar[] = [];
 
     /**
      * @todo Error handling.
@@ -38,12 +49,14 @@ function mergedCalendar() {
 
     return {
       current,
-      years,
+      years
     };
-  }
 }
+//#endregion
 
+//#region > Exports
 export { mergedCalendar };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

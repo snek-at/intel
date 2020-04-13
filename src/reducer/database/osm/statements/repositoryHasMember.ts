@@ -1,16 +1,19 @@
+//#region > Statements
 const initialize = `
-  DROP TABLE IF EXISTS repository_has_member ;
-  CREATE TABLE IF NOT EXISTS repository_has_member (
-    repository_id INT NOT NULL REFERENCES repository (id),
-    member_id INT NOT NULL  REFERENCES member (id),
-    PRIMARY KEY (repository_id, member_id)
+  DROP TABLE IF EXISTS repositoryhasmember;
+  CREATE TABLE IF NOT EXISTS repositoryhasmember (
+    id INT NOT NULL AUTO_INCREMENT,
+    repositoryId INT NOT NULL REFERENCES repository (id),
+    memberId INT NOT NULL  REFERENCES member (id),
+    UNIQUE(id),
+    PRIMARY KEY (repositoryId, memberId)
   );
 `;
 
 const create = `
-  INSERT INTO repository_has_member(
-    repository_id,
-    member_id
+  INSERT INTO repositoryhasmember(
+    repositoryId,
+    memberId
   )
   VALUES (?,?);
 `;
@@ -19,13 +22,16 @@ const all = `
   SELECT
     *
   FROM
-    repository_has_member
+    repositoryhasmember
   INNER JOIN
     member m
-      ON member_id = m.id
+      ON memberId = m.id
 `;
+//#endregion
 
+//#region > Exports
 export { initialize, create, all };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

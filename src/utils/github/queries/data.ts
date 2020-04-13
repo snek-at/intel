@@ -1,7 +1,11 @@
-//> Imports
-// DocumentNode neede for queries.
-import { gql } from "apollo-boost";
+//#region > Imports
 
+//> GQL
+// DocumentNode needed for queries
+import { gql } from "apollo-boost";
+//#endregion
+
+//#region > Queries
 const profile = () => gql`
   query profile($username: String!) {
     user(login: $username) {
@@ -134,8 +138,11 @@ const contribution_by_repository_fragment = `
     }
   }
 `;
+//#endregion
 
+//#region > Exports
 export { profile, calendar, calendar_fragment };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

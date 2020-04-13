@@ -1,3 +1,4 @@
+//#region > Statements
 const initialize = `
   DROP TABLE IF EXISTS platform;
   CREATE TABLE IF NOT EXISTS platform (
@@ -50,17 +51,19 @@ const all = `
     *
   FROM
     platform
-
 `;
 
 const lowestCreatedAtYear = `
-  SELECT 
+  SELECT
     year(min(createdAt)) as createdAt
   FROM
-    platform  
+    platform
 `;
+//#endregion
 
+//#region > Exports
 export { initialize, create, get, all, lowestCreatedAtYear };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

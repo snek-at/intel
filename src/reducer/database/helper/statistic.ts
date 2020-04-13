@@ -1,5 +1,14 @@
-import moment from "moment";
 
+//#region > Imports
+
+//> Moment
+// A lightweight JavaScript date library for parsing,
+// validating, manipulating, and formatting dates.
+import moment from "moment";
+//#endregion
+
+//#region > Interfaces
+/** @interface Streak defines the structure of a streak. */
 interface IStreak {
   startDate?: string;
   endDate?: string | null;
@@ -7,34 +16,37 @@ interface IStreak {
   totalContributions: number;
 }
 
+/** @interface Day defines the structure of the calendar day. */
 interface IDay {
   date?: string;
   color?: string;
   total: number;
 }
+//#endregion
 
+//#region > Functions
 /**
  * Calculate contribution streaks.
  *
  * @param values A list of days.
- * @returns A list of streaks.
+ * @returns {object} A list of streaks.
  * @description Determines the contribution streaks from a list of days.
  */
 function calculateStreaks(values: IDay[]) {
   let list = [];
-  if (!values) {
-    throw new Error("An error occurred due to an invalid input parameters!");
-  } else {
+
+  if (values) {
     let streak: IStreak = {
       totalDays: 0,
-      totalContributions: 0,
+      totalContributions: 0
     };
 
     for (let index: number = 0; index < values.length; index++) {
       const day: IDay = values[index];
       let nextDay: IDay = {
-        total: 0,
+        total: 0
       };
+
       if (values[values.length - 1] === day) {
         nextDay = values[index];
       } else {
@@ -49,9 +61,11 @@ function calculateStreaks(values: IDay[]) {
           totalContributions: 0,
         };
       }
+
       const dayDiff = moment(nextDay.date).diff(moment(day.date), "days");
+
       if (dayDiff === 1) {
-        streak.totalDays += 1;
+        streak.totalDays++;
         streak.totalContributions += day.total;
       } else {
         if (streak.totalDays > 0) {
@@ -62,15 +76,21 @@ function calculateStreaks(values: IDay[]) {
 
         streak = {
           totalDays: 0,
-          totalContributions: 0,
+          totalContributions: 0
         };
       }
     }
+  } else {
+    throw new Error("An error occurred due to an invalid input parameters!");
   }
+
   return list;
 }
+//#endregion
 
+//#region > Exports
 export { calculateStreaks };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

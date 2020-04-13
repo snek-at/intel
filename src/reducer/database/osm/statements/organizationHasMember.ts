@@ -1,16 +1,19 @@
+//#region > Statements
 const initialize = `
-  DROP TABLE IF EXISTS organization_has_member ;
-  CREATE TABLE IF NOT EXISTS organization_has_member (
-    organization_id INT NOT NULL REFERENCES organization (id),
-    member_id INT NOT NULL  REFERENCES member (id),
-    PRIMARY KEY (organization_id, member_id)
+  DROP TABLE IF EXISTS organizationhasmember;
+  CREATE TABLE IF NOT EXISTS organizationhasmember (
+    id INT NOT NULL AUTO_INCREMENT,
+    organizationId INT NOT NULL REFERENCES organization (id),
+    memberId INT NOT NULL REFERENCES member (id),
+    UNIQUE(id),
+    PRIMARY KEY (organizationId, memberId)
   );
 `;
 
 const create = `
-  INSERT INTO organization_has_member(
-    organization_id,
-    member_id
+  INSERT INTO organizationhasmember(
+    organizationId,
+    memberId
   )
   VALUES (?,?);
 `;
@@ -19,13 +22,16 @@ const all = `
   SELECT
     *
   FROM
-    organization_has_member
+    organizationhasmember
   INNER JOIN
     member m
-      ON member_id = m.id
+      ON memberId = m.id
 `;
+//#endregion
 
+//#region > Exports
 export { initialize, create, all };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

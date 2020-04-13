@@ -1,3 +1,4 @@
+//#region > Statements
 const initialize = `
     DROP TABLE IF EXISTS organization;
     CREATE TABLE IF NOT EXISTS organization (
@@ -8,7 +9,7 @@ const initialize = `
     fullname VARCHAR(80) NOT NULL,
     UNIQUE(url),
     PRIMARY KEY (id)
-    );
+  );
 `;
 
 const create = `
@@ -36,8 +37,11 @@ const all = `
   FROM
     organization o
 `;
+//#endregion
 
+//#region > Exports
 export { initialize, create, get, all };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

@@ -1,16 +1,16 @@
-//> Imports
+//#region > Imports
 // Contains a framework for creating a database in the browser.
 var alasql = require("alasql");
 
-/**@class Provides interaction to the database. */
+/** @class Provides interaction to the database. */
 class SOAssambler {
   static database = new alasql.Database();
   /**
    * The implementation of the getObjects is necessary for any model!
    *
    * @constructor
-   * @author: schettn
-   * @param Base The class of a model.
+   * @author Nico Schett <contact@schett.net>
+   * @param Base The class of a OSM model.
    * @description Creates a instance of SOAssambler.
    */
   constructor(private Base: any) {
@@ -30,7 +30,7 @@ class SOAssambler {
    * Create object in database.
    *
    * @param fields The data of the object. It has to be in the correct order!
-   * @returns A object of the initialized Base class.
+   * @returns {object} A object of the initialized Base class.
    * @description Creates a entry in the database and returns a object type of Base.
    */
   create(fields: any) {
@@ -47,7 +47,7 @@ class SOAssambler {
     } catch (err) {
       return {
         success: false,
-        message: err.message,
+        message: err.message
       };
     }
   }
@@ -56,7 +56,7 @@ class SOAssambler {
    * Get a object out of the database.
    *
    * @param fields The data to get a object by.
-   * @returns A object of the initialized Base class.
+   * @returns {object} A object of the initialized Base class.
    * @description Get a object out of the database and convert in to type of Base.
    */
   get(fields: any) {
@@ -74,7 +74,7 @@ class SOAssambler {
     } catch (err) {
       return {
         success: false,
-        message: err.message,
+        message: err.message
       };
     }
   }
@@ -84,7 +84,7 @@ class SOAssambler {
    *
    * @deprecated The fields parameter my be useless and should be removed!
    * @param fields The data to get a object by.
-   * @retruns A list of objects of the initialized Base class.
+   * @returns {object[]} A list of objects of the initialized Base class.
    * @description Get all objects converted to type of Base in a list.
    */
   all(...fields: any[]) {
@@ -99,7 +99,7 @@ class SOAssambler {
     } catch (err) {
       return {
         success: false,
-        message: err.message,
+        message: err.message
       };
     }
   }
@@ -109,7 +109,7 @@ class SOAssambler {
    * @param filter A filterset.
    * @param Cls A optional model. When not provided Base is chosen.
    * @param filterStatement A optional filter statement. When not provided .all() is chosen.
-   * @retruns A list of filtered objects of the initialized Base class.
+   * @returns {object[]} A list of filtered objects of the initialized Base class.
    * @description Get all objects converted to type Cls or Base in a list.
    */
   filter(filter: any, Cls?: any, filterStatement?: any) {
@@ -151,7 +151,7 @@ class SOAssambler {
       return {
         success: false,
         response: null,
-        message: err.message,
+        message: err.message
       };
     }
   }
@@ -160,7 +160,7 @@ class SOAssambler {
    * Send a custom query to the database.
    *
    * @param query A custom SQL statement.
-   * @returns A object of the initialized Base class.
+   * @returns {object} A object of the initialized Base class.
    * @description Get a object out of the database and convert in to type of Base.
    */
   custom(query: any) {
@@ -174,7 +174,7 @@ class SOAssambler {
     } catch (err) {
       return {
         success: false,
-        message: err.message,
+        message: err.message
       };
     }
   }
@@ -188,8 +188,11 @@ class SOAssambler {
     SOAssambler.database = new alasql.Database();
   }
 }
+//#endregion
 
+//#region > Exports
 export { SOAssambler };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

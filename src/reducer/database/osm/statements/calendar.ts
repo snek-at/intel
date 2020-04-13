@@ -1,10 +1,11 @@
+//#region > Statements
 const initialize = `
   DROP TABLE IF EXISTS calendar;
   CREATE TABLE IF NOT EXISTS calendar (
     id INT NOT NULL AUTO_INCREMENT,
     date DATE NOT NULL,
     total INT NOT NULL,
-    platform_id INT NOT NULL  REFERENCES platform (id),
+    platformId INT NOT NULL  REFERENCES platform (id),
     PRIMARY KEY (id)
   );
 `;
@@ -13,7 +14,7 @@ const create = `
   INSERT INTO calendar(
     date,
     total,
-    platform_id
+    platformId
   )
   VALUES (?,?,?);
 `;
@@ -49,7 +50,7 @@ const busiestDayBetweenDate = `
   SELECT 
       total,
       date,
-      platform_id
+      platformId
   FROM 
       calendar
   WHERE 
@@ -64,10 +65,16 @@ const busiestDayBetweenDate = `
 `;
 
 const dayByDate = `
-  SELECT *
-    FROM calendar
-    WHERE date = ?
+  SELECT
+    *
+  FROM
+    calendar
+  WHERE
+    date = ?
 `;
+//#endregion
+
+//#region > Exports
 export {
   initialize,
   create,
@@ -75,8 +82,8 @@ export {
   all,
   betweenDate,
   busiestDayBetweenDate,
-  dayByDate,
-};
+  dayByDate
+};//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

@@ -1,8 +1,14 @@
-//> Imports
+//#region > Imports
+
+//> Moment
+// A lightweight JavaScript date library for parsing,
+// validating, manipulating, and formatting dates.
+import moment from "moment";
+
+
+//> Models
 // Contains all reducer database models
 import * as models from "../../reducer/database/models";
-// Contains momentJS
-import moment from "moment";
 
 /**
  * Converter for data from the github api.
@@ -31,7 +37,7 @@ function run(rawData: any) {
       avatarUrl: edge.node.avatarUrl,
       url: edge.node.url,
       name: edge.node.login,
-      fullname: edge.node.name,
+      fullname: edge.node.name
     });
 
     edge.node.membersWithRole.nodes.forEach((node: any) => {
@@ -40,22 +46,24 @@ function run(rawData: any) {
         url: node.url,
         fullname: node.name,
         username: node.login,
-        platform_id: platform.id,
+        platformId: platform.id
       });
     });
   });
 
-  // Store repositories with key: nameWithOwner in order to prevent duplicates
+  /** @todo Store repositories with key: nameWithOwner in order to prevent duplicates*/
 
   let repositories: any = {};
+
   // Calendar
   for (let [index, year2] of Object.entries(rawData.calendar)) {
     let year = year2 as any;
+
     if (index !== "__typename") {
       let yearCount = "0";
+
       if (index !== "current") {
         yearCount = index.split("T")[1];
-
         year.contributionCalendar.weeks.forEach((week: any) => {
           week.contributionDays.forEach((day: any) => {
             if (day.contributionCount > 0) {
@@ -93,7 +101,7 @@ function run(rawData: any) {
         totalRepositoriesWithContributedCommits:
           year.totalRepositoriesWithContributedCommits,
         totalRepositoriesWithContributedPullRequests:
-          year.totalRepositoriesWithContributedPullRequests,
+          year.totalRepositoriesWithContributedPullRequests
       });
     }
   }
@@ -106,12 +114,13 @@ function run(rawData: any) {
       url: node.owner.url,
       fullname: node.owner.login, // Fullname is not present
       username: node.owner.login,
-      platform_id: platform.id,
+      platformId: platform.id
     });
+
     if (owner.success === false) {
       owner = models.Member.objects.filter({
         username: node.owner.login,
-        platform_id: platform.id,
+        platformId: platform.id
       })[0];
     }
 
@@ -119,7 +128,7 @@ function run(rawData: any) {
       avatarUrl: node.openGraphImageUrl,
       url: node.url,
       name: node.nameWithOwner,
-      owner_id: owner.id,
+      ownerId: owner.id
     });
 
     node.assignableUsers.nodes.forEach((member: any) => {
@@ -128,7 +137,7 @@ function run(rawData: any) {
         url: member.url,
         fullname: member.name,
         username: member.login,
-        platform_id: platform.id,
+        platformId: platform.id
       });
     });
 
@@ -136,13 +145,16 @@ function run(rawData: any) {
       repository.createLanguage({
         color: edge.node.color,
         name: edge.node.name,
-        size: edge.size,
+        size: edge.size
       });
     });
   });
 }
+//#endregion
 
+//#region > Exports
 export { run };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

@@ -1,16 +1,19 @@
+//#region > Statementss
 const initialize = `
-  DROP TABLE IF EXISTS platform_has_repository ;
-  CREATE TABLE IF NOT EXISTS platform_has_repository (
-    platform_id INT NOT NULL REFERENCES platform (id),
-    repository_id INT NOT NULL  REFERENCES repository (id),
-    PRIMARY KEY (platform_id, repository_id)
+  DROP TABLE IF EXISTS platformhasrepository;
+  CREATE TABLE IF NOT EXISTS platformhasrepository (
+    id INT NOT NULL AUTO_INCREMENT,
+    platformId INT NOT NULL REFERENCES platform (id),
+    repositoryId INT NOT NULL  REFERENCES repository (id),
+    UNIQUE(id),
+    PRIMARY KEY (platformId, repositoryId)
   );
 `;
 
 const create = `
-  INSERT INTO platform_has_repository(
-    platform_id,
-    repository_id
+  INSERT INTO platformhasrepository(
+    platformId,
+    repositoryId
   )
   VALUES (?,?);
 `;
@@ -19,13 +22,16 @@ const all = `
   SELECT
     *
   FROM
-    platform_has_repository
+    platformhasrepository
   INNER JOIN
     repository r
-      ON repository_id = r.id
+      ON repositoryId = r.id
 `;
+//#endregion
 
+//#region > Exports
 export { initialize, create, all };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

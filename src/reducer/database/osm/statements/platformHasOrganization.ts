@@ -1,16 +1,19 @@
+//#region > Statements
 const initialize = `
-    DROP TABLE IF EXISTS platform_has_organization;
-    CREATE TABLE IF NOT EXISTS platform_has_organization (
-    platform_id INT NOT NULL REFERENCES platform (id),
-    organization_id INT NOT NULL REFERENCES organization (id),
-    PRIMARY KEY (platform_id, organization_id)
-    );
+  DROP TABLE IF EXISTS platformhasorganization;
+  CREATE TABLE IF NOT EXISTS platformhasorganization (
+    id INT NOT NULL AUTO_INCREMENT,
+    platformId INT NOT NULL REFERENCES platform (id),
+    organizationId INT NOT NULL REFERENCES organization (id),
+    UNIQUE(id),
+    PRIMARY KEY (platformId, organizationId)
+  );
 `;
 
 const create = `
-  INSERT INTO platform_has_organization(
-    platform_id,
-    organization_id
+  INSERT INTO platformhasorganization(
+    platformId,
+    organizationId
   )
   VALUES (?,?);
 `;
@@ -19,13 +22,16 @@ const all = `
   SELECT
     *
   FROM
-    platform_has_organization
+    platformhasorganization
   INNER JOIN
     organization o
-      ON organization_id = o.id
+      ON organizationId = o.id
 `;
+//#endregion
 
+//#region > Exports
 export { initialize, create, all };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

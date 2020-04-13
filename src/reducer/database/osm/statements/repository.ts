@@ -1,3 +1,4 @@
+//#region > Statements
 const initialize = `
   DROP TABLE IF EXISTS repository;
   CREATE TABLE IF NOT EXISTS repository (
@@ -5,7 +6,7 @@ const initialize = `
     avatarUrl VARCHAR(2048) NOT NULL,
     url VARCHAR(2048) NOT NULL,
     name VARCHAR(80) NOT NULL,
-    owner_id INT NULL REFERENCES member (id),
+    ownerId INT NULL REFERENCES member (id),
     UNIQUE(url),
     PRIMARY KEY (id)
   );
@@ -16,7 +17,7 @@ const create = `
     avatarUrl,
     url,
     name,
-    owner_id
+    ownerId
   )
   VALUES (?,?,?,?);
 `;
@@ -48,10 +49,13 @@ const withOwner = `
     repository r
   INNER JOIN
     member m
-      ON r.owner_id = m.id
+      ON r.ownerId = m.id
 `;
+//#endregion
 
+//#region > Exports
 export { initialize, create, get, all, withOwner };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

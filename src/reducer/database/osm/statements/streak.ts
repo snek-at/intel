@@ -1,11 +1,12 @@
+//#region > Statements
 const initialize = `
-  DROP TABLE IF EXISTS streak ;
+  DROP TABLE IF EXISTS streak;
   CREATE TABLE IF NOT EXISTS streak (
     id INT NOT NULL AUTO_INCREMENT,
     startDate DATE NULL,
     endDate DATE NULL,
     total INT NULL,
-    statistic_id INT NOT NULL REFERENCES statistic(id),
+    statisticId INT NOT NULL REFERENCES statistic(id),
     PRIMARY KEY (id)
   );
 `;
@@ -15,7 +16,7 @@ const create = `
     startDate,
     endDate,
     total,
-    statistic_id
+    statisticId
   )
   VALUES (?,?,?,?);
 `;
@@ -35,8 +36,11 @@ const all = `
   FROM
     streak
 `;
+//#endregion
 
+//#region > Exports
 export { initialize, create, get, all };
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
