@@ -1,4 +1,3 @@
-
 //#region > Statements
 const initialize = `
   DROP TABLE IF EXISTS member;
