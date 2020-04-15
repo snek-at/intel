@@ -113,7 +113,7 @@ interface IGitHubData {
  * @implements IIntel
  * @see {@link http://github.com/snek-at/intel/README.md |SNEK Intel README} for further information.
  */
-class Intel implements IIntel {
+export class Intel implements IIntel {
   public snekclient: SnekClient;
   private reducer: Reducer;
   
@@ -208,10 +208,6 @@ class Intel implements IIntel {
     return this.reducer.get();
   }
 }
-//#endregion
-
-//#region > Exports
-export type { Intel };
 //#endregion
 
 /**

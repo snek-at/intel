@@ -34,7 +34,7 @@ import * as helper from "../helper";
 
 //#region > Classes
 /** @class A basic statement object class which provides access to the SOAssembler and squeezer. */
-class BaseSO {
+abstract class BaseSO {
   //> Static Fields
   /** 
    * @static 
@@ -43,8 +43,28 @@ class BaseSO {
    */
   static objects : SOAssembler;
 
+  //> Abstract Fields
+  /**
+   * @description Necessary for database processing.
+   */
+  abstract id: number;
+
+  //> Abstract Methods
+  // Currently not implemented but interesting for future integration.
+  ///**
+  // * @returns {Boolean} A check if the database write process was successful.
+  // * @description Writes the statement object to the databse.
+  // */
+  //abstract save(): void;
+
+  /**
+   * @description Necessary for interacting with the SOAssambler on object level.
+   */
+  abstract objects: SOAssembler;
+
   //> Static Methods
   /**
+   * @static
    * @param self A implementation of a statement object.
    * @returns {SOAssembler} A SOAssembler object.
    * @description Generate a new SOAssembler object, with the provided osm model.
@@ -53,6 +73,7 @@ class BaseSO {
     return new SOAssembler(self);
   }
 
+  //> Methods
   /**
    * Render object.
    *
@@ -61,12 +82,13 @@ class BaseSO {
    * @description Filter the object by a list of keys.
    */
   render(filter: string[]) {
-    return helper.general.squeezer(this, filter);
+    return helper.general.squeezer(this);
   }
 }
 
 /** @class A statement object which implements the platform sql statements. */
-class PlatformSO extends BaseSO {
+abstract class PlatformSO extends BaseSO {
+  //> Static Fields
   static statements = platform;
 
   //> Static Methods
@@ -80,6 +102,53 @@ class PlatformSO extends BaseSO {
       PlatformSO.statements.lowestCreatedAtYear
     )[0];
   }
+
+  //> Abstract Methods
+  /**
+   * @param fields Repository data.
+   * @returns {RepositorySO} A repository SO object.
+   * @description Used to create a repository within the platform.
+   */
+  abstract createRepository(fields: any): RepositorySO;
+
+  /**
+   * @param fields Organization data.
+   * @returns {OrganizationSO} A organization SO object.
+   * @description Used to create a organization within the platform.
+   */
+  abstract createOrganization(fields: any): OrganizationSO;
+
+  /**
+   * @param fields Statistic data.
+   * @returns {StatisticSO} A statistic SO object.
+   * @description Used to create a statistic within the platform.
+   */
+  abstract createStatistic(fields: any): StatisticSO;
+
+  /**
+   * @param fields Caledar entry data.
+   * @returns {CalendarSO} A calendar SO object.
+   * @description Used to create a calendar day within the platform.
+   */
+  abstract createCalendarEntry(fields: any): CalendarSO;
+
+  /**
+   * @returns {RepositorySO[]} A list of repository SO objects.
+   * @description Used to get all repositories within the platform.
+   */
+  abstract getRepositories(fields: any): RepositorySO[];
+
+  /**
+   * @returns {OrganizationSO[]} A list of organization SO objects.
+   * @description Used to get all organizations within the platform.
+   */
+  abstract getOrganizations(fields: any): OrganizationSO[];
+
+  /**
+   * @returns {Object} A calendar structure in any format.
+   * @description Used to get all repositories within the platform.
+   */
+  abstract getCalendar(dates: any): object;
 
   //> Model Implementation Example
   // class PlatformModel extends PlatformSO{
@@ -134,8 +203,9 @@ class PlatformSO extends BaseSO {
   // }
 }
 
-/** @class A statement object which implements the member sql statements. */
-class MemberSO extends BaseSO {
+/** @abstract @class A statement object which implements the member sql statements. */
+abstract class MemberSO extends BaseSO {
+  //> Static Fields
   static statements = member;
 
   //> Model Implementation Example
@@ -192,21 +262,46 @@ class MemberSO extends BaseSO {
 }
 
 /** @class A statement object which implements the repository sql statements. */
-class RepositorySO extends BaseSO {
+abstract class RepositorySO extends BaseSO {
+  //> Static Fields
   static statements = repository;
 
-  //> Methods
+  //> Static Methods
   /**
-   * @param cls A extended class of RepositorySO.
-   * @param self A object of the extended class.
-   * @description Get languages of a repository.
-   * @returns {object[]} A list of objects containing repository data.
+   * @static
+   * @returns {Object[]} List of language data objects.
+   * @description Returns a list of merged language data.
    */
-  getLanguages(cls: any, self: any) {
-    let response = cls.objects.custom(language.byRepository(self.id));
-
-    return response;
+  static getLanguages() {
+    return SOAssembler.database.exec(LanguageSO.statements.merged);
   }
+
+  //> Abstract Methods
+  /**
+   * @param fields Statistic data.
+   * @returns {MemberSO} A member SO object.
+   * @description Used to create a member within the repository.
+   */
+  abstract createMember(fields: any): MemberSO;
+
+  /**
+   * @param fields Language data.
+   * @returns {MemberSO} A language SO object.
+   * @description Used to create a language within the repository.
+   */
+  abstract createLanguage(fields: any): LanguageSO;
+
+  /**
+   * @returns {MemberSO[]} A list of member SO objects.
+   * @description Used to get all members within the repository.
+   */
+  abstract getMembers(fields: any): MemberSO[];
+
+  /**
+   * @returns {LanguageSO[]} A list of language SO objects.
+   * @description Used to get all languages within the repository.
+   */
+  abstract getLanguages(fields: any): LanguageSO[];
 
   //> Model Implementation Example
   // class RepositoryModel extends RepositorySO{
@@ -262,8 +357,9 @@ class RepositorySO extends BaseSO {
 }
 
 /** @class A statement object which implements the platformHasMember sql statements. */
-class RepositoryHasMemberSO extends BaseSO {
-  static statements = repositoryHasMember;
+abstract class RepositoryHasMemberSO extends BaseSO {
+   //> Static Fields
+   static statements = repositoryHasMember;
 
   //> Model Implementation Example
   // class RepositoryHasMemberModel extends RepositoryHasMemberSO{
@@ -319,18 +415,9 @@ class RepositoryHasMemberSO extends BaseSO {
 }
 
 /** @class A statement object which implements the language sql statements. */
-class LanguageSO extends BaseSO {
+abstract class LanguageSO extends BaseSO {
+  //> Static Fields
   static statements = language;
-
-  //> Static Methods
-  /**
-   * @static
-   * @description Get merged languages over all platforms.
-   * @returns {object[]} A list of objects containing languages data.
-   */
-  static getLanguages() {
-    return SOAssembler.database.exec(LanguageSO.statements.merged);
-  }
 
   //> Model Implementation Example
   // class LanguageModel extends LanguageSO{
@@ -386,7 +473,8 @@ class LanguageSO extends BaseSO {
 }
 
 /** @class A statement object which implements the platformHasRepository sql statements. */
-class PlatformHasRepositorySO extends BaseSO {
+abstract class PlatformHasRepositorySO extends BaseSO {
+  //> Static Fields
   static statements = platformHasRepository;
 
   //> Model Implementation Example
@@ -443,27 +531,32 @@ class PlatformHasRepositorySO extends BaseSO {
 }
 
 /** @class A statement object which implements the organization sql statements. */
-class OrganizationSO extends BaseSO {
+abstract class OrganizationSO extends BaseSO {
+  //> Static Fields
   static statements = organization;
 
-  //> Methods
+  //> Abstract Methods
   /**
-   * @param cls A extended class of OrganizationSO.
-   * @param self A object of the extended class.
-   * @description Get all repositories belonging to a organization.
-   * @returns {object[]} A list of objects containing repository data.
+   * @abstract
+   * @param fields Member data.
+   * @returns {MemberSO} A member SO object.
+   * @description Create a member within this organization.
    */
-  getRepositories(cls: any, self: any) {
-    let response = cls.objects.filter(
-      {
-        owner: self.name
-      },
-      cls,
-      repository.withOwner
-    );
+  abstract createMember(fields: any): MemberSO;
 
-    return response;
-  }
+  /**
+   * @abstract
+   * @returns {MemberSO[]} A list of member SO objects.
+   * @description Get all members within this organization.
+   */
+  abstract getMembers(): MemberSO[];
+
+  /**
+   * @abstract
+   * @returns {RepositorySO[]} A list of repository SO objects.
+   * @description Get all repositories within this organization.
+   */
+  abstract getRepositories(): RepositorySO[];
 
   //> Model Implementation Example
   // class OrganizationModel extends OrganizationSO{
@@ -519,7 +612,8 @@ class OrganizationSO extends BaseSO {
 }
 
 /** @class A statement object which implements the organizationHasMember sql statements. */
-class OrganizationHasMemberSO extends BaseSO {
+abstract class OrganizationHasMemberSO extends BaseSO {
+  //> Static Fields
   static statements = organizationHasMember;
 
   //> Model Implementation Example
@@ -576,7 +670,8 @@ class OrganizationHasMemberSO extends BaseSO {
 }
 
 /** @class A statement object which implements the platformHasOrganization sql statements. */
-class PlatformHasOrganizationSO extends BaseSO {
+abstract class PlatformHasOrganizationSO extends BaseSO {
+  //> Static Fields
   static statements = platformHasOrganization;
 
   //> Model Implementation Example
@@ -633,7 +728,8 @@ class PlatformHasOrganizationSO extends BaseSO {
 }
 
 /** @class A statement object which implements the statistic sql statements. */
-class StatisticSO extends BaseSO {
+abstract class StatisticSO extends BaseSO {
+  //> Static Fields
   static statements = statistic;
 
   //> Static Methods
@@ -641,7 +737,7 @@ class StatisticSO extends BaseSO {
    * @static
    * @param cls A extended class of StatisticSO.
    * @description Get a merged statistic over all platforms.
-   * @returns {object[]} A list of objects containing statistic data.
+   * @returns {Object[]} A list of objects containing statistic data.
    */
   static getMerged(cls: any) {
     let response = SOAssembler.database.exec(StatisticSO.statements.allMerged);
@@ -654,13 +750,13 @@ class StatisticSO extends BaseSO {
     return response;
   }
 
-  //> Methods
   /**
+   * @static
    * @param self A object of the extended class of StatisticSO.
    * @description Get a merged contributions over all platforms.
    * @returns {object[]} A list of objects containing contribution data.
    */
-  getContributions(self: any) {
+  static getContributions(self: any) {
     let response;
 
     if (!self.id) {
@@ -686,6 +782,38 @@ class StatisticSO extends BaseSO {
 
     return response;
   }
+
+  //> Abstract Methods
+  /**
+   * @param fields Streak data.
+   * @returns {MemberSO} A streak SO object.
+   * @description Used to create a streak within the statistic.
+   */
+  abstract createStreak(fields: any): StreakSO;
+
+  /**
+   * @returns {StreakSO[]} A streak SO object.
+   * @description Used to get all streaks within the statistic.
+   */
+  abstract getStreaks(): StreakSO[];
+
+  /**
+   * @returns {StreakSO[]} The longest and current streak SO objects.
+   * @description Used to calculate all the longest and current streak.
+   */
+  abstract getStreakDetail(streaks: StreakSO[]): {longest: StreakSO, current: StreakSO} ;
+
+  /**
+   * @returns {CalendarSO} A calendar SO object.
+   * @description Used to calculate the busiest day within a statistic year.
+   */
+  abstract getBusiestDay(): CalendarSO;
+
+  /**
+   * @returns {Object} A object containing contribution type totals.
+   * @description Used to calculate contribution count of the different types in a statistic year.
+   */
+  abstract getContributions(): { commit: number, issue: number, pullRequest: number, pullRequestReview: number };
 
   //> Model Implementation Example
   // class StatisticModel extends StreakSO{
@@ -741,7 +869,8 @@ class StatisticSO extends BaseSO {
 }
 
 /** @class A statement object which implements the streak sql statements. */
-class StreakSO extends BaseSO {
+abstract class StreakSO extends BaseSO {
+  //> Static Fields
   static statements = streak;
   
   //> Model Implementation Example
@@ -798,7 +927,8 @@ class StreakSO extends BaseSO {
 }
 
 /** @class A statement object which implements the calendar sql statements. */
-class CalendarSO extends BaseSO {
+abstract class CalendarSO extends BaseSO {
+  //> Static Fields
   static statements = calendar;
 
   //> Static Methods
@@ -890,6 +1020,14 @@ class CalendarSO extends BaseSO {
     }
   }
 
+  //> Abstract Methods
+  /**
+   * @param fields Contribution data.
+   * @returns {MemberSO} A contribution SO object.
+   * @description Used to create a contribution within the calendar day.
+   */
+  abstract createContribution(fields: any): ContributionSO;
+
   //> Model Implementation Example
   // class CalendarModel extends CalendarSO{
   //   /**
@@ -944,7 +1082,8 @@ class CalendarSO extends BaseSO {
 }
 
 /** @class A statement object which implements the contribution sql statements. */
-class ContributionSO extends BaseSO {
+abstract class ContributionSO extends BaseSO {
+  //> Static Fields
   static statements = contribution;
 
   //> Model Implementation Example
