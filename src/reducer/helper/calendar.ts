@@ -15,7 +15,8 @@ import { ICalendar } from "../database/helper/calendar";
 /**
  * Get a merged calendar object.
  *
- * @returns {object} A calendar object containing the current calendar structure object and the calendar structure objects of all years.
+ * @returns {object} A calendar object containing the current calendar structure object 
+ * and the calendar structure objects of all years.
  * @description Get merged contribution calendars over all platforms by year.
  */
 function mergedCalendar() {
