@@ -146,7 +146,7 @@ class SOAssembler {
       }
 
       var filtered = response.filter((el: any) => {
-        return el != null;
+        return el !== null;
       });
 
       let objects = filtered.map((entry: any) => {

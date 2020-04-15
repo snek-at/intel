@@ -1,8 +1,5 @@
 {
-    "cSpell.words": [
-        "snek"
-    ],
-    "editor.fontLigatures": true,
+  "editor.fontLigatures": true,
   "editor.snippetSuggestions": "top",
   "editor.insertSpaces": true,
   "terminal.integrated.fontFamily": "Consolas",
@@ -39,6 +36,7 @@
   "cSpell.showStatus": true,
   "cSpell.ignorePaths": ["node_modules"],
   "cSpell.words": [
+    "snek",
     "browserslist",
     "contribs",
     "homescreen",
