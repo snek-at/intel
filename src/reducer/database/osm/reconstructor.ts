@@ -15,7 +15,7 @@ class SOAssambler {
    */
   constructor(private Base: any) {
     /**
-     * Initialize the table if the if the necessary statement exists.
+     * Initialize the table if the necessary statement exists.
      */
     if (Base.statements.initialize) {
       SOAssambler.database.exec(Base.statements.initialize);

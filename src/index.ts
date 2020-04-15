@@ -14,12 +14,12 @@
 //> snek-client
 //#PACKAGE snek-client
 //## npm install snek-client
-// Contains a interface for the snek-client
+// Contains the clients for API calls to SNEK and GitHub.
 import { SnekClient, GithubClient } from "snek-client";
 
 
 //> Reducer
-// Contains reducer and database models
+// Contains the reducer and database models
 import { Reducer } from "./reducer";
 
 //> Utils
@@ -27,7 +27,7 @@ import { Reducer } from "./reducer";
 import * as github from "./utils/github/index";
 
 //> Interfaces
-// Contains a profile interface for the profile query result
+// Contains the profile interface for the profile query result
 import { IProfile } from "./utils/github/queries/index";
 
 /** @interface Intel defines the structure of the intel class. */
@@ -57,7 +57,7 @@ interface IIntel {
 /** @interface Source defines the structure of a source object. */
 interface ISource {
   /**
-   * User: A username of the provides platforms.
+   * User: A username of the provided platform.
    */
   user: string;
   /**
@@ -66,7 +66,7 @@ interface ISource {
   platform: {
     /**
      * Optional!
-     * Url: A url of a provided platform.
+     * Url: A url of the provided platform.
      */
     url?: string;
     /**
@@ -111,7 +111,7 @@ class Intel implements IIntel {
   /**
    * @constructor
    * @author Nico Schett <contact@schett.net>
-   * @description Creates a instance of the Intel.
+   * @description Creates a Intel instance.
    */
   constructor() {
     // init snekclient
@@ -124,7 +124,7 @@ class Intel implements IIntel {
    * Get gitlab or github data and fill the models.
    *
    * @param source A source object of type ISource.
-   * @description Fill the models with data of github or gitlab. The type and username is specified by the source param.
+   * @description Fill the models with data from github or gitlab. The type and username are specified by the source param.
    */
   async append(source: ISource) {
     let platform = source.platform.name.toLowerCase();
@@ -133,7 +133,7 @@ class Intel implements IIntel {
       if (platform === "github") {
         // Init github client
         /**
-         * Use default client url if there is no optinal one.
+         * Use the default client url if none is provided.
          */
         let githubClient: GithubClient;
 

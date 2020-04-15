@@ -23,7 +23,6 @@ import { ICalendar } from "../database/helper/calendar";
  * @description Get merged contribution calendears over all platforms by year.
  */
 function mergedCalendar() {
-  // Maybe the from date is invalid!
   /**
    * @todo Error handling.
    */

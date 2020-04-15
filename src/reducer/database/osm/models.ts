@@ -705,7 +705,6 @@ class StatisticSO extends BaseSO {
     let response;
 
     if (!self.id) {
-      // maybe merged object?
       response = {
         commit: SOAssambler.database.exec(
           StatisticSO.statements.commitContributionsOfYear,
