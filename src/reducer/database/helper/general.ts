@@ -1,4 +1,3 @@
-
 //#region > Functions
 /**
  * Reduce object fields by using a list of keys.

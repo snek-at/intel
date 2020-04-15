@@ -1,7 +1,7 @@
 //#region > Statements
 const initialize = `
-    DROP TABLE IF EXISTS organization;
-    CREATE TABLE IF NOT EXISTS organization (
+  DROP TABLE IF EXISTS organization;
+  CREATE TABLE IF NOT EXISTS organization (
     id INT NOT NULL AUTO_INCREMENT,
     avatarUrl VARCHAR(2048) NOT NULL,
     url VARCHAR(2048) NOT NULL,

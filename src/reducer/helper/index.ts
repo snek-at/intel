@@ -1,5 +1,4 @@
 //#region > Imports
-
 //> Helper
 // Contains all calendar helper functions
 import * as calendar from "./calendar";

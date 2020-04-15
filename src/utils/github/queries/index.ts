@@ -1,14 +1,12 @@
 //#region > Imports
-
 //> Moment
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
-
-
 //> Queries
 // Contains all queries for github graphql api.
-import * as queries from "./data";//#endregion//#endregion
+import * as queries from "./data";
+//#endregion
 
 //#region > Interfaces
 /**

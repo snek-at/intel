@@ -1,5 +1,4 @@
 //#region > Imports
-
 //> Models
 // Contains all osm models
 import * as models from "./models";

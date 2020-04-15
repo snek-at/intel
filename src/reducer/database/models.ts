@@ -1,15 +1,11 @@
 //#region > Imports
-
 //> Moment
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
-
-
 //> OSM
 // Contains all statement objects.
 import * as osm from "./osm";
-
 //> Helper
 // Contains helper functions for the models.
 import * as helper from "./helper";
@@ -31,6 +27,87 @@ interface IPlatform {
   location: string;
   statusMessage: string;
   statusEmojiHTML: string;
+}
+
+/** @interface Member defines the structure of the member model. */
+interface IMember {
+  id: number;
+  avatarUrl: string;
+  url: string;
+  fullname: string;
+  username: string;
+  platformId: number;
+}
+
+/** @interface Repository defines the structure of the repository model. */
+interface IRepository {
+  id: number;
+  avatarUrl: string;
+  url: string;
+  name: string;
+  ownerId: number;
+}
+
+/** @interface Language defines the structure of the language model. */
+interface ILanguage {
+  id: number;
+  color: string;
+  name: string;
+  size: number;
+  share: number;
+  repositoryId: number;
+}
+
+/** @interface Organization defines the structure of the organization model. */
+interface IOrganization {
+  id: number;
+  avatarUrl: string;
+  url: string;
+  name: string;
+  fullname: string;
+}
+
+/** @interface Statistic defines the structure of the statistic model. */
+interface IStatistic {
+  id: number;
+  year: number;
+  totalIssueContributions: number;
+  totalCommitContributions: number;
+  totalRepositoryContributions: number;
+  totalPullRequestContributions: number;
+  totalPullRequestReviewContributions: number;
+  totalRepositoriesWithContributedIssues: number;
+  totalRepositoriesWithContributedCommits: number;
+  totalRepositoriesWithContributedPullRequests: number;
+  platformId: number;
+}
+
+/** @interface Streak defines the structure of the streak model. */
+interface IStreak {
+  id: number;
+  startDate: string;
+  endDate: string;
+  totalDays: number;
+  totalContributions: number;
+  statisticId: number;
+}
+
+/** @interface Calendar defines the structure of the calendar model. */
+interface ICalendar {
+  id: number;
+  date: string;
+  total: number;
+  platformId: number;
+}
+
+/** @interface Contribution defines the structure of the contribution model. */
+interface IContribution {
+  id: number;
+  repoUrl: string;
+  datetime: string;
+  nameWithOwner: string;
+  type: string;
+  calendarId: number;
 }
 //#endregion
 
@@ -200,16 +277,6 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
   }
 }
 
-/** @interface Member defines the structure of the member model. */
-interface IMember {
-  id: number;
-  avatarUrl: string;
-  url: string;
-  fullname: string;
-  username: string;
-  platformId: number;
-}
-
 /**
  * @class A OSM model for a member object.
  * @extends osm.models.MemberSO Statement object.
@@ -234,15 +301,6 @@ class Member extends osm.models.MemberSO {
     this.username = args["username"];
     this.platformId = args["platformId"];
   }
-}
-
-/** @interface Repository defines the structure of the repository model. */
-interface IRepository {
-  id: number;
-  avatarUrl: string;
-  url: string;
-  name: string;
-  ownerId: number;
 }
 
 /**
@@ -352,16 +410,6 @@ class RepositoryHasMember extends osm.models.RepositoryHasMemberSO {
   );
 }
 
-/** @interface Language defines the structure of the language model. */
-interface ILanguage {
-  id: number;
-  color: string;
-  name: string;
-  size: number;
-  share: number;
-  repositoryId: number;
-}
-
 /**
  * @class A OSM model for a language object.
  * @extends osm.models.LanguageSO Statement object.
@@ -412,15 +460,6 @@ class PlatformHasRepository extends osm.models.PlatformHasRepositorySO {
   public static objects = osm.models.PlatformHasRepositorySO.getObjects(
     PlatformHasRepository
   );
-}
-
-/** @interface Organization defines the structure of the organization model. */
-interface IOrganization {
-  id: number;
-  avatarUrl: string;
-  url: string;
-  name: string;
-  fullname: string;
 }
 
 /**
@@ -523,21 +562,6 @@ class PlatformHasOrganization extends osm.models.PlatformHasOrganizationSO {
   public static objects = osm.models.PlatformHasOrganizationSO.getObjects(
     PlatformHasOrganization
   );
-}
-
-/** @interface Statistic defines the structure of the statistic model. */
-interface IStatistic {
-  id: number;
-  year: number;
-  totalIssueContributions: number;
-  totalCommitContributions: number;
-  totalRepositoryContributions: number;
-  totalPullRequestContributions: number;
-  totalPullRequestReviewContributions: number;
-  totalRepositoriesWithContributedIssues: number;
-  totalRepositoriesWithContributedCommits: number;
-  totalRepositoriesWithContributedPullRequests: number;
-  platformId: number;
 }
 
 /**
@@ -737,16 +761,6 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
   }
 }
 
-/** @interface Streak defines the structure of the streak model. */
-interface IStreak {
-  id: number;
-  startDate: string;
-  endDate: string;
-  totalDays: number;
-  totalContributions: number;
-  statisticId: number;
-}
-
 /**
  * @class A OSM model for a streak object.
  * @extends osm.models.StreakSO Statement object.
@@ -771,14 +785,6 @@ class Streak extends osm.models.StreakSO implements IStreak {
     this.totalContributions = args["totalContributions"];
     this.statisticId = args["statisticId"];
   }
-}
-
-/** @interface Calendar defines the structure of the calendar model. */
-interface ICalendar {
-  id: number;
-  date: string;
-  total: number;
-  platformId: number;
 }
 
 /**
@@ -820,16 +826,6 @@ class Calendar extends osm.models.CalendarSO implements ICalendar {
 
     return contribution as Contribution;
   }
-}
-
-/** @interface Contribution defines the structure of the contribution model. */
-interface IContribution {
-  id: number;
-  repoUrl: string;
-  datetime: string;
-  nameWithOwner: string;
-  type: string;
-  calendarId: number;
 }
 
 /**

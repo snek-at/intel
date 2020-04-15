@@ -1,5 +1,4 @@
 //#region > Imports
-
 //> GQL
 // DocumentNode needed for queries
 import { gql } from "apollo-boost";
@@ -54,8 +53,7 @@ const profile = () => gql`
   }
 `;
 
-const calendar = (fragments: string) =>
-  gql(String.raw`
+const calendar = (fragments: string) => gql`
   query calendar ($username: String!){
     user(login: $username) {
       current: contributionsCollection {
@@ -71,7 +69,7 @@ const calendar = (fragments: string) =>
       ${fragments}
     }
   }
-`);
+`;
 
 // Fragments
 const calendar_fragment = (c: number, fromYear: string, toYear: string) => `

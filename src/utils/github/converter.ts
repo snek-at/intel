@@ -1,15 +1,14 @@
 //#region > Imports
-
 //> Moment
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
-
-
 //> Models
 // Contains all reducer database models
 import * as models from "../../reducer/database/models";
+//#endregion
 
+//#region > Functions
 /**
  * Converter for data from the github api.
  *
@@ -29,7 +28,7 @@ function run(rawData: any) {
     createdAt: rawData.profile.createdAt,
     location: rawData.profile.location,
     statusMessage: rawData.profile.status.message,
-    statusEmojiHTML: rawData.profile.status.emojiHTML,
+    statusEmojiHTML: rawData.profile.status.emojiHTML
   });
 
   rawData.profile.organizations.edges.forEach((edge: any) => {
@@ -70,7 +69,7 @@ function run(rawData: any) {
               // Insert Calendar days
               platform.createCalendarEntry({
                 date: moment(day.date).format("YYYY-MM-DD"),
-                total: day.contributionCount,
+                total: day.contributionCount
               });
             }
           });

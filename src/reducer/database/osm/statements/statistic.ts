@@ -1,4 +1,4 @@
-//#region > Statementss
+//#region > Statements
 const initialize = `
   DROP TABLE IF EXISTS statistic;
   CREATE TABLE IF NOT EXISTS statistic (
@@ -66,14 +66,19 @@ const allMerged = `
   GROUP BY year
 `;
 
-const contributionSumFragment =
-  "sum(totalCommitContributions) + sum(totalIssueContributions) + sum(totalPullRequestContributions) + sum(totalPullRequestReviewContributions)";
+const contributionSumFragment = `
+  sum(totalCommitContributions)
+  + sum(totalIssueContributions)
+  + sum(totalPullRequestContributions)
+  + sum(totalPullRequestReviewContributions)
+`;
+
 const contributionOfYearFragment = (type: string) => `
   SELECT
-  sum(${type}) as total,
-  ROUND(sum(${type}) / (${contributionSumFragment}) * 100, 2) as share
+    sum(${type}) as total,
+    ROUND(sum(${type}) / (${contributionSumFragment}) * 100, 2) as share
   FROM
-  statistic
+    statistic
   WHERE year = ?
   GROUP BY year
 `;

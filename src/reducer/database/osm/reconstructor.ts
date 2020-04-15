@@ -1,24 +1,28 @@
 //#region > Imports
+//> AlaSQL
 // Contains a framework for creating a database in the browser.
 var alasql = require("alasql");
+//#endregion
 
+//#region > Classes
 /** @class Provides interaction to the database. */
-class SOAssambler {
+class SOAssembler {
   static database = new alasql.Database();
+
   /**
    * The implementation of the getObjects is necessary for any model!
    *
    * @constructor
    * @author Nico Schett <contact@schett.net>
    * @param Base The class of a OSM model.
-   * @description Creates a instance of SOAssambler.
+   * @description Creates a instance of SOAssembler.
    */
   constructor(private Base: any) {
     /**
      * Initialize the table if the necessary statement exists.
      */
     if (Base.statements.initialize) {
-      SOAssambler.database.exec(Base.statements.initialize);
+      SOAssembler.database.exec(Base.statements.initialize);
     } else {
       /**
        * @todo Error handling.
@@ -36,13 +40,16 @@ class SOAssambler {
   create(fields: any) {
     try {
       let tablename = new this.Base({}).constructor.name.toLowerCase();
-      SOAssambler.database.exec(
+
+      SOAssembler.database.exec(
         this.Base.statements.create,
         Object.values(fields)
       );
-      fields.id = SOAssambler.database.autoval(tablename, "id");
+
+      fields.id = SOAssembler.database.autoval(tablename, "id");
 
       let obj = new this.Base(fields);
+
       return obj;
     } catch (err) {
       return {
@@ -61,7 +68,7 @@ class SOAssambler {
    */
   get(fields: any) {
     try {
-      let response = SOAssambler.database.exec(
+      let response = SOAssembler.database.exec(
         this.Base.statements.get,
         Object.values(fields)
       );
@@ -69,7 +76,9 @@ class SOAssambler {
       if (response.length === 1) {
         response = response[0];
       }
+
       let obj = new this.Base(response);
+
       return obj;
     } catch (err) {
       return {
@@ -90,7 +99,8 @@ class SOAssambler {
   all(...fields: any[]) {
     try {
       let response;
-      response = SOAssambler.database.exec(this.Base.statements.all, fields);
+
+      response = SOAssembler.database.exec(this.Base.statements.all, fields);
       response = response.map((entry: any) => {
         return new this.Base(entry);
       });
@@ -103,6 +113,7 @@ class SOAssambler {
       };
     }
   }
+
   /**
    * Get filtered objects of the table specifed by type of Base.
    *
@@ -117,7 +128,9 @@ class SOAssambler {
       if (!filterStatement) {
         filterStatement = this.Base.statements.all;
       }
-      let response = SOAssambler.database.exec(filterStatement);
+
+      let response = SOAssembler.database.exec(filterStatement);
+
       for (let entry in response) {
         if ({}.hasOwnProperty.call(response, entry)) {
           for (let f in filter) {
@@ -138,11 +151,13 @@ class SOAssambler {
 
       let objects = filtered.map((entry: any) => {
         let o;
+
         if (Cls) {
           o = new Cls(entry);
         } else {
           o = new this.Base(entry);
         }
+
         return o;
       });
 
@@ -165,11 +180,12 @@ class SOAssambler {
    */
   custom(query: any) {
     try {
-      let response = SOAssambler.database.exec(query);
+      let response = SOAssembler.database.exec(query);
 
       response = response.map((entry: any) => {
         return new this.Base(entry);
       });
+
       return response;
     } catch (err) {
       return {
@@ -185,13 +201,13 @@ class SOAssambler {
    * @description Reinitialize the database. This will reset all datasets!
    */
   reload() {
-    SOAssambler.database = new alasql.Database();
+    SOAssembler.database = new alasql.Database();
   }
 }
 //#endregion
 
 //#region > Exports
-export { SOAssambler };
+export { SOAssembler };
 //#endregion
 
 /**

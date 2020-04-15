@@ -1,9 +1,7 @@
 //#region > Imports
-
 //> Models
 // Contains all models of the database.
 import * as models from "./database/models";
-
 //> Helper
 // Contains helper functions for the models.
 import * as helper from "./helper";

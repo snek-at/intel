@@ -1,9 +1,7 @@
 //#region > Imports
-
 //> Reconstructor
-// SOAssambler for SO objects
-import { SOAssambler } from "./reconstructor";
-
+// SOAssembler for SO objects
+import { SOAssembler } from "./reconstructor";
 //> Statements
 // Contains SQL statements
 import * as platform from "./statements/platform";
@@ -19,32 +17,40 @@ import * as statistic from "./statements/statistic";
 import * as streak from "./statements/streak";
 import * as calendar from "./statements/calendar";
 import * as contribution from "./statements/contribution";
-
 //> Helper
 // Contains all helper
 import * as helper from "../helper";
+//#endregion
 
 /**
- * Implementaion examples of the statement objects defined below.
+ * Implementation examples of the statement objects defined below.
  *
- * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/models.ts |SNEK Models} for implementation examples.
+ * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/models.ts |SNEK Models}
+ * for implementation examples.
  */
+
+//#region > Interfaces
 //#endregion
 
 //#region > Classes
-/** @class A basic statement object class which provides access to the SOAssambler and squeezer. */
+/** @class A basic statement object class which provides access to the SOAssembler and squeezer. */
 class BaseSO {
-  
-//> Static Methods
+  //> Static Fields
+  /** 
+   * @static 
+   * @description Provides access to the SOAssembler to provide functionality like create, all, filter,...
+   * @tutorial Usage: "public static objects = StatementObject.getObjects(osmModel);"
+   */
+  static objects : SOAssembler;
+
+  //> Static Methods
   /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   *
    * @param self A implementation of a statement object.
-   * @returns {SOAssambler} A SOAssambler object.
-   * @description Enables access to the SOAssambler to provide functionality like create, all, filter,...
+   * @returns {SOAssembler} A SOAssembler object.
+   * @description Generate a new SOAssembler object, with the provided osm model.
    */
   static getObjects(self: any) {
-    return new SOAssambler(self);
+    return new SOAssembler(self);
   }
 
   /**
@@ -63,29 +69,24 @@ class BaseSO {
 class PlatformSO extends BaseSO {
   static statements = platform;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Static Methods
+  //> Static Methods
   /**
    * @static
    * @description Get the platform with the lowest createdAt.
    * @returns {object} A object containing platform data with the lowest creation date.
    */
   static getLowestCreatedAtYear() {
-    return SOAssambler.database.exec(
+    return SOAssembler.database.exec(
       PlatformSO.statements.lowestCreatedAtYear
     )[0];
   }
 
-  
-//> Model Implementation Example
+  //> Model Implementation Example
   // class PlatformModel extends PlatformSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(PlatformModel);
 
@@ -94,11 +95,11 @@ class PlatformSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/platform.ts |Platform SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/platform.ts |Platform SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: PlatformFields){
   //     super();
-  //  //
   //     this.id = fields.id;
   //   }
 
@@ -137,16 +138,12 @@ class PlatformSO extends BaseSO {
 class MemberSO extends BaseSO {
   static statements = member;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Model Implementation Example
+  //> Model Implementation Example
   // class MemberModel extends MemberSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(MemberModel);
 
@@ -155,11 +152,11 @@ class MemberSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/member.ts |Member SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/member.ts |Member SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: MemberFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -198,12 +195,7 @@ class MemberSO extends BaseSO {
 class RepositorySO extends BaseSO {
   static statements = repository;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Methods
+  //> Methods
   /**
    * @param cls A extended class of RepositorySO.
    * @param self A object of the extended class.
@@ -212,15 +204,16 @@ class RepositorySO extends BaseSO {
    */
   getLanguages(cls: any, self: any) {
     let response = cls.objects.custom(language.byRepository(self.id));
+
     return response;
   }
 
-  
-//> Model Implementation Example
+  //> Model Implementation Example
   // class RepositoryModel extends RepositorySO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(RepositoryModel);
 
@@ -229,11 +222,11 @@ class RepositorySO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/repository.ts |Repository SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/repository.ts |Repository SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: RepositoryFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -272,16 +265,12 @@ class RepositorySO extends BaseSO {
 class RepositoryHasMemberSO extends BaseSO {
   static statements = repositoryHasMember;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Model Implementation Example
+  //> Model Implementation Example
   // class RepositoryHasMemberModel extends RepositoryHasMemberSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(RepositoryHasMemberModel);
 
@@ -290,11 +279,11 @@ class RepositoryHasMemberSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/repositoryHasMember.ts |RepositoryHasMember SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/repositoryHasMember.ts |RepositoryHasMember SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: RepositoryHasMemberFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -333,27 +322,22 @@ class RepositoryHasMemberSO extends BaseSO {
 class LanguageSO extends BaseSO {
   static statements = language;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Static Methods
+  //> Static Methods
   /**
    * @static
    * @description Get merged languages over all platforms.
    * @returns {object[]} A list of objects containing languages data.
    */
   static getLanguages() {
-    return SOAssambler.database.exec(LanguageSO.statements.merged);
+    return SOAssembler.database.exec(LanguageSO.statements.merged);
   }
 
-  
-//> Model Implementation Example
+  //> Model Implementation Example
   // class LanguageModel extends LanguageSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(LanguageModel);
 
@@ -362,11 +346,11 @@ class LanguageSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/language.ts |Language SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/language.ts |Language SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: LanguageFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -405,16 +389,12 @@ class LanguageSO extends BaseSO {
 class PlatformHasRepositorySO extends BaseSO {
   static statements = platformHasRepository;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Model Implementation Example
+  //> Model Implementation Example
   // class PlatformHasRepositoryModel extends PlatformHasRepositorySO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(PlatformHasRepositoryModel);
 
@@ -423,11 +403,11 @@ class PlatformHasRepositorySO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/platformHasRepository.ts |PlatformHasRepository SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/platformHasRepository.ts |PlatformHasRepository SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: PlatformHasRepositoryFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -466,12 +446,7 @@ class PlatformHasRepositorySO extends BaseSO {
 class OrganizationSO extends BaseSO {
   static statements = organization;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Methods
+  //> Methods
   /**
    * @param cls A extended class of OrganizationSO.
    * @param self A object of the extended class.
@@ -490,12 +465,12 @@ class OrganizationSO extends BaseSO {
     return response;
   }
 
-  
-//> Model Implementation Example
+  //> Model Implementation Example
   // class OrganizationModel extends OrganizationSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(OrganizationModel);
 
@@ -504,11 +479,11 @@ class OrganizationSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/orgaization.ts |Organization SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/orgaization.ts |Organization SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: OrganizationFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -547,17 +522,12 @@ class OrganizationSO extends BaseSO {
 class OrganizationHasMemberSO extends BaseSO {
   static statements = organizationHasMember;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Model Implementation Example
-
+  //> Model Implementation Example
   // class OrganizationHasMemberModel extends OrganizationHasMemberSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(OrganizationHasMemberModel);
 
@@ -566,11 +536,11 @@ class OrganizationHasMemberSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/organizationHasMember.ts |OrganizationHasMember SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/organizationHasMember.ts |OrganizationHasMember SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: OrganizationHasMemberFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -609,17 +579,12 @@ class OrganizationHasMemberSO extends BaseSO {
 class PlatformHasOrganizationSO extends BaseSO {
   static statements = platformHasOrganization;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Model Implementation Example
-
+  //> Model Implementation Example
   // class PlatformHasOrganizationModel extends PlatformHasOrganizationSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(PlatformHasOrganizationModel);
 
@@ -628,11 +593,11 @@ class PlatformHasOrganizationSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/platformHasOrganization.ts |PlatformHasOrganization SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/platformHasOrganization.ts |PlatformHasOrganization SQL statements}
+  //    *  for further information.
   //    */
   //   constructor(fields: StatisticFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -671,12 +636,7 @@ class PlatformHasOrganizationSO extends BaseSO {
 class StatisticSO extends BaseSO {
   static statements = statistic;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Static Methods
+  //> Static Methods
   /**
    * @static
    * @param cls A extended class of StatisticSO.
@@ -684,7 +644,7 @@ class StatisticSO extends BaseSO {
    * @returns {object[]} A list of objects containing statistic data.
    */
   static getMerged(cls: any) {
-    let response = SOAssambler.database.exec(StatisticSO.statements.allMerged);
+    let response = SOAssembler.database.exec(StatisticSO.statements.allMerged);
 
     // Parse to class objects
     response = response.map((entry: any) => {
@@ -694,8 +654,7 @@ class StatisticSO extends BaseSO {
     return response;
   }
 
-  
-//> Methods
+  //> Methods
   /**
    * @param self A object of the extended class of StatisticSO.
    * @description Get a merged contributions over all platforms.
@@ -706,19 +665,19 @@ class StatisticSO extends BaseSO {
 
     if (!self.id) {
       response = {
-        commit: SOAssambler.database.exec(
+        commit: SOAssembler.database.exec(
           StatisticSO.statements.commitContributionsOfYear,
           [self.year]
         )[0] as number,
-        issue: SOAssambler.database.exec(
+        issue: SOAssembler.database.exec(
           StatisticSO.statements.issueContributionsOfYear,
           [self.year]
         )[0] as number,
-        pullRequest: SOAssambler.database.exec(
+        pullRequest: SOAssembler.database.exec(
           StatisticSO.statements.issueContributionsOfYear,
           [self.year]
         )[0] as number,
-        pullRequestReview: SOAssambler.database.exec(
+        pullRequestReview: SOAssembler.database.exec(
           StatisticSO.statements.pullRequestReviewContributionsOfYear,
           [self.year]
         )[0] as number
@@ -728,13 +687,12 @@ class StatisticSO extends BaseSO {
     return response;
   }
 
-  
-//> Model Implementation Example
-
+  //> Model Implementation Example
   // class StatisticModel extends StreakSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(StatisticModel);
 
@@ -743,11 +701,11 @@ class StatisticSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/statistic.ts |Statistic SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/statistic.ts |Statistic SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: StatisticFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -785,18 +743,13 @@ class StatisticSO extends BaseSO {
 /** @class A statement object which implements the streak sql statements. */
 class StreakSO extends BaseSO {
   static statements = streak;
-
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
   
-//> Model Implementation Example
-
+  //> Model Implementation Example
   // class StreakModel extends StreakSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(StreakModel);
 
@@ -805,11 +758,11 @@ class StreakSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/streak.ts |Streak SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/streak.ts |Streak SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: StreakFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -848,12 +801,7 @@ class StreakSO extends BaseSO {
 class CalendarSO extends BaseSO {
   static statements = calendar;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Static Methods
+  //> Static Methods
   /**
    * @static
    * @param dates From and to date.
@@ -861,7 +809,7 @@ class CalendarSO extends BaseSO {
    * @returns {object[]} A list of objects containing day data.
    */
   static getDaysBetweenDate(dates: { from: string; to: string }) {
-    let days = SOAssambler.database.exec(CalendarSO.statements.betweenDate, [
+    let days = SOAssembler.database.exec(CalendarSO.statements.betweenDate, [
       dates.from,
       dates.to,
     ]);
@@ -876,7 +824,7 @@ class CalendarSO extends BaseSO {
    * @returns {object} A objects containing day data.
    */
   static getBusiestDay(dates: { from: string; to: string }) {
-    let response = SOAssambler.database.exec(
+    let response = SOAssembler.database.exec(
       CalendarSO.statements.busiestDayBetweenDate,
       [dates.from, dates.to]
     )[0];
@@ -900,7 +848,7 @@ class CalendarSO extends BaseSO {
     // fill totals
     calendar.weeks.forEach((week) => {
       week.days.forEach((day) => {
-        let entries = SOAssambler.database.exec(
+        let entries = SOAssembler.database.exec(
           CalendarSO.statements.dayByDate,
           [day.date]
         );
@@ -942,13 +890,12 @@ class CalendarSO extends BaseSO {
     }
   }
 
-  
-//> Model Implementation Example
-
+  //> Model Implementation Example
   // class CalendarModel extends CalendarSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(CalendarModel);
 
@@ -957,11 +904,11 @@ class CalendarSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/calendar.ts |Calendar SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/calendar.ts |Calendar SQL statements}
+  //    * for further information.
   //    */
   //   constructor(fields: CalendarFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 
@@ -1000,17 +947,12 @@ class CalendarSO extends BaseSO {
 class ContributionSO extends BaseSO {
   static statements = contribution;
 
-  /**
-   * The implementation of the getObjects is necessary for any statement object implementation!
-   * /
-
-  
-//> Model Implementation Example
-
+  //> Model Implementation Example
   // class ContributionModel extends ContributionSO{
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}), objects.all()
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/reconstructor.ts |SNEK Reconstructor} 
+  //    * for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(ContributionModel);
 
@@ -1019,11 +961,11 @@ class ContributionSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without modifying the initialize statement of the statement object!
-  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/contribution.ts |Contribution SQL statements} for further information.
+  //    * @see {@link http://github.com/snek-at/intel/tree/master/src/reducer/database/osm/statements/contribution.ts |Contribution SQL statements} 
+  //    * for further information.
   //    */
   //   constructor(fields: ContributionFields){
   //     super();
-  //
   //     this.id = fields.id;
   //   }
 

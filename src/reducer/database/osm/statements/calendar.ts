@@ -48,19 +48,19 @@ const betweenDate = `
 
 const busiestDayBetweenDate = `
   SELECT 
-      total,
-      date,
-      platformId
+    total,
+    date,
+    platformId
   FROM 
-      calendar
+    calendar
   WHERE 
-      total = (
-          SELECT 
-              MAX(total )
-          FROM
-              calendar
-          WHERE date >= ?
-          AND date <= ? )
+    total = (
+      SELECT 
+        MAX(total)
+      FROM
+        calendar
+      WHERE date >= ?
+      AND date <= ?)
   LIMIT 1;
 `;
 
@@ -83,7 +83,8 @@ export {
   betweenDate,
   busiestDayBetweenDate,
   dayByDate
-};//#endregion
+};
+//#endregion
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)

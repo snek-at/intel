@@ -1,6 +1,4 @@
-
 //#region > Imports
-
 //> Moment
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.

@@ -10,26 +10,23 @@
  */
 
 //#region > Imports
-
 //> snek-client
 //#PACKAGE snek-client
 //## npm install snek-client
 // Contains the clients for API calls to SNEK and GitHub.
 import { SnekClient, GithubClient } from "snek-client";
-
-
 //> Reducer
 // Contains the reducer and database models
 import { Reducer } from "./reducer";
-
 //> Utils
 // Contains the github utils
 import * as github from "./utils/github/index";
-
 //> Interfaces
 // Contains the profile interface for the profile query result
 import { IProfile } from "./utils/github/queries/index";
+//#endregion
 
+//#region > Interfaces
 /** @interface Intel defines the structure of the intel class. */
 interface IIntel {
   /**
@@ -91,6 +88,18 @@ interface IDataUser {
     user: object;
   };
 }
+
+/** @interface GitHubData defines the structure which is requiered to run the github converter. */
+interface IGitHubData {
+  /**
+   * Profile: A profile object which contains all profile data of a github user.
+   */
+  profile: object;
+  /**
+   * Calendar: A calendar object which contains all calendar data of a github user.
+   */
+  calendar: object;
+}
 //#endregion
 
 //#region > Classes
@@ -107,7 +116,7 @@ interface IDataUser {
 class Intel implements IIntel {
   public snekclient: SnekClient;
   private reducer: Reducer;
-
+  
   /**
    * @constructor
    * @author Nico Schett <contact@schett.net>
@@ -165,19 +174,7 @@ class Intel implements IIntel {
           }
         )) as IDataUser;
 
-        /** @interface Data defines the structure which is requiered to run the github converter.  */
-        interface IData {
-          /**
-           * Profile: A profile object which contains all profile data of a github user.
-           */
-          profile: object;
-          /**
-           * Calendar: A calendar object which contains all calendar data of a github user.
-           */
-          calendar: object;
-        }
-
-        const data: IData = {
+        const data: IGitHubData = {
           profile: profileData.data.user,
           calendar: calendarData.data.user,
         };

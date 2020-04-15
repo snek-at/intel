@@ -1,5 +1,4 @@
 //#region > Imports
-
 //> Models
 // Contains all models of the database.
 import * as models from "../database/models";
@@ -48,7 +47,7 @@ interface IStatistic extends models.Statistic {
 /**
  * A merged statistic.
  *
- * @returns A statistic object object.
+ * @returns A statistic object.
  * @description Returns a object containing e.g busiest day and streaks of current and each year.
  */
 function mergedStatistic() : IStatisticResponse {

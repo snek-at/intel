@@ -1,15 +1,11 @@
 //#region > Imports
-
 //> Moment
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
-
-
 //> Models
 // Contains all models of the database.
 import * as models from "../database/models";
-
 //> Interfaces
 // Contains a calendar interface
 import { ICalendar } from "../database/helper/calendar";
@@ -20,7 +16,7 @@ import { ICalendar } from "../database/helper/calendar";
  * Get a merged calendar object.
  *
  * @returns {object} A calendar object containing the current calendar structure object and the calendar structure objects of all years.
- * @description Get merged contribution calendears over all platforms by year.
+ * @description Get merged contribution calendars over all platforms by year.
  */
 function mergedCalendar() {
   /**
