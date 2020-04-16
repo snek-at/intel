@@ -123,7 +123,7 @@ class SOAssembler {
    * @returns {object[]} A list of filtered objects of the initialized Base class.
    * @description Get all objects converted to type Cls or Base in a list.
    */
-  filter(filter: any, Cls?: any, filterStatement?: any) {
+  filter(filter: any, Cls?: any, filterStatement?: string) {
     try {
       if (!filterStatement) {
         filterStatement = this.Base.statements.all;
