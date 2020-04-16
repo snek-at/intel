@@ -150,7 +150,7 @@ class SOAssembler {
                 { f },
                 {
                   get: () => {
-                    return entry;
+                    return f;
                   },
                 }
               );
