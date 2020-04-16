@@ -276,6 +276,12 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
 
     return response.data;
   }
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -303,6 +309,12 @@ class Member extends osm.models.MemberSO {
     this.username = args["username"];
     this.platformId = args["platformId"];
   }
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -403,6 +415,12 @@ class Repository extends osm.models.RepositorySO implements IRepository {
 
     return response;
   }
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -413,8 +431,15 @@ class RepositoryHasMember extends osm.models.RepositoryHasMemberSO {
   public static objects = osm.models.RepositoryHasMemberSO.getObjects(
     RepositoryHasMember
   );
+
   public objects = RepositoryHasMember.objects;
   public id = 0;
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -458,6 +483,12 @@ class Language extends osm.models.LanguageSO implements ILanguage {
 
     return response;
   }
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -468,8 +499,15 @@ class PlatformHasRepository extends osm.models.PlatformHasRepositorySO {
   public static objects = osm.models.PlatformHasRepositorySO.getObjects(
     PlatformHasRepository
   );
+
   public id = 0;
   public objects = PlatformHasRepository.objects;
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -556,6 +594,12 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
 
     return response as Repository[];
   }
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -568,6 +612,12 @@ class OrganizationHasMember extends osm.models.OrganizationHasMemberSO {
   );
   public objects = OrganizationHasMember.objects;
   public id = 0;
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -578,8 +628,15 @@ class PlatformHasOrganization extends osm.models.PlatformHasOrganizationSO {
   public static objects = osm.models.PlatformHasOrganizationSO.getObjects(
     PlatformHasOrganization
   );
+
   public objects = PlatformHasOrganization.objects;
   public id = 0;
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -778,6 +835,12 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
   static getMerged(): Statistic[] {
     return super.getMerged(Statistic) as Statistic[];
   }
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -805,6 +868,13 @@ class Streak extends osm.models.StreakSO implements IStreak {
     this.totalContributions = args["totalContributions"];
     this.statisticId = args["statisticId"];
   }
+
+    
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -847,6 +917,12 @@ class Calendar extends osm.models.CalendarSO implements ICalendar {
 
     return contribution as Contribution;
   }
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 
 /**
@@ -874,6 +950,12 @@ class Contribution extends osm.models.ContributionSO implements IContribution {
     this.type = args["type"];
     this.calendarId = args["calendarId"];
   }
+
+  /**
+   * @todo
+   * @description Saves this osm model.
+   */
+  save() { }
 }
 //#endregion
 

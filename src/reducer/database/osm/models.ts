@@ -50,12 +50,11 @@ abstract class BaseSO {
   abstract id: number;
 
   //> Abstract Methods
-  // Currently not implemented but interesting for future integration.
-  ///**
-  // * @returns {Boolean} A check if the database write process was successful.
-  // * @description Writes the statement object to the databse.
-  // */
-  //abstract save(): void;
+  /**
+  * @returns {Boolean} A check if the database write process was successful.
+  * @description Writes the statement object to the databse.
+  */
+  abstract save(): void;
 
   /**
    * @description Necessary for interacting with the SOAssambler on object level.
