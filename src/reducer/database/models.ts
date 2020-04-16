@@ -399,11 +399,7 @@ class Repository extends osm.models.RepositorySO implements IRepository {
    * @description Get the analysis of all language data of this repository.
    */
   getLanguages(): Language[] {
-    let response = Language.getLanguages();
-
-    response.map((entry) => {
-      return new Language(entry)
-    });
+    let response = Language.objects.custom(Language.statements.byRepository(this.id)) as Language[];
 
     return response;
   }
@@ -556,7 +552,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
    */
   getRepositories(): Repository[] {
     let filterStatement = Repository.statements.withOwner;
-    let response = this.objects.filter({ owner: this.name, Repository, filterStatement});
+    let response = this.objects.filter({ owner: this.name}, Repository, filterStatement);
 
     return response as Repository[];
   }
