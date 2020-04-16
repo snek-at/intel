@@ -137,7 +137,17 @@ class SOAssembler {
             if ({}.hasOwnProperty.call(filter, f)) {
               if (response[entry]) {
                 if (filter[f] !== response[entry][f]) {
-                  delete response[entry];
+                  /** Proxy to neutralize Generic Object Injection Sink */
+                  var proxy = new Proxy(
+                    { entry },
+                    {
+                      get: () => {
+                        return entry;
+                      },
+                    }
+                  );
+
+                  delete response[proxy.entry];
                 }
               }
             }

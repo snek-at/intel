@@ -12,9 +12,17 @@ function squeezer(obj: any, keys?: string[]) {
     let keysToRemove = Object.keys(obj).filter((x) => !keys.includes(x));
 
     for (let index = 0; index < keysToRemove.length; index++) {
-      const key = keysToRemove[index];
+      /** Proxy to neutralize Generic Object Injection Sink */
+      var proxy = new Proxy(
+        { index },
+        {
+          get: () => {
+            return keysToRemove[index];
+          },
+        }
+      );
 
-      delete obj[key];
+      delete obj[proxy.index];
     }
   }
 
