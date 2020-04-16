@@ -38,10 +38,11 @@
     "graphql": "^14.6.0",
     "moment": "^2.24.0",
     "react-scripts": "^3.4.1",
-    "snek-client": "file:../client",
+    "snek-client": "file:../client"
+  },
+  "devDependencies": {
     "typescript": "^3.8.3"
   },
-  "devDependencies": {},
   "prettier": {
     "arrowParens": "always"
   }
