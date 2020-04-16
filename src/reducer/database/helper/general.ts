@@ -17,12 +17,12 @@ function squeezer(obj: any, keys?: string[]) {
         { index },
         {
           get: () => {
-            return keysToRemove[index];
+            return index;
           },
         }
       );
 
-      delete obj[proxy.index];
+      delete obj[keysToRemove[proxy.index]];
     }
   }
 
