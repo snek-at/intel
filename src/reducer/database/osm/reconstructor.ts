@@ -135,19 +135,29 @@ class SOAssembler {
         if ({}.hasOwnProperty.call(response, entry)) {
           for (let f in filter) {
             if ({}.hasOwnProperty.call(filter, f)) {
-              if (response[entry]) {
-                if (filter[f] !== response[entry][f]) {
-                  /** Proxy to neutralize Generic Object Injection Sink */
-                  var proxy = new Proxy(
-                    { entry },
-                    {
-                      get: () => {
-                        return entry;
-                      },
-                    }
-                  );
+               /** Proxy to neutralize Generic Object Injection Sink */
+               var eProxy = new Proxy(
+                { entry },
+                {
+                  get: () => {
+                    return entry;
+                  },
+                }
+              );
 
-                  delete response[proxy.entry];
+              /** Proxy to neutralize Generic Object Injection Sink */
+              var fProxy = new Proxy(
+                { f },
+                {
+                  get: () => {
+                    return entry;
+                  },
+                }
+              );
+
+              if (response[eProxy.entry]) {
+                if (filter[fProxy.f] !== response[eProxy.entry][fProxy.f]) {
+                  delete response[eProxy.entry];
                 }
               }
             }
