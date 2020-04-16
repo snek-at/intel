@@ -36,13 +36,13 @@ function calculateStreaks(values: IDay[]) {
   if (values) {
     let streak: IStreak = {
       totalDays: 0,
-      totalContributions: 0
+      totalContributions: 0,
     };
 
     for (let index: number = 0; index < values.length; index++) {
       const day: IDay = values[index];
       let nextDay: IDay = {
-        total: 0
+        total: 0,
       };
 
       if (values[values.length - 1] === day) {
@@ -74,12 +74,12 @@ function calculateStreaks(values: IDay[]) {
 
         streak = {
           totalDays: 0,
-          totalContributions: 0
+          totalContributions: 0,
         };
       }
     }
   } else {
-    throw new Error("An error occurred due to an invalid input parameters!");
+    throw new Error("An error occurred due to invalid input parameters!");
   }
 
   return list;

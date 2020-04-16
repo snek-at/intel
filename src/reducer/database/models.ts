@@ -165,13 +165,13 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
 
     if (repository.success === false) {
       repository = Repository.objects.filter({
-        url: fields.url
+        url: fields.url,
       })[0];
     }
 
     PlatformHasRepository.objects.create({
       platformId: this.id,
-      repositoryId: repository.id
+      repositoryId: repository.id,
     });
 
     return repository as Repository;
@@ -189,13 +189,13 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
 
     if (organization.success === false) {
       organization = Organization.objects.filter({
-        url: fields.url
+        url: fields.url,
       })[0];
     }
 
     PlatformHasOrganization.objects.create({
       platformId: this.id,
-      organizationId: organization.id
+      organizationId: organization.id,
     });
 
     return organization as Organization;
@@ -240,7 +240,7 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
   getRepositories(): Repository[] {
     let repositories = PlatformHasRepository.objects.filter(
       {
-        platformId: this.id
+        platformId: this.id,
       },
       Repository
     );
@@ -257,7 +257,7 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
   getOrganizations(): Organization[] {
     let organizations = PlatformHasOrganization.objects.filter(
       {
-        platformId: this.id
+        platformId: this.id,
       },
       Organization
     );
@@ -281,7 +281,7 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -314,7 +314,7 @@ class Member extends osm.models.MemberSO {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -354,19 +354,19 @@ class Repository extends osm.models.RepositorySO implements IRepository {
       url: fields.url,
       fullname: fields.fullname,
       username: fields.username,
-      platformId: fields.platformId
+      platformId: fields.platformId,
     });
 
     if (member.success === false) {
       member = Member.objects.filter({
         username: fields.username,
-        platformId: fields.platformId
+        platformId: fields.platformId,
       })[0];
     }
 
     RepositoryHasMember.objects.create({
       repositoryId: this.id,
-      memberId: member.id
+      memberId: member.id,
     });
 
     return member as Member;
@@ -396,7 +396,7 @@ class Repository extends osm.models.RepositorySO implements IRepository {
   getMembers(): Member[] {
     let members = RepositoryHasMember.objects.filter(
       {
-        repositoryId: this.id
+        repositoryId: this.id,
       },
       Member
     );
@@ -411,7 +411,9 @@ class Repository extends osm.models.RepositorySO implements IRepository {
    * @description Get the analysis of all language data of this repository.
    */
   getLanguages(): Language[] {
-    let response = Language.objects.custom(Language.statements.byRepository(this.id)) as Language[];
+    let response = Language.objects.custom(
+      Language.statements.byRepository(this.id)
+    ) as Language[];
 
     return response;
   }
@@ -420,7 +422,7 @@ class Repository extends osm.models.RepositorySO implements IRepository {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -439,7 +441,7 @@ class RepositoryHasMember extends osm.models.RepositoryHasMemberSO {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -475,8 +477,10 @@ class Language extends osm.models.LanguageSO implements ILanguage {
    * @description Get a language analysis of all language data.
    */
   static getLanguages(): Language[] {
-    let response = this.objects.custom(Language.statements.merged) as Language[];
-  
+    let response = this.objects.custom(
+      Language.statements.merged
+    ) as Language[];
+
     response = response.map((entry) => {
       return new Language(entry);
     });
@@ -488,7 +492,7 @@ class Language extends osm.models.LanguageSO implements ILanguage {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -507,7 +511,7 @@ class PlatformHasRepository extends osm.models.PlatformHasRepositorySO {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -547,19 +551,19 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
       url: fields.url,
       fullname: fields.fullname,
       username: fields.username,
-      platformId: fields.platformId
+      platformId: fields.platformId,
     });
 
     if (member.success === false) {
       member = Member.objects.filter({
         username: fields.username,
-        platformId: fields.platformId
+        platformId: fields.platformId,
       })[0];
     }
 
     OrganizationHasMember.objects.create({
       organizationId: this.id,
-      memberId: member.id
+      memberId: member.id,
     });
 
     return member as Member;
@@ -574,7 +578,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
   getMembers(): Member[] {
     let members = OrganizationHasMember.objects.filter(
       {
-        organizationId: this.id
+        organizationId: this.id,
       },
       Member
     );
@@ -590,7 +594,11 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
    */
   getRepositories(): Repository[] {
     let filterStatement = Repository.statements.withOwner;
-    let response = this.objects.filter({ owner: this.name}, Repository, filterStatement);
+    let response = this.objects.filter(
+      { owner: this.name },
+      Repository,
+      filterStatement
+    );
 
     return response as Repository[];
   }
@@ -599,7 +607,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -617,7 +625,7 @@ class OrganizationHasMember extends osm.models.OrganizationHasMemberSO {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -636,7 +644,7 @@ class PlatformHasOrganization extends osm.models.PlatformHasOrganizationSO {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -713,7 +721,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
 
     return {
       from,
-      to
+      to,
     };
   }
 
@@ -728,7 +736,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
       let { from, to } = this.getDates();
       let response = Calendar.getDaysBetweenDate({
         from,
-        to
+        to,
       });
 
       response = helper.statistic.calculateStreaks(response);
@@ -760,7 +768,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
       endDate: "-",
       totalDays: 0,
       totalContributions: 0,
-      statisticId: 0
+      statisticId: 0,
     });
 
     streaks.forEach((streak) => {
@@ -775,7 +783,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
 
     return {
       longest,
-      current
+      current,
     };
   }
 
@@ -791,7 +799,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
       let { from, to } = this.getDates();
       let response = Calendar.getBusiestDay({
         from,
-        to
+        to,
       });
 
       if (response) {
@@ -806,7 +814,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
       id: -1,
       date: "",
       total: 0,
-      platformId: -1
+      platformId: -1,
     });
   }
 
@@ -840,7 +848,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -869,12 +877,11 @@ class Streak extends osm.models.StreakSO implements IStreak {
     this.statisticId = args["statisticId"];
   }
 
-    
   /**
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -912,7 +919,7 @@ class Calendar extends osm.models.CalendarSO implements ICalendar {
       datetime: fields.datetime,
       nameWithOwner: fields.nameWithOwner,
       type: fields.type,
-      calendarId: this.id
+      calendarId: this.id,
     });
 
     return contribution as Contribution;
@@ -922,7 +929,7 @@ class Calendar extends osm.models.CalendarSO implements ICalendar {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 
 /**
@@ -955,7 +962,7 @@ class Contribution extends osm.models.ContributionSO implements IContribution {
    * @todo
    * @description Saves this osm model.
    */
-  save() { }
+  save() {}
 }
 //#endregion
 

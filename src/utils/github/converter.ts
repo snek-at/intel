@@ -28,7 +28,7 @@ function run(rawData: any) {
     createdAt: rawData.profile.createdAt,
     location: rawData.profile.location,
     statusMessage: rawData.profile.status.message,
-    statusEmojiHTML: rawData.profile.status.emojiHTML
+    statusEmojiHTML: rawData.profile.status.emojiHTML,
   });
 
   rawData.profile.organizations.edges.forEach((edge: any) => {
@@ -36,7 +36,7 @@ function run(rawData: any) {
       avatarUrl: edge.node.avatarUrl,
       url: edge.node.url,
       name: edge.node.login,
-      fullname: edge.node.name
+      fullname: edge.node.name,
     });
 
     edge.node.membersWithRole.nodes.forEach((node: any) => {
@@ -45,7 +45,7 @@ function run(rawData: any) {
         url: node.url,
         fullname: node.name,
         username: node.login,
-        platformId: platform.id
+        platformId: platform.id,
       });
     });
   });
@@ -69,7 +69,7 @@ function run(rawData: any) {
               // Insert Calendar days
               platform.createCalendarEntry({
                 date: moment(day.date).format("YYYY-MM-DD"),
-                total: day.contributionCount
+                total: day.contributionCount,
               });
             }
           });
@@ -100,7 +100,7 @@ function run(rawData: any) {
         totalRepositoriesWithContributedCommits:
           year.totalRepositoriesWithContributedCommits,
         totalRepositoriesWithContributedPullRequests:
-          year.totalRepositoriesWithContributedPullRequests
+          year.totalRepositoriesWithContributedPullRequests,
       });
     }
   }
@@ -113,13 +113,13 @@ function run(rawData: any) {
       url: node.owner.url,
       fullname: node.owner.login, // Fullname is not present
       username: node.owner.login,
-      platformId: platform.id
+      platformId: platform.id,
     });
 
     if (owner.success === false) {
       owner = models.Member.objects.filter({
         username: node.owner.login,
-        platformId: platform.id
+        platformId: platform.id,
       })[0];
     }
 
@@ -127,7 +127,7 @@ function run(rawData: any) {
       avatarUrl: node.openGraphImageUrl,
       url: node.url,
       name: node.nameWithOwner,
-      ownerId: owner.id
+      ownerId: owner.id,
     });
 
     node.assignableUsers.nodes.forEach((member: any) => {
@@ -136,7 +136,7 @@ function run(rawData: any) {
         url: member.url,
         fullname: member.name,
         username: member.login,
-        platformId: platform.id
+        platformId: platform.id,
       });
     });
 
@@ -144,7 +144,7 @@ function run(rawData: any) {
       repository.createLanguage({
         color: edge.node.color,
         name: edge.node.name,
-        size: edge.size
+        size: edge.size,
       });
     });
   });

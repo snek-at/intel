@@ -21,7 +21,7 @@ class Reducer {
       profile: helper.profile.mergedProfile(),
       calendar: helper.calendar.mergedCalendar(),
       statistic: helper.statistic.mergedStatistic(),
-      language: helper.language.mergedLanguage()
+      language: helper.language.mergedLanguage(),
     };
   }
 }

@@ -116,7 +116,7 @@ interface IGitHubData {
 export class Intel implements IIntel {
   public snekclient: SnekClient;
   private reducer: Reducer;
-  
+
   /**
    * @constructor
    * @author Nico Schett <contact@schett.net>

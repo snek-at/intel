@@ -68,7 +68,6 @@ const merged = `
 `;
 //#endregion
 
-
 //#region > Exports
 export { initialize, create, get, all, byRepository, merged };
 //#endregion

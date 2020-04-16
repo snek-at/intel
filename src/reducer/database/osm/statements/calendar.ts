@@ -82,7 +82,7 @@ export {
   all,
   betweenDate,
   busiestDayBetweenDate,
-  dayByDate
+  dayByDate,
 };
 //#endregion
 

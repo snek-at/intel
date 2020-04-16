@@ -31,15 +31,15 @@ interface IStatistic extends models.Statistic {
     issue: number;
     pullRequest: number;
     pullRequestReview: number;
-  }
+  };
   /**
-   * Streaks: A object which contains longest, current and a list of streaks. 
+   * Streaks: A object which contains longest, current and a list of streaks.
    */
   streak: {
     longest: models.Streak;
     current: models.Streak;
     streaks: models.Streak[];
-  }
+  };
 }
 //#endregion
 
@@ -50,9 +50,9 @@ interface IStatistic extends models.Statistic {
  * @returns A statistic object.
  * @description Returns a object containing e.g busiest day and streaks of current and each year.
  */
-function mergedStatistic() : IStatisticResponse {
+function mergedStatistic(): IStatisticResponse {
   let statistic = models.Statistic.getMerged() as IStatistic[];
-  
+
   let currentYear: IStatistic | null = null;
   let yearsList: IStatistic[] = [];
 
@@ -66,7 +66,7 @@ function mergedStatistic() : IStatisticResponse {
     entry.streak = {
       longest,
       current,
-      streaks
+      streaks,
     };
     entry.contributions = entry.getContributions();
     entry.busiestDay = entry.getBusiestDay();
@@ -84,12 +84,12 @@ function mergedStatistic() : IStatisticResponse {
     }
   });
 
-  return {current: currentYear, years: yearsList};
+  return { current: currentYear, years: yearsList };
 }
 //#endregion
 
 //#region > Exports
-export type { IStatisticResponse, IStatistic }
+export type { IStatisticResponse, IStatistic };
 export { mergedStatistic };
 //#endregion
 

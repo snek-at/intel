@@ -34,24 +34,23 @@ interface IDay {
  * @description Generates a calendar object containing empty days from startDate to endDate.
  */
 function generateCalendarStructure(startDate: string, endDate: string) {
-  let weeks: IWeek[] = [{days: []}];
+  let weeks: IWeek[] = [{ days: [] }];
 
   for (
     let m = moment(startDate);
-
     m.diff(endDate, "days") <= 0;
     m.add(1, "days")
   ) {
     if (weeks[weeks.length - 1].days.length > 6) {
       weeks.push({
-        days: []
+        days: [],
       });
     }
 
     let day: IDay = {
       date: m.format("YYYY-MM-DD"),
       color: "#ffffff",
-      total: 0
+      total: 0,
     };
 
     weeks[weeks.length - 1].days.push(day);

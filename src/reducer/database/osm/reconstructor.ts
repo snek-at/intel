@@ -54,7 +54,7 @@ class SOAssembler {
     } catch (err) {
       return {
         success: false,
-        message: err.message
+        message: err.message,
       };
     }
   }
@@ -83,7 +83,7 @@ class SOAssembler {
     } catch (err) {
       return {
         success: false,
-        message: err.message
+        message: err.message,
       };
     }
   }
@@ -109,7 +109,7 @@ class SOAssembler {
     } catch (err) {
       return {
         success: false,
-        message: err.message
+        message: err.message,
       };
     }
   }
@@ -134,7 +134,12 @@ class SOAssembler {
         if ({}.hasOwnProperty.call(response, entry)) {
           for (let f in filter) {
             if ({}.hasOwnProperty.call(filter, f)) {
-              /** Proxy to neutralize Generic Object Injection Sink */
+              /** 
+               * Proxy to neutralize Generic Object Injection Sink.
+               * @todo Validate the proxy workaround for the injection vulnerability via a penetration test.
+               * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
+               * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
+               */
               var eProxy = new Proxy(
                 { entry },
                 {
@@ -144,7 +149,12 @@ class SOAssembler {
                 }
               );
 
-              /** Proxy to neutralize Generic Object Injection Sink */
+              /** 
+               * Proxy to neutralize Generic Object Injection Sink.
+               * @todo Validate the proxy workaround for the injection vulnerability via a penetration test.
+               * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
+               * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
+               */
               var fProxy = new Proxy(
                 { f },
                 {
@@ -185,7 +195,7 @@ class SOAssembler {
       return {
         success: false,
         response: null,
-        message: err.message
+        message: err.message,
       };
     }
   }
@@ -209,7 +219,7 @@ class SOAssembler {
     } catch (err) {
       return {
         success: false,
-        message: err.message
+        message: err.message,
       };
     }
   }

@@ -110,7 +110,7 @@ export {
   commitContributionsOfYear,
   issueContributionsOfYear,
   pullRequestContributionsOfYear,
-  pullRequestReviewContributionsOfYear
+  pullRequestReviewContributionsOfYear,
 };
 //#endregion
 
