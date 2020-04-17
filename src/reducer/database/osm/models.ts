@@ -126,6 +126,15 @@ abstract class PlatformSO extends BaseSO {
     )[0];
   }
 
+  /**
+   * @static
+   * @description Get a list of source types and its total.
+   * @returns {object[]} A object list containing source types.
+   */
+  static getSourceTypes() {
+    return SOAssembler.database.exec(PlatformSO.statements.getSourceTypes);
+  }
+
   //> Abstract Methods
   /**
    * @param fields Repository data.

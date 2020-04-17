@@ -11,6 +11,10 @@ import * as models from "../database/models";
  */
 interface IPlatform extends models.Platform {
   /**
+   * Sources: A list of objects.
+   */
+  sources: object[];
+  /**
    * Repositories: A list of repository objects.
    */
   repositories: IRepository[];
@@ -67,6 +71,7 @@ function mergedProfile() {
   let repositories = models.Repository.objects.all() as IRepository[];
   let organizations = models.Organization.objects.all() as IOrganization[];
 
+  platform.sources = models.Platform.getSourceTypes();
   platform.repositories = repositories.map((repository) => {
     repository.owner = (models.Member.objects.get({
       id: repository.ownerId,
