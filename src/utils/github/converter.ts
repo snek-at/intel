@@ -123,8 +123,7 @@ function run(rawData: any) {
 
     if (owner.success === false) {
       owner = models.Member.objects.filter({
-        username: node.owner.login,
-        platformId: platform.id,
+        url: node.owner.url,
       })[0];
     }
 

@@ -360,8 +360,7 @@ class Repository extends osm.models.RepositorySO implements IRepository {
 
     if (member.success === false) {
       member = Member.objects.filter({
-        username: fields.username,
-        platformId: fields.platformId,
+        url: fields.url,
       })[0];
     }
 
@@ -559,8 +558,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
 
     if (member.success === false) {
       member = Member.objects.filter({
-        username: fields.username,
-        platformId: fields.platformId,
+        url: fields.url,
       })[0];
     }
 
@@ -710,7 +708,6 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    * @returns {object} A object with from and to date.
    * @description Get the correct from and to date. The calculation
    *              is based of wether this statistic is the current year or not.
-   *  
    */
   getDates() {
     let from, to;
