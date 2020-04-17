@@ -2,12 +2,14 @@
 //> Moment
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
-import moment from "moment";
+import moment, { Moment } from "moment";
 //#endregion
 
 //#region > Interfaces
 /** @interface Calendar defines the structure of the calendar object. */
 interface ICalendar {
+  startDate: Moment;
+  endDate: Moment;
   weeks: IWeek[];
 }
 
@@ -38,7 +40,6 @@ function generateCalendarStructure(startDate: string, endDate: string) {
 
   for (
     let m = moment(startDate);
-
     m.diff(endDate, "days") <= 0;
     m.add(1, "days")
   ) {
@@ -57,7 +58,11 @@ function generateCalendarStructure(startDate: string, endDate: string) {
     weeks[weeks.length - 1].days.push(day);
   }
 
-  let calendar = { weeks } as ICalendar;
+  let calendar = {
+    startDate: moment(startDate),
+    endDate: moment(endDate),
+    weeks,
+  } as ICalendar;
 
   return calendar;
 }
