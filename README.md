@@ -25,6 +25,8 @@ This repository serves as an entry point for future packages of the SNEK team.
 
 ## Table of contents
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0224ced616347beb703d9330867b5d5)](https://app.codacy.com/gh/snek-at/intel?utm_source=github.com&utm_medium=referral&utm_content=snek-at/intel&utm_campaign=Badge_Grade_Dashboard)
+
 - [Table of contents](#table-of-contents)
 - [Quick start](#quick-start)
 - [Status](#status)
