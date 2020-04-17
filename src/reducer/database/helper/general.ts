@@ -2,6 +2,7 @@
 /**
  * Reduce object fields by using a list of keys.
  *
+ * @todo Implement a way to remove objects/arrays from a object.
  * @param obj A object to squeeze.
  * @param keys A list of object keys to filter by.
  * @returns {object} The filtered object.
