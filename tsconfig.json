@@ -19,8 +19,6 @@
     /* Disallow inconsistently-cased references to the same file. */
     "forceConsistentCasingInFileNames": true
   },
-  /* The files to type check. */
-  "include": ["src/*/*"],
   /* The files to not type check. */
   "exclude": ["node_modules", "build"]
 }
