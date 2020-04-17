@@ -29,7 +29,7 @@ interface IScrapedData {
   };
 }
 
-/** @interfaces CalendarDays defines the data structur for the calendar. */
+/** @interfaces CalendarDays defines the data structure for the calendar. */
 interface CalendarDays {
   [date: string]: {
     contributions: {
@@ -54,7 +54,7 @@ interface Statistic {
 //#region > Functions
 /**
  * Converter for data from the scraper.
- *
+ * @function
  * @param rawData Data to be processed. Must fit IScrapedData format.
  * @description Fill the database with data provided by "rawData".
  */
@@ -123,7 +123,7 @@ function runScraper(rawData: IScrapedData) {
   if (groupList) {
     for (let index = 0; index < groupList.length; index++) {
       const element = groupList[index];
-      /* Select avatar. Set null if no image is set */
+      /* Select avatar. Set to null if no image is set */
       let avatarUrl = element
         .getElementsByClassName("avatar-container")[0]
         .getElementsByTagName("img")[0]
@@ -167,7 +167,7 @@ function runScraper(rawData: IScrapedData) {
   if (projectsList) {
     for (let index = 0; index < projectsList.length; index++) {
       const element = projectsList[index];
-      /* Select avatar. Set null if no image is set */
+      /* Select avatar. Set to null if no image is set */
       let avatarUrl = element
         .getElementsByClassName("avatar-container")[0]
         .getElementsByTagName("img")[0]
@@ -197,7 +197,7 @@ function runScraper(rawData: IScrapedData) {
     }
   }
 
-  /* Extract activity list from from rawData.activity */
+  /* Extract activity list from rawData.activity */
   let events = new DOMParser().parseFromString(
     rawData.activity.html,
     "text/html"
@@ -207,7 +207,7 @@ function runScraper(rawData: IScrapedData) {
   let days: CalendarDays = {};
   let stats: Statistic = {};
 
-  /* Check whether there are contributions(events) or not */
+  /* Check whether there are contributions/events or not */
   if (eventList) {
     /*
       Loop trough every item in the event list.
@@ -252,8 +252,10 @@ function runScraper(rawData: IScrapedData) {
         ?.getElementsByTagName("span")[0].innerText;
 
       let contributionCount = 1;
+
       if (moreCommitText) {
         let moreCommitsCount = moreCommitText.match(/\d/g)?.join("");
+
         if (moreCommitsCount) {
           contributionCount += parseInt(moreCommitsCount);
         }
@@ -289,6 +291,7 @@ function runScraper(rawData: IScrapedData) {
                 [`${type}`]: {
                   [datetimeStr]: {
                     total: contributionCount,
+                    /* Remove "/" from name. E.g: /schettn to schettn */
                     name: name.slice(1),
                     repoUrl: platformUrl + name,
                   },
@@ -303,6 +306,7 @@ function runScraper(rawData: IScrapedData) {
               [`${type}`]: {
                 [datetimeStr]: {
                   total: contributionCount,
+                  /* Remove "/" from name. E.g: /schettn to schettn */
                   name: name.slice(1),
                   repoUrl: platformUrl + name,
                 },
@@ -331,7 +335,7 @@ function runScraper(rawData: IScrapedData) {
         total: days[date].total,
       });
 
-      /* Create contribution */
+      /* Create contributions */
       for (let type in days[date].contributions) {
         /* Create multiple contributions if they were contributed on the same datetime */
         for (let datetime in days[date].contributions[type]) {
