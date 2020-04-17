@@ -708,7 +708,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    * Get dates of statistic.
    * @returns {object} A object with from and to date.
    * @description Get the correct from and to date. The calculation
-   *              is based of wether this statistic is the current year or not.
+   *              is based on wether this statistic is the current year or not.
    */
   getDates() {
     let from, to;
