@@ -92,18 +92,18 @@ const calendar_fragment = (c: number, fromYear: string, toYear: string) => `
       }
     }
     commitContributionsByRepository {
-      ${contribution_by_repository_fragment}
+      ${contributionByRepositoryFragment}
     }
     issueContributionsByRepository {
-      ${contribution_by_repository_fragment}
+      ${contributionByRepositoryFragment}
     }
     pullRequestContributionsByRepository {
-      ${contribution_by_repository_fragment}
+      ${contributionByRepositoryFragment}
     }
   }
 `;
 
-const contribution_by_repository_fragment = `
+const contributionByRepositoryFragment = `
   repository {
     openGraphImageUrl
     name

@@ -33,8 +33,11 @@ import * as helper from "../helper";
 //#endregion
 
 //#region > Classes
-/** @class A basic statement object class which provides access
- *         to the SOAssembler and squeezer. */
+/**
+ * @abstract
+ * @class A basic statement object class which provides access
+ *        to the SOAssembler and squeezer. 
+ */
 abstract class BaseSO {
   //> Static Fields
   /**
