@@ -31,9 +31,11 @@
   "dependencies": {
     "alasql": "^0.5.5",
     "moment": "^2.24.0",
-    "snek-client": "1.0.0"
+    "snek-client": "1.0.0",
     "typescript": "^3.8.3"
   },
   "devDependencies": {},
-  "prettier": { "arrowParens": "always" }
+  "prettier": {
+    "arrowParens": "always"
+  }
 }
