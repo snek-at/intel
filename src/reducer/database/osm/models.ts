@@ -29,9 +29,6 @@ import * as helper from "../helper";
  *      examples.
  */
 
-//#region > Interfaces
-//#endregion
-
 //#region > Classes
 /**
  * @abstract
@@ -59,7 +56,7 @@ abstract class BaseSO {
   //> Abstract Methods
   /**
    * @returns {Boolean} A check if the database write process was successful.
-   * @description Writes the statement object to the databse.
+   * @description Writes the statement object to the database.
    */
   abstract save(): void;
 
@@ -348,7 +345,7 @@ abstract class RepositorySO extends BaseSO {
   //    *                objects.all()
   //    *
   //    * @see {@link https://bit.ly/34GtpX3 |SNEK Reconstructor} for further
-  //    *       information.
+  //    *      information.
   //    */
   //   public static objects = PlatformSO.getObjects(RepositoryModel);
 

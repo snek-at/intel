@@ -278,7 +278,7 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
   }
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -311,7 +311,7 @@ class Member extends osm.models.MemberSO {
   }
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -419,7 +419,7 @@ class Repository extends osm.models.RepositorySO implements IRepository {
   }
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -438,7 +438,7 @@ class RepositoryHasMember extends osm.models.RepositoryHasMemberSO {
   public id = 0;
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -489,7 +489,7 @@ class Language extends osm.models.LanguageSO implements ILanguage {
   }
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -508,7 +508,7 @@ class PlatformHasRepository extends osm.models.PlatformHasRepositorySO {
   public objects = PlatformHasRepository.objects;
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -604,7 +604,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
   }
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -622,7 +622,7 @@ class OrganizationHasMember extends osm.models.OrganizationHasMemberSO {
   public id = 0;
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -641,7 +641,7 @@ class PlatformHasOrganization extends osm.models.PlatformHasOrganizationSO {
   public id = 0;
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -844,7 +844,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
   }
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -877,7 +877,7 @@ class Streak extends osm.models.StreakSO implements IStreak {
   }
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -925,7 +925,7 @@ class Calendar extends osm.models.CalendarSO implements ICalendar {
   }
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
@@ -958,7 +958,7 @@ class Contribution extends osm.models.ContributionSO implements IContribution {
   }
 
   /**
-   * @todo Implement the save functionality.
+   * @todo Implement a save functionality.
    * @description Saves this osm model.
    */
   save() {}
