@@ -72,7 +72,7 @@ const calendar = (fragments: string) => gql`
 `;
 
 // Fragments
-const calendar_fragment = (c: number, fromYear: string, toYear: string) => `
+const calendarFragment = (c: number, fromYear: string, toYear: string) => `
   calendarT${c}: contributionsCollection(from:"${fromYear}", to:"${toYear}" ){
     totalIssueContributions
     totalCommitContributions
@@ -139,7 +139,7 @@ const contributionByRepositoryFragment = `
 //#endregion
 
 //#region > Exports
-export { profile, calendar, calendar_fragment };
+export { profile, calendar, calendarFragment };
 //#endregion
 
 /**
