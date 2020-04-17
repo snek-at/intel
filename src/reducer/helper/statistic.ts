@@ -2,6 +2,9 @@
 //> Models
 // Contains all models of the database.
 import * as models from "../database/models";
+//> Interfaces
+//> Contains the share interface for the languages.
+import { Share } from "../database/osm/models";
 //#endregion
 
 //#region > Interfaces
@@ -27,10 +30,11 @@ interface IStatistic extends models.Statistic {
    * Contributions: A object with contribution types and their total.
    */
   contributions: {
-    commit: number;
-    issue: number;
-    pullRequest: number;
-    pullRequestReview: number;
+    commit: Share;
+    issue: Share;
+    pullRequest: Share;
+    pullRequestReview: Share;
+    total: number;
   };
   /**
    * Streaks: A object which contains longest, current and a list of streaks.

@@ -9,6 +9,7 @@ import * as osm from "./osm";
 //> Helper
 // Contains helper functions for the models.
 import * as helper from "./helper";
+import { Share } from "./osm/models";
 //#endregion
 
 //#region > Interfaces
@@ -825,12 +826,8 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    */
   getContributions() {
     let response = Statistic.getContributions(this);
-
-    if (response) {
-      return response;
-    }
-
-    return { commit: 0, issue: 0, pullRequest: 0, pullRequestReview: 0 };
+    
+    return response;
   }
 
   /**
