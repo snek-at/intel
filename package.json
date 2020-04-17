@@ -4,10 +4,15 @@
   "private": true,
   "homepage": "http://snek.at",
   "license": "EUPL-1.2",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/snek-at/intel.git"
   },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
@@ -26,13 +31,19 @@
   "bugs": {
     "url": "https://github.com/snek-at/intel/issues"
   },
-  "main": "src/index.js",
   "author": "schettn",
   "dependencies": {
     "alasql": "^0.5.5",
-    "react-scripts": "^3.3.1",
-    "snek-client": "1.0.0"
+    "apollo-boost": "^0.4.7",
+    "graphql": "^14.6.0",
+    "moment": "^2.24.0",
+    "react-scripts": "^3.4.1",
+    "snek-client": "file:../client"
   },
-  "devDependencies": {},
-  "prettier": { "arrowParens": "always" }
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
+  "prettier": {
+    "arrowParens": "always"
+  }
 }
