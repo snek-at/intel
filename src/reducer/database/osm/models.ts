@@ -254,7 +254,7 @@ abstract class MemberSO extends BaseSO {
   //    */
   //    constructor(fields: MemberFields){
   //      super();
-
+  //
   //      this.id = fields.id;
   //    }
 
