@@ -2,9 +2,14 @@
 //> Models
 // Contains all models of the database.
 import * as models from "../database/models";
+//> Helper
+// Contains all calendar helper functions
+import * as helper from "./index";
 //> Interfaces
-//> Contains the share interface for the languages.
+//> Contains the share interface for the languages
 import { Share } from "../database/osm/models";
+// Contains the contribution calendar structure
+import { ICalendar } from "../database/helper/calendar";
 //#endregion
 
 //#region > Interfaces
@@ -18,6 +23,10 @@ interface IStatisticResponse {
    * Years: A list of statistic year objects.
    */
   years: IStatistic[];
+  /**
+   * Languages: A list of language objects.
+   */
+  languages: models.Language[];
 }
 
 /** @interface Statistic defines the structure of statistic object. */
@@ -44,6 +53,10 @@ interface IStatistic extends models.Statistic {
     current: models.Streak;
     streaks: models.Streak[];
   };
+  /*
+    Calendar: A contribution calendar in day format. 
+  */
+  calendar: ICalendar;
 }
 //#endregion
 
@@ -81,14 +94,24 @@ function mergedStatistic(): IStatisticResponse {
 
     entry.render([]);
 
+    /* Get merged calendar which contains the current and a list of years */
+    let calendar = helper.calendar.mergedCalendar();
+
     if (entry.year === 0) {
+      /* Integrate a calendar year to the current statistic year */
+      entry.calendar = calendar.current;
       currentYear = entry;
     } else {
+      /* Integrate a calendar year to the corresponding statistic year */
+      entry.calendar = calendar.years[yearsList.length];
       yearsList.push(entry);
     }
   });
 
-  return { current: currentYear, years: yearsList };
+  /* Get the merged languages which contains a list of language object */
+  const languages = helper.language.mergedLanguage();
+
+  return { current: currentYear, years: yearsList, languages };
 }
 //#endregion
 
