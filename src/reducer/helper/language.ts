@@ -28,5 +28,5 @@ export { mergedLanguage };
 
 /**
  * SPDX-License-Identifier: (EUPL-1.2)
- * Copyright © Simon Prast
+ * Copyright © 2019-2020 Simon Prast
  */
