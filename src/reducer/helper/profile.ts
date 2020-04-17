@@ -26,6 +26,10 @@ interface IPlatform extends models.Platform {
  */
 interface IRepository extends models.Repository {
   /**
+   * Owner: A member object.
+   */
+  owner: models.Member;
+  /**
    * Members: A list of member objects.
    */
   members: models.Member[];
@@ -64,6 +68,9 @@ function mergedProfile() {
   let organizations = models.Organization.objects.all() as IOrganization[];
 
   platform.repositories = repositories.map((repository) => {
+    repository.owner = (models.Member.objects.get({
+      id: repository.ownerId,
+    }) as models.Member).render([]);
     repository.members = repository.getMembers().map((member) => {
       return member.render([]);
     });
@@ -80,8 +87,16 @@ function mergedProfile() {
     });
 
     let repositories = organization.getRepositories() as IRepository[];
+    /* 
+       Set the organization as owner for each repository within
+       the organization. To render a organization as a member
+       a list of member keys to render by is defined.
+    */
+    let owner = organization.render(["avatarUrl", "url", "fullname", "name"]);
 
     organization.repositories = repositories.map((repository) => {
+      /* Pass the organization to member format */
+      repository.owner = owner;
       repository.members = repository.getMembers().map((member) => {
         return member.render([]);
       });
