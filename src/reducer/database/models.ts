@@ -65,6 +65,7 @@ interface IOrganization {
   url: string;
   name: string;
   fullname: string;
+  description: string;
 }
 
 /** @interface Statistic defines the structure of the statistic model. */
@@ -527,6 +528,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
   public url = "";
   public name = "";
   public fullname = "";
+  public description = "";
 
   constructor(args: IOrganization) {
     super();
@@ -536,6 +538,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
     this.url = args["url"];
     this.name = args["name"];
     this.fullname = args["fullname"];
+    this.description = args["description"];
   }
 
   /**

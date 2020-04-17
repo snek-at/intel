@@ -37,6 +37,7 @@ function run(rawData: any) {
       url: edge.node.url,
       name: edge.node.login,
       fullname: edge.node.name,
+      description: edge.node.description,
     });
 
     edge.node.membersWithRole.nodes.forEach((node: any) => {

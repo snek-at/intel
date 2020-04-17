@@ -7,6 +7,7 @@ const initialize = `
     url VARCHAR(2048) NOT NULL,
     name VARCHAR(80) NOT NULL,
     fullname VARCHAR(80) NOT NULL,
+    description VARCHAR(255),
     UNIQUE(url),
     PRIMARY KEY (id)
   );
@@ -17,9 +18,10 @@ const create = `
     avatarUrl,
     url,
     name,
-    fullname
+    fullname,
+    description
   )
-  VALUES (?,?,?,?);
+  VALUES (?,?,?,?,?);
 `;
 
 const get = `

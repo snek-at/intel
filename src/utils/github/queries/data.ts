@@ -36,6 +36,7 @@ const profile = () => gql`
             url
             avatarUrl
             name
+            description
             membersWithRole(first: 100) {
               totalCount
               nodes {
