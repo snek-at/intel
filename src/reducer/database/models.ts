@@ -705,8 +705,9 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
   /**
    * Get dates of statistic.
    * @returns {object} A object with from and to date.
-   * @description Get the correct from and to date.
-   * The calculation is based of wether this statistic is the current year or not.
+   * @description Get the correct from and to date. The calculation
+   *              is based of wether this statistic is the current year or not.
+   *  
    */
   getDates() {
     let from, to;
@@ -807,9 +808,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
       }
     }
 
-    /**
-     * Create empty calendar entry for busiest day if there is no real busiest day.
-     */
+    /* Create empty calendar entry for busiest day if there is no real busiest day */
     return new Calendar({
       id: -1,
       date: "",
@@ -821,8 +820,8 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
   /**
    * Get all contributions.
    *
-   * @returns {object} A contribtion type statistic object.
-   * @description Get a merged contribution over all platforms whithin this statstic year.
+   * @returns {object} A contribution type statistic object.
+   * @description Get a merged contribution over all platforms within this statistic year.
    */
   getContributions() {
     let response = Statistic.getContributions(this);

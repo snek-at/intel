@@ -141,9 +141,7 @@ export class Intel implements IIntel {
     try {
       if (platform === "github") {
         // Init github client
-        /**
-         * Use the default client url if none is provided.
-         */
+        /* Use the default client url if none is provided */
         let githubClient: GithubClient;
 
         if (source.platform.url) {

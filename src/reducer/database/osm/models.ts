@@ -26,7 +26,7 @@ import * as helper from "../helper";
  * Implementation examples of the statement objects defined below.
  *
  * @see {@link https://bit.ly/3eu58YP |SNEK Models} for implementation
- *       examples.
+ *      examples.
  */
 
 //#region > Interfaces
@@ -36,7 +36,7 @@ import * as helper from "../helper";
 /**
  * @abstract
  * @class A basic statement object class which provides access
- *        to the SOAssembler and squeezer. 
+ *        to the SOAssembler and squeezer.
  */
 abstract class BaseSO {
   //> Static Fields
@@ -44,6 +44,7 @@ abstract class BaseSO {
    * @static
    * @description Provides access to the SOAssembler to provide functionality
    *              like create, all, filter,...
+   *
    * @tutorial Usage: "public static objects =
    *                   StatementObject.getObjects(osmModel);"
    */
@@ -166,8 +167,9 @@ abstract class PlatformSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2KgKi0R |SNEK Reconstructor}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(PlatformModel);
 
@@ -178,8 +180,9 @@ abstract class PlatformSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/3eqFFPO |Platform SQL statements}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   constructor(fields: PlatformFields){
   //     super();
@@ -235,8 +238,9 @@ abstract class MemberSO extends BaseSO {
   //  /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2z7epWs |SNEK Reconstructor}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //  public static objects = PlatformSO.getObjects(MemberModel);
 
@@ -247,12 +251,13 @@ abstract class MemberSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/2VfhPiD |Member SQL statements} for further
-  //    *       information.
+  //    *      information.
   //    */
   //    constructor(fields: MemberFields){
   //      super();
-  
+
   //      this.id = fields.id;
   //    }
 
@@ -341,6 +346,7 @@ abstract class RepositorySO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/34GtpX3 |SNEK Reconstructor} for further
   //    *       information.
   //    */
@@ -353,8 +359,9 @@ abstract class RepositorySO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/2wOO5Qa |Repository SQL statements} for
-  //    *       further information.
+  //    *      further information.
   //    */
   //   constructor(fields: RepositoryFields){
   //     super();
@@ -410,8 +417,9 @@ abstract class RepositoryHasMemberSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor} for further
-  //    *       information.
+  //    *      information.
   //    */
   //   public static objects = PlatformSO.getObjects(RepositoryHasMemberModel);
 
@@ -422,8 +430,9 @@ abstract class RepositoryHasMemberSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/34LLjHN |RepositoryHasMember SQL statements}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   constructor(fields: RepositoryHasMemberFields){
   //     super();
@@ -480,8 +489,9 @@ abstract class LanguageSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor} for further
-  //    *       information.
+  //    *      information.
   //    */
   //   public static objects = PlatformSO.getObjects(LanguageModel);
 
@@ -493,8 +503,9 @@ abstract class LanguageSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //               modifying the initialize statement of the statement
   //               object!
+  //    *
   //    * @see {@link https://bit.ly/2K7zAd8 |Language SQL statements}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   constructor(fields: LanguageFields){
   //     super();
@@ -550,8 +561,9 @@ abstract class PlatformHasRepositorySO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor} for further
-  //    *       information.
+  //    *      information.
   //    */
   //   public static objects =
   //                          PlatformSO.getObjects(PlatformHasRepositoryModel);
@@ -563,6 +575,7 @@ abstract class PlatformHasRepositorySO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/3cAuD99 |PlatformHasRepository SQL
   //    *                                     statements} for further
   //    *                                     information.
@@ -646,8 +659,9 @@ abstract class OrganizationSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor} for further
-  //    *       information.
+  //    *      information.
   //    */
   //   public static objects = PlatformSO.getObjects(OrganizationModel);
 
@@ -658,8 +672,9 @@ abstract class OrganizationSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/2Ka0fGh |Organization SQL statements}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   constructor(fields: OrganizationFields){
   //     super();
@@ -715,8 +730,9 @@ abstract class OrganizationHasMemberSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   public static objects =
   //                          PlatformSO.getObjects(OrganizationHasMemberModel);
@@ -728,6 +744,7 @@ abstract class OrganizationHasMemberSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/34OKcY4 |OrganizationHasMember SQL
   //    *                                     statements} for further
   //    *                                     information.
@@ -788,8 +805,9 @@ abstract class PlatformHasOrganizationSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   public static objects =
   //                       PlatformSO.getObjects(PlatformHasOrganizationModel);
@@ -801,6 +819,7 @@ abstract class PlatformHasOrganizationSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/2VDx5Ve |PlatformHasOrganization SQL
   //    *                                     statements} for further
   //    *                                     information.
@@ -951,8 +970,9 @@ abstract class StatisticSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(StatisticModel);
 
@@ -963,8 +983,9 @@ abstract class StatisticSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/3aeo9Lr |Statistic SQL statements}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   constructor(fields: StatisticFields){
   //     super();
@@ -1019,8 +1040,9 @@ abstract class StreakSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(StreakModel);
 
@@ -1029,10 +1051,11 @@ abstract class StreakSO extends BaseSO {
   //    * Notice!: The NOT NULL fields are strictly required!
   //    * Also custom fields are possible too.
   //    * Notice!: Custom field cannot be saved in the database without
-  //    *          modifying the initialize statement of the statement 
+  //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/2yhpDY6 |Streak SQL statements}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   constructor(fields: StreakFields){
   //     super();
@@ -1118,6 +1141,7 @@ abstract class CalendarSO extends BaseSO {
    * @param dates From and to date.
    * @description Get a generated calendar containing days between from and to
    *              date.
+   *
    * @returns {object} A object containing a success and calendar data.
    */
   static getCalendar(dates: { from: string; to: string }) {
@@ -1185,8 +1209,9 @@ abstract class CalendarSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(CalendarModel);
 
@@ -1197,8 +1222,9 @@ abstract class CalendarSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/3clyGpB |Calendar SQL statements}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   constructor(fields: CalendarFields){
   //     super();
@@ -1253,8 +1279,9 @@ abstract class ContributionSO extends BaseSO {
   //   /**
   //    * General usage: objects.create({fields}), objects.filter({id=1}),
   //    *                objects.all()
+  //    *
   //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   public static objects = PlatformSO.getObjects(ContributionModel);
 
@@ -1265,8 +1292,9 @@ abstract class ContributionSO extends BaseSO {
   //    * Notice!: Custom field cannot be saved in the database without
   //    *          modifying the initialize statement of the statement
   //    *          object!
+  //    *
   //    * @see {@link https://bit.ly/2XGCIVu |Contribution SQL statements}
-  //    *       for further information.
+  //    *      for further information.
   //    */
   //   constructor(fields: ContributionFields){
   //     super();

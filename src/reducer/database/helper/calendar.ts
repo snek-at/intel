@@ -38,6 +38,7 @@ function generateCalendarStructure(startDate: string, endDate: string) {
 
   for (
     let m = moment(startDate);
+
     m.diff(endDate, "days") <= 0;
     m.add(1, "days")
   ) {
