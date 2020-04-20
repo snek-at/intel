@@ -96,8 +96,16 @@ function mergedProfile() {
      * Set the organization as owner for each repository within
      * the organization. To render a organization as a member
      * a list of member keys to render by is defined.
+     * Creating a new instance is required due to referencing issues.
      */
-    let owner = organization.render(["avatarUrl", "url", "fullname", "name"]);
+    let owner = {
+      ...organization.render(
+        /* Including the following field in the owner object */
+        ["avatarUrl", "url", "fullname", "name"],
+        /* Excluding the following field in the owner object */
+        ["repositories", "objects"]
+      ),
+    };
 
     organization.repositories = repositories.map((repository) => {
       /* Pass the organization to member format */
