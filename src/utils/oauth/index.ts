@@ -2,6 +2,7 @@
 //> RSA 
 // Contains authentication service
 import RSA from "react-very-simple-oauth";
+
 //> GithubProvider
 // Contains the github authentication provider
 import GithubProvider from './GithubProvider';

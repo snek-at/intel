@@ -1,10 +1,11 @@
 //#region > Imports
-//> Guid Generator
-// Contains a random guid generator
-import GuidGenerator from "../../toolbox/GuidGenerator";
 //> Interfaces
 // Contains the interfaces for the provider functions
 import { IProvider, ExtractedData } from "react-very-simple-oauth";
+
+//> Guid Generator
+// Contains a random guid generator
+import GuidGenerator from "../../toolbox/GuidGenerator";
 //> Config
 // Contains the values for the provider
 import Config from "./config.json";
@@ -15,7 +16,6 @@ import Config from "./config.json";
 const state = GuidGenerator();
 let providerConfig = Config.providers.github;
 let details = providerConfig.details.deploy;
-
 const GithubProvider: IProvider<boolean> = {
   /**
    * Builds authorization url
