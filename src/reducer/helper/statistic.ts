@@ -2,6 +2,14 @@
 //> Models
 // Contains all models of the database.
 import * as models from "../database/models";
+//> Helper
+// Contains all calendar helper functions
+import * as helper from "./index";
+//> Interfaces
+//> Contains the share interface for the languages
+import { Share } from "../database/osm/models";
+// Contains the contribution calendar structure
+import { ICalendar } from "../database/helper/calendar";
 //#endregion
 
 //#region > Interfaces
@@ -15,6 +23,10 @@ interface IStatisticResponse {
    * Years: A list of statistic year objects.
    */
   years: IStatistic[];
+  /**
+   * Languages: A list of language objects.
+   */
+  languages: models.Language[];
 }
 
 /** @interface Statistic defines the structure of statistic object. */
@@ -27,19 +39,38 @@ interface IStatistic extends models.Statistic {
    * Contributions: A object with contribution types and their total.
    */
   contributions: {
-    commit: number;
-    issue: number;
-    pullRequest: number;
-    pullRequestReview: number;
+    /** Commit: The share of commit contributions. */
+    commit: Share;
+    /** Issue: The share of issue contributions. */
+    issue: Share;
+    /** PullRequest: The share of pullRequest contributions. */
+    pullRequest: Share;
+    /** PullRequestReview: The share of pullRequestReview contributions. */
+    pullRequestReview: Share;
+    /**
+     * Total: The total amount of contributions. This is the sum of
+     *        all contribution type share object total fields.
+     */
+    total: number;
   };
   /**
    * Streaks: A object which contains longest, current and a list of streaks.
    */
   streak: {
+    /** 
+     * Longest: The streak with the longest difference between
+     *          startDate and endDate.
+     */
     longest: models.Streak;
+    /** Current: A streak which ends today. */
     current: models.Streak;
+    /** Streaks: A list of streak objects. */
     streaks: models.Streak[];
   };
+  /**
+   * Calendar: A contribution calendar in day format.
+   */
+  calendar: ICalendar;
 }
 //#endregion
 
@@ -77,14 +108,25 @@ function mergedStatistic(): IStatisticResponse {
 
     entry.render([]);
 
+    /* Get merged calendar which contains the current and a list of years */
+    let calendar = helper.calendar.mergedCalendar();
+
     if (entry.year === 0) {
+      /* Integrate a calendar year to the current statistic year */
+      entry.calendar = calendar.current;
       currentYear = entry;
     } else {
+      /* Integrate a calendar year to the corresponding statistic year */
+      entry.calendar = calendar.years[yearsList.length];
+
       yearsList.push(entry);
     }
   });
 
-  return { current: currentYear, years: yearsList };
+  /* Get the merged languages which contains a list of language object */
+  const languages = helper.language.mergedLanguage();
+
+  return { current: currentYear, years: yearsList, languages };
 }
 //#endregion
 

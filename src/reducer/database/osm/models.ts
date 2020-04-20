@@ -22,6 +22,20 @@ import * as contribution from "./statements/contribution";
 import * as helper from "../helper";
 //#endregion
 
+//#region > Interfaces
+/** @interface Share defines the structure of a contribution type share. */
+interface Share {
+  /**
+   * Size: The size of the share. E.g: 51.92%
+   */
+  size: number;
+  /**
+   * Total: The amount of contributions within a share.
+   */
+  total: number;
+}
+//#endregion
+
 /**
  * Implementation examples of the statement objects defined below.
  *
@@ -110,6 +124,15 @@ abstract class PlatformSO extends BaseSO {
     return SOAssembler.database.exec(
       PlatformSO.statements.lowestCreatedAtYear
     )[0];
+  }
+
+  /**
+   * @static
+   * @description Get a list of source types and its total.
+   * @returns {object[]} A object list containing source types.
+   */
+  static getSourceTypes() {
+    return SOAssembler.database.exec(PlatformSO.statements.getSourceTypes);
   }
 
   //> Abstract Methods
@@ -896,30 +919,53 @@ abstract class StatisticSO extends BaseSO {
    * @returns {object[]} A list of objects containing contribution data.
    */
   static getContributions(self: any) {
-    let response;
+    let response = null;
 
     if (!self.id) {
       response = {
         commit: SOAssembler.database.exec(
           StatisticSO.statements.commitContributionsOfYear,
           [self.year]
-        )[0] as number,
+        )[0] as Share,
         issue: SOAssembler.database.exec(
           StatisticSO.statements.issueContributionsOfYear,
           [self.year]
-        )[0] as number,
+        )[0] as Share,
         pullRequest: SOAssembler.database.exec(
           StatisticSO.statements.issueContributionsOfYear,
           [self.year]
-        )[0] as number,
+        )[0] as Share,
         pullRequestReview: SOAssembler.database.exec(
           StatisticSO.statements.pullRequestReviewContributionsOfYear,
           [self.year]
-        )[0] as number,
+        )[0] as Share,
+        total: 0,
       };
+
+      // Calculate the total contribution by summing up all types
+      response.total =
+        response.commit.total +
+        response.issue.total +
+        response.pullRequest.total +
+        response.pullRequestReview.total;
     }
 
-    return response;
+    if (response) {
+      return response;
+    }
+
+    const defaultShare: Share = {
+      total: 0,
+      size: 0,
+    };
+
+    return {
+      commit: defaultShare,
+      issue: defaultShare,
+      pullRequest: defaultShare,
+      pullRequestReview: defaultShare,
+      total: 0,
+    };
   }
 
   //> Abstract Methods
@@ -956,10 +1002,11 @@ abstract class StatisticSO extends BaseSO {
    *              in a statistic year.
    */
   abstract getContributions(): {
-    commit: number;
-    issue: number;
-    pullRequest: number;
-    pullRequestReview: number;
+    commit: Share;
+    issue: Share;
+    pullRequest: Share;
+    pullRequestReview: Share;
+    total: number;
   };
 
   //> Model Implementation Example
@@ -1335,6 +1382,7 @@ abstract class ContributionSO extends BaseSO {
 //#endregion
 
 //#region > Exports
+export type { Share };
 export {
   BaseSO,
   PlatformSO,

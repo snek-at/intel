@@ -9,6 +9,7 @@ import * as osm from "./osm";
 //> Helper
 // Contains helper functions for the models.
 import * as helper from "./helper";
+import { Share } from "./osm/models";
 //#endregion
 
 //#region > Interfaces
@@ -65,6 +66,7 @@ interface IOrganization {
   url: string;
   name: string;
   fullname: string;
+  description: string;
 }
 
 /** @interface Statistic defines the structure of the statistic model. */
@@ -359,8 +361,7 @@ class Repository extends osm.models.RepositorySO implements IRepository {
 
     if (member.success === false) {
       member = Member.objects.filter({
-        username: fields.username,
-        platformId: fields.platformId,
+        url: fields.url,
       })[0];
     }
 
@@ -527,6 +528,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
   public url = "";
   public name = "";
   public fullname = "";
+  public description = "";
 
   constructor(args: IOrganization) {
     super();
@@ -536,6 +538,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
     this.url = args["url"];
     this.name = args["name"];
     this.fullname = args["fullname"];
+    this.description = args["description"];
   }
 
   /**
@@ -556,8 +559,7 @@ class Organization extends osm.models.OrganizationSO implements IOrganization {
 
     if (member.success === false) {
       member = Member.objects.filter({
-        username: fields.username,
-        platformId: fields.platformId,
+        url: fields.url,
       })[0];
     }
 
@@ -706,8 +708,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    * Get dates of statistic.
    * @returns {object} A object with from and to date.
    * @description Get the correct from and to date. The calculation
-   *              is based of wether this statistic is the current year or not.
-   *  
+   *              is based on wether this statistic is the current year or not.
    */
   getDates() {
     let from, to;
@@ -825,12 +826,8 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    */
   getContributions() {
     let response = Statistic.getContributions(this);
-
-    if (response) {
-      return response;
-    }
-
-    return { commit: 0, issue: 0, pullRequest: 0, pullRequestReview: 0 };
+    
+    return response;
   }
 
   /**

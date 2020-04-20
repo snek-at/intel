@@ -37,6 +37,7 @@ function run(rawData: any) {
       url: edge.node.url,
       name: edge.node.login,
       fullname: edge.node.name,
+      description: edge.node.description,
     });
 
     edge.node.membersWithRole.nodes.forEach((node: any) => {
@@ -122,8 +123,7 @@ function run(rawData: any) {
 
     if (owner.success === false) {
       owner = models.Member.objects.filter({
-        username: node.owner.login,
-        platformId: platform.id,
+        url: node.owner.url,
       })[0];
     }
 

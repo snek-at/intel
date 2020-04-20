@@ -2,24 +2,33 @@
 //> Moment
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
-import moment from "moment";
+import moment, { Moment } from "moment";
 //#endregion
 
 //#region > Interfaces
 /** @interface Calendar defines the structure of the calendar object. */
 interface ICalendar {
+  /** StartDate: The date a calendar object starts with. */
+  startDate: Moment;
+  /** EndDate: The date a calendar object ends with. */
+  endDate: Moment;
+  /** Weeks: Contains a list of week objects. */
   weeks: IWeek[];
 }
 
 /** @interface Week defines the structure of the week object. */
 interface IWeek {
+  /** Days: Contains a list of day objects. */
   days: IDay[];
 }
 
 /** @interface Day defines the structure of the day object. */
 interface IDay {
+  /** Date: The date of a day object. */
   date: string;
+  /** Color: The color of a day object. */
   color: string;
+  /** Total: The total contribution amount of a day object. */
   total: number;
 }
 //#endregion
@@ -38,7 +47,6 @@ function generateCalendarStructure(startDate: string, endDate: string) {
 
   for (
     let m = moment(startDate);
-
     m.diff(endDate, "days") <= 0;
     m.add(1, "days")
   ) {
@@ -57,7 +65,11 @@ function generateCalendarStructure(startDate: string, endDate: string) {
     weeks[weeks.length - 1].days.push(day);
   }
 
-  let calendar = { weeks } as ICalendar;
+  let calendar = {
+    startDate: moment(startDate),
+    endDate: moment(endDate),
+    weeks,
+  } as ICalendar;
 
   return calendar;
 }

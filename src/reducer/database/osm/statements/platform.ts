@@ -59,10 +59,19 @@ const lowestCreatedAtYear = `
   FROM
     platform
 `;
+
+const getSourceTypes = `
+  SELECT
+    platformName as source,
+    count(platformName) as total
+  FROM
+    platform
+  GROUP BY platformName
+`;
 //#endregion
 
 //#region > Exports
-export { initialize, create, get, all, lowestCreatedAtYear };
+export { initialize, create, get, all, lowestCreatedAtYear, getSourceTypes };
 //#endregion
 
 /**

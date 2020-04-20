@@ -8,7 +8,7 @@ const initialize = `
     fullname VARCHAR(80) NULL,
     username VARCHAR(80) NOT NULL,
     platformId INT NOT NULL REFERENCES platform (id),
-    UNIQUE(username, platformId),
+    UNIQUE(url),
     PRIMARY KEY (id)
   );
 `;
