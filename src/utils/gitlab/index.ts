@@ -2,7 +2,7 @@
 //> Paths
 // Contains all path variables
 import * as paths from "./paths";
-//> Convertor
+//> Converter
 // Contains all provided converters for GitLab data
 import * as converter from "./converter";
 //#endregion

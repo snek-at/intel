@@ -1,29 +1,46 @@
 //#region > Imports
-//> Models
-// Contains all reducer database models
-import * as models from "../../reducer/database/models";
 //> Moment
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
+
+//> Models
+// Contains all reducer database models
+import * as models from "../../reducer/database/models";
 //#endregion
 
 //#region > Interfaces
-/** @interfaces ScrapedData defines the data structure required for the converter. */
+/**
+ * @interfaces ScrapedData defines the data structure required
+ *             for the converter.
+ */
 interface IScrapedData {
+  /** Manually set platform information. */
   platform: {
     url: string;
     name: string;
   };
+  /** DOM data of a users profile page. */
   home: Document;
+  /**
+   * DOM data of a users news feed. Contains
+   * less contribution information than activity.
+   */
   atom?: Document;
+  /** Contribution calendar of a user. Contains only days of the current year. */
   currentCalendar: { [index: string]: number };
+  /** JSON data of a users groups */
   groups: {
     html: string;
   };
+  /** JSON data of a projects/repositories groups. */
   projects: {
     html: string;
   };
+  /**
+   *  JSON data of a users activity feed. Contains information about every
+   *  contribution.
+   */
   activity: {
     html: string;
   };
@@ -210,9 +227,9 @@ function runScraper(rawData: IScrapedData) {
   /* Check whether there are contributions/events or not */
   if (eventList) {
     /*
-      Loop trough every item in the event list.
-      Extract contribution data from element.
-    */
+     * Loop trough every item in the event list.
+     * Extract contribution data from element.
+     */
     for (let index = 0; index < eventList.length; index++) {
       const element = eventList[index];
       /* Define the contribution types */
