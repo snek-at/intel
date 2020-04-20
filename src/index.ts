@@ -30,7 +30,8 @@ import { IProfile } from "./utils/github/queries/index";
 /** @interface Intel defines the structure of the intel class. */
 interface IIntel {
   /**
-   * Snekclient: A client implementation for snek interaction from the "snek-client" package.
+   * Snekclient: A client implementation for snek interaction from the
+   *             "snek-client" package.
    */
   snekclient: SnekClient;
   /**
@@ -38,7 +39,8 @@ interface IIntel {
    * @function
    * @param {ISource} source A source object.
    * @returns {Promise<void>} Empty promise for conformation of completion.
-   * @description Append data to the database based on the information in a source object.
+   * @description Append data to the database based on the information in
+   *              a source object.
    */
   append(source: ISource): Promise<void>;
   /**
@@ -78,25 +80,33 @@ interface ISource {
   authorization: string;
 }
 
-/** @interface DataUser defines the structure of the reponse of the github client. */
+/**
+ *  @interface DataUser defines the structure of the response of
+ *  the github client.
+ */
 interface IDataUser {
   data: {
     /**
      * User: Can contain any information according to a user.
-     * The content of this object relays on the query with which the client is addressed.
+     *       The content of this object relays on the query with which the client
+     *       is addressed.
      */
     user: object;
   };
 }
 
-/** @interface GitHubData defines the structure which is requiered to run the github converter. */
+/**
+ * @interface GitHubData defines the structure which is required to run
+ *             the github converter.
+ */
 interface IGitHubData {
   /**
    * Profile: A profile object which contains all profile data of a github user.
    */
   profile: object;
   /**
-   * Calendar: A calendar object which contains all calendar data of a github user.
+   * Calendar: A calendar object which contains all calendar data of
+   *           a github user.
    */
   calendar: object;
 }
@@ -111,7 +121,8 @@ interface IGitHubData {
  * We know every single mistake, every single scratch.
  * Although we can frankly say, we love it!
  * @implements IIntel
- * @see {@link http://github.com/snek-at/intel/README.md |SNEK Intel README} for further information.
+ * @see {@link http://github.com/snek-at/intel/README.md |SNEK Intel README}
+ *      for further information.
  */
 export class Intel implements IIntel {
   public snekclient: SnekClient;
@@ -133,7 +144,8 @@ export class Intel implements IIntel {
    * Get gitlab or github data and fill the models.
    *
    * @param source A source object of type ISource.
-   * @description Fill the models with data from github or gitlab. The type and username are specified by the source param.
+   * @description Fill the models with data from github or gitlab.
+   *              The type and username are specified by the source param.
    */
   async append(source: ISource) {
     let platform = source.platform.name.toLowerCase();
@@ -200,7 +212,7 @@ export class Intel implements IIntel {
    * Get a reduced object.
    *
    * @returns A reduced object.
-   * @description Get a reduced object which contains profile, calendar, statistic and language data.
+   * @description Get a reduced object which contains profile and statistic data.
    */
   get() {
     return this.reducer.get();
