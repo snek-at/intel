@@ -17,8 +17,10 @@
      */
     "esModuleInterop": true,
     /* Disallow inconsistently-cased references to the same file. */
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    /* Allow json modules. */
+    "resolveJsonModule": true
   },
   /* The files to not type check. */
-  "exclude": ["node_modules", "build"]
+  "exclude": ["node_modules", "build"],
 }
