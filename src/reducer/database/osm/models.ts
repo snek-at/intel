@@ -941,6 +941,7 @@ abstract class StatisticSO extends BaseSO {
         )[0] as Share,
         total: 0,
       };
+
       // Calculate the total contribution by summing up all types
       response.total =
         response.commit.total +

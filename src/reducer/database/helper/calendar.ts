@@ -8,20 +8,27 @@ import moment, { Moment } from "moment";
 //#region > Interfaces
 /** @interface Calendar defines the structure of the calendar object. */
 interface ICalendar {
+  /** StartDate: The date a calendar object starts with. */
   startDate: Moment;
+  /** EndDate: The date a calendar object ends with. */
   endDate: Moment;
+  /** Weeks: Contains a list of week objects. */
   weeks: IWeek[];
 }
 
 /** @interface Week defines the structure of the week object. */
 interface IWeek {
+  /** Days: Contains a list of day objects. */
   days: IDay[];
 }
 
 /** @interface Day defines the structure of the day object. */
 interface IDay {
+  /** Date: The date of a day object. */
   date: string;
+  /** Color: The color of a day object. */
   color: string;
+  /** Total: The total contribution amount of a day object. */
   total: number;
 }
 //#endregion
