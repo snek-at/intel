@@ -38,6 +38,7 @@
     "graphql": "^14.6.0",
     "moment": "^2.24.0",
     "react-scripts": "^3.4.1",
+    "react-very-simple-oauth": "^1.1.1",
     "snek-client": "file:../client"
   },
   "devDependencies": {
