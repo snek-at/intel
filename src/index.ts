@@ -261,10 +261,10 @@ export class Intel implements IIntel {
 
   /**
    * Reset reducer.
-   * 
+   *
    * @description Reinitialize the reducer. This will erase the whole database!
    */
-  resetReducer(){
+  resetReducer() {
     this.reducer = new Reducer();
   }
 }
