@@ -100,8 +100,8 @@ abstract class BaseSO {
    * @returns {any} The filtered object.
    * @description Filter the object by a list of keys.
    */
-  render(filter: string[]): any {
-    return helper.general.squeezer(this, filter);
+  render(filter: string[], excludes: string[] = ["objects"]): any {
+    return helper.general.squeezer(this, filter, excludes);
   }
 }
 
