@@ -81,7 +81,7 @@ let data = intel.get();
 ### Reset Database
 This will erase all datasets in the databse.
 ```typescript=
-intel.reloadReducer();
+intel.resetReducer();
 ```
 ### Sessions
 Session are completely handled by the Intel. 
