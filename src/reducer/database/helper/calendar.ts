@@ -58,7 +58,7 @@ function generateCalendarStructure(startDate: string, endDate: string) {
 
     let day: IDay = {
       date: m.format("YYYY-MM-DD"),
-      color: "#ffffff",
+      color: "#ebedf0",
       total: 0,
     };
 

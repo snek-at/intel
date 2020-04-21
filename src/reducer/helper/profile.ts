@@ -32,7 +32,7 @@ interface IRepository extends models.Repository {
   /**
    * Owner: A member object.
    */
-  owner: models.Member;
+  owner: IOrganization;
   /**
    * Members: A list of member objects.
    */
