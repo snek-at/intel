@@ -81,20 +81,20 @@ let data = intel.get();
 ### Reset Database
 This will erase all datasets in the databse.
 ```typescript=
-intel.reloadReducer()
+intel.reloadReducer();
 ```
 ### Sessions
 Session are completely handled by the Intel. 
 ```typescript=
 /* 
-  Starts the session for an anonymous user or maintains the session if
-  a user is logged in
-*/
+ * Starts the session for an anonymous user or maintains the session if
+ * a user is logged in.
+ */
 await intel.snekclient.session.begin();
 /*
-  Overrides an active session with a new session using the credential
-  pair
-*/
+ * Overrides an active session with a new session using the credential
+ * pair.
+ */
 await intel.snekclient.session.begin({
   username: "schettn",
   password: "tschischkotschicko",
@@ -184,10 +184,10 @@ The client ID, the client secret and the redirect URL are provided through an OA
 Put this script inside your redirect page to obtain the access token from the OAuth2 request. 
 ```javascript=
 /*
-  The redirect script:
-  Get name of window which was set by the parent to be the unique
-  request key
-*/
+ * The redirect script:
+ * Get name of window which was set by the parent to be the unique
+ * request key
+ */
 const requestKey = window.name;
 // Update corresponding entry with the redirected url which should
 // contain either access token or failure reason in the query
