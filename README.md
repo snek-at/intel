@@ -225,17 +225,30 @@ Have a bug or a feature request? Please first search for existing and closed iss
 For transparency into our release cycle and in striving to maintain backward compatibility, this repository is maintained under [the Semantic Versioning guidelines](https://semver.org/). Sometimes we screw up, but we adhere to those rules whenever possible.
 
 ## [](#creators)Creators
-<a href="https://github.com/schettn">
-	<img src="https://avatars.githubusercontent.com/schettn" alt="Avatar schettn" style="width:100px; border-radius: 100%">
-</a>
-
-<a href="https://github.com/pinterid">
-	<img src="https://avatars.githubusercontent.com/pinterid" alt="Avatar pinterid" style="width:100px; border-radius: 100%">
-</a>
-
-<a href="https://github.com/kleberbaum">
-	<img src="https://avatars.githubusercontent.com/kleberbaum" alt="Avatar kleberbaum" style="width:100px; border-radius: 100%">
-</a>
+<table border="0">
+	<tr>
+		<td>
+		<a href="https://github.com/schettn">
+			<img src="https://avatars.githubusercontent.com/schettn?s=100" alt="Avatar schettn">
+		</a>
+		</td>
+		<td>
+			<a href="https://github.com/pinterid">
+				<img src="https://avatars.githubusercontent.com/pinterid?s=100" alt="Avatar pinterid">
+			</a>
+		</td>	
+		<td>
+			<a href="https://github.com/kleberbaum">
+				<img src="https://avatars.githubusercontent.com/kleberbaum?s=100" alt="Avatar kleberbaum">
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td><a href="https://github.com/schettn">Nico Schett</a></td>
+		<td><a href="https://github.com/pinterid">David Pinterics</a></td>
+		<td><a href="https://github.com/kleberbaum">Florian Kleber</a></td>
+	</tr>
+</table>
 
 ## [](#thanks)Thanks
 We do not have any external contributors yet, but if you want your name to be here, feel free to [contribute to our project](#contributing).
