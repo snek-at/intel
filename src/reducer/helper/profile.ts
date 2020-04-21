@@ -1,4 +1,7 @@
 //#region > Imports
+//> Lodash
+// Contains a method to create a deep copy of a object
+import cloneDeep from 'lodash.clonedeep';
 //> Models
 // Contains all models of the database
 import * as models from "../database/models";
@@ -30,9 +33,9 @@ interface IPlatform extends models.Platform {
  */
 interface IRepository extends models.Repository {
   /**
-   * Owner: A member object.
+   * Owner: A organization object.
    */
-  owner: IOrganization;
+  owner: models.Organization;
   /**
    * Members: A list of member objects.
    */
@@ -96,16 +99,15 @@ function mergedProfile() {
      * Set the organization as owner for each repository within
      * the organization. To render a organization as a member
      * a list of member keys to render by is defined.
-     * Creating a new instance is required due to referencing issues.
+     * Deep Cloning the organization is required due to
+     * referencing issues.
      */
-    let owner = {
-      ...organization.render(
-        /* Including the following field in the owner object */
-        ["avatarUrl", "url", "fullname", "name"],
-        /* Excluding the following field in the owner object */
-        ["repositories", "objects"]
-      ),
-    };
+    let owner = cloneDeep(organization).render(
+      /* Including the following field in the owner object */
+      ["avatarUrl", "url", "fullname", "name"],
+      /* Excluding the following field in the owner object */
+      ["repositories", "objects"]
+    );
 
     organization.repositories = repositories.map((repository) => {
       /* Pass the organization to member format */
