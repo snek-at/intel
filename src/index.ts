@@ -13,15 +13,15 @@
 //> snek-client
 //#PACKAGE snek-client
 //## npm install snek-client
-// Contains the clients for API calls to SNEK and GitHub.
+// Contains the clients for API calls to SNEK, Github and Gitlab.
 import { SnekClient, GithubClient, GitlabClient } from "snek-client";
 //> Reducer
 // Contains the reducer and database models
 import { Reducer } from "./reducer";
 //> Utils
-// Contains the github utils
+// Contains the github util
 import * as github from "./utils/github/index";
-// Contains the github utils
+// Contains the gitlab util
 import * as gitlab from "./utils/gitlab/index";
 //> Interfaces
 // Contains the profile interface for the profile query result
