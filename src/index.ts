@@ -13,14 +13,17 @@
 //> snek-client
 //#PACKAGE snek-client
 //## npm install snek-client
-// Contains the clients for API calls to SNEK and GitHub.
-import { SnekClient, GithubClient } from "snek-client";
+// Contains the clients for API calls to SNEK, Github and Gitlab.
+import { SnekClient, GithubClient, GitlabClient } from "snek-client";
+
 //> Reducer
 // Contains the reducer and database models
 import { Reducer } from "./reducer";
 //> Utils
-// Contains the github utils
+// Contains the github util
 import * as github from "./utils/github/index";
+// Contains the gitlab util
+import * as gitlab from "./utils/gitlab/index";
 //> Interfaces
 // Contains the profile interface for the profile query result
 import { IProfile } from "./utils/github/queries/index";
@@ -30,7 +33,8 @@ import { IProfile } from "./utils/github/queries/index";
 /** @interface Intel defines the structure of the intel class. */
 interface IIntel {
   /**
-   * Snekclient: A client implementation for snek interaction from the "snek-client" package.
+   * Snekclient: A client implementation for snek interaction from the
+   *             "snek-client" package.
    */
   snekclient: SnekClient;
   /**
@@ -38,7 +42,8 @@ interface IIntel {
    * @function
    * @param {ISource} source A source object.
    * @returns {Promise<void>} Empty promise for conformation of completion.
-   * @description Append data to the database based on the information in a source object.
+   * @description Append data to the database based on the information in
+   *              a source object.
    */
   append(source: ISource): Promise<void>;
   /**
@@ -78,25 +83,33 @@ interface ISource {
   authorization: string;
 }
 
-/** @interface DataUser defines the structure of the reponse of the github client. */
+/**
+ *  @interface DataUser defines the structure of the response from
+ *             the github client.
+ */
 interface IDataUser {
   data: {
     /**
      * User: Can contain any information according to a user.
-     * The content of this object relays on the query with which the client is addressed.
+     *       The content of this object relays on the query with which the client
+     *       is addressed.
      */
     user: object;
   };
 }
 
-/** @interface GitHubData defines the structure which is requiered to run the github converter. */
+/**
+ * @interface GitHubData defines the structure which is required to run
+ *            the github converter.
+ */
 interface IGitHubData {
   /**
    * Profile: A profile object which contains all profile data of a github user.
    */
   profile: object;
   /**
-   * Calendar: A calendar object which contains all calendar data of a github user.
+   * Calendar: A calendar object which contains all calendar data of
+   *           a github user.
    */
   calendar: object;
 }
@@ -111,7 +124,8 @@ interface IGitHubData {
  * We know every single mistake, every single scratch.
  * Although we can frankly say, we love it!
  * @implements IIntel
- * @see {@link http://github.com/snek-at/intel/README.md |SNEK Intel README} for further information.
+ * @see {@link http://github.com/snek-at/intel/README.md |SNEK Intel README}
+ *      for further information.
  */
 export class Intel implements IIntel {
   public snekclient: SnekClient;
@@ -133,7 +147,8 @@ export class Intel implements IIntel {
    * Get gitlab or github data and fill the models.
    *
    * @param source A source object of type ISource.
-   * @description Fill the models with data from github or gitlab. The type and username are specified by the source param.
+   * @description Fill the models with data from github or gitlab.
+   *              The type and username are specified by the source param.
    */
   async append(source: ISource) {
     let platform = source.platform.name.toLowerCase();
@@ -178,6 +193,45 @@ export class Intel implements IIntel {
         };
 
         github.converter.run(data);
+      } else if (platform === "gitlab") {
+        let gitlabClient: GitlabClient;
+
+        // Init gitlab client
+        /* Use the default client url if none is provided */
+        if (source.platform.url) {
+          gitlabClient = new GitlabClient(source.platform.url);
+        } else {
+          gitlabClient = new GitlabClient();
+        }
+
+        let rawData = {
+          platform: {
+            name: source.platform.name,
+            url: source.platform.url
+              ? source.platform.url
+              : "https://gitlab.com",
+          },
+          home: await gitlabClient.endpointScraper.getDom(
+            gitlab.paths.home(source.user)
+          ),
+          atom: await gitlabClient.endpointScraper.getDom(
+            gitlab.paths.atom(source.user)
+          ),
+          currentCalendar: await gitlabClient.endpointScraper.getJson<{
+            [index: string]: number;
+          }>(gitlab.paths.currentCalendar(source.user)),
+          groups: await gitlabClient.endpointScraper.getJson<{ html: string }>(
+            gitlab.paths.groups(source.user)
+          ),
+          projects: await gitlabClient.endpointScraper.getJson<{
+            html: string;
+          }>(gitlab.paths.projects(source.user)),
+          activity: await gitlabClient.endpointScraper.getJson<{
+            html: string;
+          }>(gitlab.paths.activity(source.user)),
+        };
+
+        gitlab.converter.runScraper(rawData);
       }
     } catch (err) {
       console.error(err);
@@ -200,10 +254,19 @@ export class Intel implements IIntel {
    * Get a reduced object.
    *
    * @returns A reduced object.
-   * @description Get a reduced object which contains profile, calendar, statistic and language data.
+   * @description Get a reduced object which contains profile and statistic data.
    */
   get() {
     return this.reducer.get();
+  }
+
+  /**
+   * Reset reducer.
+   *
+   * @description Reinitialize the reducer. This will erase the whole database!
+   */
+  resetReducer() {
+    this.reducer = new Reducer();
   }
 }
 //#endregion
