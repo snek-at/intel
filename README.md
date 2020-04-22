@@ -91,6 +91,7 @@ Session are completely handled by the Intel.
  * a user is logged in.
  */
 await intel.snekclient.session.begin();
+
 /*
  * Overrides an active session with a new session using the credential
  * pair.
@@ -99,6 +100,7 @@ await intel.snekclient.session.begin({
   username: "schettn",
   password: "tschischkotschicko",
 });
+
 /* Ends the session */
 await intel.snekclient.session.end();
 
@@ -110,21 +112,25 @@ All tasks are session aware! Every task has the capability of token handeling. M
 /* Login an anonymous user on the snek-engine */
 let userData =
     await intel.snekclient.session.tasks.auth.anon();
+
 /* Login a real user on the snek-engine */
 let userData =
     await intel.snekclient.session.tasks.auth.nonanon();
+
 /* Refresh the user tokens on the snek-engine */
 let refreshState =
     await intel.snekclient.session.tasks.auth.refresh();
+
 /* Revoke the user tokens on the snek-engine */
 let revokeState =
     await intel.snekclient.session.tasks.auth.revoke();
     
 
 /** Authorization Tasks */
-/* Get all profile pages from snek-engine  */
+/* Get all profile pages from snek-engine */
 let pagesData =
     await intel.snekclient.session.tasks.general.allPageUrls();
+
 /* Get all GitLab servers from the snek-engine */
 let gitlabServerData =
     await intel.snekclient.session.tasks.general.gitlabServer();
@@ -134,12 +140,15 @@ let gitlabServerData =
 /* Get all GitLab servers from the snek-engine */
 let cachePageData =
     await intel.snekclient.session.tasks.user.cache();
+
 /* Get the profile page data from the snek-engine */
 let profilePageData =
     await intel.snekclient.session.tasks.user.profile();
+
 /* Get the registration data from snek-engine */
 let registrationData =
     await intel.snekclient.session.tasks.user.registration();
+
 /* Get the whoami data from snek-engine */
 let whoamiData =
     await intel.snekclient.session.tasks.user.whoami();
@@ -204,8 +213,10 @@ import RSA, { GithubProvider } from "snek-intel/utils/oauth";
 const openGitHubOAuth = () => {
     return await RSA.acquireTokenAsync(GithubProvider)
 };
+
 /* Example on how to call the GitHub OAuth function */
 const { data } = openGitHubOAuth();
+
 console.log(data.username, data.accessToken)
 ```
 ## [](#contributing)Contributing
