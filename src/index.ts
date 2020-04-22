@@ -15,6 +15,7 @@
 //## npm install snek-client
 // Contains the clients for API calls to SNEK, Github and Gitlab.
 import { SnekClient, GithubClient, GitlabClient } from "snek-client";
+
 //> Reducer
 // Contains the reducer and database models
 import { Reducer } from "./reducer";
@@ -83,7 +84,7 @@ interface ISource {
 }
 
 /**
- *  @interface DataUser defines the structure of the response of
+ *  @interface DataUser defines the structure of the response from
  *  the github client.
  */
 interface IDataUser {
