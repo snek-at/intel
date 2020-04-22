@@ -179,7 +179,7 @@ The client ID, the client secret and the redirect URL are provided through an OA
 ```
 <mark>Currently, a solution to adapt the config file more easily is being developed.</mark>
 
-#### Imlementation
+#### Implementation
 ##### Redirect page
 Put this script inside your redirect page to obtain the access token from the OAuth2 request. 
 ```javascript
