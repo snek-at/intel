@@ -52,7 +52,7 @@ $ npm install snek-client
 
 ## [](#usage)Usage
 ### Source Object
-```typescript=
+```typescript
 /* GitHub Source Object */
 let source = {
   user: "schettn",
@@ -67,25 +67,25 @@ let source = {
 };
 ```
 ### Append Source Object to Database
-```typescript=
+```typescript
 await intel.append(source);
 ```
 ### Append List of Source Object to Database
-```typescript=
+```typescript
 await intel.appendList([source1, source2]);
 ```
 ### Get Reduced Data from Database
-```typescript=
+```typescript
 let data = intel.get();
 ```
 ### Reset Database
 This will erase all datasets in the databse.
-```typescript=
+```typescript
 intel.resetReducer();
 ```
 ### Sessions
 Session are completely handled by the Intel. 
-```typescript=
+```typescript
 /* 
  * Starts the session for an anonymous user or maintains the session if
  * a user is logged in.
@@ -105,7 +105,7 @@ await intel.snekclient.session.end();
 ```
 ### Tasks
 All tasks are session aware! Every task has the capability of token handeling. Modifying a token is not suggested.
-```typescript=
+```typescript
 /** Authorization Tasks */
 /* Login an anonymous user on the snek-engine */
 let userData =
@@ -148,7 +148,7 @@ let whoamiData =
 ### OAuth2
 #### Config File
 The client ID, the client secret and the redirect URL are provided through an OAuth organization. To change this file, one has to clone the repository and manually create a new config file.
-```json=
+```json
 {
   "providers": {
     "github": {
@@ -182,7 +182,7 @@ The client ID, the client secret and the redirect URL are provided through an OA
 #### Imlementation
 ##### Redirect page
 Put this script inside your redirect page to obtain the access token from the OAuth2 request. 
-```javascript=
+```javascript
 /*
  * The redirect script:
  * Get name of window which was set by the parent to be the unique
@@ -196,7 +196,7 @@ localStorage.setItem(requestKey, window.location.href);
 window.close();
 ```
 ##### Requesting access token
-```javascript=
+```javascript
 /* Import GithubProvider and the RSA */
 import RSA, { GithubProvider } from "snek-intel/utils/oauth";
 
