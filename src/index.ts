@@ -85,7 +85,7 @@ interface ISource {
 
 /**
  *  @interface DataUser defines the structure of the response from
- *  the github client.
+ *             the github client.
  */
 interface IDataUser {
   data: {
@@ -100,7 +100,7 @@ interface IDataUser {
 
 /**
  * @interface GitHubData defines the structure which is required to run
- *             the github converter.
+ *            the github converter.
  */
 interface IGitHubData {
   /**
