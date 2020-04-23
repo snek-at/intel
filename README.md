@@ -7,7 +7,8 @@
 
 <h3 align="center">SNEKNetwork for Engineers and Knowledged</h3>
 <p align="center">
-The SNEK project is an attempt to create a transparent, open-source non-profit platform that allows engineers to categorize and compare. It should enable engineers from adjacent fields to visualize each other's skills through visualization and project identification.
+The SNEK project is an attempt to create a transparent, open-source, non-profit platform that enables engineers to categorize and compare themselves with other software developers in their respective fields, through project identification and visialization.
+
   <br>
 Intel serves as the :green_heart: of SNEK. Intel is the central data processing system for SNEK, providing interfaces to connect our other systems.
   <br>
@@ -106,7 +107,7 @@ await intel.snekclient.session.end();
 
 ```
 ### Tasks
-All tasks are session aware! Every task has the capability of token handeling. Modifying a token is not suggested.
+All tasks are session aware! Every task has the capability of token handling. Modifying a token is not suggested.
 ```typescript
 /** Authorization Tasks */
 /* Login an anonymous user on the snek-engine */
@@ -156,7 +157,7 @@ let whoamiData =
 
 ### OAuth2
 #### Config File
-The client ID, the client secret and the redirect URL are provided through an OAuth organization. To change this file, one has to clone the repository and manually create a new config file.
+The client ID, the client secret and the redirect URL are provided by an OAuth organization. To change this file, the repository has to be cloned in order to create a new config file manually.
 ```json
 {
   "providers": {
@@ -186,7 +187,7 @@ The client ID, the client secret and the redirect URL are provided through an OA
   "devUrl": "http://localhost:3000"
 }
 ```
-<mark>Currently, a solution to adapt the config file more easily is being developed.</mark>
+<mark>Currently, a solution to adapt the config file more easily is under development.</mark>
 
 #### Implementation
 ##### Redirect page
@@ -199,7 +200,7 @@ Put this script inside your redirect page to obtain the access token from the OA
  */
 const requestKey = window.name;
 // Update corresponding entry with the redirected url which should
-// contain either access token or failure reason in the query
+// either contain the access token or the reason for failure in the query
 // parameter / hash
 localStorage.setItem(requestKey, window.location.href);
 window.close();
@@ -222,18 +223,18 @@ console.log(data.username, data.accessToken)
 ## [](#contributing)Contributing
 ![GitHub last commit](https://img.shields.io/github/last-commit/snek-at/intel) ![GitHub issues](https://img.shields.io/github/issues-raw/snek-at/intel) ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/snek-at/intel?color=green)
 
-Please read through our [contributing guidelines](https://github.com/snek-at/front/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+Please read through our [guidelines for contribution](https://github.com/snek-at/front/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
 All HTML and CSS should conform to the [Code Guide](https://github.com/mdo/code-guide), maintained by [Mark Otto](https://github.com/mdo).
 
 ## [](#bug-and-feature-requests)Bugs and feature requests
 
-Have a bug or a feature request? Please first search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/snek-at/package-template/issues/new/choose).
+Do you have a bug or a feature request? Please first search for existing and closed issues. If your problem or idea has not been addressed yet, [please open a new issue](https://github.com/snek-at/package-template/issues/new/choose).
 
 ## [](#versioning)Versioning
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/snek-at/intel)
 
-For transparency into our release cycle and in striving to maintain backward compatibility, this repository is maintained under [the Semantic Versioning guidelines](https://semver.org/). Sometimes we screw up, but we adhere to those rules whenever possible.
+For reasons of transparency concering our release cycle and in striving to maintain backward compatibility, this repository is maintained under [the Semantic Versioning guidelines](https://semver.org/). Some minor screw ups aside, we try to adhere to those rules whenever possible.
 
 ## [](#creators)Creators
 <table border="0">
