@@ -9,8 +9,8 @@
           "scope": "repo, user:email, read:user, read:org"
         },
         "deploy": {
-          "clientId": "b4337a9c1ad66984c060",
-          "clientSecret": "1b05648d36ca92d63766e32e8e9a7d740b214816",
+          "clientId": "2148629809594d57c113",
+          "clientSecret": "64a37e4846387cfcaea35d83afca3c9c8689628c",
           "redirectUrl": "https://snek.at/redirect",
           "scope": "repo, user:email, read:user, read:org"
         }
