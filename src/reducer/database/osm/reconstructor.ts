@@ -39,7 +39,7 @@ class SOAssembler {
    */
   create(fields: any) {
     try {
-      let tablename = new this.Base({}).constructor.name.toLowerCase();
+      let tablename = new this.Base({}).tableName();
 
       SOAssembler.database.exec(
         this.Base.statements.create,

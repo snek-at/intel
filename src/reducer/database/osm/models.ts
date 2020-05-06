@@ -80,6 +80,11 @@ abstract class BaseSO {
    */
   abstract objects: SOAssembler;
 
+  /**
+   * @description Defines the osm table name.
+   */
+  abstract tableName(): string;
+
   //> Static Methods
   /**
    * @static
@@ -182,6 +187,16 @@ abstract class PlatformSO extends BaseSO {
    */
   abstract getCalendar(dates: any): object;
 
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "platform";
+  }
+
   //> Model Implementation Example
   // class PlatformModel extends PlatformSO{
   //   /**
@@ -252,6 +267,16 @@ abstract class PlatformSO extends BaseSO {
 abstract class MemberSO extends BaseSO {
   //> Static Fields
   static statements = member;
+
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "member";
+  }
 
   //> Model Implementation Example
   //  class MemberModel extends MemberSO{
@@ -361,6 +386,16 @@ abstract class RepositorySO extends BaseSO {
    */
   abstract getLanguages(fields: any): LanguageSO[];
 
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "repository";
+  }
+
   //> Model Implementation Example
   // class RepositoryModel extends RepositorySO{
   //   /**
@@ -431,6 +466,16 @@ abstract class RepositorySO extends BaseSO {
 abstract class RepositoryHasMemberSO extends BaseSO {
   //> Static Fields
   static statements = repositoryHasMember;
+
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "repositoryhasmember";
+  }
 
   //> Model Implementation Example
   // class RepositoryHasMemberModel extends RepositoryHasMemberSO{
@@ -504,6 +549,16 @@ abstract class LanguageSO extends BaseSO {
   //> Static Fields
   static statements = language;
 
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "language";
+  }
+
   //> Model Implementation Example
   // class LanguageModel extends LanguageSO{
   //   /**
@@ -575,6 +630,16 @@ abstract class LanguageSO extends BaseSO {
 abstract class PlatformHasRepositorySO extends BaseSO {
   //> Static Fields
   static statements = platformHasRepository;
+
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "platformhasrepository";
+  }
 
   //> Model Implementation Example
   // class PlatformHasRepositoryModel extends PlatformHasRepositorySO{
@@ -674,6 +739,16 @@ abstract class OrganizationSO extends BaseSO {
    */
   abstract getRepositories(): RepositorySO[];
 
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "organization";
+  }
+
   //> Model Implementation Example
   // class OrganizationModel extends OrganizationSO{
   //   /**
@@ -744,6 +819,16 @@ abstract class OrganizationSO extends BaseSO {
 abstract class OrganizationHasMemberSO extends BaseSO {
   //> Static Fields
   static statements = organizationHasMember;
+
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "organizationhasmember";
+  }
 
   //> Model Implementation Example
   // class OrganizationHasMemberModel extends OrganizationHasMemberSO{
@@ -819,6 +904,16 @@ abstract class OrganizationHasMemberSO extends BaseSO {
 abstract class PlatformHasOrganizationSO extends BaseSO {
   //> Static Fields
   static statements = platformHasOrganization;
+
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "platformhasorganization";
+  }
 
   //> Model Implementation Example
   // class PlatformHasOrganizationModel extends PlatformHasOrganizationSO{
@@ -1009,6 +1104,16 @@ abstract class StatisticSO extends BaseSO {
     total: number;
   };
 
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "statistic";
+  }
+
   //> Model Implementation Example
   // class StatisticModel extends StreakSO{
   //   /**
@@ -1078,6 +1183,16 @@ abstract class StatisticSO extends BaseSO {
 abstract class StreakSO extends BaseSO {
   //> Static Fields
   static statements = streak;
+
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "streak";
+  }
 
   //> Model Implementation Example
   // class StreakModel extends StreakSO{
@@ -1248,6 +1363,16 @@ abstract class CalendarSO extends BaseSO {
    */
   abstract createContribution(fields: any): ContributionSO;
 
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "calendar";
+  }
+
   //> Model Implementation Example
   // class CalendarModel extends CalendarSO{
   //   /**
@@ -1317,6 +1442,16 @@ abstract class CalendarSO extends BaseSO {
 abstract class ContributionSO extends BaseSO {
   //> Static Fields
   static statements = contribution;
+
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName() {
+    return "contribution";
+  }
 
   //> Model Implementation Example
   // class ContributionModel extends ContributionSO{
