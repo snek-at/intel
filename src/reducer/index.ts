@@ -16,10 +16,10 @@ class Reducer {
    * @returns {object} A object with profile, calendar, statistic and language information.
    * @description Get a object which contains profile, calendar, statistic and language information.
    */
-  get() {
+  async get() {
     return {
-      profile: helper.profile.mergedProfile(),
-      statistic: helper.statistic.mergedStatistic(),
+      profile: await helper.profile.mergedProfile(),
+      statistic: await helper.statistic.mergedStatistic(),
     };
   }
 }

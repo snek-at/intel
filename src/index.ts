@@ -192,7 +192,7 @@ export class Intel implements IIntel {
           calendar: calendarData.data.user,
         };
 
-        github.converter.run(data);
+        await github.converter.run(data);
       } else if (platform === "gitlab") {
         let gitlabClient: GitlabClient;
 

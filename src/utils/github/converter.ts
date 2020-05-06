@@ -7,6 +7,9 @@ import moment from "moment";
 //> Models
 // Contains all reducer database models
 import * as models from "../../reducer/database/models";
+//> Delay
+// Contains a Delay function for timeouts
+import Delay from "../../toolbox/Delay";
 //#endregion
 
 //#region > Functions
@@ -16,7 +19,7 @@ import * as models from "../../reducer/database/models";
  * @param rawData
  * @description Fill the database with data provided by "rawData".
  */
-function run(rawData: any) {
+async function run(rawData: any) {
   let platform = models.Platform.objects.create({
     platformName: "github",
     platformUrl: "https://github.com",
@@ -61,6 +64,7 @@ function run(rawData: any) {
 
   // Calendar
   for (let [index, yearObject] of Object.entries(rawData.calendar)) {
+    await Delay(300);
     /*
       Set type of year because it is not possible in the loop declaration.
       This is required because of the type of yearIndex which is unknown.
