@@ -30,7 +30,7 @@ function run(rawData: any) {
     location: rawData.profile.location,
     statusMessage: rawData.profile.status.message,
     statusEmojiHTML: rawData.profile.status.emojiHTML,
-  });
+  }) as models.Platform;
 
   rawData.profile.organizations.edges.forEach((edge: any) => {
     if (edge.node) {

@@ -125,7 +125,7 @@ function runScraper(rawData: IScrapedData) {
     location: null,
     statusMessage,
     statusEmojiHTML,
-  });
+  }) as models.Platform;
 
   /* Extract organization data from rawData.groups */
   let groups = new DOMParser().parseFromString(
