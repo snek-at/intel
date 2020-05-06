@@ -1,7 +1,8 @@
 //#region > Imports
 //> Lodash
 // Contains a method to create a deep copy of a object
-import cloneDeep from 'lodash.clonedeep';
+import cloneDeep from "lodash.clonedeep";
+
 //> Models
 // Contains all models of the database
 import * as models from "../database/models";
