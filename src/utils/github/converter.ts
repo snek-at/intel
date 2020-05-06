@@ -33,23 +33,26 @@ function run(rawData: any) {
   });
 
   rawData.profile.organizations.edges.forEach((edge: any) => {
-    let organization = platform.createOrganization({
-      avatarUrl: edge.node.avatarUrl,
-      url: edge.node.url,
-      name: edge.node.login,
-      fullname: edge.node.name,
-      description: edge.node.description,
-    });
-
-    edge.node.membersWithRole.nodes.forEach((node: any) => {
-      organization.createMember({
-        avatarUrl: node.avatarUrl,
-        url: node.url,
-        fullname: node.name,
-        username: node.login,
-        platformId: platform.id,
+    if (edge.node) {
+      let organization: models.Organization;
+      organization = platform.createOrganization({
+        avatarUrl: edge.node.avatarUrl,
+        url: edge.node.url,
+        name: edge.node.login,
+        fullname: edge.node.name,
+        description: edge.node.description,
       });
-    });
+
+      edge.node.membersWithRole.nodes.forEach((node: any) => {
+        organization.createMember({
+          avatarUrl: node.avatarUrl,
+          url: node.url,
+          fullname: node.name,
+          username: node.login,
+          platformId: platform.id,
+        });
+      });
+    }
   });
 
   /** @todo Store repositories with key: nameWithOwner in order to prevent duplicates */
