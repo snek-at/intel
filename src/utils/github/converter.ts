@@ -38,6 +38,7 @@ async function run(rawData: any) {
   rawData.profile.organizations.edges.forEach((edge: any) => {
     if (edge.node) {
       let organization: models.Organization;
+
       organization = platform.createOrganization({
         avatarUrl: edge.node.avatarUrl,
         url: edge.node.url,

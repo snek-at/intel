@@ -92,6 +92,7 @@ async function mergedProfile() {
 
     return repository.render([]);
   });
+
   await Delay(1000);
 
   platform.organizations = organizations.map((organization) => {
@@ -129,6 +130,7 @@ async function mergedProfile() {
 
     return organization.render([]);
   });
+
   await Delay(1000);
 
   platform.render([]);
