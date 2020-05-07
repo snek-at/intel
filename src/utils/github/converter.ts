@@ -3,9 +3,13 @@
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
+
 //> Models
 // Contains all reducer database models
 import * as models from "../../reducer/database/models";
+//> Delay
+// Contains a Delay function for timeouts
+import Delay from "../../toolbox/Delay";
 //#endregion
 
 //#region > Functions
@@ -15,7 +19,7 @@ import * as models from "../../reducer/database/models";
  * @param rawData
  * @description Fill the database with data provided by "rawData".
  */
-function run(rawData: any) {
+async function run(rawData: any) {
   let platform = models.Platform.objects.create({
     platformName: "github",
     platformUrl: "https://github.com",
@@ -29,26 +33,30 @@ function run(rawData: any) {
     location: rawData.profile.location,
     statusMessage: rawData.profile.status.message,
     statusEmojiHTML: rawData.profile.status.emojiHTML,
-  });
+  }) as models.Platform;
 
   rawData.profile.organizations.edges.forEach((edge: any) => {
-    let organization = platform.createOrganization({
-      avatarUrl: edge.node.avatarUrl,
-      url: edge.node.url,
-      name: edge.node.login,
-      fullname: edge.node.name,
-      description: edge.node.description,
-    });
+    if (edge.node) {
+      let organization: models.Organization;
 
-    edge.node.membersWithRole.nodes.forEach((node: any) => {
-      organization.createMember({
-        avatarUrl: node.avatarUrl,
-        url: node.url,
-        fullname: node.name,
-        username: node.login,
-        platformId: platform.id,
+      organization = platform.createOrganization({
+        avatarUrl: edge.node.avatarUrl,
+        url: edge.node.url,
+        name: edge.node.login,
+        fullname: edge.node.name,
+        description: edge.node.description,
       });
-    });
+
+      edge.node.membersWithRole.nodes.forEach((node: any) => {
+        organization.createMember({
+          avatarUrl: node.avatarUrl,
+          url: node.url,
+          fullname: node.name,
+          username: node.login,
+          platformId: platform.id,
+        });
+      });
+    }
   });
 
   /** @todo Store repositories with key: nameWithOwner in order to prevent duplicates */
@@ -57,6 +65,7 @@ function run(rawData: any) {
 
   // Calendar
   for (let [index, yearObject] of Object.entries(rawData.calendar)) {
+    await Delay(300);
     /*
       Set type of year because it is not possible in the loop declaration.
       This is required because of the type of yearIndex which is unknown.

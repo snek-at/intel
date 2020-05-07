@@ -24,7 +24,9 @@ const GithubProvider: IProvider<boolean> = {
    * @description Build the authorization url for the OAuth-Request, the values are obtained from the config file.
    */
   buildAuthorizeUrl(): string {
-    if (window.location.href.includes(Config.devUrl)) {
+    let href = window.location.href.toString();
+    
+    if (href.includes(Config.devUrl)) {
       details = providerConfig.details.dev;
     }
 

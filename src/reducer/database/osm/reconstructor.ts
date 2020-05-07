@@ -39,7 +39,7 @@ class SOAssembler {
    */
   create(fields: any) {
     try {
-      let tablename = new this.Base({}).constructor.name.toLowerCase();
+      let tablename = new this.Base({}).tableName();
 
       SOAssembler.database.exec(
         this.Base.statements.create,
@@ -134,7 +134,7 @@ class SOAssembler {
         if ({}.hasOwnProperty.call(response, entry)) {
           for (let f in filter) {
             if ({}.hasOwnProperty.call(filter, f)) {
-              /** 
+              /**
                * Proxy to neutralize Generic Object Injection Sink.
                * @todo Validate the proxy workaround for the injection vulnerability via a penetration test.
                * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
@@ -149,7 +149,7 @@ class SOAssembler {
                 }
               );
 
-              /** 
+              /**
                * Proxy to neutralize Generic Object Injection Sink.
                * @todo Validate the proxy workaround for the injection vulnerability via a penetration test.
                * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}

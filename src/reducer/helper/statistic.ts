@@ -5,6 +5,9 @@ import * as models from "../database/models";
 //> Helper
 // Contains all calendar helper functions
 import * as helper from "./index";
+//> Delay
+// Contains a Delay function for timeouts
+import Delay from "../../toolbox/Delay";
 //> Interfaces
 //> Contains the share interface for the languages
 import { Share } from "../database/osm/models";
@@ -57,7 +60,7 @@ interface IStatistic extends models.Statistic {
    * Streaks: A object which contains longest, current and a list of streaks.
    */
   streak: {
-    /** 
+    /**
      * Longest: The streak with the longest difference between
      *          startDate and endDate.
      */
@@ -81,13 +84,16 @@ interface IStatistic extends models.Statistic {
  * @returns A statistic object.
  * @description Returns a object containing e.g busiest day and streaks of current and each year.
  */
-function mergedStatistic(): IStatisticResponse {
+async function mergedStatistic(): Promise<IStatisticResponse> {
   let statistic = models.Statistic.getMerged() as IStatistic[];
 
   let currentYear: IStatistic | null = null;
   let yearsList: IStatistic[] = [];
 
-  statistic.forEach((entry) => {
+  for (const index in statistic) {
+    await Delay(300);
+
+    let entry = statistic[index];
     let streaks = entry.getStreaks().map((streak) => {
       return streak.render([]);
     });
@@ -121,7 +127,9 @@ function mergedStatistic(): IStatisticResponse {
 
       yearsList.push(entry);
     }
-  });
+  }
+
+  await Delay(2500);
 
   /* Get the merged languages which contains a list of language object */
   const languages = helper.language.mergedLanguage();

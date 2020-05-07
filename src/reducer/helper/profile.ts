@@ -1,10 +1,14 @@
 //#region > Imports
 //> Lodash
 // Contains a method to create a deep copy of a object
-import cloneDeep from 'lodash.clonedeep';
+import cloneDeep from "lodash.clonedeep";
+
 //> Models
 // Contains all models of the database
 import * as models from "../database/models";
+//> Delay
+// Contains a Delay function for timeouts
+import Delay from "../../toolbox/Delay";
 //#endregion
 
 //#region > Interfaces
@@ -69,7 +73,7 @@ interface IOrganization extends models.Organization {
  * @returns A merged profile object.
  * @description Get all profile information. Platform nr. 1 is used for general information.
  */
-function mergedProfile() {
+async function mergedProfile() {
   let platform = models.Platform.objects.get({ id: 1 }) as IPlatform;
   let repositories = models.Repository.objects.all() as IRepository[];
   let organizations = models.Organization.objects.all() as IOrganization[];
@@ -88,6 +92,8 @@ function mergedProfile() {
 
     return repository.render([]);
   });
+
+  await Delay(1000);
 
   platform.organizations = organizations.map((organization) => {
     organization.members = organization.getMembers().map((member) => {
@@ -124,6 +130,8 @@ function mergedProfile() {
 
     return organization.render([]);
   });
+
+  await Delay(1000);
 
   platform.render([]);
 
