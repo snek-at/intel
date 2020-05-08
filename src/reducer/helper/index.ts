@@ -8,10 +8,12 @@ import * as profile from "./profile";
 import * as statistic from "./statistic";
 // Contains all language helper functions
 import * as language from "./language";
+// Contains all talks helper functions
+import * as talks from "./talks";
 //#endregion
 
 //#region > Exports
-export { calendar, profile, statistic, language };
+export { calendar, profile, statistic, language, talks };
 //#endregion
 
 /**

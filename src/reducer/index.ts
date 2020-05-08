@@ -10,17 +10,32 @@ import * as helper from "./helper";
 //#region > Classes
 /** @class Reduce the data of the models. */
 class Reducer {
+  //> Static Fields
+  static models = models;
+
+  //> Methods
   /**
    * Get data of the models.
    *
-   * @returns {object} A object with profile, calendar, statistic and language information.
-   * @description Get a object which contains profile, calendar, statistic and language information.
+   * @returns {object} A object with profile, calendar, statistic and
+   *                   language information.
+   * @description Get a object which contains profile, calendar, statistic and
+   *              language information.
    */
   async get() {
     return {
       profile: await helper.profile.mergedProfile(),
       statistic: await helper.statistic.mergedStatistic(),
     };
+  }
+
+  /**
+   * @returns {Promise<helper.talks.ITalk[]>} A promise which contains a object
+   *                                          list with talk information.
+   * @description Delivers all talks from the database
+   */
+  async getTalks() : Promise<helper.talks.ITalk[]> {
+    return helper.talks.mergedTalks();
   }
 }
 //#endregion
