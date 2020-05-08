@@ -1011,19 +1011,21 @@ class Talk extends osm.models.TalkSO implements ITalk {
       })[0];
 
       if (repository) {
-        repository.owner = Member.objects.filter({
-          url: repositoryData.owner.url,
-        })[0];
+        repository.owner = Member.objects.get({
+          id: repository.ownerId,
+        }) as Member;
+
+        repository.owner.render([]);
 
         /* Return the existing repository from the database */
-        return repository as Repository;
+        return repository;
       } else {
         /* Return a new repository created with repositoryData */
         let repository: any = new Repository(repositoryData);
 
         repository.owner = new Member(repositoryData.owner);
 
-        return repository as Repository;
+        return repository;
       }
     } catch (ex) {
       console.warn(
