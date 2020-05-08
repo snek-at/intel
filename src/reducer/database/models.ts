@@ -826,7 +826,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    */
   getContributions() {
     let response = Statistic.getContributions(this);
-    
+
     return response;
   }
 
