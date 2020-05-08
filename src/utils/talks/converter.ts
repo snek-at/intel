@@ -11,7 +11,6 @@ import { Talk } from "../../reducer/database/models";
  * @description Converter for talk data from the Github APIv3
  */
 async function run(rawData: any) {
-  console.log(rawData);
   rawData.talks.forEach((item: any) => {
     let displayUrl = "https://docs.google.com/viewer?embedded=true&url=";
     let downloadUrl;
