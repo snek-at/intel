@@ -1518,7 +1518,7 @@ abstract class ContributionSO extends BaseSO {
 
 /**
  * @abstract
- * @class A statement object which implements the talk sql statements.
+ * @class A statement object which implements the talk sql statements
  */
 abstract class TalkSO extends BaseSO {
   //> Static Fields
@@ -1527,8 +1527,8 @@ abstract class TalkSO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName(): string {
     return "talk";
@@ -1565,7 +1565,7 @@ abstract class TalkSO extends BaseSO {
   //   /**
   //    * Example method:
   //    *
-  //    * @description A method to save the object to the database.
+  //    * @description A method to save the object to the database
   //    * Only fields defined in the constructor will be saved!
   //    * IMPORTANT!: The fields in objects.create() have to match the SQL
   //    *             insert statement! Therefore unused fields have to be set
@@ -1578,7 +1578,7 @@ abstract class TalkSO extends BaseSO {
   //   /**
   //    * Example method:
   //    *
-  //    * @description A method to filter the database for id=0.
+  //    * @description A method to filter the database for id=0
   //    */
   //   getFirstItem(){
   //     return TalkModel.objects.filter({id: 0}) as TalkModel;

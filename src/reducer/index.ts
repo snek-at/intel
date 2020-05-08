@@ -8,7 +8,7 @@ import * as helper from "./helper";
 //#endregion
 
 //#region > Classes
-/** @class Reduce the data of the models. */
+/** @class Reduce the data of the models */
 class Reducer {
   //> Static Fields
   static models = models;

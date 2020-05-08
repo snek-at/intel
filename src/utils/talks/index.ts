@@ -18,15 +18,15 @@ import * as converter from "./converter";
  */
 interface ISource {
   /**
-   * Authorization: A token for authorizing the client.
+   * Authorization: A token for authorizing the client
    */
   authorization: string;
   /**
-   * Usernames: A string list containing usernames.
+   * Usernames: A string list containing usernames
    */
   usernames: string[];
   /**
-   * Organization: A string list containing organization names.
+   * Organization: A string list containing organization names
    */
   organizations: string[];
 }

@@ -112,7 +112,7 @@ interface IContribution {
   calendarId: number;
 }
 
-/** @interface Talk defines the structure of the contribution model. */
+/** @interface Talk defines the structure of the contribution model */
 interface ITalk {
   id: number;
   name: string;
@@ -973,8 +973,8 @@ class Contribution extends osm.models.ContributionSO implements IContribution {
 }
 
 /**
- * @class A OSM model for a contribution object.
- * @extends osm.models.ContributionSO Statement object.
+ * @class A OSM model for a talk object
+ * @extends osm.models.TalkSO Statement object
  */
 class Talk extends osm.models.TalkSO implements ITalk {
   public static objects = osm.models.TalkSO.getObjects(Talk);
