@@ -17,6 +17,7 @@ import * as statistic from "./statements/statistic";
 import * as streak from "./statements/streak";
 import * as calendar from "./statements/calendar";
 import * as contribution from "./statements/contribution";
+import * as talk from "./statements/talk";
 //> Helper
 // Contains all helper
 import * as helper from "../helper";
@@ -1514,6 +1515,86 @@ abstract class ContributionSO extends BaseSO {
   //   }
   // }
 }
+
+/**
+ * @abstract
+ * @class A statement object which implements the talk sql statements.
+ */
+abstract class TalkSO extends BaseSO {
+  //> Static Fields
+  static statements = talk;
+
+  //> Methods
+  /**
+   * @static
+   * @returns {string} A table name.
+   * @description Returns the database table name of this osm model.
+   */
+  tableName(): string {
+    return "talk";
+  }
+
+  //> Model Implementation Example
+  // class TalkModel extends TalkSO{
+  //   /**
+  //    * General usage: objects.create({fields}), objects.filter({id=1}),
+  //    *                objects.all()
+  //    *
+  //    * @see {@link https://bit.ly/2Vxq1tu |SNEK Reconstructor}
+  //    *      for further information.
+  //    */
+  //   public static objects = TalkSO.getObjects(TalkModel);
+
+  //   /**
+  //    * Fields may contain all fields defined by the database table.
+  //    * Notice!: The NOT NULL fields are strictly required!
+  //    * Also custom fields are possible too.
+  //    * Notice!: Custom field cannot be saved in the database without
+  //    *          modifying the initialize statement of the statement
+  //    *          object!
+  //    *
+  //    * @see {@link https://bit.ly/2XGCIVu |Talk SQL statements}
+  //    *      for further information.
+  //    */
+  //   constructor(fields: TalkFields){
+  //     super();
+  //
+  //     this.id = fields.id;
+  //   }
+
+  //   /**
+  //    * Example method:
+  //    *
+  //    * @description A method to save the object to the database.
+  //    * Only fields defined in the constructor will be saved!
+  //    * IMPORTANT!: The fields in objects.create() have to match the SQL
+  //    *             insert statement! Therefore unused fields have to be set
+  //    *             to null!
+  //    */
+  //   save(){
+  //     TalkModel.objects.create({id: this.id});
+  //   }
+
+  //   /**
+  //    * Example method:
+  //    *
+  //    * @description A method to filter the database for id=0.
+  //    */
+  //   getFirstItem(){
+  //     return TalkModel.objects.filter({id: 0}) as TalkModel;
+  //   }
+
+  //   /**
+  //    * Example method:
+  //    *
+  //    * @description A method to get all entries and parse it to a list of
+  //    *              models.
+  //    */
+  //   getAll(){
+  //     return TalkModel.objects.all() as TalkModel[];
+  //   }
+  // }
+}
 //#endregion
 
 //#region > Exports
@@ -1533,6 +1614,7 @@ export {
   StreakSO,
   CalendarSO,
   ContributionSO,
+  TalkSO,
 };
 //#endregion
 

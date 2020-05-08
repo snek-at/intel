@@ -111,6 +111,17 @@ interface IContribution {
   type: string;
   calendarId: number;
 }
+
+/** @interface Talk defines the structure of the contribution model. */
+interface ITalk {
+  id: number;
+  name: string;
+  url: string;
+  displayUrl: string;
+  downloadUrl: string;
+  path: string;
+  repositoryData: string;
+}
 //#endregion
 
 //#region > Classes
@@ -960,6 +971,79 @@ class Contribution extends osm.models.ContributionSO implements IContribution {
    */
   save() {}
 }
+
+/**
+ * @class A OSM model for a contribution object.
+ * @extends osm.models.ContributionSO Statement object.
+ */
+class Talk extends osm.models.TalkSO implements ITalk {
+  public static objects = osm.models.TalkSO.getObjects(Talk);
+  public objects = Talk.objects;
+
+  public id = 0;
+  public name = "";
+  public url = "";
+  public displayUrl = "";
+  public downloadUrl = "";
+  public path = "";
+  public repositoryData = "";
+
+  constructor(args: ITalk) {
+    super();
+
+    this.id = args["id"];
+    this.name = args["name"];
+    this.url = args["url"];
+    this.displayUrl = args["displayUrl"];
+    this.downloadUrl = args["downloadUrl"];
+    this.path = args["path"];
+    this.repositoryData = args["repositoryData"];
+  }
+
+  getRepository(): Repository {
+    try {
+      /* Parse repositoryData to a object */
+      let repositoryData = JSON.parse(this.repositoryData);
+
+      /* Filter repositories for repository represented by repositoryData  */
+      const repository: any = Repository.objects.filter({
+        url: repositoryData.url,
+      })[0];
+
+      if (repository) {
+        repository.owner = Member.objects.filter({
+          url: repositoryData.owner.url,
+        })[0];
+
+        /* Return the existing repository from the database */
+        return repository as Repository;
+      } else {
+        /* Return a new repository created with repositoryData */
+        let repository: any = new Repository(repositoryData);
+
+        repository.owner = new Member(repositoryData.owner);
+
+        return repository as Repository;
+      }
+    } catch (ex) {
+      console.warn(
+        ex +
+          "De-serialization of repositoryData failed, " +
+          "therefore an empty repository is provided!"
+      );
+
+      const repositoryData: any = {};
+
+      return new Repository(repositoryData);
+    }
+  }
+
+  /**
+   * @todo Implement a save functionality.
+   * @description Saves this statement object to the database.
+   */
+  save() {}
+}
 //#endregion
 
 //#region > Exports
@@ -974,6 +1058,7 @@ export {
   RepositoryHasMember,
   Streak,
   Calendar,
+  Talk,
 };
 //#endregion
 
