@@ -24,6 +24,8 @@ import { Reducer } from "./reducer";
 import * as github from "./utils/github/index";
 // Contains the gitlab util
 import * as gitlab from "./utils/gitlab/index";
+// Contains the talks util
+import * as talks from "./utils/talks/index";
 //> Interfaces
 // Contains the profile interface for the profile query result
 import { IProfile } from "./utils/github/queries/index";
@@ -248,6 +250,47 @@ export class Intel implements IIntel {
     for (let source in sources) {
       await this.append(sources[source]);
     }
+  }
+
+  /**
+   * @param {ISource[]} sources A list of source objects
+   * @param {string[]} organizations A string list of organization names
+   * @description Generate talks with provided github source objects and
+   *              organizations.
+   */
+  async generateTalks(sources: ISource[], organizations: string[] = []) {
+    /* Check if organizations are provided */
+    if (organizations.length === 0) {
+      /* Get all organization from database */
+      organizations = Reducer.models.Organization.objects.all();
+      /* Convert to a organization name list */
+      organizations.map((organization: any) => {
+        return organization.name;
+      });
+    }
+
+    /* Convert to a username list */
+    const usernames = sources.map((source) => {
+      return source.user;
+    });
+
+    await talks.generate({
+      /**
+       * The authorization token of the first source is used.
+       * @todo Use authorization token that is related to a talk
+       */
+      authorization: sources[0].authorization,
+      usernames,
+      organizations,
+    });
+  }
+
+  /**
+   * @returns A list of talk objects
+   * @description Delivers all talks from the database
+   */
+  async getTalks() {
+    return this.reducer.getTalks();
   }
 
   /**
