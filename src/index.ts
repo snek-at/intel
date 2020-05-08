@@ -4,8 +4,11 @@
  *  intel = new Intel();
  *  intel.append(ISource);
  *  intel.appendList(ISource[]);
+ *  intel.generateTalks(ISource[], organizations?);
+ *  intel.appendTalk(file);
+ *  intel.getTalks();
  *  intel.get();
- *  intel.snekClient
+ *  intel.snekClient;
  * ##
  */
 
