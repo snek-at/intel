@@ -26,6 +26,8 @@ import * as github from "./utils/github/index";
 import * as gitlab from "./utils/gitlab/index";
 // Contains the talks util
 import * as talks from "./utils/talks/index";
+// Contains the upload util
+import * as upload from "./utils/upload/index";
 //> Interfaces
 // Contains the profile interface for the profile query result
 import { IProfile } from "./utils/github/queries/index";
@@ -283,6 +285,16 @@ export class Intel implements IIntel {
       usernames,
       organizations,
     });
+  }
+
+  /**
+   * @param {Blob} file A file to be uploaded
+   * @description Upload a file to anonfile and add it to models
+   */
+  async appendTalk(file: Blob) {
+    const talk = await upload.anonfiles.uploadFile(file);
+
+    await talks.append(talk);
   }
 
   /**
