@@ -32,7 +32,7 @@ interface ITalk {
  * @function
  * @param {Document} dom A specific download site of anonfile
  * @returns {string | null} The download URL if available
- * @description Extracts the download url from a download site
+ * @description Extracts the download URL from a download site
  */
 function getDownloadUrl(dom: Document): string | null {
   return dom.getElementsByTagName("a")[1].getAttribute("href");

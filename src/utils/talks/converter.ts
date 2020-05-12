@@ -14,7 +14,7 @@ async function run(rawData: any) {
   rawData.talks.forEach((item: any) => {
     let displayUrl = "https://docs.google.com/viewer?embedded=true&url=";
     let downloadUrl;
-    
+
     if (item.displayUrl) {
       displayUrl += item.displayUrl;
       downloadUrl = item.downloadUrl;
@@ -28,7 +28,7 @@ async function run(rawData: any) {
       url: item.html_url,
       displayUrl,
       downloadUrl,
-      path: item.path
+      path: item.path,
     };
 
     const repository = {
@@ -39,13 +39,13 @@ async function run(rawData: any) {
         avatarUrl: item.repository.owner.avatar_url,
         url: item.repository.owner.url,
         fullname: item.repository.owner.fullname,
-        username: item.repository.owner.username
-      }
+        username: item.repository.owner.username,
+      },
     };
 
     Talk.objects.create({
       ...talk,
-      repositoryData: JSON.stringify(repository)
+      repositoryData: JSON.stringify(repository),
     });
   });
 }

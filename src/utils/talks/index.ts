@@ -48,7 +48,6 @@ async function generate(source: ISource) {
   const run = async (name: string, user: boolean = true) => {
     /* Page Number */
     let pn = 1;
-
     /* A counter of the already fetched items */
     let currentItems = 0;
     /* The total amount of items to fetch */
@@ -72,6 +71,7 @@ async function generate(source: ISource) {
       currentItems += response.items.length;
 
       await converter.run({ talks: response.items });
+
       pn++;
     }
   };
