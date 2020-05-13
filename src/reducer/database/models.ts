@@ -112,7 +112,7 @@ interface IContribution {
   calendarId: number;
 }
 
-/** @interface Talk defines the structure of the contribution model */
+/** @interface Talk defines the structure of the talk model */
 interface ITalk {
   id: number;
   name: string;
