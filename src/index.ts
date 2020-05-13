@@ -14,7 +14,7 @@
 //#PACKAGE snek-client
 //## npm install snek-client
 // Contains the clients for API calls to SNEK, Github and Gitlab.
-import { SnekClient, GithubClient, GitlabClient } from "snek-client";
+import { SnekClient, GithubClient, WebClient } from "snek-client";
 
 //> Reducer
 // Contains the reducer and database models
@@ -194,14 +194,14 @@ export class Intel implements IIntel {
 
         await github.converter.run(data);
       } else if (platform === "gitlab") {
-        let gitlabClient: GitlabClient;
+        let gitlabClient: WebClient;
 
         // Init gitlab client
         /* Use the default client url if none is provided */
         if (source.platform.url) {
-          gitlabClient = new GitlabClient(source.platform.url);
+          gitlabClient = new WebClient(source.platform.url);
         } else {
-          gitlabClient = new GitlabClient();
+          gitlabClient = new WebClient("https://gitlab.com");
         }
 
         let rawData = {
@@ -211,22 +211,22 @@ export class Intel implements IIntel {
               ? source.platform.url
               : "https://gitlab.com",
           },
-          home: await gitlabClient.endpointScraper.getDom(
+          home: await gitlabClient.scraper.getDom(
             gitlab.paths.home(source.user)
           ),
-          atom: await gitlabClient.endpointScraper.getDom(
+          atom: await gitlabClient.scraper.getDom(
             gitlab.paths.atom(source.user)
           ),
-          currentCalendar: await gitlabClient.endpointScraper.getJson<{
+          currentCalendar: await gitlabClient.scraper.getJson<{
             [index: string]: number;
           }>(gitlab.paths.currentCalendar(source.user)),
-          groups: await gitlabClient.endpointScraper.getJson<{ html: string }>(
+          groups: await gitlabClient.scraper.getJson<{ html: string }>(
             gitlab.paths.groups(source.user)
           ),
-          projects: await gitlabClient.endpointScraper.getJson<{
+          projects: await gitlabClient.scraper.getJson<{
             html: string;
           }>(gitlab.paths.projects(source.user)),
-          activity: await gitlabClient.endpointScraper.getJson<{
+          activity: await gitlabClient.scraper.getJson<{
             html: string;
           }>(gitlab.paths.activity(source.user)),
         };
