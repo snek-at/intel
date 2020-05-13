@@ -30,11 +30,14 @@ interface ITalk {
 //#region > Functions
 /**
  * @function
- * @param {Document} dom A specific download site of anonfile
+ * @param {string} url The url that contains the download URL
  * @returns {string | null} The download URL if available
  * @description Extracts the download URL from a download site
  */
-function getDownloadUrl(dom: Document): string | null {
+async function getDownloadUrl(url: string): Promise<string | null> {
+  const webClient = new WebClient(url);
+  let dom = await webClient.scraper.getDom("");
+
   return dom.getElementsByTagName("a")[1].getAttribute("href");
 }
 
@@ -54,8 +57,7 @@ async function uploadFile(file: Blob) {
     data: { file: { metadata: { name: string }; url: { short: string } } };
   }>("upload", data);
 
-  webClient = new WebClient(response.data.file.url.short);
-  const downloadUrl = getDownloadUrl(await webClient.scraper.getDom(""));
+  const downloadUrl = await getDownloadUrl(response.data.file.url.short);
 
   const talk: ITalk = {
     name: response.data.file.metadata.name,
@@ -78,7 +80,7 @@ async function uploadFile(file: Blob) {
 //#endregion
 
 //#region > Exports
-export { uploadFile };
+export { uploadFile, getDownloadUrl };
 //#endregion
 
 /**

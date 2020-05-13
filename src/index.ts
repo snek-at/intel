@@ -301,6 +301,18 @@ export class Intel implements IIntel {
   }
 
   /**
+ * @function
+ * @param {string} string The url that contains the download URL
+ * @returns {string | null} The download URL if available
+ * @description Extracts the download URL from a download site
+ */
+  async getDownloadUrl(url: string): Promise<string | null> {
+    let downloadUrl = await upload.anonfiles.getDownloadUrl(url);
+
+    return downloadUrl;
+  }
+
+  /**
    * @returns A list of talk objects
    * @description Delivers all talks from the database
    */
