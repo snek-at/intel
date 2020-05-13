@@ -6,6 +6,7 @@
  *  intel.appendList(ISource[]);
  *  intel.generateTalks(ISource[], organizations?);
  *  intel.appendTalk(file);
+ *  intel.getDownloadUrl();
  *  intel.getTalks();
  *  intel.get();
  *  intel.snekClient;
@@ -301,11 +302,10 @@ export class Intel implements IIntel {
   }
 
   /**
- * @function
- * @param {string} url The url that contains the download URL
- * @returns {string | null} The download URL if available
- * @description Extracts the download URL from a download site
- */
+   * @param {string} url The url that contains the download URL
+   * @returns {string | null} The download URL if available
+   * @description Extracts the download URL from a anonfile download site
+   */
   async getDownloadUrl(url: string): Promise<string | null> {
     let downloadUrl = await upload.anonfiles.getDownloadUrl(url);
 
