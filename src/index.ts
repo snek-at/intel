@@ -4,8 +4,12 @@
  *  intel = new Intel();
  *  intel.append(ISource);
  *  intel.appendList(ISource[]);
+ *  intel.generateTalks(ISource[], organizations?);
+ *  intel.appendTalk(file);
+ *  intel.getDownloadUrl();
+ *  intel.getTalks();
  *  intel.get();
- *  intel.snekClient
+ *  intel.snekClient;
  * ##
  */
 
@@ -24,6 +28,10 @@ import { Reducer } from "./reducer";
 import * as github from "./utils/github/index";
 // Contains the gitlab util
 import * as gitlab from "./utils/gitlab/index";
+// Contains the talks util
+import * as talks from "./utils/talks/index";
+// Contains the upload util
+import * as upload from "./utils/upload/index";
 //> Interfaces
 // Contains the profile interface for the profile query result
 import { IProfile } from "./utils/github/queries/index";
@@ -248,6 +256,68 @@ export class Intel implements IIntel {
     for (let source in sources) {
       await this.append(sources[source]);
     }
+  }
+
+  /**
+   * @param {ISource[]} sources A list of source objects
+   * @param {string[]} organizations A string list of organization names
+   * @description Generate talks with provided github source objects and
+   *              organizations.
+   */
+  async generateTalks(sources: ISource[], organizations: string[] = []) {
+    /* Check if organizations are provided */
+    if (organizations.length === 0) {
+      /* Get all organization from database */
+      organizations = Reducer.models.Organization.objects.all();
+      /* Convert to a organization name list */
+      organizations.map((organization: any) => {
+        return organization.name;
+      });
+    }
+
+    /* Convert to a username list */
+    const usernames = sources.map((source) => {
+      return source.user;
+    });
+
+    await talks.generate({
+      /**
+       * The authorization token of the first source is used.
+       * @todo Use authorization token that is related to a talk
+       */
+      authorization: sources[0].authorization,
+      usernames,
+      organizations,
+    });
+  }
+
+  /**
+   * @param {Blob} file A file to be uploaded
+   * @description Upload a file to anonfile and add it to models
+   */
+  async appendTalk(file: Blob) {
+    const talk = await upload.anonfiles.uploadFile(file);
+
+    await talks.append(talk);
+  }
+
+  /**
+   * @param {string} url The url that contains the download URL
+   * @returns {string | null} The download URL if available
+   * @description Extracts the download URL from a anonfile download site
+   */
+  async getDownloadUrl(url: string): Promise<string | null> {
+    let downloadUrl = await upload.anonfiles.getDownloadUrl(url);
+
+    return downloadUrl;
+  }
+
+  /**
+   * @returns A list of talk objects
+   * @description Delivers all talks from the database
+   */
+  async getTalks() {
+    return this.reducer.getTalks();
   }
 
   /**
