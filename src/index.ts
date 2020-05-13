@@ -302,7 +302,7 @@ export class Intel implements IIntel {
 
   /**
  * @function
- * @param {string} string The url that contains the download URL
+ * @param {string} url The url that contains the download URL
  * @returns {string | null} The download URL if available
  * @description Extracts the download URL from a download site
  */
