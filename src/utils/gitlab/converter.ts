@@ -77,9 +77,7 @@ interface Statistic {
  */
 function runScraper(rawData: IScrapedData) {
   /* Extract platform data from rawData.home document */
-  let platformName = rawData.home.querySelectorAll(
-    '[property="og:site_name"]'
-  )[0].attributes[0].value;
+  let platformName = rawData.platform.name;
 
   let platformUrl = rawData.platform.url;
   let avatarUrl =
