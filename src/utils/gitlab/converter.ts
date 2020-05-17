@@ -89,15 +89,15 @@ function runScraper(rawData: IScrapedData) {
     : avatarUrl;
 
   let websiteUrl = rawData.home.querySelectorAll('[property="og:url"]')[0]
-    .attributes[0].value;
+    ?.attributes[0].value;
 
   let username = rawData.home
     .querySelectorAll('[data-action="overview"]')[0]
-    .getAttribute("href")
+    ?.getAttribute("href")
     ?.slice(1);
 
   let fullName = rawData.home.querySelectorAll('[property="og:title"]')[0]
-    .attributes[0].value;
+    ?.attributes[0].value;
 
   let createdAt = moment(
     new Date(
@@ -110,7 +110,7 @@ function runScraper(rawData: IScrapedData) {
 
   let status = rawData.home.getElementsByClassName("cover-status")[0];
   let statusMessage = status?.lastChild?.textContent;
-  let statusEmojiHTML = status?.getElementsByTagName("gl-emoji")[0].outerHTML;
+  let statusEmojiHTML = status?.getElementsByTagName("gl-emoji")[0]?.outerHTML;
 
   /* Create a platform with the associated platform data */
   let platform = models.Platform.objects.create({
