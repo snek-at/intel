@@ -80,10 +80,13 @@ function runScraper(rawData: IScrapedData) {
   let platformName = rawData.platform.name;
 
   let platformUrl = rawData.platform.url;
-  let avatarUrl =
-    platformUrl +
-    rawData.home.querySelectorAll('[property="og:image"]')[0].attributes[0]
-      .value;
+  let avatarUrl = rawData.home.querySelectorAll('[property="og:image"]')[0]
+    ?.attributes[0].value;
+
+  /* When a default image is set the keywoard upload is not in the url */
+  avatarUrl = avatarUrl.includes("upload")
+    ? platformUrl + avatarUrl
+    : avatarUrl;
 
   let websiteUrl = rawData.home.querySelectorAll('[property="og:url"]')[0]
     .attributes[0].value;
