@@ -2,10 +2,27 @@
 //> Models
 // Contains all osm models
 import * as models from "./models";
+//> Reconstructor
+// SOAssembler for SO objects
+import { SOAssembler } from "./reconstructor";
 //#endregion
 
+//#region > Functions
+/**
+ * Reset all database entries.
+ * @function
+ * @description Delete all entries from all database tables
+ */
+function reset() {
+  /* Select all database tables */
+  SOAssembler.database.exec("SHOW TABLES").map((table: any) => {
+    /* Remove all entries from a database table */
+    SOAssembler.database.exec("DELETE FROM " + table.tableid);
+  });
+}
+
 //#region > Exports
-export { models };
+export { models, reset };
 //#endregion
 
 /**
