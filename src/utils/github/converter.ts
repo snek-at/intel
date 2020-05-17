@@ -31,8 +31,8 @@ async function run(rawData: any) {
     fullName: rawData.profile.name,
     createdAt: rawData.profile.createdAt,
     location: rawData.profile.location,
-    statusMessage: rawData.profile.status.message,
-    statusEmojiHTML: rawData.profile.status.emojiHTML,
+    statusMessage: rawData.profile.status?.message,
+    statusEmojiHTML: rawData.profile.status?.emojiHTML,
   }) as models.Platform;
 
   rawData.profile.organizations.edges.forEach((edge: any) => {
