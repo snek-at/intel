@@ -104,7 +104,8 @@ function runScraper(rawData: IScrapedData) {
       rawData.home
         .getElementsByClassName("user-info")[0]
         .getElementsByTagName("p")[0]
-        .getElementsByTagName("span")[1].innerHTML
+        .getElementsByTagName("span")[1]
+        .innerHTML.split("since")[1]
     )
   ).format();
 
