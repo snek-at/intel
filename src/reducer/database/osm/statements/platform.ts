@@ -1,72 +1,75 @@
 //#region > Statements
 const initialize = `
-  DROP TABLE IF EXISTS platform;
-  CREATE TABLE IF NOT EXISTS platform (
-    id INT NOT NULL AUTO_INCREMENT,
-    platformName VARCHAR(80) NOT NULL,
-    platformUrl VARCHAR(2048) NOT NULL,
-    avatarUrl VARCHAR(2048) NOT NULL,
-    websiteUrl VARCHAR(2048) NOT NULL,
-    company VARCHAR(80) NOT NULL,
-    email VARCHAR(80) NOT NULL,
-    username VARCHAR(80) NOT NULL,
-    fullName VARCHAR(80) NOT NULL,
-    createdAt DATE NOT NULL,
-    location VARCHAR(80) NULL,
-    statusMessage VARCHAR(80) NULL,
-    statusEmojiHTML VARCHAR(80) NULL,
-    PRIMARY KEY (id)
+DROP TABLE IF EXISTS platform;
+
+CREATE TABLE IF NOT EXISTS platform
+  (
+     id              INT NOT NULL auto_increment,
+     platformName    VARCHAR(80) NOT NULL,
+     platformUrl     VARCHAR(2048) NOT NULL,
+     avatarUrl       VARCHAR(2048) NOT NULL,
+     websiteUrl      VARCHAR(2048) NOT NULL,
+     company         VARCHAR(80) NOT NULL,
+     email           VARCHAR(80) NOT NULL,
+     username        VARCHAR(80) NOT NULL,
+     fullname        VARCHAR(80) NOT NULL,
+     createdAt       DATE NOT NULL,
+     location        VARCHAR(80) NULL,
+     statusMessage   VARCHAR(80) NULL,
+     statusEmojiHTML VARCHAR(80) NULL,
+     PRIMARY KEY (id)
   );
 `;
 
 const create = `
-  INSERT INTO platform(
-    platformName,
-    platformUrl,
-    avatarUrl,
-    websiteUrl,
-    company,
-    email,
-    username,
-    fullName,
-    createdAt,
-    location,
-    statusMessage,
-    statusEmojiHTML
-  )
-  VALUES (?,?,?,?,?,?,?,?,?,?,?,?);
+INSERT INTO platform
+            (platformName,
+             platformUrl,
+             avatarUrl,
+             websiteUrl,
+             company,
+             email,
+             username,
+             fullname,
+             createdAt,
+             location,
+             statusMessage,
+             statusEmojiHTML)
+VALUES      (?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?);
 `;
 
 const get = `
-  SELECT
-    *
-  FROM
-    platform
-  WHERE
-    id=?
+SELECT *
+FROM   platform
+WHERE  id = ?
 `;
 
 const all = `
-  SELECT
-    *
-  FROM
-    platform
+SELECT *
+FROM   platform
 `;
 
 const lowestCreatedAtYear = `
-  SELECT
-    year(min(createdAt)) as createdAt
-  FROM
-    platform
+SELECT Year(Min(createdAt)) AS createdAt
+FROM   platform
 `;
 
 const getSourceTypes = `
-  SELECT
-    platformName as source,
-    count(platformName) as total
-  FROM
-    platform
-  GROUP BY platformName
+SELECT platformName        AS source,
+       Count(platformName) AS total
+FROM   platform
+GROUP  BY platformName
 `;
 //#endregion
 

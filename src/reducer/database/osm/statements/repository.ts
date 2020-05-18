@@ -1,55 +1,51 @@
 //#region > Statements
 const initialize = `
-  DROP TABLE IF EXISTS repository;
-  CREATE TABLE IF NOT EXISTS repository (
-    id INT NOT NULL AUTO_INCREMENT,
-    avatarUrl VARCHAR(2048) NOT NULL,
-    url VARCHAR(2048) NOT NULL,
-    name VARCHAR(80) NOT NULL,
-    ownerId INT NULL REFERENCES member (id),
-    UNIQUE(url),
-    PRIMARY KEY (id)
+DROP TABLE IF EXISTS repository;
+
+CREATE TABLE IF NOT EXISTS repository
+  (
+     id        INT NOT NULL auto_increment,
+     avatarUrl VARCHAR(2048) NOT NULL,
+     url       VARCHAR(2048) NOT NULL,
+     name      VARCHAR(80) NOT NULL,
+     ownerid   INT NULL REFERENCES member (id),
+     UNIQUE(url),
+     PRIMARY KEY (id)
   );
 `;
 
 const create = `
-  INSERT INTO repository(
-    avatarUrl,
-    url,
-    name,
-    ownerId
-  )
-  VALUES (?,?,?,?);
+INSERT INTO repository
+            (avatarUrl,
+             url,
+             name,
+             ownerid)
+VALUES      (?,
+             ?,
+             ?,
+             ?);
 `;
 
 const get = `
-  SELECT
-    *
-  FROM
-    repository
-  WHERE
-    id=?
+SELECT *
+FROM   repository
+WHERE  id = ?
 `;
 
 const all = `
-  SELECT
-    *
-  FROM
-    repository r
+SELECT *
+FROM   repository r
 `;
 
 const withOwner = `
-  SELECT
-    r.id as id,
-    r.avatarUrl as avatarUrl,
-    r.url as url,
-    r.name as name,
-    m.username as owner
-  FROM 
-    repository r
-  INNER JOIN
-    member m
-      ON r.ownerId = m.id
+SELECT r.id        AS id,
+       r.avatarUrl AS avatarUrl,
+       r.url       AS url,
+       r.name      AS name,
+       m.username  AS owner
+FROM   repository r
+       INNER JOIN member m
+               ON r.ownerid = m.id
 `;
 //#endregion
 

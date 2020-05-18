@@ -1,44 +1,45 @@
 //#region > Statements
 const initialize = `
-  DROP TABLE IF EXISTS talk;
-  CREATE TABLE IF NOT EXISTS talk (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(80) NOT NULL,
-    url VARCHAR(2024) NOT NULL,
-    displayUrl VARCHAR(2024) NOT NULL,
-    downloadUrl VARCHAR(2024) NOT NULL,
-    path VARCHAR(2024) NOT NULL,
-    repositoryData TEXT NOT NULL,
-    PRIMARY KEY (id)
+DROP TABLE IF EXISTS talk;
+
+CREATE TABLE IF NOT EXISTS talk
+  (
+     id             INT NOT NULL auto_increment,
+     name           VARCHAR(80) NOT NULL,
+     url            VARCHAR(2024) NOT NULL,
+     displayUrl     VARCHAR(2024) NOT NULL,
+     downloadUrl    VARCHAR(2024) NOT NULL,
+     path           VARCHAR(2024) NOT NULL,
+     repositoryData TEXT NOT NULL,
+     PRIMARY KEY (id)
   );
 `;
 
 const create = `
-  INSERT INTO talk(
-    name,
-    url,
-    displayUrl,
-    downloadUrl,
-    path,
-    repositoryData
-  )
-  VALUES (?,?,?,?,?,?);
+INSERT INTO talk
+            (name,
+             url,
+             displayUrl,
+             downloadUrl,
+             path,
+             repositoryData)
+VALUES      (?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?);
 `;
 
 const get = `
-  SELECT
-    *
-  FROM
-    talk
-  WHERE
-    id=?
+SELECT *
+FROM   talk
+WHERE  id = ?
 `;
 
 const all = `
-  SELECT
-    *
-  FROM
-    talk
+SELECT *
+FROM   talk
 `;
 //#endregion
 
