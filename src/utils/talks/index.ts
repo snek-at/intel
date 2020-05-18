@@ -82,7 +82,7 @@ async function generate(source: ISource) {
            */
           currentItems = totalItems;
 
-          console.error("TALKS query" + JSON.stringify(err));
+          console.error("TALKS QUERY" + JSON.stringify(err));
         });
     }
   };

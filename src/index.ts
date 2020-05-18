@@ -242,7 +242,7 @@ export class Intel implements IIntel {
         gitlab.converter.runScraper(rawData);
       }
     } catch (err) {
-      console.error(err);
+      console.error("INTEL GITLAB", err);
     }
   }
 

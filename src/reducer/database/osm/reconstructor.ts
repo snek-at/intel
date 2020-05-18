@@ -107,6 +107,8 @@ class SOAssembler {
 
       return response;
     } catch (err) {
+      console.error("OSM RECONSTRUCTOR ALL", err);
+
       return {
         success: false,
         message: err.message,
@@ -192,6 +194,8 @@ class SOAssembler {
 
       return objects;
     } catch (err) {
+      console.error("OSM RECONSTRUCTOR FILTER", err);
+
       return {
         success: false,
         response: null,
