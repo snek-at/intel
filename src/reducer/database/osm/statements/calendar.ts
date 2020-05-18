@@ -46,22 +46,27 @@ const betweenDate = `
     date <= ?
 `;
 
-const busiestDayBetweenDate = `
+const busiestDayBetweenDate = (from: string, to: string) => `
   SELECT 
     total,
     date,
     platformId
   FROM 
     calendar
-  WHERE 
-    total = (
-      SELECT 
-        MAX(total)
-      FROM
-        calendar
-      WHERE date >= ?
-      AND date <= ?)
-  LIMIT 1;
+  WHERE
+    date >= "${from}"
+      AND
+        date <= "${to}"
+      AND total IN (
+                    SELECT 
+                      MAX(total)
+                    FROM
+                      calendar
+                    WHERE
+                      date >= "${from}"
+                        AND
+                          date <= "${to}"
+                    )
 `;
 
 const dayByDate = `

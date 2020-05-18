@@ -1,4 +1,10 @@
 //#region > Imports
+//> Moment
+//#INSTALL "moment"
+// A lightweight JavaScript date library for parsing,
+// validating, manipulating, and formatting dates.
+import moment from "moment";
+
 //> Reconstructor
 // SOAssembler for SO objects
 import { SOAssembler } from "./reconstructor";
@@ -1289,8 +1295,10 @@ abstract class CalendarSO extends BaseSO {
    */
   static getBusiestDay(dates: { from: string; to: string }) {
     let response = SOAssembler.database.exec(
-      CalendarSO.statements.busiestDayBetweenDate,
-      [dates.from, dates.to]
+      CalendarSO.statements.busiestDayBetweenDate(
+        moment(dates.from).format("YYYY-MM-DD"),
+        moment(dates.to).format("YYYY-MM-DD")
+      )
     )[0];
 
     return response;
@@ -1332,8 +1340,8 @@ abstract class CalendarSO extends BaseSO {
     });
 
     try {
-      let busiestDay = CalendarSO.getBusiestDay(dates);
       let busiestDayTotal = 0;
+      let busiestDay = CalendarSO.getBusiestDay(dates);
 
       if (busiestDay) {
         busiestDayTotal = busiestDay.total;
