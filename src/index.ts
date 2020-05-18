@@ -253,6 +253,15 @@ export class Intel implements IIntel {
    * @description Calls .append() for each source object in the provided list.
    */
   async appendList(sources: ISource[]) {
+    /* Sources which platform name is github should be before others */
+    sources = sources.sort((a, b) => {
+      const platformNameOrder = ["github", "gitlab"];
+      const aPlatformNameIndex = platformNameOrder.indexOf(a.platform.name);
+      const bPlatformNameIndex = platformNameOrder.indexOf(b.platform.name);
+
+      return aPlatformNameIndex - bPlatformNameIndex;
+    });
+
     for (let source in sources) {
       await this.append(sources[source]);
     }
