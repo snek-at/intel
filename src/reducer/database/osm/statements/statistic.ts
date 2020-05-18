@@ -80,15 +80,15 @@ ORDER  BY year
 `;
 
 const contributionSumFragment = `
-  sum(totalCommitContributions)
-  + sum(totalIssueContributions)
-  + sum(totalPullRequestContributions)
-  + sum(totalPullRequestReviewContributions)
+  Sum(totalCommitContributions)
+  + Sum(totalIssueContributions)
+  + Sum(totalPullRequestContributions)
+  + Sum(totalPullRequestReviewContributions)
 `;
 
 const contributionOfYearFragment = (type: string) => `
-SELECT   sum(${type})                                                AS total,
-         round(sum(${type}) / (${contributionSumFragment}) * 100, 2) AS share
+SELECT   Sum(${type})                                                AS total,
+         round(Sum(${type}) / (${contributionSumFragment}) * 100, 2) AS share
 FROM     statistic
 WHERE    year = ?
 GROUP BY year
