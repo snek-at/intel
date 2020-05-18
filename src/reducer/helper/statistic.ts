@@ -90,6 +90,9 @@ async function mergedStatistic(): Promise<IStatisticResponse> {
   let currentYear: IStatistic | null = null;
   let yearsList: IStatistic[] = [];
 
+  /* Get merged calendar which contains the current and a list of years */
+  let calendar = helper.calendar.mergedCalendar();
+
   for (const index in statistic) {
     await Delay(300);
 
@@ -113,9 +116,6 @@ async function mergedStatistic(): Promise<IStatisticResponse> {
     }
 
     entry.render([]);
-
-    /* Get merged calendar which contains the current and a list of years */
-    let calendar = helper.calendar.mergedCalendar();
 
     if (entry.year === 0) {
       /* Integrate a calendar year to the current statistic year */
