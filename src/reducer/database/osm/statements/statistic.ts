@@ -64,6 +64,7 @@ const allMerged = `
   FROM
     statistic
   GROUP BY year
+  ORDER BY year
 `;
 
 const contributionSumFragment = `
