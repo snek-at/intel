@@ -260,8 +260,6 @@ export class Intel implements IIntel {
       const aPlatformNameIndex = platformNameOrder.indexOf(a.platform.name);
       const bPlatformNameIndex = platformNameOrder.indexOf(b.platform.name);
 
-      //if (aPlatformNameIndex === bPlatformNameIndex) return a.card - b.card;
-
       return aPlatformNameIndex - bPlatformNameIndex;
     });
 
@@ -283,6 +281,7 @@ export class Intel implements IIntel {
       organizations = Reducer.models.Organization.objects.filter({
         platformName: "github",
       });
+
       /* Convert to a organization name list */
       organizations = organizations.map((organization: any) => {
         return organization.name;

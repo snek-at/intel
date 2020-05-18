@@ -2,7 +2,6 @@
 //> AlaSQL
 // Contains a framework for creating a database in the browser.
 var alasql = require("alasql");
-
 //#endregion
 
 //#region > Classes

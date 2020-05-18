@@ -49,7 +49,7 @@ async function getDownloadUrl(url: string): Promise<string | null> {
  * @function
  * @param {Blob} file A file to be uploaded
  * @returns {ITalk} A unconverted talk object
- * @description Upload a file to anonfile and return
+ * @description Uploads a file to anonfile and returns a talk
  */
 async function uploadFile(file: Blob) {
   let webClient = new WebClient("https://api.anonfiles.com/");

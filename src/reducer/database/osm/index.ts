@@ -11,7 +11,7 @@ import { SOAssembler } from "./reconstructor";
 /**
  * Reset all database entries.
  * @function
- * @description Delete all entries from all database tables
+ * @description Delete all entries from every database table
  */
 function reset() {
   /* Select all database tables */
