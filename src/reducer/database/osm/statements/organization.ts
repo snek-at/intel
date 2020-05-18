@@ -35,9 +35,22 @@ const get = `
 
 const all = `
   SELECT
-    *
-  FROM
-    organization o
+    id,
+    avatarUrl,
+    url,
+    name,
+    fullname,
+    description,
+    (
+      SELECT
+        p.platformName
+      FROM
+        platformhasorganization pho
+          INNER JOIN platform p
+            ON pho.platformId = p.id
+      WHERE pho.organizationId = 1
+      ) AS platformName
+  FROM organization o
 `;
 //#endregion
 
