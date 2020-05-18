@@ -36,7 +36,7 @@ class Reducer {
    *                                          list with talk information.
    * @description Delivers all talks from the database
    */
-  async getTalks() : Promise<helper.talks.ITalk[]> {
+  async getTalks(): Promise<helper.talks.ITalk[]> {
     return helper.talks.mergedTalks();
   }
 

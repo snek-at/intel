@@ -5,7 +5,7 @@ import { WebClient } from "snek-client";
 //#endregion
 
 //#region > Interfaces
-/** 
+/**
  * @todo Convert this to a generic file interface
  * @interface Talk defines the structure of a not converted talk object
  */
@@ -37,7 +37,7 @@ interface ITalk {
 async function getDownloadUrl(url: string): Promise<string | null> {
   const webClient = new WebClient(url);
   /*
-   * The url with which the web client was initialized already contains the endpoint url, 
+   * The url with which the web client was initialized already contains the endpoint url,
    * therefore the path no longer has to be specified explicitly.
    */
   let dom = await webClient.scraper.getDom("");
@@ -49,7 +49,7 @@ async function getDownloadUrl(url: string): Promise<string | null> {
  * @function
  * @param {Blob} file A file to be uploaded
  * @returns {ITalk} A unconverted talk object
- * @description Upload a file to anonfile and return 
+ * @description Upload a file to anonfile and return
  */
 async function uploadFile(file: Blob) {
   let webClient = new WebClient("https://api.anonfiles.com/");

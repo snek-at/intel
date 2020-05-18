@@ -9,7 +9,6 @@ import * as osm from "./osm";
 //> Helper
 // Contains helper functions for the models.
 import * as helper from "./helper";
-import { Share } from "./osm/models";
 //#endregion
 
 //#region > Interfaces

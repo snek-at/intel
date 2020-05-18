@@ -1354,8 +1354,6 @@ abstract class CalendarSO extends BaseSO {
         data: calendar,
       };
     } catch (err) {
-      console.error(err);
-
       return {
         success: false,
         data: helper.calendar.generateCalendarStructure(dates.from, dates.to),

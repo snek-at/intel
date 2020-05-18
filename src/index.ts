@@ -256,8 +256,11 @@ export class Intel implements IIntel {
     /* Sources which platform name is github should be before others */
     sources = sources.sort((a, b) => {
       const platformNameOrder = ["github", "gitlab"];
+
       const aPlatformNameIndex = platformNameOrder.indexOf(a.platform.name);
       const bPlatformNameIndex = platformNameOrder.indexOf(b.platform.name);
+
+      //if (aPlatformNameIndex === bPlatformNameIndex) return a.card - b.card;
 
       return aPlatformNameIndex - bPlatformNameIndex;
     });
@@ -337,13 +340,12 @@ export class Intel implements IIntel {
    * @returns A reduced object.
    * @description Get a reduced object which contains profile and statistic data.
    */
-  get() {
+  async get() {
     return this.reducer.get();
   }
 
   /**
    * Reset reducer.
-   *
    * @description Reinitialize the reducer. This will erase the whole database!
    */
   resetReducer() {
