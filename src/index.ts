@@ -267,10 +267,12 @@ export class Intel implements IIntel {
   async generateTalks(sources: ISource[], organizations: string[] = []) {
     /* Check if organizations are provided */
     if (organizations.length === 0) {
-      /* Get all organization from database */
-      organizations = Reducer.models.Organization.objects.all();
+      /* Get all github organizations from database */
+      organizations = Reducer.models.Organization.objects.filter({
+        platformName: "github",
+      });
       /* Convert to a organization name list */
-      organizations.map((organization: any) => {
+      organizations = organizations.map((organization: any) => {
         return organization.name;
       });
     }
