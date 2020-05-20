@@ -36,7 +36,8 @@ class SOAssembler {
    *
    * @param fields The data of the object. It has to be in the correct order!
    * @returns {object} A object of the initialized Base class
-   * @description Creates a entry in the database and returns a object type of Base
+   * @description Creates a entry in the database and returns a object type of
+   *              Base.
    */
   create(fields: any) {
     try {
@@ -65,7 +66,8 @@ class SOAssembler {
    *
    * @param fields The data to get a object by
    * @returns {object} A object of the initialized Base class
-   * @description Get a object out of the database and convert in to type of Base
+   * @description Get a object out of the database and convert in to type of
+   *              Base.
    */
   get(fields: any) {
     try {
@@ -122,7 +124,8 @@ class SOAssembler {
    *
    * @param filter A filter set
    * @param Cls A optional model. When not provided Base is chosen
-   * @param filterStatement A optional filter statement. When not provided .all() is chosen
+   * @param filterStatement A optional filter statement. When not provided .all()
+   *                       is chosen.
    * @returns {object[]} A list of filtered objects of the initialized Base class
    * @description Get all objects converted to type Cls or Base in a list
    */
@@ -139,8 +142,9 @@ class SOAssembler {
             if ({}.hasOwnProperty.call(filter, f)) {
               /**
                * Proxy to neutralize Generic Object Injection Sink.
-               * 
-               * @todo Validate the proxy workaround for the injection vulnerability via a penetration test
+               *
+               * @todo Validate the proxy workaround for the injection
+               *       vulnerability via a penetration test.
                * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
                * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
                */
@@ -155,8 +159,9 @@ class SOAssembler {
 
               /**
                * Proxy to neutralize Generic Object Injection Sink.
-               * 
-               * @todo Validate the proxy workaround for the injection vulnerability via a penetration test
+               *
+               * @todo Validate the proxy workaround for the injection
+               *       vulnerability via a penetration test.
                * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
                * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
                */
@@ -213,7 +218,8 @@ class SOAssembler {
    *
    * @param query A custom SQL statement
    * @returns {object} A object of the initialized Base class
-   * @description Get a object out of the database and convert in to type of Base
+   * @description Get a object out of the database and convert in to type of
+   *              Base.
    */
   custom(query: any) {
     try {

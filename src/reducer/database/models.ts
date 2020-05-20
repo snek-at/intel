@@ -232,7 +232,8 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
    *
    * @param fields Calendar entry data.
    * @returns {Statistic} A calendar object
-   * @description Create a day of a calendar with the given fields within this platform
+   * @description Create a day of a calendar with the given fields within this
+   *              platform.
    */
   createCalendarEntry(fields: any): Calendar {
     fields.platformId = this.id;
@@ -277,7 +278,8 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
   /**
    * Get a calendar.
    *
-   * @returns {helper.calendar.ICalendar} A contribution calendar structure object
+   * @returns {helper.calendar.ICalendar} A contribution calendar structure
+   *                                      object.
    * @description Get a merged contribution calendar from all platform data
    */
   getCalendar(dates: any) {
@@ -707,7 +709,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
 
   /**
    * Get dates of statistic.
-   * 
+   *
    * @returns {object} A object with from and to date
    * @description Get the correct from and to date. The calculation
    *              is based on wether this statistic is the current year or not.
@@ -795,7 +797,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    *
    * @returns {Calendar} A calendar object
    * @description Get the entry with the most contributions per day within
-   * the date range of this statistic.
+   *              the date range of this statistic.
    */
   getBusiestDay(): Calendar {
     if (this.year || this.year === 0) {
@@ -810,7 +812,10 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
       }
     }
 
-    /* Create empty calendar entry for busiest day, if there is no real busiest day */
+    /*
+     * Create empty calendar entry for busiest day, if there is no real
+     * busiest day-
+     */
     return new Calendar({
       id: -1,
       date: "",
@@ -823,7 +828,8 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    * Get all contributions.
    *
    * @returns {object} A contribution type statistic object
-   * @description Get a merged contribution over all platforms within this statistic year
+   * @description Get a merged contribution over all platforms within this
+   *              statistic year.
    */
   getContributions() {
     let response = Statistic.getContributions(this);
@@ -835,7 +841,8 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    * Get merged statistic.
    *
    * @returns {Statistic[]} A list of merged statistic years object
-   * @description Get a list of statistic years from merged data of all platforms
+   * @description Get a list of statistic years from merged data of all
+   *              platforms.
    */
   static getMerged(): Statistic[] {
     return super.getMerged(Statistic) as Statistic[];

@@ -10,7 +10,7 @@ import { SOAssembler } from "./reconstructor";
 //#region > Functions
 /**
  * Reset all database entries.
- * 
+ *
  * @function
  * @description Delete all entries from every database table
  */

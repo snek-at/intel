@@ -11,12 +11,15 @@ import * as queries from "./data";
 
 //#region > Interfaces
 /**
- * @interface Profile defines the structure of the profile object which is required to generate the calendar query
- * @description Only createdAt is defined due to no more information is needed to generate the calendar query
+ * @interface Profile defines the structure of the profile object which is required
+ *                   to generate the calendar query.
+ * @description Only createdAt is defined due to no more information is needed to
+ *              generate the calendar query.
  */
 interface IProfile {
   /**
-   * CreatedAt: A datetime string which defines the day where a account of a provided platform was created.
+   * CreatedAt: A datetime string which defines the day where a account of a
+   *            provided platform was created.
    */
   createdAt: string;
 }

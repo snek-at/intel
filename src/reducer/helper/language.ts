@@ -8,6 +8,7 @@ import * as models from "../database/models";
 /**
  * Get a language statistic over all platforms.
  *
+ * @function
  * @returns {models.Language[]} A list of merged language objects
  */
 function mergedLanguage() {

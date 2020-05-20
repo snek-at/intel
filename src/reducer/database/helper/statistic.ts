@@ -27,6 +27,7 @@ interface IDay {
 /**
  * Calculate contribution streaks.
  *
+ * @function
  * @param values A list of days
  * @returns {object} A list of streaks
  * @description Determines the contribution streaks from a list of days

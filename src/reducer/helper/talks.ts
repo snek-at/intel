@@ -12,6 +12,7 @@ interface ITalk extends Talk {
    */
   repository: Repository;
   /**
+   * //#LEGACY
    * @todo Move this to snek-at/engine
    * Uid: A temporary random string to identify a talk.
    */

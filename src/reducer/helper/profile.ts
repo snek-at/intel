@@ -71,8 +71,10 @@ interface IOrganization extends models.Organization {
 /**
  * Get merged profile.
  *
+ * @function
  * @returns A merged profile object
- * @description Get all profile information. Platform nr. 1 is used for general information
+ * @description Get all profile information. Platform nr. 1 is used for general
+ *              information.
  */
 async function mergedProfile() {
   let platform = models.Platform.objects.get({ id: 1 }) as IPlatform;

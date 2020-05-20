@@ -60,17 +60,21 @@ async function run(rawData: any) {
     }
   });
 
-  /** @todo Store repositories with key: nameWithOwner in order to prevent duplicates */
+  /**
+   * @todo Store repositories with key: nameWithOwner in order to prevent
+   *       duplicates.
+   */
 
   let repositories: any = {};
 
   // Calendar
   for (let [index, yearObject] of Object.entries(rawData.calendar)) {
     await Delay(300);
+
     /*
-      Set type of year because it is not possible in the loop declaration.
-      This is required because of the type of yearIndex which is unknown.
-    */
+     * Set type of year because it is not possible in the loop declaration.
+     * This is required because of the type of yearIndex which is unknown.
+     */
     let year = yearObject as any;
 
     if (index !== "__typename") {

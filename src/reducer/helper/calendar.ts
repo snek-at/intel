@@ -16,14 +16,13 @@ import { ICalendar } from "../database/helper/calendar";
 /**
  * Get a merged calendar object.
  *
- * @returns {object} A calendar object containing the current calendar structure object
- * and the calendar structure objects of all years.
+ * @function
+ * @returns {object} A calendar object containing the current calendar structure
+ *                   object and the calendar structure objects of all years.
  * @description Get merged contribution calendars over all platforms by year
  */
 function mergedCalendar() {
-  /**
-   * @todo Error handling
-   */
+  /** @todo Error handling */
   let current = models.Calendar.getCalendar({
     from: moment().subtract(1, "years").day(0).format(),
     to: moment().format(),
@@ -32,9 +31,7 @@ function mergedCalendar() {
   const { createdAt } = models.Platform.getLowestCreatedAtYear();
   let years: ICalendar[] = [];
 
-  /**
-   * @todo Error handling
-   */
+  /** @todo Error handling */
   for (let year = createdAt; year <= moment().year(); year++) {
     years.push(
       models.Calendar.getCalendar({

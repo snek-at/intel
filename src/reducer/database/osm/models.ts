@@ -30,7 +30,7 @@ import * as helper from "../helper";
 //#endregion
 
 //#region > Interfaces
-/** @interface Share defines the structure of a contribution type share. */
+/** @interface Share defines the structure of a contribution type share */
 interface Share {
   /**
    * Size: The size of the share. E.g: 51.92%.
@@ -200,7 +200,7 @@ abstract class PlatformSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "platform";
   }
 
@@ -281,7 +281,7 @@ abstract class MemberSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "member";
   }
 
@@ -399,7 +399,7 @@ abstract class RepositorySO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "repository";
   }
 
@@ -480,7 +480,7 @@ abstract class RepositoryHasMemberSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "repositoryhasmember";
   }
 
@@ -562,7 +562,7 @@ abstract class LanguageSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "language";
   }
 
@@ -644,7 +644,7 @@ abstract class PlatformHasRepositorySO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "platformhasrepository";
   }
 
@@ -752,7 +752,7 @@ abstract class OrganizationSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "organization";
   }
 
@@ -833,7 +833,7 @@ abstract class OrganizationHasMemberSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "organizationhasmember";
   }
 
@@ -918,7 +918,7 @@ abstract class PlatformHasOrganizationSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "platformhasorganization";
   }
 
@@ -1117,7 +1117,7 @@ abstract class StatisticSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "statistic";
   }
 
@@ -1197,7 +1197,7 @@ abstract class StreakSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "streak";
   }
 
@@ -1375,7 +1375,7 @@ abstract class CalendarSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "calendar";
   }
 
@@ -1455,7 +1455,7 @@ abstract class ContributionSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName() {
+  tableName(): string {
     return "contribution";
   }
 

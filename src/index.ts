@@ -46,7 +46,6 @@ interface IIntel {
   snekclient: SnekClient;
   /**
    * @todo Adding error handling
-   * @function
    * @param {ISource} source A source object
    * @returns {Promise<void>} Empty promise for conformation of completion
    * @description Append data to the database based on the information in
@@ -55,7 +54,6 @@ interface IIntel {
   append(source: ISource): Promise<void>;
   /**
    * @todo Adding error handling
-   * @function
    * @param {ISource[]} sources A list of source objects
    * @returns {Promise<void>} Empty promise for conformation of completion
    * @description Append data to the database for n source objects
@@ -98,8 +96,9 @@ interface IDataUser {
   data: {
     /**
      * User: Can contain any information according to a user.
-     *       The content of this object relays on the query with which the client
-     *       is addressed.
+     *       The content of this object relays on the query with which the
+     *       client.
+     *
      */
     user: object;
   };
@@ -126,10 +125,7 @@ interface IGitHubData {
 /**
  * @class Intel - A place where everything becomes one thing.
  * By using the snek-client, utils and the brand new snek-reducer we
- * created a new way of life.
- * Some might say that this is not perfect in every way. But they are just fools.
- * We know every single mistake, every single scratch.
- * Although we can frankly say, we love it!
+ * created a new way of life. We can frankly say, we love it!
  * @implements IIntel
  * @see {@link http://github.com/snek-at/intel/README.md |SNEK Intel README}
  *      for further information.
@@ -296,7 +292,7 @@ export class Intel implements IIntel {
     await talks.generate({
       /**
        * The authorization token of the first source is used.
-       * 
+       *
        * @todo Use authorization token that is related to a talk
        */
       authorization: sources[0].authorization,
@@ -346,7 +342,7 @@ export class Intel implements IIntel {
 
   /**
    * Reset reducer.
-   * 
+   *
    * @description Reinitialize the reducer. This will erase the whole database
    */
   resetReducer() {
