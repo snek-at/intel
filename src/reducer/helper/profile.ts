@@ -1,5 +1,6 @@
 //#region > Imports
-//> Lodash
+//# PACKAGE "lodash.clonedeep"
+//## npm install "lodash.clonedepp"@4.5.0
 // Contains a method to create a deep copy of a object
 import cloneDeep from "lodash.clonedeep";
 
@@ -13,8 +14,8 @@ import Delay from "../../toolbox/Delay";
 
 //#region > Interfaces
 /**
- * @interface Platform defines the structure of the platform object.
- * @extends models.Platform A OSM model.
+ * @interface Platform defines the structure of the platform object
+ * @extends models.Platform A OSM model
  */
 interface IPlatform extends models.Platform {
   /**
@@ -32,8 +33,8 @@ interface IPlatform extends models.Platform {
 }
 
 /**
- * @interface Repository defines the structure of the repository object.
- * @extends models.Repository A OSM model.
+ * @interface Repository defines the structure of the repository object
+ * @extends models.Repository A OSM model
  */
 interface IRepository extends models.Repository {
   /**
@@ -51,8 +52,8 @@ interface IRepository extends models.Repository {
 }
 
 /**
- * @interface Organization defines the structure of the organization object.
- * @extends models.Organization A OSM model.
+ * @interface Organization defines the structure of the organization object
+ * @extends models.Organization A OSM model
  */
 interface IOrganization extends models.Organization {
   /**
@@ -70,8 +71,8 @@ interface IOrganization extends models.Organization {
 /**
  * Get merged profile.
  *
- * @returns A merged profile object.
- * @description Get all profile information. Platform nr. 1 is used for general information.
+ * @returns A merged profile object
+ * @description Get all profile information. Platform nr. 1 is used for general information
  */
 async function mergedProfile() {
   let platform = models.Platform.objects.get({ id: 1 }) as IPlatform;

@@ -1,11 +1,12 @@
 //#region > Imports
-//> AlaSQL
-// Contains a framework for creating a database in the browser.
+//# PACKAGE "alasql"
+//## npm install "alasql"@0.5.9
+// Contains a framework for creating a database in the browser
 var alasql = require("alasql");
 //#endregion
 
 //#region > Classes
-/** @class Provides interaction to the database. */
+/** @class Provides interaction to the database */
 class SOAssembler {
   static database = new alasql.Database();
 
@@ -14,8 +15,8 @@ class SOAssembler {
    *
    * @constructor
    * @author Nico Schett <contact@schett.net>
-   * @param Base The class of a OSM model.
-   * @description Creates a instance of SOAssembler.
+   * @param Base The class of a OSM model
+   * @description Creates a instance of SOAssembler
    */
   constructor(private Base: any) {
     /**
@@ -25,7 +26,7 @@ class SOAssembler {
       SOAssembler.database.exec(Base.statements.initialize);
     } else {
       /**
-       * @todo Error handling.
+       * @todo Error handling
        */
     }
   }
@@ -34,8 +35,8 @@ class SOAssembler {
    * Create object in database.
    *
    * @param fields The data of the object. It has to be in the correct order!
-   * @returns {object} A object of the initialized Base class.
-   * @description Creates a entry in the database and returns a object type of Base.
+   * @returns {object} A object of the initialized Base class
+   * @description Creates a entry in the database and returns a object type of Base
    */
   create(fields: any) {
     try {
@@ -62,9 +63,9 @@ class SOAssembler {
   /**
    * Get a object out of the database.
    *
-   * @param fields The data to get a object by.
-   * @returns {object} A object of the initialized Base class.
-   * @description Get a object out of the database and convert in to type of Base.
+   * @param fields The data to get a object by
+   * @returns {object} A object of the initialized Base class
+   * @description Get a object out of the database and convert in to type of Base
    */
   get(fields: any) {
     try {
@@ -89,12 +90,11 @@ class SOAssembler {
   }
 
   /**
-   * Get all objects of the table specifed by type of Base.
+   * Get all objects of the table specified by type of Base.
    *
    * @deprecated The fields parameter my be useless and should be removed!
-   * @param fields The data to get a object by.
-   * @returns {object[]} A list of objects of the initialized Base class.
-   * @description Get all objects converted to type of Base in a list.
+   * @param fields The data to get a object by
+   * @returns {object[]} A list of objects of the initialized Base class
    */
   all(...fields: any[]) {
     try {
@@ -118,13 +118,13 @@ class SOAssembler {
   }
 
   /**
-   * Get filtered objects of the table specifed by type of Base.
+   * Get filtered objects of the table specified by type of Base.
    *
-   * @param filter A filterset.
-   * @param Cls A optional model. When not provided Base is chosen.
-   * @param filterStatement A optional filter statement. When not provided .all() is chosen.
-   * @returns {object[]} A list of filtered objects of the initialized Base class.
-   * @description Get all objects converted to type Cls or Base in a list.
+   * @param filter A filter set
+   * @param Cls A optional model. When not provided Base is chosen
+   * @param filterStatement A optional filter statement. When not provided .all() is chosen
+   * @returns {object[]} A list of filtered objects of the initialized Base class
+   * @description Get all objects converted to type Cls or Base in a list
    */
   filter(filter: any, Cls?: any, filterStatement?: string) {
     try {
@@ -139,7 +139,8 @@ class SOAssembler {
             if ({}.hasOwnProperty.call(filter, f)) {
               /**
                * Proxy to neutralize Generic Object Injection Sink.
-               * @todo Validate the proxy workaround for the injection vulnerability via a penetration test.
+               * 
+               * @todo Validate the proxy workaround for the injection vulnerability via a penetration test
                * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
                * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
                */
@@ -154,7 +155,8 @@ class SOAssembler {
 
               /**
                * Proxy to neutralize Generic Object Injection Sink.
-               * @todo Validate the proxy workaround for the injection vulnerability via a penetration test.
+               * 
+               * @todo Validate the proxy workaround for the injection vulnerability via a penetration test
                * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
                * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
                */
@@ -209,9 +211,9 @@ class SOAssembler {
   /**
    * Send a custom query to the database.
    *
-   * @param query A custom SQL statement.
-   * @returns {object} A object of the initialized Base class.
-   * @description Get a object out of the database and convert in to type of Base.
+   * @param query A custom SQL statement
+   * @returns {object} A object of the initialized Base class
+   * @description Get a object out of the database and convert in to type of Base
    */
   custom(query: any) {
     try {
@@ -233,7 +235,7 @@ class SOAssembler {
   /**
    * Reset the database.
    *
-   * @description Reinitialize the database. This will reset all datasets!
+   * @description Reinitialize the database. This will reset every dataset!
    */
   reload() {
     SOAssembler.database = new alasql.Database();

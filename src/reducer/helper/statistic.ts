@@ -1,6 +1,6 @@
 //#region > Imports
 //> Models
-// Contains all models of the database.
+// Contains all models of the database
 import * as models from "../database/models";
 //> Helper
 // Contains all calendar helper functions
@@ -16,7 +16,7 @@ import { ICalendar } from "../database/helper/calendar";
 //#endregion
 
 //#region > Interfaces
-/** @interface StatisticResponse defines the structure of the merged statistic response object. */
+/** @interface StatisticResponse defines the structure of the merged statistic response object */
 interface IStatisticResponse {
   /**
    * Current: The current statistic year object. This can be null if there is no current year in the database.
@@ -32,7 +32,7 @@ interface IStatisticResponse {
   languages: models.Language[];
 }
 
-/** @interface Statistic defines the structure of statistic object. */
+/** @interface Statistic defines the structure of statistic object */
 interface IStatistic extends models.Statistic {
   /**
    * BustiestDay: A calendar day object.
@@ -81,8 +81,8 @@ interface IStatistic extends models.Statistic {
 /**
  * A merged statistic.
  *
- * @returns A statistic object.
- * @description Returns a object containing e.g busiest day and streaks of current and each year.
+ * @returns A statistic object
+ * @description Returns a object containing e.g busiest day and streaks of current and each year
  */
 async function mergedStatistic(): Promise<IStatisticResponse> {
   let statistic = models.Statistic.getMerged() as IStatistic[];
