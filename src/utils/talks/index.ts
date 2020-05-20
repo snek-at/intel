@@ -82,6 +82,7 @@ async function generate(source: ISource) {
            */
           currentItems = totalItems;
 
+          //#LEGACY
           console.error("TALKS QUERY" + JSON.stringify(err));
         });
     }

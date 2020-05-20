@@ -107,6 +107,7 @@ class SOAssembler {
 
       return response;
     } catch (err) {
+      //#LEGACY
       console.error("OSM RECONSTRUCTOR ALL", err);
 
       return {
@@ -194,6 +195,7 @@ class SOAssembler {
 
       return objects;
     } catch (err) {
+      //#LEGACY
       console.error("OSM RECONSTRUCTOR FILTER", err);
 
       return {
