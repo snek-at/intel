@@ -1,5 +1,5 @@
 //#region > Imports
-//# PACKAGE "react-very-simple-oauth"
+//#PACKAGE "react-very-simple-oauth"
 //## npm i "react-very-simple-oauth"@1.1.1
 // Contains the interfaces for the provider functions
 import { IProvider, ExtractedData } from "react-very-simple-oauth";

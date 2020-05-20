@@ -1,5 +1,5 @@
 //#region > Imports
-//# PACKAGE "react-very-simple-oauth"
+//#PACKAGE "react-very-simple-oauth"
 //## npm install "react-very-simple-oauth"@1.1.1 
 // Contains authentication service
 import RSA from "react-very-simple-oauth";

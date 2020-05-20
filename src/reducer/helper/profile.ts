@@ -1,5 +1,5 @@
 //#region > Imports
-//# PACKAGE "lodash.clonedeep"
+//#PACKAGE "lodash.clonedeep"
 //## npm install "lodash.clonedepp"@4.5.0
 // Contains a method to create a deep copy of a object
 import cloneDeep from "lodash.clonedeep";

@@ -1,11 +1,11 @@
 //#region > Imports
-//# PACKAGE "moment"
+//#PACKAGE "moment"
 //## npm install "moment"@2.25.3
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
 
-//> Reconstructor
+//> Re-constructor
 // SOAssembler for SO objects
 import { SOAssembler } from "./reconstructor";
 //> Statements
