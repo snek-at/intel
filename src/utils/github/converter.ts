@@ -1,5 +1,6 @@
 //#region > Imports
-//> Moment
+//# PACKAGE "moment"
+//## npm install "moment"@2.25.3
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
@@ -17,7 +18,7 @@ import Delay from "../../toolbox/Delay";
  * Converter for data from the github api.
  *
  * @param rawData
- * @description Fill the database with data provided by "rawData".
+ * @description Fill the database with data provided by "rawData"
  */
 async function run(rawData: any) {
   let platform = models.Platform.objects.create({

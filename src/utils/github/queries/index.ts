@@ -1,17 +1,18 @@
 //#region > Imports
-//> Moment
+//# PACKAGE "moment"
+//## npm install "moment"@2.25.3
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
 //> Queries
-// Contains all queries for github graphql api.
+// Contains all queries for github graphql api
 import * as queries from "./data";
 //#endregion
 
 //#region > Interfaces
 /**
- * @interface Profile defines the structure of the profile object which is requiered to generate the calendar query.
- * @description Only createdAt is defined due to no more information is needed to generate the calendar query.
+ * @interface Profile defines the structure of the profile object which is required to generate the calendar query
+ * @description Only createdAt is defined due to no more information is needed to generate the calendar query
  */
 interface IProfile {
   /**
@@ -25,8 +26,8 @@ interface IProfile {
 /**
  * Profile query.
  *
- * @returns {DocumentNode} A query in DocumentNode format.
- * @description Get a query used for github profile data.
+ * @returns {DocumentNode} A query in DocumentNode format
+ * @description Get a query used for github profile data
  */
 function profile() {
   return queries.profile();
@@ -35,9 +36,9 @@ function profile() {
 /**
  * Calendar query.
  *
- * @param profile The resolved profile query of the github api.
- * @returns {DocumentNode} A query in DocumentNode format.
- * @description Get a query used for github profile data.
+ * @param profile The resolved profile query of the github api
+ * @returns {DocumentNode} A query in DocumentNode format
+ * @description Get a query used for github profile data
  */
 function calendar(profile: IProfile) {
   let date = moment(profile.createdAt);

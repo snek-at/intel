@@ -1,5 +1,6 @@
 //#region > Imports
-//> Moment
+//# PACKAGE "moment"
+//## npm install "moment"@2.25.3
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
@@ -29,7 +30,7 @@ interface IScrapedData {
   atom?: Document;
   /** Contribution calendar of a user. Contains only days of the current year. */
   currentCalendar: { [index: string]: number };
-  /** JSON data of a users groups */
+  /** JSON data of a users groups. */
   groups: {
     html: string;
   };
@@ -46,7 +47,7 @@ interface IScrapedData {
   };
 }
 
-/** @interfaces CalendarDays defines the data structure for the calendar. */
+/** @interfaces CalendarDays defines the data structure for the calendar */
 interface CalendarDays {
   [date: string]: {
     contributions: {
@@ -58,7 +59,7 @@ interface CalendarDays {
   };
 }
 
-/** @interfaces Statistic defines the data structure for a statistic year. */
+/** @interfaces Statistic defines the data structure for a statistic year */
 interface Statistic {
   [year: number]: {
     [type: string]: {
@@ -71,9 +72,10 @@ interface Statistic {
 //#region > Functions
 /**
  * Converter for data from the scraper.
+ * 
  * @function
- * @param rawData Data to be processed. Must fit IScrapedData format.
- * @description Fill the database with data provided by "rawData".
+ * @param rawData Data to be processed. Must fit IScrapedData format
+ * @description Fill the database with data provided by "rawData"
  */
 function runScraper(rawData: IScrapedData) {
   /* Extract platform data from rawData.home document */
@@ -386,10 +388,10 @@ function runScraper(rawData: IScrapedData) {
           totalPullRequestContributions: stats[year]["pullRequest"]?.total
             ? stats[year]["pullRequest"].total
             : 0,
-          totalPullRequestReviewContributions: 0, // currently not provided by Gitlab
-          totalRepositoriesWithContributedIssues: 0, // currently not provided by Gitlab
-          totalRepositoriesWithContributedCommits: 0, // currently not provided by Gitlab
-          totalRepositoriesWithContributedPullRequests: 0, // currently not provided by Gitlab
+          totalPullRequestReviewContributions: 0, // currently not provided by GitLab
+          totalRepositoriesWithContributedIssues: 0, // currently not provided by GitLab
+          totalRepositoriesWithContributedCommits: 0, // currently not provided by GitLab
+          totalRepositoriesWithContributedPullRequests: 0, // currently not provided by GitLab
         });
       }
 
@@ -407,10 +409,10 @@ function runScraper(rawData: IScrapedData) {
         totalPullRequestContributions: stats[year]["pullRequest"]?.total
           ? stats[year]["pullRequest"].total
           : 0,
-        totalPullRequestReviewContributions: 0, // currently not provided by Gitlab
-        totalRepositoriesWithContributedIssues: 0, // currently not provided by Gitlab
-        totalRepositoriesWithContributedCommits: 0, // currently not provided by Gitlab
-        totalRepositoriesWithContributedPullRequests: 0, // currently not provided by Gitlab
+        totalPullRequestReviewContributions: 0, // currently not provided by GitLab
+        totalRepositoriesWithContributedIssues: 0, // currently not provided by GitLab
+        totalRepositoriesWithContributedCommits: 0, // currently not provided by GitLab
+        totalRepositoriesWithContributedPullRequests: 0, // currently not provided by GitLab
       });
     }
   }
