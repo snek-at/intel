@@ -1,31 +1,30 @@
 //#region > Statementss
 const initialize = `
-  DROP TABLE IF EXISTS platformhasrepository;
-  CREATE TABLE IF NOT EXISTS platformhasrepository (
-    id INT NOT NULL AUTO_INCREMENT,
-    platformId INT NOT NULL REFERENCES platform (id),
-    repositoryId INT NOT NULL  REFERENCES repository (id),
-    UNIQUE(id),
-    PRIMARY KEY (platformId, repositoryId)
+DROP TABLE IF EXISTS platformhasrepository;
+
+CREATE TABLE IF NOT EXISTS platformhasrepository
+  (
+     id           INT NOT NULL auto_increment,
+     platformId   INT NOT NULL REFERENCES platform (id),
+     repositoryId INT NOT NULL REFERENCES repository (id),
+     UNIQUE(id),
+     PRIMARY KEY (platformId, repositoryId)
   );
 `;
 
 const create = `
-  INSERT INTO platformhasrepository(
-    platformId,
-    repositoryId
-  )
-  VALUES (?,?);
+INSERT INTO platformhasrepository
+            (platformId,
+             repositoryId)
+VALUES      (?,
+             ?);
 `;
 
 const all = `
-  SELECT
-    *
-  FROM
-    platformhasrepository
-  INNER JOIN
-    repository r
-      ON repositoryId = r.id
+SELECT *
+FROM   platformhasrepository
+       INNER JOIN repository r
+               ON repositoryId = r.id
 `;
 //#endregion
 

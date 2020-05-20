@@ -242,7 +242,8 @@ export class Intel implements IIntel {
         gitlab.converter.runScraper(rawData);
       }
     } catch (err) {
-      console.error(err);
+      //#LEGACY
+      console.error("INTEL GITLAB", err);
     }
   }
 
@@ -253,6 +254,16 @@ export class Intel implements IIntel {
    * @description Calls .append() for each source object in the provided list.
    */
   async appendList(sources: ISource[]) {
+    /* Sources which platform name is github should be before others */
+    sources = sources.sort((a, b) => {
+      const platformNameOrder = ["github", "gitlab"];
+
+      const aPlatformNameIndex = platformNameOrder.indexOf(a.platform.name);
+      const bPlatformNameIndex = platformNameOrder.indexOf(b.platform.name);
+
+      return aPlatformNameIndex - bPlatformNameIndex;
+    });
+
     for (let source in sources) {
       await this.append(sources[source]);
     }
@@ -267,10 +278,13 @@ export class Intel implements IIntel {
   async generateTalks(sources: ISource[], organizations: string[] = []) {
     /* Check if organizations are provided */
     if (organizations.length === 0) {
-      /* Get all organization from database */
-      organizations = Reducer.models.Organization.objects.all();
+      /* Get all github organizations from database */
+      organizations = Reducer.models.Organization.objects.filter({
+        platformName: "github",
+      });
+
       /* Convert to a organization name list */
-      organizations.map((organization: any) => {
+      organizations = organizations.map((organization: any) => {
         return organization.name;
       });
     }
@@ -326,17 +340,16 @@ export class Intel implements IIntel {
    * @returns A reduced object.
    * @description Get a reduced object which contains profile and statistic data.
    */
-  get() {
+  async get() {
     return this.reducer.get();
   }
 
   /**
    * Reset reducer.
-   *
    * @description Reinitialize the reducer. This will erase the whole database!
    */
   resetReducer() {
-    this.reducer = new Reducer();
+    this.reducer.reset();
   }
 }
 //#endregion

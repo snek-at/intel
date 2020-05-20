@@ -1,31 +1,30 @@
 //#region > Statements
 const initialize = `
-  DROP TABLE IF EXISTS organizationhasmember;
-  CREATE TABLE IF NOT EXISTS organizationhasmember (
-    id INT NOT NULL AUTO_INCREMENT,
-    organizationId INT NOT NULL REFERENCES organization (id),
-    memberId INT NOT NULL REFERENCES member (id),
-    UNIQUE(id),
-    PRIMARY KEY (organizationId, memberId)
+DROP TABLE IF EXISTS organizationhasmember;
+
+CREATE TABLE IF NOT EXISTS organizationhasmember
+  (
+     id             INT NOT NULL auto_increment,
+     organizationId INT NOT NULL REFERENCES organization (id),
+     memberId       INT NOT NULL REFERENCES member (id),
+     UNIQUE(id),
+     PRIMARY KEY (organizationId, memberId)
   );
 `;
 
 const create = `
-  INSERT INTO organizationhasmember(
-    organizationId,
-    memberId
-  )
-  VALUES (?,?);
+INSERT INTO organizationhasmember
+            (organizationId,
+             memberId)
+VALUES      (?,
+             ?);
 `;
 
 const all = `
-  SELECT
-    *
-  FROM
-    organizationhasmember
-  INNER JOIN
-    member m
-      ON memberId = m.id
+SELECT *
+FROM   organizationhasmember
+       INNER JOIN member m
+               ON memberId = m.id
 `;
 //#endregion
 

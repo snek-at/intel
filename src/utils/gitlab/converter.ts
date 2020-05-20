@@ -77,39 +77,41 @@ interface Statistic {
  */
 function runScraper(rawData: IScrapedData) {
   /* Extract platform data from rawData.home document */
-  let platformName = rawData.home.querySelectorAll(
-    '[property="og:site_name"]'
-  )[0].attributes[0].value;
+  let platformName = rawData.platform.name;
 
   let platformUrl = rawData.platform.url;
-  let avatarUrl =
-    platformUrl +
-    rawData.home.querySelectorAll('[property="og:image"]')[0].attributes[0]
-      .value;
+  let avatarUrl = rawData.home.querySelectorAll('[property="og:image"]')[0]
+    ?.attributes[0].value;
+
+  /* When a default image is set the keywoard upload is not in the url */
+  avatarUrl = avatarUrl.includes("upload")
+    ? platformUrl + avatarUrl
+    : avatarUrl;
 
   let websiteUrl = rawData.home.querySelectorAll('[property="og:url"]')[0]
-    .attributes[0].value;
+    ?.attributes[0].value;
 
   let username = rawData.home
     .querySelectorAll('[data-action="overview"]')[0]
-    .getAttribute("href")
+    ?.getAttribute("href")
     ?.slice(1);
 
   let fullName = rawData.home.querySelectorAll('[property="og:title"]')[0]
-    .attributes[0].value;
+    ?.attributes[0].value;
 
   let createdAt = moment(
     new Date(
       rawData.home
         .getElementsByClassName("user-info")[0]
         .getElementsByTagName("p")[0]
-        .getElementsByTagName("span")[1].innerHTML
+        .getElementsByTagName("span")[1]
+        .innerHTML.split("since")[1]
     )
   ).format();
 
   let status = rawData.home.getElementsByClassName("cover-status")[0];
   let statusMessage = status?.lastChild?.textContent;
-  let statusEmojiHTML = status?.getElementsByTagName("gl-emoji")[0].outerHTML;
+  let statusEmojiHTML = status?.getElementsByTagName("gl-emoji")[0]?.outerHTML;
 
   /* Create a platform with the associated platform data */
   let platform = models.Platform.objects.create({

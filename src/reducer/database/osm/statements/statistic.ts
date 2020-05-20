@@ -1,86 +1,97 @@
 //#region > Statements
 const initialize = `
-  DROP TABLE IF EXISTS statistic;
-  CREATE TABLE IF NOT EXISTS statistic (
-    id INT NOT NULL AUTO_INCREMENT,
-    year INT NOT NULL,
-    totalIssueContributions INT NOT NULL,
-    totalCommitContributions INT NOT NULL,
-    totalRepositoryContributions INT NOT NULL,
-    totalPullRequestContributions INT NOT NULL,
-    totalPullRequestReviewContributions INT NOT NULL,
-    totalRepositoriesWithContributedIssues INT NOT NULL,
-    totalRepositoriesWithContributedCommits INT NOT NULL,
-    totalRepositoriesWithContributedPullRequests INT NOT NULL,
-    platformId INT NOT NULL REFERENCES platform (id),
-    UNIQUE(year, platformId),
-    PRIMARY KEY (id)
+DROP TABLE IF EXISTS statistic;
+
+CREATE TABLE IF NOT EXISTS statistic
+  (
+     id                                           INT NOT NULL auto_increment,
+     year                                         INT NOT NULL,
+     totalIssueContributions                      INT NOT NULL,
+     totalCommitContributions                     INT NOT NULL,
+     totalRepositoryContributions                 INT NOT NULL,
+     totalPullRequestContributions                INT NOT NULL,
+     totalPullRequestReviewContributions          INT NOT NULL,
+     totalRepositoriesWithContributedIssues       INT NOT NULL,
+     totalRepositoriesWithContributedCommits      INT NOT NULL,
+     totalRepositoriesWithContributedPullRequests INT NOT NULL,
+     platformId                                   INT NOT NULL REFERENCES
+     platform (id),
+     UNIQUE(year, platformId),
+     PRIMARY KEY (id)
   );
 `;
 
 const create = `
-  INSERT INTO statistic(
-    year,
-    totalIssueContributions,
-    totalCommitContributions,
-    totalRepositoryContributions,
-    totalPullRequestContributions,
-    totalPullRequestReviewContributions,
-    totalRepositoriesWithContributedIssues,
-    totalRepositoriesWithContributedCommits,
-    totalRepositoriesWithContributedPullRequests,
-    platformId
-  )
-  VALUES (?,?,?,?,?,?,?,?,?,?);
+INSERT INTO statistic
+            (year,
+             totalIssueContributions,
+             totalCommitContributions,
+             totalRepositoryContributions,
+             totalPullRequestContributions,
+             totalPullRequestReviewContributions,
+             totalRepositoriesWithContributedIssues,
+             totalRepositoriesWithContributedCommits,
+             totalRepositoriesWithContributedPullRequests,
+             platformId)
+VALUES      (?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?,
+             ?);
 `;
 
 const get = `
-  SELECT
-    *
-  FROM
-    statistic
-  WHERE
-    id=?
+SELECT *
+FROM   statistic
+WHERE  id = ?
 `;
 
 const all = `
-  SELECT
-    *
-  FROM
-    statistic
+SELECT *
+FROM   statistic
 `;
 
 const allMerged = `
-  SELECT
-    year,
-    sum(totalIssueContributions) as totalIssueContributions,
-    sum(totalCommitContributions) as totalCommitContributions,
-    sum(totalRepositoryContributions) as totalRepositoryContributions,
-    sum(totalPullRequestContributions) as totalPullRequestContributions,
-    sum(totalPullRequestReviewContributions) as totalPullRequestReviewContributions,
-    sum(totalRepositoriesWithContributedIssues) as totalRepositoriesWithContributedIssues,
-    sum(totalRepositoriesWithContributedCommits) as totalRepositoriesWithContributedCommits,
-    sum(totalRepositoriesWithContributedPullRequests) as totalRepositoriesWithContributedPullRequests
-  FROM
-    statistic
-  GROUP BY year
+SELECT year,
+       Sum(totalIssueContributions)                      AS
+       totalIssueContributions,
+       Sum(totalCommitContributions)                     AS
+       totalCommitContributions,
+       Sum(totalRepositoryContributions)                 AS
+       totalRepositoryContributions,
+       Sum(totalPullRequestContributions)                AS
+       totalPullRequestContributions,
+       Sum(totalPullRequestReviewContributions)          AS
+       totalPullRequestReviewContributions,
+       Sum(totalRepositoriesWithContributedIssues)       AS
+       totalRepositoriesWithContributedIssues,
+       Sum(totalRepositoriesWithContributedCommits)      AS
+       totalRepositoriesWithContributedCommits,
+       Sum(totalRepositoriesWithContributedPullRequests) AS
+       totalRepositoriesWithContributedPullRequests
+FROM   statistic
+GROUP  BY year
+ORDER  BY year
 `;
 
 const contributionSumFragment = `
-  sum(totalCommitContributions)
-  + sum(totalIssueContributions)
-  + sum(totalPullRequestContributions)
-  + sum(totalPullRequestReviewContributions)
+  Sum(totalCommitContributions)
+  + Sum(totalIssueContributions)
+  + Sum(totalPullRequestContributions)
+  + Sum(totalPullRequestReviewContributions)
 `;
 
 const contributionOfYearFragment = (type: string) => `
-  SELECT
-    sum(${type}) as total,
-    ROUND(sum(${type}) / (${contributionSumFragment}) * 100, 2) as share
-  FROM
-    statistic
-  WHERE year = ?
-  GROUP BY year
+SELECT   Sum(${type})                                                AS total,
+         round(Sum(${type}) / (${contributionSumFragment}) * 100, 2) AS share
+FROM     statistic
+WHERE    year = ?
+GROUP BY year
 `;
 
 const commitContributionsOfYear = `

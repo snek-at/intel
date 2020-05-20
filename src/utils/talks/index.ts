@@ -62,17 +62,29 @@ async function generate(source: ISource) {
         path = paths.organization(name, pn);
       }
 
-      let response = await client.scraper.getJson<{
-        items: [];
-        total_count: 0;
-      }>(path);
+      await client.scraper
+        .getJson<{
+          items: [];
+          total_count: 0;
+        }>(path)
+        .then(async (response) => {
+          totalItems = response.total_count;
+          currentItems += response.items.length;
 
-      totalItems = response.total_count;
-      currentItems += response.items.length;
+          await converter.run({ talks: response.items });
 
-      await converter.run({ talks: response.items });
+          pn++;
+        })
+        .catch((err) => {
+          /*
+           * Set currentItems equal to to totalItem in order to skip
+           * the failed request.
+           */
+          currentItems = totalItems;
 
-      pn++;
+          //#LEGACY
+          console.error("TALKS QUERY" + JSON.stringify(err));
+        });
     }
   };
 

@@ -1,40 +1,39 @@
 //#region > Statements
 const initialize = `
-  DROP TABLE IF EXISTS streak;
-  CREATE TABLE IF NOT EXISTS streak (
-    id INT NOT NULL AUTO_INCREMENT,
-    startDate DATE NULL,
-    endDate DATE NULL,
-    total INT NULL,
-    statisticId INT NOT NULL REFERENCES statistic(id),
-    PRIMARY KEY (id)
+DROP TABLE IF EXISTS streak;
+
+CREATE TABLE IF NOT EXISTS streak
+  (
+     id          INT NOT NULL auto_increment,
+     startDate   DATE NULL,
+     endDate     DATE NULL,
+     total       INT NULL,
+     statisticId INT NOT NULL REFERENCES statistic(id),
+     PRIMARY KEY (id)
   );
 `;
 
 const create = `
-  INSERT INTO streak(
-    startDate,
-    endDate,
-    total,
-    statisticId
-  )
-  VALUES (?,?,?,?);
+INSERT INTO streak
+            (startDate,
+             endDate,
+             total,
+             statisticId)
+VALUES      (?,
+             ?,
+             ?,
+             ?);
 `;
 
 const get = `
-  SELECT
-    *
-  FROM
-    streak
-  WHERE
-    id=?
+SELECT *
+FROM   streak
+WHERE  id = ?
 `;
 
 const all = `
-  SELECT
-    *
-  FROM
-    streak
+SELECT *
+FROM   streak
 `;
 //#endregion
 

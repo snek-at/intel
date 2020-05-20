@@ -2,6 +2,8 @@
 //> Models
 // Contains all models of the database.
 import * as models from "./database/models";
+// Contains the osm functions
+import * as osm from "./database/osm";
 //> Helper
 // Contains helper functions for the models.
 import * as helper from "./helper";
@@ -34,14 +36,22 @@ class Reducer {
    *                                          list with talk information.
    * @description Delivers all talks from the database
    */
-  async getTalks() : Promise<helper.talks.ITalk[]> {
+  async getTalks(): Promise<helper.talks.ITalk[]> {
     return helper.talks.mergedTalks();
+  }
+
+  /**
+   * Reset the database.
+   * @description Resets the database by emptying all tables
+   */
+  reset() {
+    osm.reset();
   }
 }
 //#endregion
 
 //#region > Exports
-export { Reducer, models };
+export { Reducer };
 //#endregion
 
 /**
