@@ -80,6 +80,7 @@ function calculateStreaks(values: IDay[]) {
       }
     }
   } else {
+    //#ERROR
     throw new Error("An error occurred due to invalid input parameters!");
   }
 

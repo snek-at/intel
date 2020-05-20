@@ -60,6 +60,7 @@ const GithubProvider: IProvider<boolean> = {
       ? errorDescriptionMatch[1]
       : "";
 
+    //#ERROR
     return new Error(
       `Error during login. Reason: ${errorReason} Description: ${errorDescription}`
     );
