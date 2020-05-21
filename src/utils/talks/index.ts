@@ -1,6 +1,6 @@
 //#region > Imports
 //#PACKAGE "snek-client"
-//## npm install "snek-client"
+//## npm install "./client"
 // Contains a client for web calls
 import { WebClient } from "snek-client";
 

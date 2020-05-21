@@ -16,7 +16,6 @@ class SOAssembler {
    * @constructor
    * @author Nico Schett <contact@schett.net>
    * @param Base The class of a OSM model
-   * @description Creates a instance of SOAssembler
    */
   constructor(private Base: any) {
     /**

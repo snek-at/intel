@@ -274,7 +274,8 @@ function runScraper(rawData: IScrapedData) {
       }
 
       /*
-       * Select the "and n more commits" and set the default contribution number
+       * Select the "and n more commits" and set the default contribution
+       * number.
        */
       let moreCommitText = element
         .getElementsByClassName("commits-stat")[0]

@@ -15,7 +15,7 @@
 
 //#region > Imports
 //#PACKAGE "snek-client"
-//## npm install "snek-client"
+//## npm install "./client"
 // Contains the clients for API calls to SNEK, Github and GitLab
 import { SnekClient, GithubClient, WebClient } from "snek-client";
 
@@ -98,7 +98,6 @@ interface IDataUser {
      * User: Can contain any information according to a user.
      *       The content of this object relays on the query with which the
      *       client.
-     *
      */
     user: object;
   };
@@ -124,8 +123,8 @@ interface IGitHubData {
 //#region > Classes
 /**
  * @class Intel - A place where everything becomes one thing.
- * By using the snek-client, utils and the brand new snek-reducer we
- * created a new way of life. We can frankly say, we love it!
+ *        By using the snek-client, utils and the brand new snek-reducer we
+ *        created a new way of life. We can frankly say, we love it!
  * @implements IIntel
  * @see {@link http://github.com/snek-at/intel/README.md |SNEK Intel README}
  *      for further information.
@@ -137,7 +136,6 @@ export class Intel implements IIntel {
   /**
    * @constructor
    * @author Nico Schett <contact@schett.net>
-   * @description Creates a Intel instance
    */
   constructor() {
     // init snekclient
