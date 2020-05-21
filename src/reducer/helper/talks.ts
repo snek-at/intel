@@ -5,7 +5,7 @@ import { Repository, Talk } from "../database/models";
 //#endregion
 
 //#region > Interfaces
-/** @interface Talk defines the structure of a talk object. */
+/** @interface Talk defines the structure of a talk object */
 interface ITalk extends Talk {
   /**
    * Repository: The repository object which contains the talk.

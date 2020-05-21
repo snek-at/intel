@@ -1,6 +1,6 @@
 //#region > Imports
 //#PACKAGE "react-very-simple-oauth"
-//## npm i "react-very-simple-oauth"@1.1.1
+//## npm install "react-very-simple-oauth"@1.1.1
 // Contains the interfaces for the provider functions
 import { IProvider, ExtractedData } from "react-very-simple-oauth";
 
@@ -39,7 +39,7 @@ const GithubProvider: IProvider<boolean> = {
         &state=${state}`;
   },
   /**
-   * Extracts Error
+   * Extracts Error.
    *
    * @param {string} redirectUrl A url that will be redirected to
    * @returns {Error | undefined} Returns Error object, if there is an error
@@ -107,9 +107,9 @@ const GithubProvider: IProvider<boolean> = {
         "Access-Control-Allow-Methods": "POST",
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        Vary: "Origin",
+        Vary: "Origin"
       },
-      method: "POST",
+      method: "POST"
     })
       .then(async (res) => await res.json())
       .then(async (res) => {
@@ -118,8 +118,8 @@ const GithubProvider: IProvider<boolean> = {
         /* GET request to get the user used for OAuth */
         await fetch(`${providerConfig.urls.usernameUrl}`, {
           headers: {
-            authorization: "Token " + accessToken,
-          },
+            authorization: "Token " + accessToken
+          }
         })
           .then(async (res) => await res.json())
           .then((res) => {
@@ -130,7 +130,7 @@ const GithubProvider: IProvider<boolean> = {
       });
 
     return data;
-  },
+  }
 };
 //#endregion
 

@@ -6,9 +6,9 @@
  * @param obj A object to squeeze
  * @param keys A list of object keys to filter by
  * @returns {object} The filtered object
+ * @todo Implement a way to remove objects/arrays from a object
  * @description Removes every key of an object that does not appear in the
  *              key list.
- * @todo Implement a way to remove objects/arrays from a object
  */
 function squeezer(obj: any, keys?: string[], exclude: string[] = ["objects"]) {
   let keysToRemove: string[] = [];
@@ -24,7 +24,7 @@ function squeezer(obj: any, keys?: string[], exclude: string[] = ["objects"]) {
      * Proxy to neutralize Generic Object Injection Sink.
      *
      * @todo Validate the proxy workaround for the injection vulnerability via
-     *       a penetration test
+     *       a penetration test.
      * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
      * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
      */
@@ -33,7 +33,7 @@ function squeezer(obj: any, keys?: string[], exclude: string[] = ["objects"]) {
       {
         get: () => {
           return index;
-        },
+        }
       }
     );
 
