@@ -56,9 +56,9 @@ interface IDay {
  * @param startDate Date to begin the calendar with
  * @param endDate Date to end the calendar with
  * @returns {object} A calendar object with a structure containing weeks with
- *                   empty days
+ *                   empty days.
  * @description Generates a calendar object containing empty days from
- *              startDate to endDate
+ *              startDate to endDate.
  */
 function generateCalendarStructure(startDate: string, endDate: string) {
   let weeks: IWeek[] = [{ days: [] }];
