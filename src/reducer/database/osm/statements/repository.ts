@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS repository
      avatarUrl VARCHAR(2048) NOT NULL,
      url       VARCHAR(2048) NOT NULL,
      name      VARCHAR(80) NOT NULL,
-     ownerid   INT NULL REFERENCES member (id),
+     ownerId   INT NULL REFERENCES member (id),
      UNIQUE(url),
      PRIMARY KEY (id)
   );
@@ -19,7 +19,7 @@ INSERT INTO repository
             (avatarUrl,
              url,
              name,
-             ownerid)
+             ownerId)
 VALUES      (?,
              ?,
              ?,
@@ -45,7 +45,7 @@ SELECT r.id        AS id,
        m.username  AS owner
 FROM   repository r
        INNER JOIN member m
-               ON r.ownerid = m.id
+               ON r.ownerId = m.id
 `;
 //#endregion
 
