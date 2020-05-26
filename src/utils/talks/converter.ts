@@ -13,7 +13,7 @@ import { Talk } from "../../reducer/database/models";
 async function run(rawData: any) {
   rawData.talks.forEach((item: any) => {
     let displayUrl = "https://docs.google.com/viewer?embedded=true&url=";
-    let downloadUrl: string;
+    let downloadUrl;
 
     if (item.displayUrl) {
       displayUrl += item.displayUrl;

@@ -814,7 +814,7 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
 
     /*
      * Create empty calendar entry for busiest day, if there is no real
-     * busiest day-
+     * busiest day.
      */
     return new Calendar({
       id: -1,

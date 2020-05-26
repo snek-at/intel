@@ -4,7 +4,7 @@
  * @returns {string} A guid string
  * @description This function generates a random guid string
  */
-function GuidGenerator(): string {
+function GuidGenerator() {
   let d = new Date().getTime();
 
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {

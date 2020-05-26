@@ -63,8 +63,7 @@ const GithubProvider: IProvider<boolean> = {
 
     //#ERROR
     return new Error(
-      `Error during login. Reason: ${errorReason} ` +
-        ` Description: ${errorDescription}`
+      `Error during login. Reason: ${errorReason} Description: ${errorDescription}`
     );
   },
   /**
@@ -91,13 +90,8 @@ const GithubProvider: IProvider<boolean> = {
       state = stateMatch[1];
     }
 
-    const AuthorizeUrl =
-      `${Config.proxyUrl} ` +
-      `${providerConfig.urls.accessTokenUrl}${code} ` +
-      `&client_secret=${details.clientSecret} ` +
-      `&client_id=${details.clientId} ` +
-      `&redirect_uri=${details.redirectUrl} ` +
-      `&state=${state}`;
+    const AuthorizeUrl = `${Config.proxyUrl}${providerConfig.urls.accessTokenUrl}${code}
+      &client_secret=${details.clientSecret}&client_id=${details.clientId}&redirect_uri=${details.redirectUrl}&state=${state}`;
 
     /* POST request to get the access token from GitHub */
     await fetch(AuthorizeUrl, {

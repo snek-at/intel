@@ -53,8 +53,8 @@ interface IDay {
  * Generate calendar object containing weeks with days.
  *
  * @function
- * @param startDate Date to begin the calendar with
- * @param endDate Date to end the calendar with
+ * @param startDate A date on which the calendar should start
+ * @param endDate A date on which the calendar should end
  * @returns {object} A calendar object with a structure containing weeks with
  *                   empty days.
  * @description Generates a calendar object containing empty days from

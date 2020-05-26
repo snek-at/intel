@@ -200,7 +200,7 @@ abstract class PlatformSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "platform";
   }
 
@@ -281,7 +281,7 @@ abstract class MemberSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "member";
   }
 
@@ -399,7 +399,7 @@ abstract class RepositorySO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "repository";
   }
 
@@ -480,7 +480,7 @@ abstract class RepositoryHasMemberSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "repositoryhasmember";
   }
 
@@ -562,7 +562,7 @@ abstract class LanguageSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "language";
   }
 
@@ -644,7 +644,7 @@ abstract class PlatformHasRepositorySO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "platformhasrepository";
   }
 
@@ -752,7 +752,7 @@ abstract class OrganizationSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "organization";
   }
 
@@ -833,7 +833,7 @@ abstract class OrganizationHasMemberSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "organizationhasmember";
   }
 
@@ -918,7 +918,7 @@ abstract class PlatformHasOrganizationSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "platformhasorganization";
   }
 
@@ -1117,7 +1117,7 @@ abstract class StatisticSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "statistic";
   }
 
@@ -1197,7 +1197,7 @@ abstract class StreakSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "streak";
   }
 
@@ -1375,7 +1375,7 @@ abstract class CalendarSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "calendar";
   }
 
@@ -1455,7 +1455,7 @@ abstract class ContributionSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "contribution";
   }
 
@@ -1535,7 +1535,7 @@ abstract class TalkSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "talk";
   }
 
