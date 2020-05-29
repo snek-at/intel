@@ -1,6 +1,6 @@
 //#region > Imports
 //> Models
-// Contains all models of the database.
+// Contains all models of the database
 import * as models from "../database/models";
 //> Helper
 // Contains all calendar helper functions
@@ -16,10 +16,14 @@ import { ICalendar } from "../database/helper/calendar";
 //#endregion
 
 //#region > Interfaces
-/** @interface StatisticResponse defines the structure of the merged statistic response object. */
+/**
+ * @interface StatisticResponse defines the structure of the merged statistic
+ *                              response object.
+ */
 interface IStatisticResponse {
   /**
-   * Current: The current statistic year object. This can be null if there is no current year in the database.
+   * Current: The current statistic year object.
+   *          This can be null if there is no current year in the database.
    */
   current: IStatistic | null;
   /**
@@ -32,7 +36,7 @@ interface IStatisticResponse {
   languages: models.Language[];
 }
 
-/** @interface Statistic defines the structure of statistic object. */
+/** @interface Statistic defines the structure of statistic object */
 interface IStatistic extends models.Statistic {
   /**
    * BustiestDay: A calendar day object.
@@ -42,17 +46,25 @@ interface IStatistic extends models.Statistic {
    * Contributions: A object with contribution types and their total.
    */
   contributions: {
-    /** Commit: The share of commit contributions. */
+    /**
+     *  Commit: The share of commit contributions.
+     */
     commit: Share;
-    /** Issue: The share of issue contributions. */
+    /**
+     *  Issue: The share of issue contributions.
+     */
     issue: Share;
-    /** PullRequest: The share of pullRequest contributions. */
+    /**
+     *  PullRequest: The share of pullRequest contributions.
+     */
     pullRequest: Share;
-    /** PullRequestReview: The share of pullRequestReview contributions. */
+    /**
+     *  PullRequestReview: The share of pullRequestReview contributions.
+     */
     pullRequestReview: Share;
     /**
-     * Total: The total amount of contributions. This is the sum of
-     *        all contribution type share object total fields.
+     * Total: The total amount of contributions. This is the sum of all
+     *        contribution type share object total fields.
      */
     total: number;
   };
@@ -65,9 +77,13 @@ interface IStatistic extends models.Statistic {
      *          startDate and endDate.
      */
     longest: models.Streak;
-    /** Current: A streak which ends today. */
+    /**
+     *  Current: A streak which ends today.
+     */
     current: models.Streak;
-    /** Streaks: A list of streak objects. */
+    /**
+     *  Streaks: A list of streak objects.
+     */
     streaks: models.Streak[];
   };
   /**
@@ -81,8 +97,10 @@ interface IStatistic extends models.Statistic {
 /**
  * A merged statistic.
  *
- * @returns A statistic object.
- * @description Returns a object containing e.g busiest day and streaks of current and each year.
+ * @function
+ * @returns A statistic object
+ * @description Returns a object containing e.g busiest day and streaks of the
+ *              current and each year.
  */
 async function mergedStatistic(): Promise<IStatisticResponse> {
   let statistic = models.Statistic.getMerged() as IStatistic[];

@@ -1,5 +1,6 @@
 //#region > Imports
-//## npm install snek-client
+//#PACKAGE "snek-client"
+//## npm install "./client"
 // Contains a client for web calls
 import { WebClient } from "snek-client";
 
@@ -18,15 +19,15 @@ import * as converter from "./converter";
  */
 interface ISource {
   /**
-   * Authorization: A token for authorizing the client
+   * Authorization: A token for authorizing the client.
    */
   authorization: string;
   /**
-   * Usernames: A string list containing usernames
+   * Usernames: A string list containing usernames.
    */
   usernames: string[];
   /**
-   * Organization: A string list containing organization names
+   * Organization: A string list containing organization names.
    */
   organizations: string[];
 }

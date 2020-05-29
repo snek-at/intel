@@ -1,5 +1,6 @@
 //#region > Imports
-//> Moment
+//#PACKAGE "moment"
+//## npm install "moment"@2.25.3
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
@@ -27,13 +28,19 @@ interface IScrapedData {
    * less contribution information than activity.
    */
   atom?: Document;
-  /** Contribution calendar of a user. Contains only days of the current year. */
+  /**
+   *  Contribution calendar of a user. Contains only days of the current year.
+   */
   currentCalendar: { [index: string]: number };
-  /** JSON data of a users groups */
+  /**
+   *  JSON data of a users groups.
+   */
   groups: {
     html: string;
   };
-  /** JSON data of a projects/repositories groups. */
+  /**
+   *  JSON data of a projects/repositories groups.
+   */
   projects: {
     html: string;
   };
@@ -46,7 +53,7 @@ interface IScrapedData {
   };
 }
 
-/** @interfaces CalendarDays defines the data structure for the calendar. */
+/** @interfaces CalendarDays defines the data structure for the calendar */
 interface CalendarDays {
   [date: string]: {
     contributions: {
@@ -58,7 +65,7 @@ interface CalendarDays {
   };
 }
 
-/** @interfaces Statistic defines the data structure for a statistic year. */
+/** @interfaces Statistic defines the data structure for a statistic year */
 interface Statistic {
   [year: number]: {
     [type: string]: {
@@ -71,9 +78,10 @@ interface Statistic {
 //#region > Functions
 /**
  * Converter for data from the scraper.
+ *
  * @function
- * @param rawData Data to be processed. Must fit IScrapedData format.
- * @description Fill the database with data provided by "rawData".
+ * @param rawData Data to be processed. Must fit IScrapedData format
+ * @description Fill the database with data provided by "rawData"
  */
 function runScraper(rawData: IScrapedData) {
   /* Extract platform data from rawData.home document */
@@ -265,7 +273,10 @@ function runScraper(rawData: IScrapedData) {
         }
       }
 
-      /* Select the "and n more commits" and set the default contribution number */
+      /*
+       * Select the "and n more commits" and set the default contribution
+       * number.
+       */
       let moreCommitText = element
         .getElementsByClassName("commits-stat")[0]
         ?.getElementsByTagName("span")[0].innerText;
@@ -356,7 +367,10 @@ function runScraper(rawData: IScrapedData) {
 
       /* Create contributions */
       for (let type in days[date].contributions) {
-        /* Create multiple contributions if they were contributed on the same datetime */
+        /*
+         * Create multiple contributions if they were contributed on the same
+         * datetime.
+         */
         for (let datetime in days[date].contributions[type]) {
           calendarDay.createContribution({
             repoUrl: days[date].contributions[type][datetime].repoUrl,
@@ -386,10 +400,14 @@ function runScraper(rawData: IScrapedData) {
           totalPullRequestContributions: stats[year]["pullRequest"]?.total
             ? stats[year]["pullRequest"].total
             : 0,
-          totalPullRequestReviewContributions: 0, // currently not provided by Gitlab
-          totalRepositoriesWithContributedIssues: 0, // currently not provided by Gitlab
-          totalRepositoriesWithContributedCommits: 0, // currently not provided by Gitlab
-          totalRepositoriesWithContributedPullRequests: 0, // currently not provided by Gitlab
+          /*
+           * The following values are currently not provided by GitLab,
+           * therefore it is set to zero.
+           */
+          totalPullRequestReviewContributions: 0,
+          totalRepositoriesWithContributedIssues: 0,
+          totalRepositoriesWithContributedCommits: 0,
+          totalRepositoriesWithContributedPullRequests: 0,
         });
       }
 
@@ -407,10 +425,14 @@ function runScraper(rawData: IScrapedData) {
         totalPullRequestContributions: stats[year]["pullRequest"]?.total
           ? stats[year]["pullRequest"].total
           : 0,
-        totalPullRequestReviewContributions: 0, // currently not provided by Gitlab
-        totalRepositoriesWithContributedIssues: 0, // currently not provided by Gitlab
-        totalRepositoriesWithContributedCommits: 0, // currently not provided by Gitlab
-        totalRepositoriesWithContributedPullRequests: 0, // currently not provided by Gitlab
+        /*
+         * The following values are currently not provided by GitLab,
+         * therefore it is set to zero.
+         */
+        totalPullRequestReviewContributions: 0,
+        totalRepositoriesWithContributedIssues: 0,
+        totalRepositoriesWithContributedCommits: 0,
+        totalRepositoriesWithContributedPullRequests: 0,
       });
     }
   }

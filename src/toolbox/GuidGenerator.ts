@@ -1,8 +1,8 @@
 //#region > Functions
 /**
- * @function Generate random guid string.
- * @returns {string} A guid string.
- * @description This function generates a random guid string.
+ * @function Generate random guid string
+ * @returns {string} A guid string
+ * @description This function generates a random guid string
  */
 function GuidGenerator() {
   let d = new Date().getTime();

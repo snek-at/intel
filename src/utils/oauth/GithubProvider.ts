@@ -1,5 +1,6 @@
 //#region > Imports
-//> Interfaces
+//#PACKAGE "react-very-simple-oauth"
+//## npm install "react-very-simple-oauth"@1.1.1
 // Contains the interfaces for the provider functions
 import { IProvider, ExtractedData } from "react-very-simple-oauth";
 
@@ -17,11 +18,13 @@ const state = GuidGenerator();
 let providerConfig = Config.providers.github;
 let details = providerConfig.details.deploy;
 const GithubProvider: IProvider<boolean> = {
+
   /**
-   * Builds authorization url
+   * Builds authorization url.
    *
-   * @returns {string} The builded authorization url.
-   * @description Build the authorization url for the OAuth-Request, the values are obtained from the config file.
+   * @returns {string} The builded authorization url
+   * @description Build the authorization url for the OAuth-Request, the values
+   *              are obtained from the config file.
    */
   buildAuthorizeUrl(): string {
     let href = window.location.href.toString();
@@ -37,11 +40,11 @@ const GithubProvider: IProvider<boolean> = {
         &state=${state}`;
   },
   /**
-   * Extracts Error
+   * Extracts Error.
    *
-   * @param {string} redirectUrl A url that will be redirected to.
-   * @returns {Error | undefined} Returns Error object, if there is an error.
-   * @description Catch any error that appears during the OAuth process.
+   * @param {string} redirectUrl A url that will be redirected to
+   * @returns {Error | undefined} Returns Error object, if there is an error
+   * @description Catch any error that appears during the OAuth process
    */
   extractError(redirectUrl: string): Error | undefined {
     const errorMatch = redirectUrl.match(/error=([^&]+)/);
@@ -59,16 +62,18 @@ const GithubProvider: IProvider<boolean> = {
       ? errorDescriptionMatch[1]
       : "";
 
+    //#ERROR
     return new Error(
       `Error during login. Reason: ${errorReason} Description: ${errorDescription}`
     );
   },
   /**
-   * Extracts Session
+   * Extracts Session.
    *
-   * @param {string} redirectUrl A url that will be redirected to.
-   * @returns {Promise<ExtractedData | null>} The username and accessToken, if the request was successful.
-   * @description Catches the accessToken and requests the username.
+   * @param {string} redirectUrl A url that will be redirected to
+   * @returns {Promise<ExtractedData | null>} The username and accessToken, if
+   *                                          the request was successful.
+   * @description Catches the accessToken and requests the username
    */
   async extractSession(redirectUrl: string): Promise<ExtractedData | null> {
     let data: ExtractedData | null = null;

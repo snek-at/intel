@@ -14,10 +14,9 @@
  */
 
 //#region > Imports
-//> snek-client
-//#PACKAGE snek-client
-//## npm install snek-client
-// Contains the clients for API calls to SNEK, Github and Gitlab.
+//#PACKAGE "snek-client"
+//## npm install "./client"
+// Contains the clients for API calls to SNEK, Github and GitLab
 import { SnekClient, GithubClient, WebClient } from "snek-client";
 
 //> Reducer
@@ -38,7 +37,7 @@ import { IProfile } from "./utils/github/queries/index";
 //#endregion
 
 //#region > Interfaces
-/** @interface Intel defines the structure of the intel class. */
+/** @interface Intel defines the structure of the intel class */
 interface IIntel {
   /**
    * Snekclient: A client implementation for snek interaction from the
@@ -46,25 +45,23 @@ interface IIntel {
    */
   snekclient: SnekClient;
   /**
-   * @todo Adding error handling.
-   * @function
-   * @param {ISource} source A source object.
-   * @returns {Promise<void>} Empty promise for conformation of completion.
+   * @todo Adding error handling
+   * @param {ISource} source A source object
+   * @returns {Promise<void>} Empty promise for conformation of completion
    * @description Append data to the database based on the information in
    *              a source object.
    */
   append(source: ISource): Promise<void>;
   /**
-   * @todo Adding error handling.
-   * @function
-   * @param {ISource[]} sources A list of source objects.
-   * @returns {Promise<void>} Empty promise for conformation of completion.
-   * @description Append data to the databse for n source objects.
+   * @todo Adding error handling
+   * @param {ISource[]} sources A list of source objects
+   * @returns {Promise<void>} Empty promise for conformation of completion
+   * @description Append data to the database for n source objects
    */
   appendList?(sources: ISource[]): Promise<void>;
 }
 
-/** @interface Source defines the structure of a source object. */
+/** @interface Source defines the structure of a source object */
 interface ISource {
   /**
    * User: A username of the provided platform.
@@ -99,8 +96,8 @@ interface IDataUser {
   data: {
     /**
      * User: Can contain any information according to a user.
-     *       The content of this object relays on the query with which the client
-     *       is addressed.
+     *       The content of this object relays on the query with which the
+     *       client.
      */
     user: object;
   };
@@ -126,11 +123,8 @@ interface IGitHubData {
 //#region > Classes
 /**
  * @class Intel - A place where everything becomes one thing.
- * By using the snek-client, utils and the brand new snek-reducer we
- * created a new way of life.
- * Some might say that this is not perfect in every way. But they are just fools.
- * We know every single mistake, every single scratch.
- * Although we can frankly say, we love it!
+ *        By using the snek-client, utils and the brand new snek-reducer we
+ *        created a new way of life. We can frankly say, we love it!
  * @implements IIntel
  * @see {@link http://github.com/snek-at/intel/README.md |SNEK Intel README}
  *      for further information.
@@ -142,7 +136,6 @@ export class Intel implements IIntel {
   /**
    * @constructor
    * @author Nico Schett <contact@schett.net>
-   * @description Creates a Intel instance.
    */
   constructor() {
     // init snekclient
@@ -152,10 +145,10 @@ export class Intel implements IIntel {
   }
 
   /**
-   * Get gitlab or github data and fill the models.
+   * Get GitLab or GitHub data and fill the models.
    *
-   * @param source A source object of type ISource.
-   * @description Fill the models with data from github or gitlab.
+   * @param source A source object of type ISource
+   * @description Fill the models with data from GitHub or GitLab.
    *              The type and username are specified by the source param.
    */
   async append(source: ISource) {
@@ -248,8 +241,8 @@ export class Intel implements IIntel {
   /**
    * Append a list of source objects.
    *
-   * @param sources A list of source objects.
-   * @description Calls .append() for each source object in the provided list.
+   * @param sources A list of source objects
+   * @description Calls .append() for each source object in the provided list
    */
   async appendList(sources: ISource[]) {
     /* Sources which platform name is github should be before others */
@@ -295,6 +288,7 @@ export class Intel implements IIntel {
     await talks.generate({
       /**
        * The authorization token of the first source is used.
+       *
        * @todo Use authorization token that is related to a talk
        */
       authorization: sources[0].authorization,
@@ -335,8 +329,8 @@ export class Intel implements IIntel {
   /**
    * Get a reduced object.
    *
-   * @returns A reduced object.
-   * @description Get a reduced object which contains profile and statistic data.
+   * @returns A reduced object
+   * @description Get a reduced object which contains profile and statistic data
    */
   async get() {
     return this.reducer.get();
@@ -344,7 +338,8 @@ export class Intel implements IIntel {
 
   /**
    * Reset reducer.
-   * @description Reinitialize the reducer. This will erase the whole database!
+   *
+   * @description Reinitialize the reducer. This will erase the whole database
    */
   resetReducer() {
     this.reducer.reset();

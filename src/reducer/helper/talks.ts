@@ -8,10 +8,11 @@ import { Repository, Talk } from "../database/models";
 /** @interface Talk defines the structure of a talk object */
 interface ITalk extends Talk {
   /**
-   * Repository: The repository object which contains the talk
+   * Repository: The repository object which contains the talk.
    */
   repository: Repository;
   /**
+   * //#LEGACY
    * @todo Move this to snek-at/engine
    * Uid: A temporary random string to identify a talk.
    */

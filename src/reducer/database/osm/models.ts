@@ -1,11 +1,11 @@
 //#region > Imports
-//> Moment
-//#INSTALL "moment"
+//#PACKAGE "moment"
+//## npm install "moment"@2.25.3
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
 
-//> Reconstructor
+//> Re-constructor
 // SOAssembler for SO objects
 import { SOAssembler } from "./reconstructor";
 //> Statements
@@ -30,10 +30,10 @@ import * as helper from "../helper";
 //#endregion
 
 //#region > Interfaces
-/** @interface Share defines the structure of a contribution type share. */
+/** @interface Share defines the structure of a contribution type share */
 interface Share {
   /**
-   * Size: The size of the share. E.g: 51.92%
+   * Size: The size of the share. E.g: 51.92%.
    */
   size: number;
   /**
@@ -60,24 +60,24 @@ abstract class BaseSO {
   //> Static Fields
   /**
    * @static
+   * @tutorial Usage: "public static objects =
+   *                   StatementObject.getObjects(osmModel);"
    * @description Provides access to the SOAssembler to provide functionality
    *              like create, all, filter,...
    *
-   * @tutorial Usage: "public static objects =
-   *                   StatementObject.getObjects(osmModel);"
    */
   static objects: SOAssembler;
 
   //> Abstract Fields
   /**
-   * @description Necessary for database processing.
+   * @description Necessary for database processing
    */
   abstract id: number;
 
   //> Abstract Methods
   /**
-   * @returns {Boolean} A check if the database write process was successful.
-   * @description Writes the statement object to the database.
+   * @returns {Boolean} A check if the database write process was successful
+   * @description Writes the statement object to the database
    */
   abstract save(): void;
 
@@ -88,15 +88,15 @@ abstract class BaseSO {
   abstract objects: SOAssembler;
 
   /**
-   * @description Defines the osm table name.
+   * @description Defines the osm table name
    */
   abstract tableName(): string;
 
   //> Static Methods
   /**
    * @static
-   * @param self A implementation of a statement object.
-   * @returns {SOAssembler} A SOAssembler object.
+   * @param self A implementation of a statement object
+   * @returns {SOAssembler} A SOAssembler object
    * @description Generate a new SOAssembler object, with the provided osm
    *              model.
    */
@@ -108,9 +108,9 @@ abstract class BaseSO {
   /**
    * Render object.
    *
-   * @param filter List of keys to filter by.
-   * @returns {any} The filtered object.
-   * @description Filter the object by a list of keys.
+   * @param filter List of keys to filter by
+   * @returns {any} The filtered object
+   * @description Filter the object by a list of keys
    */
   render(filter: string[], excludes: string[] = ["objects"]): any {
     return helper.general.squeezer(this, filter, excludes);
@@ -119,7 +119,7 @@ abstract class BaseSO {
 
 /**
  * @abstract
- * @class A statement object which implements the platform sql statements.
+ * @class A statement object which implements the platform sql statements
  */
 abstract class PlatformSO extends BaseSO {
   //> Static Fields
@@ -128,9 +128,9 @@ abstract class PlatformSO extends BaseSO {
   //> Static Methods
   /**
    * @static
-   * @description Get the platform with the lowest createdAt.
    * @returns {object} A object containing platform data with the
    *                   lowest creation date.
+   * @description Get the platform with the lowest createdAt
    */
   static getLowestCreatedAtYear() {
     return SOAssembler.database.exec(
@@ -140,8 +140,8 @@ abstract class PlatformSO extends BaseSO {
 
   /**
    * @static
-   * @description Get a list of source types and its total.
-   * @returns {object[]} A object list containing source types.
+   * @returns {object[]} A object list containing source types
+   * @description Get a list of source types and its total
    */
   static getSourceTypes() {
     return SOAssembler.database.exec(PlatformSO.statements.getSourceTypes);
@@ -149,56 +149,56 @@ abstract class PlatformSO extends BaseSO {
 
   //> Abstract Methods
   /**
-   * @param fields Repository data.
-   * @returns {RepositorySO} A repository SO object.
-   * @description Used to create a repository within the platform.
+   * @param fields Repository data
+   * @returns {RepositorySO} A repository SO object
+   * @description Used to create a repository within the platform
    */
   abstract createRepository(fields: any): RepositorySO;
 
   /**
-   * @param fields Organization data.
-   * @returns {OrganizationSO} A organization SO object.
-   * @description Used to create a organization within the platform.
+   * @param fields Organization data
+   * @returns {OrganizationSO} A organization SO object
+   * @description Used to create a organization within the platform
    */
   abstract createOrganization(fields: any): OrganizationSO;
 
   /**
-   * @param fields Statistic data.
-   * @returns {StatisticSO} A statistic SO object.
-   * @description Used to create a statistic within the platform.
+   * @param fields Statistic data
+   * @returns {StatisticSO} A statistic SO object
+   * @description Used to create a statistic within the platform
    */
   abstract createStatistic(fields: any): StatisticSO;
 
   /**
-   * @param fields Caledar entry data.
-   * @returns {CalendarSO} A calendar SO object.
-   * @description Used to create a calendar day within the platform.
+   * @param fields Calendar entry data
+   * @returns {CalendarSO} A calendar SO object
+   * @description Used to create a calendar day within the platform
    */
   abstract createCalendarEntry(fields: any): CalendarSO;
 
   /**
-   * @returns {RepositorySO[]} A list of repository SO objects.
-   * @description Used to get all repositories within the platform.
+   * @returns {RepositorySO[]} A list of repository SO objects
+   * @description Used to get all repositories within the platform
    */
   abstract getRepositories(fields: any): RepositorySO[];
 
   /**
-   * @returns {OrganizationSO[]} A list of organization SO objects.
-   * @description Used to get all organizations within the platform.
+   * @returns {OrganizationSO[]} A list of organization SO objects
+   * @description Used to get all organizations within the platform
    */
   abstract getOrganizations(fields: any): OrganizationSO[];
 
   /**
-   * @returns {Object} A calendar structure in any format.
-   * @description Used to get all repositories within the platform.
+   * @returns {Object} A calendar structure in any format
+   * @description Used to get all repositories within the platform
    */
   abstract getCalendar(dates: any): object;
 
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "platform";
@@ -278,8 +278,8 @@ abstract class MemberSO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "member";
@@ -350,7 +350,7 @@ abstract class MemberSO extends BaseSO {
 
 /**
  * @abstract
- * @class A statement object which implements the repository sql statements.
+ * @class A statement object which implements the repository sql statements
  */
 abstract class RepositorySO extends BaseSO {
   //> Static Fields
@@ -359,8 +359,8 @@ abstract class RepositorySO extends BaseSO {
   //> Static Methods
   /**
    * @static
-   * @returns {Object[]} List of language data objects.
-   * @description Returns a list of merged language data.
+   * @returns {Object[]} List of language data objects
+   * @description Returns a list of merged language data
    */
   static getLanguages() {
     return SOAssembler.database.exec(LanguageSO.statements.merged);
@@ -368,36 +368,36 @@ abstract class RepositorySO extends BaseSO {
 
   //> Abstract Methods
   /**
-   * @param fields Statistic data.
-   * @returns {MemberSO} A member SO object.
-   * @description Used to create a member within the repository.
+   * @param fields Statistic data
+   * @returns {MemberSO} A member SO object
+   * @description Used to create a member within the repository
    */
   abstract createMember(fields: any): MemberSO;
 
   /**
-   * @param fields Language data.
-   * @returns {MemberSO} A language SO object.
-   * @description Used to create a language within the repository.
+   * @param fields Language data
+   * @returns {MemberSO} A language SO object
+   * @description Used to create a language within the repository
    */
   abstract createLanguage(fields: any): LanguageSO;
 
   /**
-   * @returns {MemberSO[]} A list of member SO objects.
-   * @description Used to get all members within the repository.
+   * @returns {MemberSO[]} A list of member SO objects
+   * @description Used to get all members within the repository
    */
   abstract getMembers(fields: any): MemberSO[];
 
   /**
-   * @returns {LanguageSO[]} A list of language SO objects.
-   * @description Used to get all languages within the repository.
+   * @returns {LanguageSO[]} A list of language SO objects
+   * @description Used to get all languages within the repository
    */
   abstract getLanguages(fields: any): LanguageSO[];
 
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "repository";
@@ -477,8 +477,8 @@ abstract class RepositoryHasMemberSO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "repositoryhasmember";
@@ -550,7 +550,7 @@ abstract class RepositoryHasMemberSO extends BaseSO {
 
 /**
  * @abstract
- * @class A statement object which implements the language sql statements.
+ * @class A statement object which implements the language sql statements
  */
 abstract class LanguageSO extends BaseSO {
   //> Static Fields
@@ -559,8 +559,8 @@ abstract class LanguageSO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "language";
@@ -641,8 +641,8 @@ abstract class PlatformHasRepositorySO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "platformhasrepository";
@@ -717,7 +717,7 @@ abstract class PlatformHasRepositorySO extends BaseSO {
 
 /**
  * @abstract
- * @class A statement object which implements the organization sql statements.
+ * @class A statement object which implements the organization sql statements
  */
 abstract class OrganizationSO extends BaseSO {
   //> Static Fields
@@ -726,31 +726,31 @@ abstract class OrganizationSO extends BaseSO {
   //> Abstract Methods
   /**
    * @abstract
-   * @param fields Member data.
-   * @returns {MemberSO} A member SO object.
-   * @description Create a member within this organization.
+   * @param fields Member data
+   * @returns {MemberSO} A member SO object
+   * @description Create a member within this organization
    */
   abstract createMember(fields: any): MemberSO;
 
   /**
    * @abstract
-   * @returns {MemberSO[]} A list of member SO objects.
-   * @description Get all members within this organization.
+   * @returns {MemberSO[]} A list of member SO objects
+   * @description Get all members within this organization
    */
   abstract getMembers(): MemberSO[];
 
   /**
    * @abstract
-   * @returns {RepositorySO[]} A list of repository SO objects.
-   * @description Get all repositories within this organization.
+   * @returns {RepositorySO[]} A list of repository SO objects
+   * @description Get all repositories within this organization
    */
   abstract getRepositories(): RepositorySO[];
 
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "organization";
@@ -830,8 +830,8 @@ abstract class OrganizationHasMemberSO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "organizationhasmember";
@@ -915,8 +915,8 @@ abstract class PlatformHasOrganizationSO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "platformhasorganization";
@@ -990,7 +990,7 @@ abstract class PlatformHasOrganizationSO extends BaseSO {
 
 /**
  * @abstract
- * @class A statement object which implements the statistic sql statements.
+ * @class A statement object which implements the statistic sql statements
  */
 abstract class StatisticSO extends BaseSO {
   //> Static Fields
@@ -999,9 +999,9 @@ abstract class StatisticSO extends BaseSO {
   //> Static Methods
   /**
    * @static
-   * @param cls A extended class of StatisticSO.
-   * @description Get a merged statistic over all platforms.
-   * @returns {Object[]} A list of objects containing statistic data.
+   * @param cls A extended class of StatisticSO
+   * @returns {Object[]} A list of objects containing statistic data
+   * @description Get a merged statistic over all platforms
    */
   static getMerged(cls: any) {
     let response = SOAssembler.database.exec(StatisticSO.statements.allMerged);
@@ -1016,9 +1016,9 @@ abstract class StatisticSO extends BaseSO {
 
   /**
    * @static
-   * @param self A object of the extended class of StatisticSO.
-   * @description Get a merged contributions over all platforms.
-   * @returns {object[]} A list of objects containing contribution data.
+   * @param self A object of the extended class of StatisticSO
+   * @returns {object[]} A list of objects containing contribution data
+   * @description Get a merged contributions over all platforms
    */
   static getContributions(self: any) {
     let response = null;
@@ -1072,34 +1072,34 @@ abstract class StatisticSO extends BaseSO {
 
   //> Abstract Methods
   /**
-   * @param fields Streak data.
-   * @returns {MemberSO} A streak SO object.
-   * @description Used to create a streak within the statistic.
+   * @param fields Streak data
+   * @returns {MemberSO} A streak SO object
+   * @description Used to create a streak within the statistic
    */
   abstract createStreak(fields: any): StreakSO;
 
   /**
-   * @returns {StreakSO[]} A streak SO object.
-   * @description Used to get all streaks within the statistic.
+   * @returns {StreakSO[]} A streak SO object
+   * @description Used to get all streaks within the statistic
    */
   abstract getStreaks(): StreakSO[];
 
   /**
-   * @returns {StreakSO[]} The longest and current streak SO objects.
-   * @description Used to calculate all the longest and current streak.
+   * @returns {StreakSO[]} The longest and current streak SO objects
+   * @description Used to calculate all the longest and current streak
    */
   abstract getStreakDetail(
     streaks: StreakSO[]
   ): { longest: StreakSO; current: StreakSO };
 
   /**
-   * @returns {CalendarSO} A calendar SO object.
-   * @description Used to calculate the busiest day within a statistic year.
+   * @returns {CalendarSO} A calendar SO object
+   * @description Used to calculate the busiest day within a statistic year
    */
   abstract getBusiestDay(): CalendarSO;
 
   /**
-   * @returns {Object} A object containing contribution type totals.
+   * @returns {Object} A object containing contribution type totals
    * @description Used to calculate contribution count of the different types
    *              in a statistic year.
    */
@@ -1114,8 +1114,8 @@ abstract class StatisticSO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "statistic";
@@ -1185,7 +1185,7 @@ abstract class StatisticSO extends BaseSO {
 
 /**
  * @abstract
- * @class A statement object which implements the streak sql statements.
+ * @class A statement object which implements the streak sql statements
  */
 abstract class StreakSO extends BaseSO {
   //> Static Fields
@@ -1194,8 +1194,8 @@ abstract class StreakSO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "streak";
@@ -1265,7 +1265,7 @@ abstract class StreakSO extends BaseSO {
 
 /**
  * @abstract
- * @class A statement object which implements the calendar sql statements.
+ * @class A statement object which implements the calendar sql statements
  */
 abstract class CalendarSO extends BaseSO {
   //> Static Fields
@@ -1274,9 +1274,9 @@ abstract class CalendarSO extends BaseSO {
   //> Static Methods
   /**
    * @static
-   * @param dates From and to date.
-   * @description Get all days between two dates.
-   * @returns {object[]} A list of objects containing day data.
+   * @param dates From and to date
+   * @returns {object[]} A list of objects containing day data
+   * @description Get all days between two dates
    */
   static getDaysBetweenDate(dates: { from: string; to: string }) {
     let days = SOAssembler.database.exec(CalendarSO.statements.betweenDate, [
@@ -1289,9 +1289,9 @@ abstract class CalendarSO extends BaseSO {
 
   /**
    * @static
-   * @param dates From and to date.
-   * @description Get the busiest day between two dates.
-   * @returns {object} A objects containing day data.
+   * @param dates From and to date
+   * @returns {object} A objects containing day data
+   * @description Get the busiest day between two dates
    */
   static getBusiestDay(dates: { from: string; to: string }) {
     let response = SOAssembler.database.exec(
@@ -1306,11 +1306,10 @@ abstract class CalendarSO extends BaseSO {
 
   /**
    * @static
-   * @param dates From and to date.
+   * @param dates From and to date
+   * @returns {object} A object containing a success and calendar data
    * @description Get a generated calendar containing days between from and to
    *              date.
-   *
-   * @returns {object} A object containing a success and calendar data.
    */
   static getCalendar(dates: { from: string; to: string }) {
     // generate calendar
@@ -1364,17 +1363,17 @@ abstract class CalendarSO extends BaseSO {
 
   //> Abstract Methods
   /**
-   * @param fields Contribution data.
-   * @returns {MemberSO} A contribution SO object.
-   * @description Used to create a contribution within the calendar day.
+   * @param fields Contribution data
+   * @returns {MemberSO} A contribution SO object
+   * @description Used to create a contribution within the calendar day
    */
   abstract createContribution(fields: any): ContributionSO;
 
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "calendar";
@@ -1444,7 +1443,7 @@ abstract class CalendarSO extends BaseSO {
 
 /**
  * @abstract
- * @class A statement object which implements the contribution sql statements.
+ * @class A statement object which implements the contribution sql statements
  */
 abstract class ContributionSO extends BaseSO {
   //> Static Fields
@@ -1453,8 +1452,8 @@ abstract class ContributionSO extends BaseSO {
   //> Methods
   /**
    * @static
-   * @returns {string} A table name.
-   * @description Returns the database table name of this osm model.
+   * @returns {string} A table name
+   * @description Returns the database table name of this osm model
    */
   tableName() {
     return "contribution";
@@ -1536,7 +1535,7 @@ abstract class TalkSO extends BaseSO {
    * @returns {string} A table name
    * @description Returns the database table name of this osm model
    */
-  tableName(): string {
+  tableName() {
     return "talk";
   }
 

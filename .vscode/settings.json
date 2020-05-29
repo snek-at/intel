@@ -1,5 +1,9 @@
 {
   "editor.rulers": [80,120],
+  "editor.formatOnSave": false,
+  "[typescript]": {
+      "editor.formatOnSave": true
+  },
   "editor.fontLigatures": true,
   "editor.snippetSuggestions": "top",
   "editor.insertSpaces": true,

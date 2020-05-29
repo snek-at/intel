@@ -1,15 +1,15 @@
 //#region > Imports
 //> Models
-// Contains all models of the database.
+// Contains all models of the database
 import * as models from "../database/models";
 //#endregion
 
 //#region > Functions
 /**
- * Get merged language statistic.
+ * Get a language statistic over all platforms.
  *
- * @returns {models.Language[]} A list of merged language objects.
- * @description Get a language statistic over all platforms.
+ * @function
+ * @returns {models.Language[]} A list of merged language objects
  */
 function mergedLanguage() {
   let languages = models.Language.getLanguages();

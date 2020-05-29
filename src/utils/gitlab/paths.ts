@@ -1,5 +1,5 @@
 //#region > Paths
-/* Define Gitlab website paths */
+/* Define GitLab website paths */
 const root = "/";
 const home = (username: string) => root  + username;
 const currentCalendar = (username: string) => root + "users/" + username + "/calendar";

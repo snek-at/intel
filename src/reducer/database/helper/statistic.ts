@@ -1,12 +1,13 @@
 //#region > Imports
-//> Moment
+//#PACKAGE "moment"
+//## npm install "moment"@2.25.3
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
 //#endregion
 
 //#region > Interfaces
-/** @interface Streak defines the structure of a streak. */
+/** @interface Streak defines the structure of a streak */
 interface IStreak {
   startDate?: string;
   endDate?: string | null;
@@ -14,7 +15,7 @@ interface IStreak {
   totalContributions: number;
 }
 
-/** @interface Day defines the structure of the calendar day. */
+/** @interface Day defines the structure of the calendar day */
 interface IDay {
   date?: string;
   color?: string;
@@ -26,9 +27,10 @@ interface IDay {
 /**
  * Calculate contribution streaks.
  *
- * @param values A list of days.
- * @returns {object} A list of streaks.
- * @description Determines the contribution streaks from a list of days.
+ * @function
+ * @param values A list of days
+ * @returns {object} A list of streaks
+ * @description Determines the contribution streaks from a list of days
  */
 function calculateStreaks(values: IDay[]) {
   let list = [];
@@ -79,6 +81,7 @@ function calculateStreaks(values: IDay[]) {
       }
     }
   } else {
+    //#ERROR
     throw new Error("An error occurred due to invalid input parameters!");
   }
 

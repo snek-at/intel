@@ -1,5 +1,6 @@
 //#region > Imports
-//> Moment
+//#PACKAGE "moment"
+//## npm install "moment"@2.25.3
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
@@ -17,7 +18,7 @@ import Delay from "../../toolbox/Delay";
  * Converter for data from the github api.
  *
  * @param rawData
- * @description Fill the database with data provided by "rawData".
+ * @description Fill the database with data provided by "rawData"
  */
 async function run(rawData: any) {
   let platform = models.Platform.objects.create({
@@ -59,17 +60,21 @@ async function run(rawData: any) {
     }
   });
 
-  /** @todo Store repositories with key: nameWithOwner in order to prevent duplicates */
+  /**
+   * @todo Store repositories with key: nameWithOwner in order to prevent
+   *       duplicates.
+   */
 
   let repositories: any = {};
 
   // Calendar
   for (let [index, yearObject] of Object.entries(rawData.calendar)) {
     await Delay(300);
+
     /*
-      Set type of year because it is not possible in the loop declaration.
-      This is required because of the type of yearIndex which is unknown.
-    */
+     * Set type of year because it is not possible in the loop declaration.
+     * This is required because of the type of yearIndex which is unknown.
+     */
     let year = yearObject as any;
 
     if (index !== "__typename") {
