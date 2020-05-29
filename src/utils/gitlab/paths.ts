@@ -1,7 +1,7 @@
 //#region > Paths
 /* Define GitLab website paths */
 const root = "/";
-const home = (username: string) => root + username;
+const home = (username: string) => root  + username;
 const currentCalendar = (username: string) => root + "users/" + username + "/calendar";
 const activity = (username: string) => root + username + "?limit=2147483647";
 const atom = (username: string) => root + username + ".atom?limit=2147483647";
