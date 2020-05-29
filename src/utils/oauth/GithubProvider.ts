@@ -18,6 +18,7 @@ const state = GuidGenerator();
 let providerConfig = Config.providers.github;
 let details = providerConfig.details.deploy;
 const GithubProvider: IProvider<boolean> = {
+
   /**
    * Builds authorization url.
    *
@@ -90,8 +91,13 @@ const GithubProvider: IProvider<boolean> = {
       state = stateMatch[1];
     }
 
-    const AuthorizeUrl = `${Config.proxyUrl}${providerConfig.urls.accessTokenUrl}${code}
-      &client_secret=${details.clientSecret}&client_id=${details.clientId}&redirect_uri=${details.redirectUrl}&state=${state}`;
+    const AuthorizeUrl =
+      `${Config.proxyUrl}` +
+      `${providerConfig.urls.accessTokenUrl}${code}` +
+      `&client_secret=${details.clientSecret}` +
+      `&client_id=${details.clientId}` +
+      `&redirect_uri=${details.redirectUrl}` +
+      `&state=${state}`;
 
     /* POST request to get the access token from GitHub */
     await fetch(AuthorizeUrl, {
@@ -101,9 +107,9 @@ const GithubProvider: IProvider<boolean> = {
         "Access-Control-Allow-Methods": "POST",
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        Vary: "Origin"
+        Vary: "Origin",
       },
-      method: "POST"
+      method: "POST",
     })
       .then(async (res) => await res.json())
       .then(async (res) => {
@@ -112,8 +118,8 @@ const GithubProvider: IProvider<boolean> = {
         /* GET request to get the user used for OAuth */
         await fetch(`${providerConfig.urls.usernameUrl}`, {
           headers: {
-            authorization: "Token " + accessToken
-          }
+            authorization: "Token " + accessToken,
+          },
         })
           .then(async (res) => await res.json())
           .then((res) => {
@@ -124,7 +130,7 @@ const GithubProvider: IProvider<boolean> = {
       });
 
     return data;
-  }
+  },
 };
 //#endregion
 

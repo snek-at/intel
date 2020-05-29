@@ -166,8 +166,7 @@ export class Intel implements IIntel {
           githubClient = new GithubClient();
         }
 
-        let profileData = (await githubClient.endpoint.send(
-          "query",
+        let profileData = (await githubClient.gql.sendQuery(
           github.queries.profile(),
           {
             username: source.user,
@@ -177,8 +176,7 @@ export class Intel implements IIntel {
           }
         )) as IDataUser;
 
-        let calendarData = (await githubClient.endpoint.send(
-          "query",
+        let calendarData = (await githubClient.gql.sendQuery(
           github.queries.calendar(profileData.data.user as IProfile),
           {
             username: source.user,
