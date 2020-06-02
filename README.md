@@ -223,7 +223,7 @@ console.log(data.username, data.accessToken)
 ## [](#contributing)Contributing
 ![GitHub last commit](https://img.shields.io/github/last-commit/snek-at/intel) ![GitHub issues](https://img.shields.io/github/issues-raw/snek-at/intel) ![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/snek-at/intel?color=green)
 
-Please read through our [guidelines for contribution](https://github.com/snek-at/front/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+Please read through our [contributing guidelines](https://github.com/snek-at/front/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
 All HTML and CSS should conform to the [Code Guide](https://github.com/mdo/code-guide), maintained by [Mark Otto](https://github.com/mdo).
 
