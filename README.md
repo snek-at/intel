@@ -40,7 +40,7 @@ Intel serves as the :green_heart: of SNEK. Intel is the central data processing 
 ## [](#installation)Installation
 The system can be installed using the ```npm install``` command:
 ```bash
-$ npm install snek-client
+$ npm install snek-intel
 ```
 
 ## [](#features)Features
@@ -225,7 +225,7 @@ console.log(data.username, data.accessToken)
 
 Please read through our [contributing guidelines](https://github.com/snek-at/front/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
-All HTML and CSS should conform to the [Code Guide](https://github.com/mdo/code-guide), maintained by [Mark Otto](https://github.com/mdo).
+All code should conform to the [Code Guide](https://github.com/snek-at/tonic/blob/master/STYLE_GUIDE.md), maintained by [SNEK](https://github.com/snek-at).
 
 ## [](#bug-and-feature-requests)Bugs and feature requests
 
