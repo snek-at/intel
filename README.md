@@ -27,15 +27,15 @@ Intel serves as the :green_heart: of SNEK. Intel is the central data processing 
  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0224ced616347beb703d9330867b5d5)](https://app.codacy.com/gh/snek-at/intel?utm_source=github.com&utm_medium=referral&utm_content=snek-at/intel&utm_campaign=Badge_Grade_Dashboard)
 ## Table of contents
 
--  [Installation](#installation)
--  [Features](#features)
--  [Usage](#usage)
--  [Contributing](#contributing)
--  [Bugs and feature requests](#bugs-and-feature-requests)
--  [Versioning](#versioning)
--  [Creators](#creators)
--  [Thanks](#thanks)
--  [Copyright and license](#copyright-and-license)
+-   [Installation](#installation)
+-   [Features](#features)
+-   [Usage](#usage)
+-   [Contributing](#contributing)
+-   [Bugs and feature requests](#bugs-and-feature-requests)
+-   [Versioning](#versioning)
+-   [Creators](#creators)
+-   [Thanks](#thanks)
+-   [Copyright and license](#copyright-and-license)
 
 ## [](#installation)Installation
 The system can be installed using the ```npm install``` command:
@@ -44,12 +44,12 @@ $ npm install snek-client
 ```
 
 ## [](#features)Features
--  GitLab Querying
--  GitHub Querying
--  Statistics Generation
--  Interface with various GraphQL APIs
--  OAuth2-Authentication
--  Session Management
+-   GitLab Querying
+-   GitHub Querying
+-   Statistics Generation
+-   Interface with various GraphQL APIs
+-   OAuth2-Authentication
+-   Session Management
 
 ## [](#usage)Usage
 ### Source Object
