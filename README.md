@@ -7,7 +7,7 @@
 
 <h3 align="center">SNEKNetwork for Engineers and Knowledged</h3>
 <p align="center">
-The SNEK project is an attempt to create a transparent, open-source, non-profit platform that enables engineers to categorize and compare themselves with other software developers in their respective fields, through project identification and visialization.
+The SNEK project is an attempt to create a transparent, open-source non-profit platform that allows engineers to categorize and compare. It should enable engineers from adjacent fields to visualize each other's skills through visualization and project identification.
 
   <br>
 Intel serves as the :green_heart: of SNEK. Intel is the central data processing system for SNEK, providing interfaces to connect our other systems.
