@@ -5,7 +5,7 @@
   </a>
 </p>
 
-<h3 align="center">SNEKNetwork for Engineers and Knowledged</h3>
+<h3 align="center">SNEK - Social Network for Engineers and Knowledged</h3>
 <p align="center">
 The SNEK project is an attempt to create a transparent, open-source non-profit platform that allows engineers to categorize and compare. It should enable engineers from adjacent fields to visualize each other's skills through visualization and project identification.
 
@@ -20,8 +20,7 @@ Intel serves as the :green_heart: of SNEK. Intel is the central data processing 
   <a href="https://www.overleaf.com/read/bcxwhwbhrmps">Documentation</a>
   <br>
   <br>
-  <a href="https://www.codacy.com/app/kleberbaum/intel">
-  </a>
+  <a href="https://www.codacy.com/app/kleberbaum/intel"></a>
 </p>
  
  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b0224ced616347beb703d9330867b5d5)](https://app.codacy.com/gh/snek-at/intel?utm_source=github.com&utm_medium=referral&utm_content=snek-at/intel&utm_campaign=Badge_Grade_Dashboard)
@@ -125,7 +124,6 @@ let refreshState =
 /* Revoke the user tokens on the snek-engine */
 let revokeState =
     await intel.snekclient.session.tasks.auth.revoke();
-    
 
 /** Authorization Tasks */
 /* Get all profile pages from snek-engine */
