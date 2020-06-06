@@ -4,6 +4,8 @@
   "[typescript]": {
       "editor.formatOnSave": true
   },
+  "prettier.trailingComma": "es5",
+  "prettier.arrowParens": "always",
   "editor.fontLigatures": true,
   "editor.snippetSuggestions": "top",
   "editor.insertSpaces": true,
@@ -51,6 +53,5 @@
     "webscrap"
   ],
   "editor.tabSize": 2,
-  "prettier.tslintIntegration": true,
   "prettier.arrowParens": "always"
 }
