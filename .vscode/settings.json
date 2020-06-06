@@ -51,6 +51,4 @@
     "webscrap"
   ],
   "editor.tabSize": 2,
-  "prettier.tslintIntegration": true,
-  "prettier.arrowParens": "always"
 }
