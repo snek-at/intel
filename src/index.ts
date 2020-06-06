@@ -15,7 +15,7 @@
 
 //#region > Imports
 //#PACKAGE "snek-client"
-//## npm install "./client"
+//## npm install "snek-client@0.1.0"
 // Contains the clients for API calls to SNEK, Github and GitLab
 import { SnekClient, GithubClient, WebClient } from "snek-client";
 
