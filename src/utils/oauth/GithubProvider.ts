@@ -18,7 +18,6 @@ const state = GuidGenerator();
 let providerConfig = Config.providers.github;
 let details = providerConfig.details.deploy;
 const GithubProvider: IProvider<boolean> = {
-
   /**
    * Builds authorization url.
    *
@@ -53,7 +52,10 @@ const GithubProvider: IProvider<boolean> = {
       return undefined;
     }
 
+    /* Get the reason for the ocurred error */
     const errorReason = errorMatch[1];
+
+    /* Get the description for the occurred error */
     const errorDescriptionMatch = redirectUrl.match(
       /error_description=([^&]+)/
     );
