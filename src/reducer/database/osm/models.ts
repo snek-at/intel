@@ -6,7 +6,7 @@
 import moment from "moment";
 
 //> Re-constructor
-// SOAssembler for SO objects
+// SOAssembler for statement objects
 import { SOAssembler } from "./reconstructor";
 //> Statements
 // Contains SQL statements
@@ -106,7 +106,7 @@ abstract class BaseSO {
 
   //> Methods
   /**
-   * Filter the SO with a list of keys.
+   * Filter the statement object with a list of keys.
    *
    * @param filter List of keys to filter by
    * @returns {any} The filtered object
@@ -153,7 +153,7 @@ abstract class PlatformSO extends BaseSO {
    * Used to create a repository within the platform.
    *
    * @param fields Repository data
-   * @returns {RepositorySO} A repository SO object
+   * @returns {RepositorySO} A repository statement object
    */
   abstract createRepository(fields: any): RepositorySO;
 
@@ -161,7 +161,7 @@ abstract class PlatformSO extends BaseSO {
    * Used to create a organization within the platform.
    *
    * @param fields Organization data
-   * @returns {OrganizationSO} A organization SO object
+   * @returns {OrganizationSO} A organization statement object
    */
   abstract createOrganization(fields: any): OrganizationSO;
 
@@ -169,7 +169,7 @@ abstract class PlatformSO extends BaseSO {
    * Used to create a statistic within the platform.
    *
    * @param fields Statistic data
-   * @returns {StatisticSO} A statistic SO object
+   * @returns {StatisticSO} A statistic statement object
    */
   abstract createStatistic(fields: any): StatisticSO;
 
@@ -177,21 +177,21 @@ abstract class PlatformSO extends BaseSO {
    * Used to create a calendar day within the platform.
    *
    * @param fields Calendar entry data
-   * @returns {CalendarSO} A calendar SO object
+   * @returns {CalendarSO} A calendar statement object
    */
   abstract createCalendarEntry(fields: any): CalendarSO;
 
   /**
    * Used to get all repositories within the platform.
    *
-   * @returns {RepositorySO[]} A list of repository SO objects
+   * @returns {RepositorySO[]} A list of repository statement objects
    */
   abstract getRepositories(fields: any): RepositorySO[];
 
   /**
    * Used to get all organizations within the platform.
    *
-   * @returns {OrganizationSO[]} A list of organization SO objects
+   * @returns {OrganizationSO[]} A list of organization statement objects
    */
   abstract getOrganizations(fields: any): OrganizationSO[];
 
@@ -382,7 +382,7 @@ abstract class RepositorySO extends BaseSO {
    * Used to create a member within the repository.
    *
    * @param fields Statistic data
-   * @returns {MemberSO} A member SO object
+   * @returns {MemberSO} A member statement object
    */
   abstract createMember(fields: any): MemberSO;
 
@@ -390,21 +390,21 @@ abstract class RepositorySO extends BaseSO {
    * Used to create a language within the repository.
    *
    * @param fields Language data
-   * @returns {MemberSO} A language SO object
+   * @returns {MemberSO} A language statement object
    */
   abstract createLanguage(fields: any): LanguageSO;
 
   /**
    * Used to get all members within the repository.
    *
-   * @returns {MemberSO[]} A list of member SO objects
+   * @returns {MemberSO[]} A list of member statement objects
    */
   abstract getMembers(fields: any): MemberSO[];
 
   /**
    * Used to get all languages within the repository.
    *
-   * @returns {LanguageSO[]} A list of language SO objects
+   * @returns {LanguageSO[]} A list of language statement objects
    */
   abstract getLanguages(fields: any): LanguageSO[];
 
@@ -748,7 +748,7 @@ abstract class OrganizationSO extends BaseSO {
    *
    * @abstract
    * @param fields Member data
-   * @returns {MemberSO} A member SO object
+   * @returns {MemberSO} A member statement object
    */
   abstract createMember(fields: any): MemberSO;
 
@@ -756,7 +756,7 @@ abstract class OrganizationSO extends BaseSO {
    * Get all members within this organization.
    *
    * @abstract
-   * @returns {MemberSO[]} A list of member SO objects
+   * @returns {MemberSO[]} A list of member statement objects
    */
   abstract getMembers(): MemberSO[];
 
@@ -764,7 +764,7 @@ abstract class OrganizationSO extends BaseSO {
    * Get all repositories within this organization.
    *
    * @abstract
-   * @returns {RepositorySO[]} A list of repository SO objects
+   * @returns {RepositorySO[]} A list of repository statement objects
    */
   abstract getRepositories(): RepositorySO[];
 
@@ -1102,21 +1102,21 @@ abstract class StatisticSO extends BaseSO {
    * Used to create a streak within the statistic.
    *
    * @param fields Streak data
-   * @returns {MemberSO} A streak SO object
+   * @returns {MemberSO} A streak statement object
    */
   abstract createStreak(fields: any): StreakSO;
 
   /**
    * Used to get all streaks within the statistic.
    *
-   * @returns {StreakSO[]} A streak SO object
+   * @returns {StreakSO[]} A streak statement object
    */
   abstract getStreaks(): StreakSO[];
 
   /**
    * Used to calculate all the longest and current streak.
    *
-   * @returns {StreakSO[]} The longest and current streak SO objects
+   * @returns {StreakSO[]} The longest and current streak statement objects
    */
   abstract getStreakDetail(
     streaks: StreakSO[]
@@ -1125,7 +1125,7 @@ abstract class StatisticSO extends BaseSO {
   /**
    * Used to calculate the busiest day within a statistic year.
    *
-   * @returns {CalendarSO} A calendar SO object
+   * @returns {CalendarSO} A calendar statement object
    */
   abstract getBusiestDay(): CalendarSO;
 
@@ -1402,7 +1402,7 @@ abstract class CalendarSO extends BaseSO {
    * Create a contribution within the calendar day.
    *
    * @param fields Contribution data
-   * @returns {MemberSO} A contribution SO object
+   * @returns {MemberSO} A contribution statement object
    */
   abstract createContribution(fields: any): ContributionSO;
 

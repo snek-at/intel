@@ -3,7 +3,7 @@
 // Contains all osm models
 import * as models from "./models";
 //> Reconstructor
-// SOAssembler for SO objects
+// SOAssembler for statement objects
 import { SOAssembler } from "./reconstructor";
 //#endregion
 
