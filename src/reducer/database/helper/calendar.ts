@@ -107,16 +107,26 @@ function fillCalendarWithColors(calendar: ICalendar, busiestDayTotal: number) {
     week.days.forEach((day) => {
       const precision = day.total / busiestDayTotal;
 
-      if (precision > 0.8 && precision <= 1) {
-        day.color = "#196127";
-      } else if (precision > 0.6 && precision <= 0.8) {
-        day.color = "#239a3b";
-      } else if (precision > 0.4 && precision <= 0.6) {
-        day.color = "#7bc96f";
-      } else if (precision > 0.0 && precision <= 0.4) {
-        day.color = "#c6e48b";
-      } else if (precision === 0) {
-        day.color = "#ebedf0";
+      switch (true) {
+        // If precision greater than 80%
+        case precision > 0.8:
+          day.color = "#196127";
+          break;
+        // If precision greater than 60%
+        case precision > 0.6:
+          day.color = "#239a3b";
+          break;
+        // If precision greater than 40%
+        case precision > 0.4:
+          day.color = "#7bc96f";
+          break;
+        // If precision greater than 0%
+        case precision > 0:
+          day.color = "#c6e48b";
+          break;
+        // If precision is 0%
+        default:
+          day.color = "#ebedf0";
       }
     });
   });
