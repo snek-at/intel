@@ -33,7 +33,7 @@ function squeezer(obj: any, keys?: string[], exclude: string[] = ["objects"]) {
       {
         get: () => {
           return index;
-        }
+        },
       }
     );
 

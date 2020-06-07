@@ -42,7 +42,7 @@ class Reducer {
 
   /**
    * Reset the database.
-   * 
+   *
    * @description Resets the database by emptying all tables
    */
   reset() {

@@ -43,7 +43,7 @@ function calculateStreaks(values: IDay[]) {
 
     for (let index: number = 0; index < values.length; index++) {
       const day: IDay = values[index];
-      
+
       let nextDay: IDay = {
         total: 0,
       };

@@ -137,7 +137,7 @@ class SOAssembler {
       }
 
       let response = SOAssembler.database.exec(filterStatement);
-      
+
       for (let entry in response) {
         if ({}.hasOwnProperty.call(response, entry)) {
           for (let f in filter) {

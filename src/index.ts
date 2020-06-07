@@ -196,7 +196,6 @@ export class Intel implements IIntel {
         };
 
         await github.converter.run(data);
-
       } else if (platform === "gitlab") {
         let gitlabClient: WebClient;
 
