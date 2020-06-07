@@ -86,7 +86,6 @@ interface Statistic {
 function runScraper(rawData: IScrapedData) {
   /* Extract platform data from rawData.home document */
   let platformName = rawData.platform.name;
-
   let platformUrl = rawData.platform.url;
   let avatarUrl = rawData.home.querySelectorAll('[property="og:image"]')[0]
     ?.attributes[0].value;

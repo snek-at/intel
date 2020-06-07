@@ -4,6 +4,7 @@
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
+
 //> OSM
 // Contains all statement objects
 import * as osm from "./osm";
@@ -441,6 +442,7 @@ class RepositoryHasMember extends osm.models.RepositoryHasMemberSO {
   );
 
   public objects = RepositoryHasMember.objects;
+
   public id = 0;
 
   /**
@@ -510,8 +512,9 @@ class PlatformHasRepository extends osm.models.PlatformHasRepositorySO {
     PlatformHasRepository
   );
 
-  public id = 0;
   public objects = PlatformHasRepository.objects;
+
+  public id = 0;
 
   /**
    * @todo Implement a save functionality
@@ -624,7 +627,9 @@ class OrganizationHasMember extends osm.models.OrganizationHasMemberSO {
   public static objects = osm.models.OrganizationHasMemberSO.getObjects(
     OrganizationHasMember
   );
+
   public objects = OrganizationHasMember.objects;
+
   public id = 0;
 
   /**
@@ -644,6 +649,7 @@ class PlatformHasOrganization extends osm.models.PlatformHasOrganizationSO {
   );
 
   public objects = PlatformHasOrganization.objects;
+
   public id = 0;
 
   /**
