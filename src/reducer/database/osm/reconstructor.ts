@@ -2,7 +2,7 @@
 //#PACKAGE "alasql"
 //## npm install "alasql"@0.5.9
 // Contains a framework for creating a database in the browser
-var alasql = require("alasql");
+let alasql = require("alasql");
 //#endregion
 
 //#region > Classes

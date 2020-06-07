@@ -28,7 +28,7 @@ function squeezer(obj: any, keys?: string[], exclude: string[] = ["objects"]) {
      * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
      * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
      */
-    var proxy = new Proxy(
+    let proxy = new Proxy(
       { index },
       {
         get: () => {
