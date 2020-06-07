@@ -65,6 +65,7 @@ function generateCalendarStructure(startDate: string, endDate: string) {
 
   for (
     let m = moment(startDate);
+    
     m.diff(endDate, "days") <= 0;
     m.add(1, "days")
   ) {
@@ -104,7 +105,7 @@ function generateCalendarStructure(startDate: string, endDate: string) {
 function fillCalendarWithColors(calendar: ICalendar, busiestDayTotal: number) {
   calendar.weeks.forEach((week) => {
     week.days.forEach((day) => {
-      let precision = day.total / busiestDayTotal;
+      const precision = day.total / busiestDayTotal;
 
       if (precision > 0.8 && precision <= 1) {
         day.color = "#196127";
@@ -125,7 +126,9 @@ function fillCalendarWithColors(calendar: ICalendar, busiestDayTotal: number) {
 //#endregion
 
 //#region > Exports
+// Interface
 export type { ICalendar };
+// Functions
 export { generateCalendarStructure, fillCalendarWithColors };
 //#endregion
 

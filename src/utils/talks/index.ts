@@ -84,6 +84,7 @@ async function generate(source: ISource) {
           currentItems = totalItems;
 
           //#LEGACY
+          //#TODO Implement proper error handling
           //#ERROR
           console.error("Talks .run()", err);
         });

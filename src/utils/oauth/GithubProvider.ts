@@ -27,7 +27,7 @@ const GithubProvider: IProvider<boolean> = {
    *              are obtained from the config file.
    */
   buildAuthorizeUrl(): string {
-    let href = window.location.href.toString();
+    const href = window.location.href.toString();
 
     if (href.includes(Config.devUrl)) {
       details = providerConfig.details.dev;

@@ -11,6 +11,9 @@
  *  intel.get();
  *  intel.snekClient;
  * ##
+ *
+ * @see {@link https://github.com/snek-at/intel#usage} for usage
+ *      examples.
  */
 
 //#region > Imports
@@ -97,7 +100,7 @@ interface IDataUser {
     /**
      * User: Can contain any information according to a user.
      *       The content of this object relays on the query with which the
-     *       client.
+     *       client gets initialized.
      */
     user: object;
   };
@@ -124,7 +127,8 @@ interface IGitHubData {
 /**
  * @class Intel - A place where everything becomes one thing.
  *        By using the snek-client, utils and the brand new snek-reducer we
- *        created a new way of life. We can frankly say, we love it!
+ *        undoubtedly created the best way to process data
+ *        in the 21st century.
  * @implements IIntel
  * @see {@link http://github.com/snek-at/intel/README.md |SNEK Intel README}
  *      for further information.
@@ -192,6 +196,7 @@ export class Intel implements IIntel {
         };
 
         await github.converter.run(data);
+
       } else if (platform === "gitlab") {
         let gitlabClient: WebClient;
 
@@ -234,6 +239,7 @@ export class Intel implements IIntel {
       }
     } catch (err) {
       //#LEGACY
+      //#TODO Implement proper error handling
       //#ERROR
       console.error("intel.append()", err);
     }

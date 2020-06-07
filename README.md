@@ -79,7 +79,7 @@ await intel.appendList([source1, source2]);
 let data = intel.get();
 ```
 ### Reset Database
-This will erase all datasets in the databse.
+This will erase all data in the database.
 ```typescript
 intel.resetReducer();
 ```
@@ -125,7 +125,8 @@ let refreshState =
 let revokeState =
     await intel.snekclient.session.tasks.auth.revoke();
 
-/** Authorization Tasks */
+
+/** General Tasks */
 /* Get all profile pages from snek-engine */
 let pagesData =
     await intel.snekclient.session.tasks.general.allPageUrls();
@@ -135,7 +136,7 @@ let gitlabServerData =
     await intel.snekclient.session.tasks.general.gitlabServer();
 
 
-/** Authorization Tasks */
+/** User Tasks */
 /* Get all GitLab servers from the snek-engine */
 let cachePageData =
     await intel.snekclient.session.tasks.user.cache();
@@ -197,6 +198,7 @@ Put this script inside your redirect page to obtain the access token from the OA
  * request key
  */
 const requestKey = window.name;
+
 // Update corresponding entry with the redirected url which should
 // either contain the access token or the reason for failure in the query
 // parameter / hash

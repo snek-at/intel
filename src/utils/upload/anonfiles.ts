@@ -63,7 +63,6 @@ async function uploadFile(file: Blob) {
   }>("upload", data);
 
   const downloadUrl = await getDownloadUrl(response.data.file.url.short);
-
   const talk: ITalk = {
     name: response.data.file.metadata.name,
     displayUrl: downloadUrl,

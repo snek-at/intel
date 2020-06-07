@@ -4,6 +4,7 @@
 // A lightweight JavaScript date library for parsing,
 // validating, manipulating, and formatting dates.
 import moment from "moment";
+
 //> Queries
 // Contains all queries for github graphql api
 import * as queries from "./data";
@@ -46,7 +47,7 @@ function profile() {
 function calendar(profile: IProfile) {
   let date = moment(profile.createdAt);
   let fragments = "";
-  let runtime = moment().year() - date.year();
+  const runtime = moment().year() - date.year();
 
   for (let index = 0; index <= runtime; index++) {
     fragments += queries.calendarFragment(
@@ -62,7 +63,9 @@ function calendar(profile: IProfile) {
 //#endregion
 
 //#region > Exports
+// Interface
 export type { IProfile };
+// Functions
 export { profile, calendar };
 //#endregion
 

@@ -21,7 +21,7 @@ import Delay from "../../toolbox/Delay";
  * @description Fill the database with data provided by "rawData"
  */
 async function run(rawData: any) {
-  let platform = models.Platform.objects.create({
+  const platform = models.Platform.objects.create({
     platformName: "github",
     platformUrl: "https://github.com",
     avatarUrl: rawData.profile.avatarUrl,

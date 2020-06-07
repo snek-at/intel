@@ -109,6 +109,7 @@ class SOAssembler {
       return response;
     } catch (err) {
       //#LEGACY
+      //#TODO Implement proper error handling
       //#ERROR
       console.error("OSM reconstructor .all()", err);
 
@@ -136,6 +137,7 @@ class SOAssembler {
       }
 
       let response = SOAssembler.database.exec(filterStatement);
+      
       for (let entry in response) {
         if ({}.hasOwnProperty.call(response, entry)) {
           for (let f in filter) {
@@ -148,7 +150,7 @@ class SOAssembler {
                * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
                * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
                */
-              var eProxy = new Proxy(
+              let eProxy = new Proxy(
                 { entry },
                 {
                   get: () => {
@@ -165,7 +167,7 @@ class SOAssembler {
                * @see {@link https://bit.ly/2KdpgAh |the-dangers-of-square-bracket-notation}
                * @see {@link https://bit.ly/3cpPVG6 |creating-defensive-objects-with-es6-proxies}
                */
-              var fProxy = new Proxy(
+              let fProxy = new Proxy(
                 { f },
                 {
                   get: () => {
@@ -184,7 +186,7 @@ class SOAssembler {
         }
       }
 
-      var filtered = response.filter((el: any) => {
+      let filtered = response.filter((el: any) => {
         return el !== null;
       });
 
@@ -203,6 +205,7 @@ class SOAssembler {
       return objects;
     } catch (err) {
       //#LEGACY
+      //#TODO Implement proper error handling
       //#ERROR
       console.error("OSM reconstructor .filer()", err);
 

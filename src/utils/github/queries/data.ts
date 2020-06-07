@@ -72,7 +72,7 @@ const calendar = (fragments: string) => gql`
   }
 `;
 
-// Fragments
+//> Fragments
 const calendarFragment = (c: number, fromYear: string, toYear: string) => `
   calendarT${c}: contributionsCollection(from:"${fromYear}", to:"${toYear}" ){
     totalIssueContributions

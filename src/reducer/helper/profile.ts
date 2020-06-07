@@ -111,7 +111,7 @@ async function mergedProfile() {
      * Deep Cloning the organization is required due to
      * referencing issues.
      */
-    let owner = cloneDeep(organization).render(
+    const owner = cloneDeep(organization).render(
       /* Including the following field in the owner object */
       ["avatarUrl", "url", "fullname", "name"],
       /* Excluding the following field in the owner object */
@@ -143,7 +143,9 @@ async function mergedProfile() {
 //#endregion
 
 //#region > Exports
+// Interface
 export type { IPlatform };
+// Functions
 export { mergedProfile };
 //#endregion
 
