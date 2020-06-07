@@ -997,9 +997,11 @@ class Talk extends osm.models.TalkSO implements ITalk {
   }
 
   getRepository(): Repository {
+    let repositoryData: any = {};
+
     try {
       /* Parse repositoryData to a object */
-      let repositoryData = JSON.parse(this.repositoryData);
+      repositoryData = JSON.parse(this.repositoryData);
 
       /* Filter repositories for repository represented by repositoryData */
       const repository: any = Repository.objects.filter({
@@ -1029,8 +1031,6 @@ class Talk extends osm.models.TalkSO implements ITalk {
           "De-serialization of repositoryData failed, " +
           "therefore an empty repository is provided!"
       );
-
-      const repositoryData: any = {};
 
       return new Repository(repositoryData);
     }
