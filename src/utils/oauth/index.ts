@@ -10,7 +10,9 @@ import GithubProvider from "./GithubProvider";
 //#endregion
 
 //#region > Exports
+//> Authentication Service
 export default RSA;
+//> Providers
 export { GithubProvider };
 //#endregion
 

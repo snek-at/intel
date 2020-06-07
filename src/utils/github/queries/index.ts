@@ -63,9 +63,9 @@ function calendar(profile: IProfile) {
 //#endregion
 
 //#region > Exports
-// Interface
+//> Interfaces
 export type { IProfile };
-// Functions
+//> Functions
 export { profile, calendar };
 //#endregion
 

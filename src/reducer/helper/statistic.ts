@@ -157,7 +157,9 @@ async function mergedStatistic(): Promise<IStatisticResponse> {
 //#endregion
 
 //#region > Exports
+//> Interfaces
 export type { IStatisticResponse, IStatistic };
+//> Functions
 export { mergedStatistic };
 //#endregion
 

@@ -135,9 +135,9 @@ function fillCalendarWithColors(calendar: ICalendar, busiestDayTotal: number) {
 //#endregion
 
 //#region > Exports
-// Interface
+//> Interfaces
 export type { ICalendar };
-// Functions
+//> Functions
 export { generateCalendarStructure, fillCalendarWithColors };
 //#endregion
 

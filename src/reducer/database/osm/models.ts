@@ -1643,7 +1643,9 @@ abstract class TalkSO extends BaseSO {
 //#endregion
 
 //#region > Exports
+//> Interfaces
 export type { Share };
+// Statement Objects
 export {
   BaseSO,
   PlatformSO,

@@ -143,9 +143,9 @@ async function mergedProfile() {
 //#endregion
 
 //#region > Exports
-// Interface
+//> Interfaces
 export type { IPlatform };
-// Functions
+//> Functions
 export { mergedProfile };
 //#endregion
 

@@ -63,9 +63,9 @@ function mergedTalks() {
 //#endregion
 
 //#region > Exports
-// Interface
+//> Interfaces
 export type { ITalk };
-// Functions
+//> Functions
 export { mergedTalks };
 //#endregion
 
