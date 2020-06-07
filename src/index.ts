@@ -15,7 +15,7 @@
 
 //#region > Imports
 //#PACKAGE "snek-client"
-//## npm install "snek-client@0.1.0"
+//## npm install "snek-client"@0.1.1
 // Contains the clients for API calls to SNEK, Github and GitLab
 import { SnekClient, GithubClient, WebClient } from "snek-client";
 
@@ -234,7 +234,8 @@ export class Intel implements IIntel {
       }
     } catch (err) {
       //#LEGACY
-      console.error("INTEL GITLAB", err);
+      //#ERROR
+      console.error("intel.append()", err);
     }
   }
 

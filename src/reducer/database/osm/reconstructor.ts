@@ -109,7 +109,8 @@ class SOAssembler {
       return response;
     } catch (err) {
       //#LEGACY
-      console.error("OSM RECONSTRUCTOR ALL", err);
+      //#ERROR
+      console.error("OSM reconstructor .all()", err);
 
       return {
         success: false,
@@ -202,7 +203,8 @@ class SOAssembler {
       return objects;
     } catch (err) {
       //#LEGACY
-      console.error("OSM RECONSTRUCTOR FILTER", err);
+      //#ERROR
+      console.error("OSM reconstructor .filer()", err);
 
       return {
         success: false,

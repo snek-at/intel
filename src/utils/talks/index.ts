@@ -1,6 +1,6 @@
 //#region > Imports
 //#PACKAGE "snek-client"
-//## npm install "snek-client@0.1.0"
+//## npm install "snek-client"@0.1.1
 // Contains a client for web calls
 import { WebClient } from "snek-client";
 
@@ -84,7 +84,8 @@ async function generate(source: ISource) {
           currentItems = totalItems;
 
           //#LEGACY
-          console.error("TALKS QUERY" + JSON.stringify(err));
+          //#ERROR
+          console.error("Talks .run()", err);
         });
     }
   };
