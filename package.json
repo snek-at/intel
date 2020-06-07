@@ -1,7 +1,6 @@
 {
   "name": "snek-intel",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.1.0",
   "homepage": "http://snek.at",
   "license": "EUPL-1.2",
   "main": "lib/index.js",
@@ -11,7 +10,8 @@
     "url": "git+https://github.com/snek-at/intel.git"
   },
   "files": [
-    "lib"
+    "lib",
+    "LICENSES"
   ],
   "scripts": {
     "start": "react-scripts start",
