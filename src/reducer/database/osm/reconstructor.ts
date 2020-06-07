@@ -93,15 +93,13 @@ class SOAssembler {
   /**
    * Get all objects of the table specified by type of Base.
    *
-   * @deprecated The fields parameter my be useless and should be removed!
-   * @param fields The data to get a object by
    * @returns {object[]} A list of objects of the initialized Base class
    */
-  all(...fields: any[]) {
+  all() {
     try {
       let response;
 
-      response = SOAssembler.database.exec(this.Base.statements.all, fields);
+      response = SOAssembler.database.exec(this.Base.statements.all);
       response = response.map((entry: any) => {
         return new this.Base(entry);
       });
