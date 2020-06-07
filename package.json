@@ -33,14 +33,14 @@
   },
   "author": "schettn",
   "dependencies": {
-    "snek-client": "^0.1.0",
     "alasql": "^0.5.5",
     "apollo-boost": "^0.4.7",
     "graphql": "^14.6.0",
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.24.0",
     "react-scripts": "^3.4.1",
-    "react-very-simple-oauth": "^1.1.1"
+    "react-very-simple-oauth": "^1.1.1",
+    "snek-client": "^0.1.1"
   },
   "devDependencies": {
     "@types/lodash.clonedeep": "^4.5.6",
