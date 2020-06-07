@@ -1,12 +1,13 @@
 {
   "editor.rulers": [80,120],
+  "editor.tabSize": 2,
+  "editor.fontLigatures": true,
+  "editor.snippetSuggestions": "top",
+  "editor.insertSpaces": true,
   "editor.formatOnSave": false,
   "[typescript]": {
       "editor.formatOnSave": true
   },
-  "editor.fontLigatures": true,
-  "editor.snippetSuggestions": "top",
-  "editor.insertSpaces": true,
   "terminal.integrated.fontFamily": "Consolas",
   "workbench.colorTheme": "Dracula Soft",
   "cSpell.ignoreWords": [
@@ -49,6 +50,5 @@
     "renamer",
     "webfonts",
     "webscrap"
-  ],
-  "editor.tabSize": 2
+  ]
 }
