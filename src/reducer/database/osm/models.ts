@@ -1034,7 +1034,7 @@ abstract class StatisticSO extends BaseSO {
           [self.year]
         )[0] as Share,
         pullRequest: SOAssembler.database.exec(
-          StatisticSO.statements.issueContributionsOfYear,
+          StatisticSO.statements.pullRequestContributionsOfYear,
           [self.year]
         )[0] as Share,
         pullRequestReview: SOAssembler.database.exec(
