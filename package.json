@@ -1,13 +1,18 @@
 {
   "name": "snek-intel",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.1.0",
   "homepage": "http://snek.at",
   "license": "EUPL-1.2",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/snek-at/intel.git"
   },
+  "files": [
+    "lib",
+    "LICENSES"
+  ],
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test --env=jsdom",
@@ -26,10 +31,19 @@
   "bugs": {
     "url": "https://github.com/snek-at/intel/issues"
   },
-  "main": "src/index.js",
   "author": "schettn",
   "dependencies": {
-    "react-scripts": "^3.3.1"
+    "alasql": "^0.5.5",
+    "apollo-boost": "^0.4.7",
+    "graphql": "^14.6.0",
+    "lodash.clonedeep": "^4.5.0",
+    "moment": "^2.24.0",
+    "react-scripts": "^3.4.1",
+    "react-very-simple-oauth": "^1.1.1",
+    "snek-client": "^0.1.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/lodash.clonedeep": "^4.5.6",
+    "typescript": "^3.8.3"
+  }
 }

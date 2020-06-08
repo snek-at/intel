@@ -1,5 +1,54 @@
 {
-    "cSpell.words": [
-        "snek"
-    ]
+  "editor.rulers": [80,120],
+  "editor.tabSize": 2,
+  "editor.fontLigatures": true,
+  "editor.snippetSuggestions": "top",
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": false,
+  "[typescript]": {
+      "editor.formatOnSave": true
+  },
+  "terminal.integrated.fontFamily": "Consolas",
+  "workbench.colorTheme": "Dracula Soft",
+  "cSpell.ignoreWords": [
+    "aichner",
+    "eupl",
+    "mdbreact",
+    "spdx",
+    "werbeagentur",
+    "fontawesome",
+    "fortawesome",
+    "reactjs",
+    "react.js"
+  ],
+  "cSpell.enabledLanguageIds": [
+    "css",
+    "html",
+    "jade",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "markdown",
+    "plaintext",
+    "scss",
+    "sql",
+    "text",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+    "yml"
+  ],
+  "cSpell.showStatus": true,
+  "cSpell.ignorePaths": ["node_modules"],
+  "cSpell.words": [
+    "snek",
+    "browserslist",
+    "contribs",
+    "homescreen",
+    "precached",
+    "renamer",
+    "webfonts",
+    "webscrap"
+  ]
 }

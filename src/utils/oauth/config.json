@@ -1,0 +1,27 @@
+{
+  "providers": {
+    "github": {
+      "details": {
+        "dev": {
+          "clientId": "1440dd4c1d1c4c0fa124",
+          "clientSecret": "0723a2b5bfef27efc8b2d26d837ead239fa0b0e6",
+          "redirectUrl": "http://localhost:3000/redirect",
+          "scope": "repo, user:email, read:user, read:org"
+        },
+        "deploy": {
+          "clientId": "2148629809594d57c113",
+          "clientSecret": "64a37e4846387cfcaea35d83afca3c9c8689628c",
+          "redirectUrl": "https://snek.at/redirect",
+          "scope": "repo, user:email, read:user, read:org"
+        }
+      },
+      "urls": {
+        "authorizeUrl": "https://github.com/login/oauth/authorize?redirect_uri=",
+        "accessTokenUrl": "https://github.com/login/oauth/access_token?code=",
+        "usernameUrl": "https://api.github.com/user"
+      }
+    }
+  },
+  "proxyUrl": "https://cors.snek.at/",
+  "devUrl": "http://localhost:3000"
+}
