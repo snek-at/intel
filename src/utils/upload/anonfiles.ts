@@ -37,11 +37,11 @@ interface ITalk {
  */
 async function getDownloadUrl(url: string): Promise<string | null> {
   const webClient = new WebClient(url);
+
   /*
    * The url with which the web client was initialized already contains the
    * endpoint url, therefore the path no longer has to be specified explicitly.
    */
-
   let dom = await webClient.scraper.getDom("");
 
   return dom.getElementsByTagName("a")[1].getAttribute("href");

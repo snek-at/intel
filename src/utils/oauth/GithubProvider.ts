@@ -107,12 +107,12 @@ const GithubProvider: IProvider<boolean> = {
     /* POST request to get the access token from GitHub */
     await fetch(AuthorizeUrl, {
       headers: {
-        "Accept": "application/json",
+        Accept: "application/json",
         "Access-Allow-Credentials": "True",
         "Access-Control-Allow-Methods": "POST",
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        "Vary": "Origin",
+        Vary: "Origin",
       },
       method: "POST",
     })
@@ -123,7 +123,7 @@ const GithubProvider: IProvider<boolean> = {
         /* GET request to get the user used for OAuth */
         await fetch(`${providerConfig.urls.usernameUrl}`, {
           headers: {
-            "authorization": "Token " + accessToken,
+            authorization: "Token " + accessToken,
           },
         })
           .then(async (res) => await res.json())
@@ -140,7 +140,7 @@ const GithubProvider: IProvider<boolean> = {
 //#endregion
 
 //#region > Exports
-//> Default Constant
+//> Default Constant Variable
 export default GithubProvider;
 //#endregion
 

@@ -106,7 +106,7 @@ abstract class BaseSO {
 
   //> Methods
   /**
-   * Filter the statement object with a list of keys.
+   * Filter the statement objects with a list of keys.
    *
    * @param filter List of keys to filter by
    * @returns {any} The filtered object
