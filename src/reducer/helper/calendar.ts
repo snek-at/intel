@@ -30,6 +30,7 @@ function mergedCalendar() {
   }).data;
 
   const { createdAt } = models.Platform.getLowestCreatedAtYear();
+
   let years: ICalendar[] = [];
 
   /** @todo Error handling */
@@ -50,6 +51,7 @@ function mergedCalendar() {
 //#endregion
 
 //#region > Exports
+//> Functions
 export { mergedCalendar };
 //#endregion
 

@@ -8,6 +8,7 @@ import * as converter from "./converter";
 //#endregion
 
 //#region > Exports
+//> Constants & Functions
 export { paths, converter };
 //#endregion
 

@@ -13,6 +13,7 @@ import * as talks from "./talks";
 //#endregion
 
 //#region > Exports
+//> Functions
 export { calendar, profile, statistic, language, talks };
 //#endregion
 

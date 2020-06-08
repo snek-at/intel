@@ -52,6 +52,7 @@ FROM   organization o
 //#endregion
 
 //#region > Exports
+//> Constants
 export { initialize, create, get, all };
 //#endregion
 

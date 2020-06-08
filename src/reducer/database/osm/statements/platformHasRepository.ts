@@ -29,6 +29,7 @@ FROM   platformhasrepository
 //#endregion
 
 //#region > Exports
+//> Constants
 export { initialize, create, all };
 //#endregion
 

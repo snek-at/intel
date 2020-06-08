@@ -45,6 +45,7 @@ function squeezer(obj: any, keys?: string[], exclude: string[] = ["objects"]) {
 //#endregion
 
 //#region > Exports
+// Functions
 export { squeezer };
 //#endregion
 

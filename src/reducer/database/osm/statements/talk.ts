@@ -44,6 +44,7 @@ FROM   talk
 //#endregion
 
 //#region > Exports
+//> Constants
 export { initialize, create, get, all };
 //#endregion
 

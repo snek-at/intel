@@ -42,6 +42,7 @@ FROM   member
 //#endregion
 
 //#region > Exports
+//> Constants
 export { initialize, create, get, all };
 //#endregion
 

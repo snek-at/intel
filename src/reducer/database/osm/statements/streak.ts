@@ -38,6 +38,7 @@ FROM   streak
 //#endregion
 
 //#region > Exports
+//> Constants
 export { initialize, create, get, all };
 //#endregion
 

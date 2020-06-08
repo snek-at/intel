@@ -13,7 +13,7 @@ import * as queries from "./data";
 //#region > Interfaces
 /**
  * @interface Profile defines the structure of the profile object which is required
- *                   to generate the calendar query.
+ *            to generate the calendar query.
  * @description Only createdAt is defined due to no more information is needed to
  *              generate the calendar query.
  */
@@ -47,6 +47,7 @@ function profile() {
 function calendar(profile: IProfile) {
   let date = moment(profile.createdAt);
   let fragments = "";
+
   const runtime = moment().year() - date.year();
 
   for (let index = 0; index <= runtime; index++) {

@@ -252,6 +252,7 @@ class SOAssembler {
 //#endregion
 
 //#region > Exports
+//> Classes
 export { SOAssembler };
 //#endregion
 

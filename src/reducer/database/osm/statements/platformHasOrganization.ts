@@ -29,6 +29,7 @@ FROM   platformhasorganization
 //#endregion
 
 //#region > Exports
+//> Constants
 export { initialize, create, all };
 //#endregion
 

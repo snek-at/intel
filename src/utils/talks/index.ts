@@ -35,11 +35,10 @@ interface ISource {
 
 //#region > Functions
 /**
- *
+ * Provides all GitHub talks based on the provided source object.
+ * 
  * @param {ISource} source A source object which must contain authorization,
  *                         usernames and organizations.
- * @description Provides all github talks of provided usernames and
- *              organizations.
  */
 async function generate(source: ISource) {
   const client = new WebClient("https://api.github.com/", {
@@ -91,12 +90,12 @@ async function generate(source: ISource) {
     }
   };
 
-  /* Loop all usernames */
+  /* Iterate trough all usernames */
   for (const index in source.usernames) {
     await run(source.usernames[index]);
   }
 
-  /* Loop all organizations */
+  /* Iterate trough all organizations */
   for (const index in source.organizations) {
     await run(source.organizations[index], false);
   }
@@ -113,6 +112,7 @@ async function append(talk: object) {
 //#endregion
 
 //#region > Exports
+//> Functions
 export { generate, append };
 //#endregion
 

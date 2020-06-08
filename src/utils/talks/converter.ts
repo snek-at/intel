@@ -7,7 +7,7 @@ import { Talk } from "../../reducer/database/models";
 //#region > Functions
 /**
  * @function
- * @param rawData
+ * @param rawData Data object which contains raw talk information
  * @description Converter for talk data from the Github APIv3
  */
 async function run(rawData: any) {
@@ -52,6 +52,7 @@ async function run(rawData: any) {
 //#endregion
 
 //#region > Exports
+//> Functions
 export { run };
 //#endregion
 

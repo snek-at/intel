@@ -18,6 +18,7 @@ function GuidGenerator() {
 //#endregion
 
 //#region > Export
+//> Default Function
 export default GuidGenerator;
 //#endregion
 

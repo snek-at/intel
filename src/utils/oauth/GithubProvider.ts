@@ -14,9 +14,10 @@ import Config from "./config.json";
 
 //#region > Providers
 // Set the default values needed for an OAuth-Request
-const state = GuidGenerator();
 let providerConfig = Config.providers.github;
 let details = providerConfig.details.deploy;
+
+const state = GuidGenerator();
 const GithubProvider: IProvider<boolean> = {
   /**
    * Builds authorization url.
@@ -80,6 +81,7 @@ const GithubProvider: IProvider<boolean> = {
   async extractSession(redirectUrl: string): Promise<ExtractedData | null> {
     let data: ExtractedData | null = null;
     let code = null;
+
     const codeMatch = redirectUrl.match(/code=([^&]+)/);
 
     if (codeMatch) {
@@ -87,6 +89,7 @@ const GithubProvider: IProvider<boolean> = {
     }
 
     let state = null;
+
     const stateMatch = redirectUrl.match(/state=([^&]+)/);
 
     if (stateMatch) {
@@ -104,12 +107,12 @@ const GithubProvider: IProvider<boolean> = {
     /* POST request to get the access token from GitHub */
     await fetch(AuthorizeUrl, {
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Access-Allow-Credentials": "True",
         "Access-Control-Allow-Methods": "POST",
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        Vary: "Origin",
+        "Vary": "Origin",
       },
       method: "POST",
     })
@@ -120,7 +123,7 @@ const GithubProvider: IProvider<boolean> = {
         /* GET request to get the user used for OAuth */
         await fetch(`${providerConfig.urls.usernameUrl}`, {
           headers: {
-            authorization: "Token " + accessToken,
+            "authorization": "Token " + accessToken,
           },
         })
           .then(async (res) => await res.json())
@@ -137,6 +140,7 @@ const GithubProvider: IProvider<boolean> = {
 //#endregion
 
 //#region > Exports
+//> Default Constant
 export default GithubProvider;
 //#endregion
 

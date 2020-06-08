@@ -23,6 +23,7 @@ function mergedLanguage() {
 //#endregion
 
 //#region > Exports
+//> Functions
 export { mergedLanguage };
 //#endregion
 

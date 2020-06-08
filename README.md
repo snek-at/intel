@@ -135,7 +135,6 @@ let pagesData =
 let gitlabServerData =
     await intel.snekclient.session.tasks.general.gitlabServer();
 
-
 /** User Tasks */
 /* Get all GitLab servers from the snek-engine */
 let cachePageData =

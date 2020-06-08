@@ -66,6 +66,7 @@ ORDER  BY size DESC
 //#endregion
 
 //#region > Exports
+//> Constants
 export { initialize, create, get, all, byRepository, merged };
 //#endregion
 
