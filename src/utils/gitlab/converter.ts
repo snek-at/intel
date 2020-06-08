@@ -149,6 +149,7 @@ function runScraper(rawData: IScrapedData) {
   if (groupList) {
     for (let index = 0; index < groupList.length; index++) {
       const element = groupList[index];
+
       /* Select avatar. Set to null if no image is set */
       let avatarUrl = element
         .getElementsByClassName("avatar-container")[0]
@@ -193,6 +194,7 @@ function runScraper(rawData: IScrapedData) {
   if (projectsList) {
     for (let index = 0; index < projectsList.length; index++) {
       const element = projectsList[index];
+
       /* Select avatar. Set to null if no image is set */
       let avatarUrl = element
         .getElementsByClassName("avatar-container")[0]
@@ -236,7 +238,7 @@ function runScraper(rawData: IScrapedData) {
   /* Check whether there are contributions/events or not */
   if (eventList) {
     /*
-     * Loop trough every item in the event list.
+     * Iterate trough every item in the event list.
      * Extract contribution data from element.
      */
     for (let index = 0; index < eventList.length; index++) {
@@ -446,6 +448,7 @@ function runScraper(rawData: IScrapedData) {
 //#endregion
 
 //#region > Exports
+//> Functions
 export { runScraper };
 //#endregion
 
