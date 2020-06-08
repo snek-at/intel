@@ -241,17 +241,24 @@ function runScraper(rawData: IScrapedData) {
      */
     for (let index = 0; index < eventList.length; index++) {
       const element = eventList[index];
+      const typeElementText = element.innerHTML.toLowerCase();
+
       /* Define the contribution types */
       let type: string = "undefined";
 
-      if (element.innerHTML.toLowerCase().includes("pushed")) {
-        type = "commit";
-      } else if (element.innerHTML.toLowerCase().includes("opened")) {
-        type = "issue";
-      } else if (element.innerHTML.toLowerCase().includes("merge branch")) {
-        type = "pullRequest";
-      } else if (element.innerHTML.toLowerCase().includes("created project")) {
-        type = "create";
+      switch (true) {
+        case typeElementText.includes("pushed"):
+          type = "commit";
+          break;
+        case typeElementText.includes("opened"):
+          type = "issue";
+          break;
+        case typeElementText.includes("merge branch"):
+          type = "pullRequest";
+          break;
+        case typeElementText.includes("created project"):
+          type = "create";
+          break;
       }
 
       /* Select date */
