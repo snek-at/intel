@@ -196,7 +196,7 @@ abstract class PlatformSO extends BaseSO {
   abstract getOrganizations(fields: any): OrganizationSO[];
 
   /**
-   * Used to get all repositories within the platform.
+   * Used to get contribution calendar of the platform.
    *
    * @returns {Object} A calendar structure in any format
    */

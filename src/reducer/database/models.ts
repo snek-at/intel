@@ -231,7 +231,7 @@ class Platform extends osm.models.PlatformSO implements IPlatform {
   /**
    * Create a calendar entry.
    *
-   * @param fields Calendar entry data.
+   * @param fields Calendar entry data
    * @returns {Statistic} A calendar object
    * @description Create a day of a calendar with the given fields within this
    *              platform.
@@ -1032,6 +1032,9 @@ class Talk extends osm.models.TalkSO implements ITalk {
         return repository;
       }
     } catch (ex) {
+      //#LEGACY
+      //#TODO Implement proper error handling
+      //#ERROR
       console.warn(
         ex +
           "De-serialization of repositoryData failed, " +
@@ -1051,6 +1054,7 @@ class Talk extends osm.models.TalkSO implements ITalk {
 //#endregion
 
 //#region > Exports
+//> Models
 export {
   Platform,
   Statistic,
