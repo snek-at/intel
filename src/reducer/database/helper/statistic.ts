@@ -91,7 +91,7 @@ function calculateStreaks(values: IDay[]) {
 //#endregion
 
 //#region > Exports
-// Functions
+//> Functions
 export { calculateStreaks };
 //#endregion
 

@@ -23,7 +23,7 @@ function reset() {
 }
 
 //#region > Exports
-// Functions
+//> Functions
 export { models, reset };
 //#endregion
 

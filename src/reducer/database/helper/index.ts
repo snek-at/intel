@@ -9,7 +9,7 @@ import * as statistic from "./statistic";
 //#endregion
 
 //#region > Exports
-// Functions
+//> Functions
 export { calendar, general, statistic };
 //#endregion
 
