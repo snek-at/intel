@@ -106,13 +106,14 @@ const GithubProvider: IProvider<boolean> = {
 
     /* POST request to get the access token from GitHub */
     await fetch(AuthorizeUrl, {
+      // prettier-ignore
       headers: {
-        Accept: "application/json",
+        "Accept": "application/json",
         "Access-Allow-Credentials": "True",
         "Access-Control-Allow-Methods": "POST",
         "Access-Control-Allow-Origin": "*",
         "Content-Type": "application/json",
-        Vary: "Origin",
+        "Vary": "Origin",
       },
       method: "POST",
     })
@@ -122,9 +123,10 @@ const GithubProvider: IProvider<boolean> = {
 
         /* GET request to get the user used for OAuth */
         await fetch(`${providerConfig.urls.usernameUrl}`, {
+          // prettier-ignore
           headers: {
-            authorization: "Token " + accessToken,
-          },
+            "authorization": "Token " + accessToken,
+          }
         })
           .then(async (res) => await res.json())
           .then((res) => {
