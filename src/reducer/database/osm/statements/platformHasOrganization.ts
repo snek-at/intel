@@ -29,7 +29,7 @@ FROM   platformhasorganization
 //#endregion
 
 //#region > Exports
-//> Constants
+//> Constant Variables
 export { initialize, create, all };
 //#endregion
 

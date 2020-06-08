@@ -61,7 +61,7 @@ WHERE  date = ?
 //#endregion
 
 //#region > Exports
-//> Constants
+//> Constant Variables
 export {
   initialize,
   create,

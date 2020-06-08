@@ -13,7 +13,7 @@ const projects = (username: string) =>
 //#endregion
 
 //#region > Exports
-//> Constants
+//> Constant Variables
 export { home, currentCalendar, activity, atom, groups, projects };
 //#endregion
 

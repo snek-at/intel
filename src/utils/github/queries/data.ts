@@ -140,7 +140,7 @@ const contributionByRepositoryFragment = `
 //#endregion
 
 //#region > Exports
-//> Constants
+//> Constant Variables
 export { profile, calendar, calendarFragment };
 //#endregion
 

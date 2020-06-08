@@ -9,7 +9,7 @@ const organization = (organizationName: string, page: number) =>
 //#endregion
 
 //#region > Exports
-//> Constants
+//> Constant Variables
 export { user, organization };
 //#endregion
 
