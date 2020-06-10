@@ -46,7 +46,7 @@ SELECT id,
         FROM   platformhasorganization pho
                INNER JOIN platform p
                        ON pho.platformId = p.id
-        WHERE  pho.organizationId = 1) AS platformName
+        WHERE  pho.organizationId = o.id) AS platformName
 FROM   organization o
 `;
 //#endregion
