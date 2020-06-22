@@ -56,9 +56,13 @@ WHERE  date >= "${from}"
 `;
 
 const dayByDate = `
-SELECT *
-FROM   calendar
-WHERE  date = ?
+SELECT id, 
+       Sum(total) AS total, 
+       date, 
+       platformId 
+FROM   calendar 
+WHERE  date = ? 
+GROUP  BY date 
 `;
 //#endregion
 
