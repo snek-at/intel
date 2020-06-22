@@ -25,68 +25,101 @@ interface IDay {
 
 //#region > Functions
 /**
- * Calculate contribution streaks.
+ * Calculate all possible contribution streaks based on a list of days.
+ * Streaks are defined as:
+ * n continuos days with contributions above 0 --> n - 1 total streak days.
  *
  * @function
  * @param values A list of days
- * @returns {object} A list of streaks
- * @description Determines the contribution streaks from a list of days
+ * @returns {IStreak[]} A list of streaks
  */
-function calculateStreaks(values: IDay[]) {
-  let list = [];
+function calculateStreaks(values: IDay[]): IStreak[] {
+  const streaks: IStreak[] = [];
 
-  if (values) {
-    let streak: IStreak = {
-      totalDays: 0,
-      totalContributions: 0,
-    };
+  let streak: IStreak | undefined = undefined;
 
-    for (let index: number = 0; index < values.length; index++) {
-      const day: IDay = values[index];
+  /**
+   * Compares two days and specifies if they could be part of the same streak.
+   *
+   * @param {IDay} day A day object
+   * @param {IDay} day A day object
+   * @returns {boolean | undefined} A check whether the days could result
+   *                               in a streak.
+   */
+  const checkContinuation = (day1: IDay, day2: IDay): boolean | undefined => {
+    try {
+      const dayDiff = moment(day2.date).diff(moment(day1.date), "days");
 
-      let nextDay: IDay = {
-        total: 0,
-      };
-
-      if (values[values.length - 1] === day) {
-        nextDay = values[index];
-      } else {
-        nextDay = values[index + 1];
+      if (dayDiff > 1) {
+        return false;
       }
 
-      if (!streak.startDate) {
-        streak = {
-          startDate: moment(day.date).format("YYYY-MM-DD"),
-          endDate: null,
-          totalDays: 0,
-          totalContributions: 0,
-        };
-      }
-
-      const dayDiff = moment(nextDay.date).diff(moment(day.date), "days");
-
-      if (dayDiff === 1) {
-        streak.totalDays++;
-        streak.totalContributions += day.total;
-      } else {
-        if (streak.totalDays > 0) {
-          streak.endDate = moment(day.date).format("YYYY-MM-DD");
-          streak.totalContributions += day.total;
-          list.push({ ...streak });
-        }
-
-        streak = {
-          totalDays: 0,
-          totalContributions: 0,
-        };
-      }
+      return true;
+    } catch {
+      return undefined;
     }
-  } else {
-    //#ERROR
-    throw new Error("An error occurred due to invalid input parameters!");
+  };
+
+  /**
+   * Handles a streak based on a specific day. If there isn't a streak yet, a new
+   * one with default values is created.
+   * When providing the isLastDay = true, totalDays are not incremented.
+   *
+   * @param {boolean} isLastDay A flag whether the day is the lat day of the list
+   * @param {IDay} day A day object
+   */
+  const handleStreak = (day: IDay, isLastDay: boolean = false) => {
+    if (streak) {
+      if (!isLastDay) {
+        streak.totalDays++;
+      }
+
+      streak.totalContributions += day.total;
+    } else {
+      streak = {
+        totalContributions: day.total,
+        totalDays: 0,
+        startDate: moment(day.date).format("YYYY-MM-DD"),
+      };
+    }
+  };
+
+  /**
+   * Pushes a streak to the streak list.
+   * Before the endDate is set to the date of a specific day.
+   * Afterward the streak is set to undefined.
+   *
+   * @param lastDay A day object
+   */
+  const pushStreak = (lastDay: IDay) => {
+    if (streak) {
+      if (streak.totalDays > 0) {
+        streak.endDate = moment(lastDay.date).format("YYYY-MM-DD");
+
+        streaks.push(streak);
+      }
+
+      streak = undefined;
+    }
+  };
+
+  /** Iterates through all values (days) and split them into streaks */
+  for (let index: number = 0; index < values.length; index++) {
+    const day = values[index];
+    const nextDay = values[index + 1];
+    const status = checkContinuation(day, nextDay);
+
+    if (status) {
+      handleStreak(day);
+    } else if (status === undefined) {
+      handleStreak(day);
+      pushStreak(day);
+    } else {
+      pushStreak(day);
+    }
   }
 
-  return list;
+  return streaks;
 }
 //#endregion
 
