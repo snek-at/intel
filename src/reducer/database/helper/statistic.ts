@@ -86,8 +86,8 @@ function calculateStreaks(values: IDay[]): IStreak[] {
 
   /**
    * Pushes a streak to the streak list.
-   * Before the endDate is set to the date of a specific day.
-   * Afterward the streak is set to undefined.
+   * Before pushing, endDate is set to the date of a specific day.
+   * Afterwards the streak is set to undefined.
    *
    * @param lastDay A day object
    */
