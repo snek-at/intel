@@ -41,10 +41,10 @@ function calculateStreaks(values: IDay[]): IStreak[] {
   /**
    * Compares two days and specifies if they could be part of the same streak.
    *
-   * @param {IDay} day A day object
-   * @param {IDay} day A day object
+   * @param {IDay} day1 A day object
+   * @param {IDay} day2 A day object
    * @returns {boolean | undefined} A check whether the days could result
-   *                               in a streak.
+   *                                in a streak.
    */
   const checkContinuation = (day1: IDay, day2: IDay): boolean | undefined => {
     try {
@@ -65,7 +65,7 @@ function calculateStreaks(values: IDay[]): IStreak[] {
    * one with default values is created.
    * When providing the isLastDay = true, totalDays are not incremented.
    *
-   * @param {boolean} isLastDay A flag whether the day is the lat day of the list
+   * @param {boolean} isLastDay A flag whether the day is the last day of the list
    * @param {IDay} day A day object
    */
   const handleStreak = (day: IDay, isLastDay: boolean = false) => {
