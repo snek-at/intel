@@ -31,6 +31,7 @@ WHERE  id = ?
 const all = `
 SELECT *
 FROM   calendar
+ORDER BY date
 `;
 
 const betweenDate = `
@@ -38,6 +39,7 @@ SELECT *
 FROM   calendar
 WHERE  date >= ?
        AND date <= ?
+ORDER BY date
 `;
 
 const busiestDayBetweenDate = (from: string, to: string) => `
@@ -54,9 +56,13 @@ WHERE  date >= "${from}"
 `;
 
 const dayByDate = `
-SELECT *
-FROM   calendar
-WHERE  date = ?
+SELECT id, 
+       Sum(total) AS total, 
+       date, 
+       platformId 
+FROM   calendar 
+WHERE  date = ? 
+GROUP  BY date 
 `;
 //#endregion
 
