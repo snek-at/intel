@@ -17,9 +17,9 @@ A clear and concise description of what you want to happen.
 - [ ] Add Requirement here. #ID
 
 **Milestones**
-- [ ] Domain walktrough
+- [ ] Domain walkthrough
 - [ ] Design (requirements)
-- [ ] Design inspectation
+- [ ] Design inspection
 - [ ] Implementation
 - [ ] Code review
 - [ ] Deploy
