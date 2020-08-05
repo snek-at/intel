@@ -19,9 +19,11 @@ A clear and concise description of what you want to happen.
 Solutions that could be implemented:
 
 **Requirements**
-- [ ] Add Requirement here. #ID
+
+-   [ ] Add Requirement here. #ID
 
 **Milestones**
+
 <table>
    <tbody>
       <tr>
