@@ -41,7 +41,7 @@
     "moment": "^2.24.0",
     "react-scripts": "^3.4.1",
     "react-very-simple-oauth": "^1.1.1",
-    "snek-client": "^0.1.1"
+    "snek-client": "file:snek-client-0.2.0-beta.tgz"
   },
   "devDependencies": {
     "@types/lodash.clonedeep": "^4.5.6",
