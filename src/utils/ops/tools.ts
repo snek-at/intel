@@ -2,13 +2,14 @@ const mergeCodetransition = (arr: any[]) => {
   const result: any[] = [];
 
   arr.reduce(function (res: any, value: any) {
-    if (!res[value.datetime]) {
-      res[value.datetime] = {
-        datetime: value.datetime,
+    const date = value.datetime.split(" ")[0];
+    if (!res[date]) {
+      res[date] = {
+        date: date,
         insertions: 0,
         deletions: 0,
       };
-      result.push(res[value.datetime]);
+      result.push(res[date]);
     }
 
     try {
