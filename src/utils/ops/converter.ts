@@ -2,6 +2,7 @@
 import gql from "graphql-tag";
 import { SnekSession } from "snek-client/lib/session/sessions";
 import { mergeCodetransition, mergeContributionFeed } from "./tools";
+
 //#endregion
 export const getEnterprisePages = async (session: SnekSession) => {
   const node = gql`
@@ -91,7 +92,7 @@ export const getEnterprisePageGeneralContent = async (
     .then((res) => {
       const page: any = res?.data?.page;
 
-      page.enterpriseCodetransitionStatistic = mergeCodetransition(
+      page.mergedEnterpriseCodetransitionStatistic = mergeCodetransition(
         page.enterpriseCodetransitionStatistic
       );
 
@@ -239,7 +240,9 @@ export const getEnterprisePageProjectsContent = (
       const projects = res.data?.page.enterpriseProjects;
 
       return projects?.map((project: any) => {
-        project.codetransition = mergeCodetransition(project.codetransition);
+        project.mergedCodetransition = mergeCodetransition(
+          project.codetransition
+        );
         project.mergedContributionFeed = mergeContributionFeed(
           project.contributionFeed
         );
@@ -299,7 +302,7 @@ export const getEnterprisePageUsersContent = (
       const users = res.data?.page.enterpriseContributors;
 
       return users?.map((user: any) => {
-        user.codetransition = mergeCodetransition(user.codetransition);
+        user.mergedCodetransition = mergeCodetransition(user.codetransition);
         user.mergedContributionFeed = mergeContributionFeed(
           user.contributionFeed
         );

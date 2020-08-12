@@ -14,28 +14,60 @@ import * as models from "../../reducer/database/models";
 import * as helper from "../../reducer/helper/calendar";
 
 const mergeCodetransition = (arr: any[]) => {
-  const result: any[] = [];
+  const reducer = new Reducer();
 
-  arr.reduce(function (res: any, value: any) {
-    const date = value.datetime.split(" ")[0];
-    if (!res[date]) {
-      res[date] = {
-        date: date,
-        insertions: 0,
-        deletions: 0,
-      };
-      result.push(res[date]);
+  arr.sort((a, b) => (moment(a.datetime) > moment(b.datetime) ? 1 : -1));
+
+  if (arr.length > 0) {
+    const platform = models.Platform.objects.create({
+      platformName: moment().toString(),
+      platformUrl: "ops.local",
+      avatarUrl: "",
+      websiteUrl: "",
+      company: null,
+      email: null,
+      username: "",
+      fullName: "",
+      createdAt: arr[0].datetime,
+      location: null,
+      statusMessage: "",
+      statusEmojiHTML: "",
+    }) as models.Platform;
+
+    const days: any[] = [];
+
+    arr.reduce(function (res: any, value: any) {
+      const date = value.datetime.split(" ")[0];
+      if (!res[date]) {
+        res[date] = {
+          date: date,
+          total: 0,
+        };
+        days.push(res[date]);
+      }
+      try {
+        res[value.datetime.split(" ")[0]].total +=
+          parseInt(value.insertions) - parseInt(value.deletions);
+      } catch {}
+
+      return res;
+    }, {});
+
+    /* Process days and create calendarEntries and contributions */
+    for (let date in days) {
+      /* Create calendarEntry */
+      platform.createCalendarEntry({
+        date: days[date].date,
+        total: days[date].total,
+      });
     }
 
-    try {
-      res[value.datetime].insertions += parseInt(value.insertions);
-      res[value.datetime].deletions += parseInt(value.deletions);
-    } catch {}
+    const calendar = helper.mergedCalendar();
 
-    return res;
-  }, {});
+    reducer.reset();
 
-  return result;
+    return calendar;
+  }
 };
 
 const mergeContributionFeed = (arr: any[]) => {
