@@ -22,4 +22,25 @@ const mergeCodetransition = (arr: any[]) => {
   return result;
 };
 
-export { mergeCodetransition };
+const mergeContributionFeed = (arr: any[]) => {
+  const result: any[] = [];
+
+  arr.reduce(function (res: any, value: any) {
+    const date = value.datetime.split(" ")[0];
+    if (!res[date]) {
+      res[date] = {
+        date: date,
+        total: 0,
+      };
+      result.push(res[date]);
+    }
+    try {
+      res[value.datetime.split(" ")[0]].total += 1;
+    } catch {}
+
+    return res;
+  }, {});
+  return result;
+};
+
+export { mergeCodetransition, mergeContributionFeed };
