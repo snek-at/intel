@@ -51,10 +51,30 @@ export const getEnterprisePageGeneralContent = async (
           enterpriseContributors {
             id
           }
+          enterpriseCodelanguageStatistic {
+            name
+            type
+            color
+            primaryExtension
+            insertions
+            deletions
+          }
           enterpriseCodetransitionStatistic {
             insertions
             deletions
             datetime
+          }
+          enterpriseContributionFeed {
+            type
+            cid
+            datetime
+            message
+            files {
+              insertions
+              deletions
+              path
+              rawChanges
+            }
           }
         }
       }
