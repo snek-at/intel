@@ -1,6 +1,7 @@
 //#region > Imports
 import gql from "graphql-tag";
 import { SnekSession } from "snek-client/lib/session/sessions";
+import { mergeCodetransition } from "./tools";
 //#endregion
 export const getEnterprisePages = async (session: SnekSession) => {
   const node = gql`
@@ -88,32 +89,11 @@ export const getEnterprisePageGeneralContent = async (
       { ...queryArgs }
     )
     .then((res) => {
-      const result: any[] = [];
       const page: any = res?.data?.page;
 
-      page.enterpriseCodetransitionStatistic.reduce(function (
-        res: any,
-        value: any
-      ) {
-        if (!res[value.datetime]) {
-          res[value.datetime] = {
-            datetime: value.datetime,
-            insertions: 0,
-            deletions: 0,
-          };
-          result.push(res[value.datetime]);
-        }
-
-        try {
-          res[value.datetime].insertions += parseInt(value.insertions);
-          res[value.datetime].deletions += parseInt(value.deletions);
-        } catch {}
-
-        return res;
-      },
-      {});
-
-      page.enterpriseCodetransitionStatistic = result;
+      page.enterpriseCodetransitionStatistic = mergeCodetransition(
+        page.enterpriseCodetransitionStatistic
+      );
 
       return page;
     });
@@ -255,26 +235,7 @@ export const getEnterprisePageProjectsContent = (
       const projects = res.data?.page.enterpriseProjects;
 
       return projects?.map((project: any) => {
-        const result: any[] = [];
-        project.codetransition.reduce(function (res: any, value: any) {
-          if (!res[value.datetime]) {
-            res[value.datetime] = {
-              datetime: value.datetime,
-              insertions: 0,
-              deletions: 0,
-            };
-            result.push(res[value.datetime]);
-          }
-
-          try {
-            res[value.datetime].insertions += parseInt(value.insertions);
-            res[value.datetime].deletions += parseInt(value.deletions);
-          } catch {}
-
-          return res;
-        }, {});
-
-        project.codetransition = result;
+        project.codetransition = mergeCodetransition(project.codetransition);
 
         return project;
       });
@@ -332,27 +293,7 @@ export const getEnterprisePageUsersContent = (
       const users = res.data?.page.enterpriseContributors;
 
       return users?.map((user: any) => {
-        const result: any[] = [];
-
-        user.codetransition.reduce(function (res: any, value: any) {
-          if (!res[value.datetime]) {
-            res[value.datetime] = {
-              datetime: value.datetime,
-              insertions: 0,
-              deletions: 0,
-            };
-            result.push(res[value.datetime]);
-          }
-
-          try {
-            res[value.datetime].insertions += parseInt(value.insertions);
-            res[value.datetime].deletions += parseInt(value.deletions);
-          } catch {}
-
-          return res;
-        }, {});
-
-        user.codetransition = result;
+        user.codetransition = mergeCodetransition(user.codetransition);
 
         return user;
       });
