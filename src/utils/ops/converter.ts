@@ -184,7 +184,9 @@ export const getEnterprisePageProjectsContent = (
               }
               codelanguages {
                 name
+                type
                 color
+                primaryExtension
                 insertions
                 deletions
               }
@@ -208,7 +210,9 @@ export const getEnterprisePageProjectsContent = (
             }
             codelanguages {
               name
+              type
               color
+              primaryExtension
               insertions
               deletions
             }
@@ -283,7 +287,9 @@ export const getEnterprisePageUsersContent = (
             }
             codelanguages {
               name
+              type
               color
+              primaryExtension
               insertions
               deletions
             }
