@@ -107,6 +107,7 @@ export const getEnterprisePageGeneralContent = async (
 export const updateEnterprisePageGeneralContent = (
   session: SnekSession,
   queryArgs: {
+    slug: string;
     imprint: {
       city?: string;
       zip_code?: string;
@@ -131,14 +132,14 @@ export const updateEnterprisePageGeneralContent = (
   }
 ) => {
   const node = gql`
-    node updateEnterprisePageGeneralContent(
+    mutation updateEnterprisePageGeneralContent(
       $values: GenericScalar!
       $token: String!
     ) {
       enterpriseFormPage(
         values: $values
         token: $token
-        url: "/enterprise-pages/e-sneklab/"
+        url: "/enterprise-pages/${queryArgs.slug}"
       ) {
         result
       }
