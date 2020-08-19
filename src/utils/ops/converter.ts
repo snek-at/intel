@@ -450,7 +450,6 @@ export const getGitlabs = (session: SnekSession) => {
         name
         description
         url
-        token
         created
         updated
         active
