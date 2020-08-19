@@ -3,6 +3,7 @@
 //## npm install "snek-client"@2.0.0
 // Contains the clients for API calls to SNEK engines
 import { SnekClient } from "snek-client";
+import { publishEnterprisePageViaConnector } from "./converter";
 
 //> Converters
 import {
@@ -73,6 +74,10 @@ class Provider {
   updateConnector = (queryArgs: any) =>
     updateConnector(this.snekclient.session, { ...queryArgs });
   getConnectors = () => getConnectors(this.snekclient.session);
+  publishEnterprisePageViaConnector = (queryArgs: any) =>
+    publishEnterprisePageViaConnector(this.snekclient.session, {
+      ...queryArgs,
+    });
 }
 
 export default Provider;

@@ -784,3 +784,28 @@ export const getConnectors = (session: SnekSession) => {
       return res.data?.connectors;
     });
 };
+
+export const publishEnterprisePageViaConnector = (
+  session: SnekSession,
+  queryArgs: {
+    connectorId: number;
+  }
+) => {
+  const node = gql`
+    mutation publishToEnterpriseConnector($token: String!, $connectorId: Int!) {
+      publishCompanyPage(token: $token, connectorId: $connectorId) {
+        success
+      }
+    }
+  `;
+
+  return session
+    .customTask<{ publishCompanyPage: { success: boolean } }>(
+      "mutation",
+      node,
+      { ...queryArgs }
+    )
+    .then((res) => {
+      return res.data?.publishCompanyPage.success;
+    });
+};
