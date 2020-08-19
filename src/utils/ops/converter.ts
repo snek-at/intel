@@ -370,7 +370,7 @@ export const deleteGitlab = (
   queryArgs: { id: number }
 ) => {
   const node = gql`
-    mutation deleteGitlab($token: String!, $id: Number!) {
+    mutation deleteGitlab($token: String!, $id: Int!) {
       deleteGitlab(token: $token, id: $id) {
         success
       }
