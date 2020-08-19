@@ -764,6 +764,7 @@ export const getConnectors = (session: SnekSession) => {
           slug
         }
         privilegesMode
+        isHashed
         shareMode
         shareProjects
         shareUsers
