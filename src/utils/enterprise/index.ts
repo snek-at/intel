@@ -34,8 +34,8 @@ import {
 class Provider {
   public snekclient: SnekClient;
 
-  constructor(opsUrl: string) {
-    this.snekclient = new SnekClient(opsUrl);
+  constructor(opsUrl: string, client?: SnekClient) {
+    this.snekclient = client ? client : new SnekClient(opsUrl);
   }
 
   /* Enterprise page */
