@@ -50,6 +50,9 @@ class Provider {
     getEnterprisePageProjectsContent(this.snekclient.session, { ...queryArgs });
   getEnterprisePageUsersContent = (queryArgs: any) =>
     getEnterprisePageUsersContent(this.snekclient.session, { ...queryArgs });
+}
+
+class OpsProvider extends Provider {
   /* Gitlab */
   addGitlab = (queryArgs: any) =>
     addGitlab(this.snekclient.session, { ...queryArgs });
@@ -80,4 +83,4 @@ class Provider {
     });
 }
 
-export default Provider;
+export default OpsProvider;
