@@ -50,6 +50,9 @@ export const getEnterprisePageGeneralContent = async (
           opensourceUrl
           recruitingUrl
           description
+          assocConnectors: connectorScpPage {
+            id
+          }
           enterpriseContributors {
             id
           }
