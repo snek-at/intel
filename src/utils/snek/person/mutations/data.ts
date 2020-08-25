@@ -5,54 +5,73 @@ import gql from "graphql-tag";
 //#endregion
 
 //#region > Mutations
-const follow = gql`
-  mutation follow($token: String!, $person: String!, $personToFollow: String!) {
-    followPerson(
-      token: $token
-      person: $person
-      personToFollow: $personToFollow
-    ) {
-      totalFollowers
+const getProfiles = gql`
+  query getProfiles($token: String!, $personName: String!) {
+    personProfiles(token: $token, personName: $personName) {
+      id
+      createdAt
+      updatedAt
+      username
+      accessToken
+      sourceType
     }
   }
 `;
-
-const unfollow = gql`
-  mutation unfollow(
+const addProfile = gql`
+  mutation addProfile(
     $token: String!
-    $person: String!
-    $personToUnfollow: String!
+    $personName: String!
+    $accessToken: String!
+    $sourceType: String!
+    $username: String!
   ) {
-    unfollowPerson(
+    addProfile(
       token: $token
-      person: $person
-      personToFollow: $personToUnfollow
+      personName: $personName
+      accessToken: $accessToken
+      sourceType: $type
+      username: $username
     ) {
-      totalFollowers
+      profile {
+        id
+        createdAt
+      }
     }
   }
 `;
 
-const like = gql`
-  mutation like($token: String!, $person: String!, $personToLike: String!) {
-    likePerson(token: $token, person: $person, personToFollow: $personToLike) {
-      totalLikes
+const deleteProfile = gql`
+  mutation deleteProfile($token: String!, $profileId: String!) {
+    deleteProfile(token: $token, profileId: $profileId) {
+      profiles {
+        id
+      }
     }
   }
 `;
 
-const unlike = gql`
-  mutation unlike($token: String!, $person: String!, $personToUnlike: String!) {
-    unlikePerson(
+const updateProfile = gql`
+  mutation updateProfile(
+    $token: String!
+    $profileId: String!
+    $accessToken: String
+    $sourceType: String
+    $username: String
+  ) {
+    updateProfile(
       token: $token
-      person: $person
-      personToFollow: $personToUnlike
+      profileId: $profileId
+      accessToken: $accessToken
+      sourceType: $accessToken
+      username: $username
     ) {
-      totalLikes
+      profile {
+        id
+      }
     }
   }
 `;
 
 //#region > Exports
-export { follow, unfollow, like, unlike };
+export { getProfiles, addProfile, deleteProfile, updateProfile };
 //#endregion

@@ -18,7 +18,18 @@ const get = (runnerOptions: { personName: string }) => {
 
 const profiles = (runnerOptions: { personName: string }) => {
   try {
-    return runner<{}>("mutation", mutations.follow, {});
+    return runner<{
+      personProfiles: {
+        id: string;
+        createdAt: string;
+        updatedAt: string;
+        username: string;
+        accessToken: string;
+        sourceType: string;
+      }[];
+    }>("mutation", mutations.getProfiles, {
+      personName: runnerOptions.personName,
+    });
   } catch {
     throw new Error(
       `Couldn't successfully fetch profiles of Person: ${runnerOptions.personName}`
@@ -37,10 +48,13 @@ const addProfile = (runnerOptions: {
   };
 }) => {
   try {
-    return runner<{}>("mutation", mutations.addProfile, {
-      person_name: runnerOptions.personName,
-      profile_type: runnerOptions.source.type,
-      profile_token: runnerOptions.source.type,
+    return runner<{
+      addProfile: { profile: { id: string; createdAt: string } };
+    }>("mutation", mutations.addProfile, {
+      personName: runnerOptions.personName,
+      username: runnerOptions.source.username,
+      sourceType: runnerOptions.source.type,
+      accessToken: runnerOptions.source.type,
     });
   } catch {
     throw new Error(
@@ -53,7 +67,11 @@ const addProfile = (runnerOptions: {
 
 const deleteProfile = (runnerOptions: { profileId: number }) => {
   try {
-    return runner<{}>("mutation", mutations.follow, {});
+    return runner<{
+      deleteProfile: { profiles: { id: string }[] };
+    }>("mutation", mutations.deleteProfile, {
+      profileId: runnerOptions.profileId,
+    });
   } catch {
     throw new Error(
       `Couldn't successfully delete profile with Id: ${runnerOptions.profileId}`
@@ -62,12 +80,17 @@ const deleteProfile = (runnerOptions: { profileId: number }) => {
 };
 
 const updateProfile = (runnerOptions: {
-  personName: string;
   profileId: number;
-  update: {};
+  toUpdate: {
+    accessToken?: string;
+    sourceType?: string;
+    username?: string;
+  };
 }) => {
   try {
-    return runner<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.updateProfile, {
+      ...runnerOptions.toUpdate,
+    });
   } catch {
     throw new Error(
       `Couldn't successfully update profile with Id: ${runnerOptions.profileId}`
