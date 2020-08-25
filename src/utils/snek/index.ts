@@ -25,6 +25,7 @@
 
 //#region > Imports
 //> All social related actions (like, follow,..)
+import * as achievements from "./achievements";
 import * as social from "./social";
 import * as person from "./person";
 import * as talks from "./person";
@@ -36,6 +37,8 @@ import { SnekClient } from "snek-client";
 //#region > Classes
 class Provider {
   public static client = new SnekClient("https://engine.snek.at/graphql");
+  public static achievements = achievements;
+  // achievements.all()
   public static social = social;
   // social.follow()
   // social.unfollow()
