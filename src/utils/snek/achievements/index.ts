@@ -3,13 +3,13 @@ import * as queries from "./queries/data";
 
 interface RunnerParameters {}
 
-const runner = Provider.client.session;
+const runner = Provider.client.session.customTask;
 
 const all = () => {
   const type = "fetch";
 
   try {
-    return runner.customTask<{
+    return runner<{
       achievements: {
         title: string;
         description: string;

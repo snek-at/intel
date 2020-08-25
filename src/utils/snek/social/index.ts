@@ -8,13 +8,13 @@ interface RunnerParameters {
   receiver: string;
 }
 
-const runner = Provider.client.session;
+const runner = Provider.client.session.customTask;
 
 const follow = (runnerOptions: RunnerParameters) => {
   const type = "follow";
 
   try {
-    return runner.customTask<{
+    return runner<{
       followPerson: { totalFollowers: number };
     }>("mutation", mutations.follow, {});
   } catch {
@@ -28,7 +28,7 @@ const unfollow = (runnerOptions: RunnerParameters) => {
   const type = "unfollow";
 
   try {
-    return runner.customTask<{
+    return runner<{
       unfollowPerson: { totalFollowers: number };
     }>("mutation", mutations.unfollow, {});
   } catch {
@@ -42,7 +42,7 @@ const like = (runnerOptions: RunnerParameters) => {
   const type = "like";
 
   try {
-    return runner.customTask<{
+    return runner<{
       like: { totalFollowers: number };
     }>("mutation", mutations.unfollow, {});
   } catch {
@@ -56,7 +56,7 @@ const unlike = (runnerOptions: RunnerParameters) => {
   const type = "unlike";
 
   try {
-    return runner.customTask<{
+    return runner<{
       unlike: { totalFollowers: number };
     }>("mutation", mutations.unfollow, {});
   } catch {

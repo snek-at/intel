@@ -1,11 +1,11 @@
 import Provider from "../index";
 import * as mutations from "./mutations/data";
 
-const runner = Provider.client.session;
+const runner = Provider.client.session.customTask;
 
 const get = (runnerOptions: { personName: string }) => {
   try {
-    return runner.customTask<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
       `Couldn't successfully fetchPerson: ${runnerOptions.personName}`
@@ -15,7 +15,7 @@ const get = (runnerOptions: { personName: string }) => {
 
 const profiles = (runnerOptions: { personName: string }) => {
   try {
-    return runner.customTask<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
       `Couldn't successfully fetch profiles of Person: ${runnerOptions.personName}`
@@ -43,7 +43,7 @@ const addGithubProfile = (runnerOptions: {
 
   //> Store Profile in Engine
   try {
-    return runner.customTask<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
       `Couldn't successfully store new Github profile of Person: ${runnerOptions.personName}`
@@ -72,7 +72,7 @@ const addGitlabProfile = (runnerOptions: {
 
   //> Store Profile in Engine
   try {
-    return runner.customTask<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
       `Couldn't successfully store new Gitlab profile of Person: ${runnerOptions.personName}`
@@ -101,7 +101,7 @@ const addInstagramProfile = (runnerOptions: {
 
   //> Store Profile in Engine
   try {
-    return runner.customTask<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
       `Couldn't successfully store new Gitlab profile of Person: ${runnerOptions.personName}`
@@ -111,7 +111,7 @@ const addInstagramProfile = (runnerOptions: {
 
 const deleteProfile = (runnerOptions: { profileId: number }) => {
   try {
-    return runner.customTask<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
       `Couldn't successfully delete profile with Id: ${runnerOptions.profileId}`
@@ -125,7 +125,7 @@ const updateProfile = (runnerOptions: {
   update: {};
 }) => {
   try {
-    return runner.customTask<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
       `Couldn't successfully update profile with Id: ${runnerOptions.profileId}`
@@ -138,7 +138,7 @@ const updateSettings = (runnerOptions: {
   settings: {};
 }) => {
   try {
-    return runner.customTask<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
       `Couldn't successfully update profile settings of Person: ${runnerOptions.personName}`
@@ -156,7 +156,7 @@ const addMetaLink = (runnerOptions: {
   };
 }) => {
   try {
-    return runner.customTask<{}>("mutation", mutations.follow, {});
+    return runner<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
       `Couldn't successfully add meta link for Person: ${runnerOptions.personName}`
