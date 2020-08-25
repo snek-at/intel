@@ -1,5 +1,8 @@
 import Provider from "../index";
 import * as mutations from "./mutations/data";
+//> Reducer
+// Contains the reducer and database models
+import { Reducer } from "../../../reducer";
 
 const runner = Provider.client.session.customTask;
 
@@ -23,88 +26,27 @@ const profiles = (runnerOptions: { personName: string }) => {
   }
 };
 
-const addGithubProfile = (runnerOptions: {
+const addProfile = (runnerOptions: {
   personName: string;
   source: {
+    type: "GITHUB" | "GITLAB" | "INSTAGRAM";
     /** User: A username of the provided platform */
-    user: string;
+    username: string;
     /** Authorization: A token for authorizing the client */
     authorization: string;
   };
 }) => {
-  //> Fetch Data from Github
   try {
-    console.log("Intel process Github");
+    return runner<{}>("mutation", mutations.addProfile, {
+      person_name: runnerOptions.personName,
+      profile_type: runnerOptions.source.type,
+      profile_token: runnerOptions.source.type,
+    });
   } catch {
     throw new Error(
-      `Couldn't successfully process new Github profile of Person: ${runnerOptions.personName}`
-    );
-  }
-
-  //> Store Profile in Engine
-  try {
-    return runner<{}>("mutation", mutations.follow, {});
-  } catch {
-    throw new Error(
-      `Couldn't successfully store new Github profile of Person: ${runnerOptions.personName}`
-    );
-  }
-};
-
-const addGitlabProfile = (runnerOptions: {
-  personName: string;
-  source: {
-    /** User: A username of the provided platform */
-    user: string;
-    /** Authorization: A token for authorizing the client */
-    authorization: string;
-  };
-}) => {
-  //> Fetch Data from Gitlab
-
-  try {
-    console.log("Intel process Gilab");
-  } catch {
-    throw new Error(
-      `Couldn't successfully process new Gitlab profile of Person: ${runnerOptions.personName}`
-    );
-  }
-
-  //> Store Profile in Engine
-  try {
-    return runner<{}>("mutation", mutations.follow, {});
-  } catch {
-    throw new Error(
-      `Couldn't successfully store new Gitlab profile of Person: ${runnerOptions.personName}`
-    );
-  }
-};
-
-const addInstagramProfile = (runnerOptions: {
-  personName: string;
-  source: {
-    /** User: A username of the provided platform */
-    user: string;
-    /** Authorization: A token for authorizing the client */
-    authorization: string;
-  };
-}) => {
-  //> Fetch Data from Instagram
-
-  try {
-    console.log("Process Instagram");
-  } catch {
-    throw new Error(
-      `Couldn't successfully process new Instagram profile of Person: ${runnerOptions.personName}`
-    );
-  }
-
-  //> Store Profile in Engine
-  try {
-    return runner<{}>("mutation", mutations.follow, {});
-  } catch {
-    throw new Error(
-      `Couldn't successfully store new Gitlab profile of Person: ${runnerOptions.personName}`
+      `Couldn't successfully add new profile for Person:\
+      ${runnerOptions.personName} \
+      of Type: ${runnerOptions.source.type}`
     );
   }
 };
@@ -167,9 +109,7 @@ const addMetaLink = (runnerOptions: {
 export {
   get,
   profiles,
-  addGithubProfile,
-  addGitlabProfile,
-  addInstagramProfile,
+  addProfile,
   deleteProfile,
   updateProfile,
   updateSettings,
