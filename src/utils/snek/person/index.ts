@@ -1,69 +1,177 @@
 import Provider from "../index";
 import * as mutations from "./mutations/data";
 
-interface RunnerParameters {
-  /** A person page which starts the operation */
-  invoker: string;
-  /** A person page which which the operation aims to */
-  receiver: string;
-}
-
 const runner = Provider.client.session;
 
-const follow = (runnerOptions: RunnerParameters) => {
-  const type = "follow";
-
+const get = (runnerOptions: { personName: string }) => {
   try {
-    return runner.customTask<{
-      followPerson: { totalFollowers: number };
-    }>("mutation", mutations.follow, {});
+    return runner.customTask<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
-      `Invoker: ${runnerOptions.invoker} couldn't successfully ${type} Receiver: ${runnerOptions.receiver}`
+      `Couldn't successfully fetchPerson: ${runnerOptions.personName}`
     );
   }
 };
 
-const unfollow = (runnerOptions: RunnerParameters) => {
-  const type = "unfollow";
-
+const profiles = (runnerOptions: { personName: string }) => {
   try {
-    return runner.customTask<{
-      unfollowPerson: { totalFollowers: number };
-    }>("mutation", mutations.unfollow, {});
+    return runner.customTask<{}>("mutation", mutations.follow, {});
   } catch {
     throw new Error(
-      `Invoker: ${runnerOptions.invoker} couldn't successfully ${type} Receiver: ${runnerOptions.receiver}`
+      `Couldn't successfully fetch profiles of Person: ${runnerOptions.personName}`
     );
   }
 };
 
-const like = (runnerOptions: RunnerParameters) => {
-  const type = "like";
-
+const addGithubProfile = (runnerOptions: {
+  personName: string;
+  source: {
+    /** User: A username of the provided platform */
+    user: string;
+    /** Authorization: A token for authorizing the client */
+    authorization: string;
+  };
+}) => {
+  //> Fetch Data from Github
   try {
-    return runner.customTask<{
-      like: { totalFollowers: number };
-    }>("mutation", mutations.unfollow, {});
+    console.log("Intel process Github");
   } catch {
     throw new Error(
-      `Invoker: ${runnerOptions.invoker} couldn't successfully ${type} Receiver: ${runnerOptions.receiver}`
+      `Couldn't successfully process new Github profile of Person: ${runnerOptions.personName}`
+    );
+  }
+
+  //> Store Profile in Engine
+  try {
+    return runner.customTask<{}>("mutation", mutations.follow, {});
+  } catch {
+    throw new Error(
+      `Couldn't successfully store new Github profile of Person: ${runnerOptions.personName}`
     );
   }
 };
 
-const unlike = (runnerOptions: RunnerParameters) => {
-  const type = "unlike";
+const addGitlabProfile = (runnerOptions: {
+  personName: string;
+  source: {
+    /** User: A username of the provided platform */
+    user: string;
+    /** Authorization: A token for authorizing the client */
+    authorization: string;
+  };
+}) => {
+  //> Fetch Data from Gitlab
 
   try {
-    return runner.customTask<{
-      unlike: { totalFollowers: number };
-    }>("mutation", mutations.unfollow, {});
+    console.log("Intel process Gilab");
   } catch {
     throw new Error(
-      `Invoker: ${runnerOptions.invoker} couldn't successfully ${type} Receiver: ${runnerOptions.receiver}`
+      `Couldn't successfully process new Gitlab profile of Person: ${runnerOptions.personName}`
+    );
+  }
+
+  //> Store Profile in Engine
+  try {
+    return runner.customTask<{}>("mutation", mutations.follow, {});
+  } catch {
+    throw new Error(
+      `Couldn't successfully store new Gitlab profile of Person: ${runnerOptions.personName}`
     );
   }
 };
 
-export { follow, unfollow, like, unlike };
+const addInstagramProfile = (runnerOptions: {
+  personName: string;
+  source: {
+    /** User: A username of the provided platform */
+    user: string;
+    /** Authorization: A token for authorizing the client */
+    authorization: string;
+  };
+}) => {
+  //> Fetch Data from Instagram
+
+  try {
+    console.log("Process Instagram");
+  } catch {
+    throw new Error(
+      `Couldn't successfully process new Instagram profile of Person: ${runnerOptions.personName}`
+    );
+  }
+
+  //> Store Profile in Engine
+  try {
+    return runner.customTask<{}>("mutation", mutations.follow, {});
+  } catch {
+    throw new Error(
+      `Couldn't successfully store new Gitlab profile of Person: ${runnerOptions.personName}`
+    );
+  }
+};
+
+const deleteProfile = (runnerOptions: { profileId: number }) => {
+  try {
+    return runner.customTask<{}>("mutation", mutations.follow, {});
+  } catch {
+    throw new Error(
+      `Couldn't successfully delete profile with Id: ${runnerOptions.profileId}`
+    );
+  }
+};
+
+const updateProfile = (runnerOptions: {
+  personName: string;
+  profileId: number;
+  update: {};
+}) => {
+  try {
+    return runner.customTask<{}>("mutation", mutations.follow, {});
+  } catch {
+    throw new Error(
+      `Couldn't successfully update profile with Id: ${runnerOptions.profileId}`
+    );
+  }
+};
+
+const updateSettings = (runnerOptions: {
+  personName: string;
+  settings: {};
+}) => {
+  try {
+    return runner.customTask<{}>("mutation", mutations.follow, {});
+  } catch {
+    throw new Error(
+      `Couldn't successfully update profile settings of Person: ${runnerOptions.personName}`
+    );
+  }
+};
+
+const addMetaLink = (runnerOptions: {
+  personName: string;
+  linkOptions: {
+    url: string;
+    link_type: string;
+    location: string;
+    description: string;
+  };
+}) => {
+  try {
+    return runner.customTask<{}>("mutation", mutations.follow, {});
+  } catch {
+    throw new Error(
+      `Couldn't successfully add meta link for Person: ${runnerOptions.personName}`
+    );
+  }
+};
+
+export {
+  get,
+  profiles,
+  addGithubProfile,
+  addGitlabProfile,
+  addInstagramProfile,
+  deleteProfile,
+  updateProfile,
+  updateSettings,
+  addMetaLink,
+};

@@ -50,6 +50,9 @@ class Provider {
   // person.profiles() -> get all profiles for the person page
   // person.addGitHubProfile()
   // person.addGitLabProfile()
+  // person.addInstagramProfile()
+  // person.deleteProfile()
+  // person.updateProfile()
   // person.updateSettings()
   // person.addMetaLink()
   public static talks = talks;
