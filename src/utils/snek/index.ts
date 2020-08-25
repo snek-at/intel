@@ -56,10 +56,12 @@ class Provider {
   // person.updateSettings()
   // person.addMetaLink()
   public static talks = talks;
-  // person.addTalk()
-  // person.deleteTalk()
-  // person.getTalks()
-  // person.getTalk()
+  // talk.all()
+  // talk.get()
+  // talk.add()
+  // talk.delete()
+  // talk.addComment()
+  // talk.deleteComment()
 }
 //#endregion
 
