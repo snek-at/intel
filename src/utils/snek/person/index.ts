@@ -29,7 +29,8 @@ const profiles = (runnerOptions: { personName: string }) => {
         }[];
       }>("mutation", queries.getProfiles, {
         personName: runnerOptions.personName,
-    });
+      })
+      .then((res) => (res.data ? res.data : null));
   } catch {
     throw new Error(
       `Couldn't successfully fetch profiles of Person: ${runnerOptions.personName}`
@@ -57,6 +58,7 @@ const addProfile = (runnerOptions: {
         sourceType: runnerOptions.source.type,
         accessToken: runnerOptions.source.authorization,
       })
+      .then((res) => (res.data ? res.data : null));
   } catch {
     throw new Error(
       `Couldn't successfully add new profile for Person:\

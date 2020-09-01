@@ -20,7 +20,8 @@ const all = () => {
             personName: string;
           }[];
         }[];
-    }>("query", queries.getAchievements, {});
+      }>("query", queries.getAchievements, {})
+      .then((res) => (res.data ? res.data : []));
   } catch {
     throw new Error(`Couldn't successfully ${type} achievements`);
   }
