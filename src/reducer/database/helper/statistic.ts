@@ -112,9 +112,9 @@ function calculateStreaks(values: IDay[]): IStreak[] {
     if (status) {
       handleStreak(day);
     } else if (status === undefined) {
-      handleStreak(day);
       pushStreak(day);
     } else {
+      handleStreak(day);
       pushStreak(day);
     }
   }

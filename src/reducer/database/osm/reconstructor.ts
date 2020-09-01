@@ -64,7 +64,8 @@ class SOAssembler {
    * Get a object out of the database.
    *
    * @param fields The data to get a object by
-   * @returns {object} A object of the initialized Base class
+   * @returns {object | undefined} A object of the initialized Base class or
+   *                              undefined when there is no match.
    * @description Get a object out of the database and convert in to type of
    *              Base.
    */
@@ -77,6 +78,8 @@ class SOAssembler {
 
       if (response.length === 1) {
         response = response[0];
+      } else {
+        return undefined;
       }
 
       let obj = new this.Base(response);
@@ -219,7 +222,7 @@ class SOAssembler {
    * Send a custom query to the database.
    *
    * @param query A custom SQL statement
-   * @returns {object} A object of the initialized Base class
+   * @returns {Array} A array of initialized Base class objects
    * @description Get a object out of the database and convert in to type of
    *              Base.
    */
@@ -227,9 +230,11 @@ class SOAssembler {
     try {
       let response = SOAssembler.database.exec(query);
 
-      response = response.map((entry: any) => {
-        return new this.Base(entry);
-      });
+      response = response
+        ? response.map((entry: any) => {
+            return new this.Base(entry);
+          })
+        : [];
 
       return response;
     } catch (err) {

@@ -1120,7 +1120,7 @@ abstract class StatisticSO extends BaseSO {
    */
   abstract getStreakDetail(
     streaks: StreakSO[]
-  ): { longest: StreakSO; current: StreakSO };
+  ): { longest: StreakSO | undefined; current: StreakSO | undefined };
 
   /**
    * Used to calculate the busiest day within a statistic year.
