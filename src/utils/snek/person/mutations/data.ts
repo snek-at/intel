@@ -64,6 +64,32 @@ const updateProfile = gql`
   }
 `;
 
+const writeVariableStore = gql`
+  mutation writeVariableStore(
+    $token: String!
+    $personName: String!
+    $rawCurrentStatistic: JSONString
+    $rawLanguages: JSONString
+    $rawOrganisations: JSONString
+    $rawProjects: JSONString
+    $rawYearsStatistic: JSONString
+  ) {
+    variableStore(
+      token: $token
+      personName: $personName
+      rawCurrentStatistic: $rawCurrentStatistic
+      rawLanguages: $rawLanguages
+      rawOrganisations: $rawOrganisations
+      rawProjects: $rawProjects
+      rawYearsStatistic: $rawYearsStatistic
+    ) {
+      person {
+        id
+      }
+    }
+  }
+`;
+
 //#region > Exports
-export { getProfiles, addProfile, deleteProfile, updateProfile };
+export { addProfile, deleteProfile, updateProfile, writeVariableStore };
 //#endregion

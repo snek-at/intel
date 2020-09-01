@@ -112,12 +112,29 @@ const updateProfile = (runnerOptions: {
 const writeVariableStore = (runnerOptions: {
   personName: string;
   toStore: {
+    currentStatistic?: string;
+    yearsStatistic?: string;
+    languages?: string;
+    organisations?: string;
+    projects?: string;
+  };
 }) => {
   try {
     return Provider.client.session
+      .customTask<{
+        variableStore: { person: { id: string } };
+      }>("mutation", mutations.writeVariableStore, {
+        personName: runnerOptions.personName,
+        rawCurrentStatistic: runnerOptions.toStore.currentStatistic,
+        rawYearsStatistic: runnerOptions.toStore.yearsStatistic,
+        rawLanguages: runnerOptions.toStore.languages,
+        rawOrganisations: runnerOptions.toStore.organisations,
+        rawProjects: runnerOptions.toStore.projects,
+      })
+      .then((res) => (res.data ? res.data : null));
   } catch {
     throw new Error(
-      `Couldn't successfully update profile settings of Person: ${runnerOptions.personName}`
+      `Couldn't successfully write the variable store of Person: ${runnerOptions.personName}`
     );
   }
 };
