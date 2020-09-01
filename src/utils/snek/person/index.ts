@@ -4,31 +4,31 @@ import * as mutations from "./mutations/data";
 // Contains the reducer and database models
 import { Reducer } from "../../../reducer";
 
-const runner = Provider.client.session.customTask;
-
 const get = (runnerOptions: { personName: string }) => {
-  try {
-    return runner<{}>("mutation", mutations.follow, {});
-  } catch {
-    throw new Error(
-      `Couldn't successfully fetchPerson: ${runnerOptions.personName}`
-    );
-  }
+  // try {
+  //   return Provider.client.session.customTask<{}>("mutation", mutations.follow, {});
+  // } catch {
+  //   throw new Error(
+  //     `Couldn't successfully fetchPerson: ${runnerOptions.personName}`
+  //   );
+  // }
 };
 
 const profiles = (runnerOptions: { personName: string }) => {
   try {
-    return runner<{
-      personProfiles: {
-        id: string;
-        createdAt: string;
-        updatedAt: string;
-        username: string;
-        accessToken: string;
-        sourceType: string;
-      }[];
-    }>("mutation", mutations.getProfiles, {
-      personName: runnerOptions.personName,
+    return Provider.client.session
+      .customTask<{
+        personProfiles: {
+          id: string;
+          createdAt: string;
+          updatedAt: string;
+          username: string;
+          accessToken: string;
+          sourceType: string;
+          isActive: boolean;
+        }[];
+      }>("mutation", queries.getProfiles, {
+        personName: runnerOptions.personName,
     });
   } catch {
     throw new Error(
@@ -48,14 +48,15 @@ const addProfile = (runnerOptions: {
   };
 }) => {
   try {
-    return runner<{
-      addProfile: { profile: { id: string; createdAt: string } };
-    }>("mutation", mutations.addProfile, {
-      personName: runnerOptions.personName,
-      username: runnerOptions.source.username,
-      sourceType: runnerOptions.source.type,
-      accessToken: runnerOptions.source.type,
-    });
+    return Provider.client.session
+      .customTask<{
+        addProfile: { profile: { id: string; createdAt: string } };
+      }>("mutation", mutations.addProfile, {
+        personName: runnerOptions.personName,
+        username: runnerOptions.source.username,
+        sourceType: runnerOptions.source.type,
+        accessToken: runnerOptions.source.authorization,
+      })
   } catch {
     throw new Error(
       `Couldn't successfully add new profile for Person:\
@@ -67,7 +68,7 @@ const addProfile = (runnerOptions: {
 
 const deleteProfile = (runnerOptions: { profileId: number }) => {
   try {
-    return runner<{
+    return Provider.client.session.customTask<{
       deleteProfile: { profiles: { id: string }[] };
     }>("mutation", mutations.deleteProfile, {
       profileId: runnerOptions.profileId,
@@ -88,12 +89,29 @@ const updateProfile = (runnerOptions: {
   };
 }) => {
   try {
-    return runner<{}>("mutation", mutations.updateProfile, {
-      ...runnerOptions.toUpdate,
-    });
+    return Provider.client.session.customTask<{}>(
+      "mutation",
+      mutations.updateProfile,
+      {
+        ...runnerOptions.toUpdate,
+      }
+    );
   } catch {
     throw new Error(
       `Couldn't successfully update profile with Id: ${runnerOptions.profileId}`
+    );
+  }
+};
+
+const writeVariableStore = (runnerOptions: {
+  personName: string;
+  toStore: {
+}) => {
+  try {
+    return Provider.client.session
+  } catch {
+    throw new Error(
+      `Couldn't successfully update profile settings of Person: ${runnerOptions.personName}`
     );
   }
 };
@@ -102,13 +120,13 @@ const updateSettings = (runnerOptions: {
   personName: string;
   settings: {};
 }) => {
-  try {
-    return runner<{}>("mutation", mutations.follow, {});
-  } catch {
-    throw new Error(
-      `Couldn't successfully update profile settings of Person: ${runnerOptions.personName}`
-    );
-  }
+  // try {
+  //   return Provider.client.session.customTask<{}>("mutation", mutations.follow, {});
+  // } catch {
+  //   throw new Error(
+  //     `Couldn't successfully update profile settings of Person: ${runnerOptions.personName}`
+  //   );
+  // }
 };
 
 const addMetaLink = (runnerOptions: {
@@ -120,13 +138,13 @@ const addMetaLink = (runnerOptions: {
     description: string;
   };
 }) => {
-  try {
-    return runner<{}>("mutation", mutations.follow, {});
-  } catch {
-    throw new Error(
-      `Couldn't successfully add meta link for Person: ${runnerOptions.personName}`
-    );
-  }
+  // try {
+  //   return Provider.client.session.customTask<{}>("mutation", mutations.follow, {});
+  // } catch {
+  //   throw new Error(
+  //     `Couldn't successfully add meta link for Person: ${runnerOptions.personName}`
+  //   );
+  // }
 };
 
 export {

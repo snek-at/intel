@@ -38,14 +38,15 @@ import { SnekClient } from "snek-client";
 class Provider {
   public static client = new SnekClient("https://engine.snek.at/graphql");
   public static achievements = achievements;
+  public static achievements: typeof achievements = require("./achievements");
   // achievements.all()
-  public static social = social;
+  public static social: typeof social = require("./social");
   // social.follow()
   // social.unfollow()
   // social.like()
   // social.unlike()
   // social.getAchievements()
-  public static person = person;
+  public static person: typeof person = require("./person");
   // person.get() -> person page + merged profile
   // person.profiles() -> get all profiles for the person page
   // person.addGitHubProfile()
