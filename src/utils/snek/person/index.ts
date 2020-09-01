@@ -1,4 +1,5 @@
 import Provider from "../index";
+import * as queries from "./queries/data";
 import * as mutations from "./mutations/data";
 //> Reducer
 // Contains the reducer and database models
