@@ -22,6 +22,7 @@ const addProfile = gql`
     $token: String!
     $personName: String!
     $accessToken: String!
+    $sourceUrl: String!
     $sourceType: String!
     $username: String!
   ) {
@@ -29,7 +30,8 @@ const addProfile = gql`
       token: $token
       personName: $personName
       accessToken: $accessToken
-      sourceType: $type
+      sourceUrl: $sourceUrl
+      sourceType: $sourceType
       username: $username
     ) {
       profile {
@@ -55,6 +57,7 @@ const updateProfile = gql`
     $token: String!
     $profileId: String!
     $accessToken: String
+    $sourceUrl: String
     $sourceType: String
     $username: String
   ) {
@@ -62,6 +65,7 @@ const updateProfile = gql`
       token: $token
       profileId: $profileId
       accessToken: $accessToken
+      sourceUrl: $sourceUrl
       sourceType: $accessToken
       username: $username
     ) {

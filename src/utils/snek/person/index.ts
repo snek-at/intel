@@ -25,6 +25,7 @@ const profiles = (runnerOptions: { personName: string }) => {
           updatedAt: string;
           username: string;
           accessToken: string;
+          sourceUrl: string;
           sourceType: string;
           isActive: boolean;
         }[];
@@ -42,6 +43,7 @@ const profiles = (runnerOptions: { personName: string }) => {
 const addProfile = (runnerOptions: {
   personName: string;
   source: {
+    URL: string | undefined;
     type: "GITHUB" | "GITLAB" | "INSTAGRAM";
     /** User: A username of the provided platform */
     username: string;
@@ -56,6 +58,7 @@ const addProfile = (runnerOptions: {
       }>("mutation", mutations.addProfile, {
         personName: runnerOptions.personName,
         username: runnerOptions.source.username,
+        sourceUrl: runnerOptions.source.URL,
         sourceType: runnerOptions.source.type,
         accessToken: runnerOptions.source.authorization,
       })
