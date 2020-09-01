@@ -67,5 +67,5 @@ class Provider {
 //#endregion
 
 //#region > Exports
-export default Provider;
+export { Provider as default };
 //#endregion
