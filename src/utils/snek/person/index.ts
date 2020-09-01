@@ -1,8 +1,9 @@
 import Provider from "../index";
 import * as queries from "./queries/data";
 import * as mutations from "./mutations/data";
-//> Reducer
-// Contains the reducer and database models
+
+import GithubProvider from "../../github";
+import GtilabProvider from "../../gitlab";
 import { Reducer } from "../../../reducer";
 
 const get = (runnerOptions: { personName: string }) => {
@@ -38,6 +39,113 @@ const profiles = (runnerOptions: { personName: string }) => {
       `Couldn't successfully fetch profiles of Person: ${runnerOptions.personName}`
     );
   }
+};
+
+const processProfiles = async (runnerOptions: { personName: string }) => {
+  const allProfiles = await profiles({
+    personName: runnerOptions.personName,
+  }).then((res) => {
+    return res ? res.personProfiles : [];
+  });
+
+  const reducer = new Reducer();
+
+  /** Resets the database due to the lack of support for multiple instances */
+  reducer.reset();
+
+  for (const profileIndex in allProfiles) {
+    const profile = allProfiles[profileIndex];
+
+    console.info(
+      `processing (${profileIndex + 1}/${
+        allProfiles.length
+      }) which Active status is: ${profile.isActive}`,
+      profile
+    );
+
+    if (profile.isActive) {
+      try {
+        switch (profile.sourceType) {
+          case "GITHUB":
+            await GithubProvider.processSource(profile.sourceUrl, {
+              user: profile.username,
+              authorization: profile.accessToken,
+            });
+            break;
+          case "GITLAB":
+            await GtilabProvider.processSource(profile.sourceUrl, {
+              user: profile.username,
+              authorization: profile.accessToken,
+            });
+            break;
+          case "INSTAGRAM":
+            break;
+        }
+      } catch {
+        console.warn(
+          `Processing profile of Type:${profile.sourceType} failed!`
+        );
+      }
+    }
+  }
+
+  console.info(`Generating merged profiles data`);
+
+  const mergedProfiles = await reducer.get();
+
+  console.log(mergedProfiles);
+
+  const prepareStatisticForVariableStore = (
+    statistic: typeof mergedProfiles.statistic.current
+  ) => {
+    if (statistic) {
+      return {
+        calendar2d: JSON.stringify(statistic.calendar),
+        contributionType2d: JSON.stringify(statistic.contributions),
+        totalIssueContributions: statistic.totalIssueContributions,
+        totalCommitContributions: statistic.totalCommitContributions,
+        totalRepositoryContributions: statistic.totalRepositoryContributions,
+        totalPullRequestContributions: statistic.totalPullRequestContributions,
+        totalPullRequestReviewContributions:
+          statistic.totalPullRequestReviewContributions,
+        totalRepositoriesWithContributedIssues:
+          statistic.totalRepositoriesWithContributedIssues,
+        totalRepositoriesWithContributedCommits:
+          statistic.totalRepositoriesWithContributedCommits,
+        totalRepositoriesWithContributedPullRequests:
+          statistic.totalRepositoriesWithContributedPullRequests,
+        currentStreak: statistic.streak.current,
+        longestStreak: statistic.streak.longest,
+      };
+    } else {
+      return undefined;
+    }
+  };
+
+  writeVariableStore({
+    personName: runnerOptions.personName,
+    toStore: {
+      currentStatistic: JSON.stringify(
+        prepareStatisticForVariableStore(mergedProfiles.statistic.current)
+      ),
+      yearsStatistic: JSON.stringify(
+        mergedProfiles.statistic.years.map((e) =>
+          prepareStatisticForVariableStore(e)
+        )
+      ),
+      languages: JSON.stringify(mergedProfiles.statistic.languages),
+      organisations: JSON.stringify(mergedProfiles.profile?.organizations),
+      projects: JSON.stringify(mergedProfiles.profile?.repositories),
+    },
+  }).then((res) =>
+    res
+      ? console.info(
+          `Successfully written variable store for Person: ${runnerOptions.personName}`
+        )
+      : console.warn(
+          `Couldn't successfully write variable store for Person: ${runnerOptions.personName}`
+        )
+  );
 };
 
 const addProfile = (runnerOptions: {
@@ -173,6 +281,7 @@ const addMetaLink = (runnerOptions: {
 export {
   get,
   profiles,
+  processProfiles,
   addProfile,
   deleteProfile,
   updateProfile,
