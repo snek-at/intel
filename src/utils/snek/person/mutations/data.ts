@@ -5,18 +5,6 @@ import gql from "graphql-tag";
 //#endregion
 
 //#region > Mutations
-const getProfiles = gql`
-  query getProfiles($token: String!, $personName: String!) {
-    personProfiles(token: $token, personName: $personName) {
-      id
-      createdAt
-      updatedAt
-      username
-      accessToken
-      sourceType
-    }
-  }
-`;
 const addProfile = gql`
   mutation addProfile(
     $token: String!
