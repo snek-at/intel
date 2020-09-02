@@ -8,60 +8,58 @@ interface RunnerParameters {
   receiver: string;
 }
 
-const runner = Provider.client.session.customTask;
-
 const follow = (runnerOptions: RunnerParameters) => {
-  const type = "follow";
-
   try {
-    return runner<{
-      followPerson: { totalFollowers: number };
-    }>("mutation", mutations.follow, {});
+    return Provider.client.session
+      .customTask<{
+        followPerson: { totalFollowers: number };
+      }>("mutation", mutations.follow, {})
+      .then((res) => (res.data ? res.data.followPerson : null));
   } catch {
     throw new Error(
-      `Invoker: ${runnerOptions.invoker} couldn't successfully ${type} Receiver: ${runnerOptions.receiver}`
+      `Invoker: ${runnerOptions.invoker} couldn't successfully follow Receiver: ${runnerOptions.receiver}`
     );
   }
 };
 
 const unfollow = (runnerOptions: RunnerParameters) => {
-  const type = "unfollow";
-
   try {
-    return runner<{
-      unfollowPerson: { totalFollowers: number };
-    }>("mutation", mutations.unfollow, {});
+    return Provider.client.session
+      .customTask<{
+        unfollowPerson: { totalFollowers: number };
+      }>("mutation", mutations.unfollow, {})
+      .then((res) => (res.data ? res.data.unfollowPerson : null));
   } catch {
     throw new Error(
-      `Invoker: ${runnerOptions.invoker} couldn't successfully ${type} Receiver: ${runnerOptions.receiver}`
+      `Invoker: ${runnerOptions.invoker} couldn't successfully unfollow Receiver: ${runnerOptions.receiver}`
     );
   }
 };
 
 const like = (runnerOptions: RunnerParameters) => {
-  const type = "like";
-
   try {
-    return runner<{
-      like: { totalFollowers: number };
-    }>("mutation", mutations.unfollow, {});
+    return Provider.client.session
+      .customTask<{
+        like: { totalFollowers: number };
+      }>("mutation", mutations.unfollow, {})
+      .then((res) => (res.data ? res.data.like : null));
   } catch {
     throw new Error(
-      `Invoker: ${runnerOptions.invoker} couldn't successfully ${type} Receiver: ${runnerOptions.receiver}`
+      `Invoker: ${runnerOptions.invoker} couldn't successfully like Receiver: ${runnerOptions.receiver}`
     );
   }
 };
 
 const unlike = (runnerOptions: RunnerParameters) => {
-  const type = "unlike";
-
   try {
-    return runner<{
-      unlike: { totalFollowers: number };
-    }>("mutation", mutations.unfollow, {});
+    return Provider.client.session
+      .customTask<{
+        unlike: { totalFollowers: number };
+      }>("mutation", mutations.unfollow, {})
+      .then((res) => (res.data ? res.data.unlike : null));
   } catch {
     throw new Error(
-      `Invoker: ${runnerOptions.invoker} couldn't successfully ${type} Receiver: ${runnerOptions.receiver}`
+      `Invoker: ${runnerOptions.invoker} couldn't successfully unlike Receiver: ${runnerOptions.receiver}`
     );
   }
 };
