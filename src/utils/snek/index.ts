@@ -25,10 +25,10 @@
 
 //#region > Imports
 //> All social related actions (like, follow,..)
-import * as achievements from "./achievements";
+import * as achievement from "./achievement";
 import * as social from "./social";
 import * as person from "./person";
-import * as talks from "./talk";
+import * as talk from "./talk";
 //> Clients
 // Contains the clients for API calls to SNEK, Github and GitLab
 import { SnekClient } from "snek-client";
@@ -38,7 +38,7 @@ import { SnekClient } from "snek-client";
 class Provider {
   public static client = new SnekClient("https://engine.snek.at/graphql");
   public static achievements = achievements;
-  public static achievements: typeof achievements = require("./achievements");
+  public static achievements: typeof achievement = require("./achievements");
   // achievements.all()
   public static social: typeof social = require("./social");
   // social.follow()
@@ -56,7 +56,7 @@ class Provider {
   // person.updateProfile()
   // person.updateSettings()
   // person.addMetaLink()
-  public static talks: typeof talks = require("./talks");
+  public static talks: typeof talk = require("./talks");
   // talk.all()
   // talk.get()
   // talk.add()
