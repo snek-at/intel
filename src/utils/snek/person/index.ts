@@ -83,6 +83,32 @@ const get = (runnerOptions: { personName: string }) => {
   }
 };
 
+const register = (runnerOptions: {
+  formValues: {
+    /* Values ​​are not camel cases because form values ​​require snake case */
+    username: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    password: string;
+    redemption_code: string;
+  };
+}) => {
+  try {
+    Provider.client.session
+      .customTask<{ registration: { result: string } }>(
+        "mutation",
+        mutations.registration,
+        {
+          values: runnerOptions.formValues,
+        }
+      )
+      .then((res) => (res.data ? res.data.registration : null));
+  } catch {
+    throw new Error(`Couldn't successfully register new person`);
+  }
+};
+
 const profiles = (runnerOptions: { personName: string }) => {
   try {
     return Provider.client.session
@@ -345,6 +371,7 @@ const addMetaLink = (runnerOptions: {
 
 export {
   get,
+  register,
   profiles,
   processProfiles,
   addProfile,

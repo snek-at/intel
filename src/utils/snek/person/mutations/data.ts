@@ -5,6 +5,22 @@ import gql from "graphql-tag";
 //#endregion
 
 //#region > Mutations
+const registration = gql`
+  mutation registration($token: String!, $values: GenericScalar!) {
+    registration: personRegistrationFormPage(
+      url: "/person-registration-form/"
+      token: $token
+      values: $values
+    ) {
+      result
+      errors {
+        name
+        errors
+      }
+    }
+  }
+`;
+
 const addProfile = gql`
   mutation addProfile(
     $token: String!
@@ -91,5 +107,11 @@ const writeVariableStore = gql`
 `;
 
 //#region > Exports
-export { addProfile, deleteProfile, updateProfile, writeVariableStore };
+export {
+  registration,
+  addProfile,
+  deleteProfile,
+  updateProfile,
+  writeVariableStore,
+};
 //#endregion
