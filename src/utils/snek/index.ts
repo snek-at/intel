@@ -28,7 +28,7 @@
 import * as achievements from "./achievements";
 import * as social from "./social";
 import * as person from "./person";
-import * as talks from "./person";
+import * as talks from "./talk";
 //> Clients
 // Contains the clients for API calls to SNEK, Github and GitLab
 import { SnekClient } from "snek-client";
@@ -56,7 +56,7 @@ class Provider {
   // person.updateProfile()
   // person.updateSettings()
   // person.addMetaLink()
-  public static talks = talks;
+  public static talks: typeof talks = require("./talks");
   // talk.all()
   // talk.get()
   // talk.add()
