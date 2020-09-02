@@ -16,6 +16,7 @@ const getAchievements = gql`
       collectors {
         firstName
         lastName
+        title
         personName: slug
       }
     }

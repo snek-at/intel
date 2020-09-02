@@ -1,4 +1,5 @@
 import Provider from "../index";
+import * as types from "../types";
 import * as queries from "./queries/data";
 
 interface RunnerParameters {}
@@ -9,17 +10,7 @@ const all = () => {
   try {
     return Provider.client.session
       .customTask<{
-        achievements: {
-          title: string;
-          description: string;
-          points: number;
-          image: { src: string };
-          collectors: {
-            firstName: string;
-            lastName: string;
-            personName: string;
-          }[];
-        }[];
+        achievements: types.GraphQLAchievement[];
       }>("query", queries.getAchievements, {})
       .then((res) => (res.data ? res.data : []));
   } catch {

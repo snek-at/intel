@@ -1,5 +1,5 @@
 import Provider from "../index";
-import * as types from "./types";
+import * as types from "../types";
 import * as queries from "./queries/data";
 import * as mutations from "./mutations/data";
 

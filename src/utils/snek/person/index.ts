@@ -1,4 +1,5 @@
 import Provider from "../index";
+import * as types from "../types";
 import * as queries from "./queries/data";
 import * as mutations from "./mutations/data";
 
@@ -9,70 +10,7 @@ import { Reducer } from "../../../reducer";
 const get = (runnerOptions: { personName: string }) => {
   try {
     return Provider.client.session.customTask<{
-      page: {
-        title: string;
-        firstName: string;
-        lastName: string;
-        status: string;
-        bio: string;
-        email: string;
-        displayEmail: boolean;
-        workplace: string;
-        displayWorkpalce: boolean;
-        websiteUrl: string;
-        location: boolean;
-        displayRanking: boolean;
-        displayProgrammingLanguages: boolean;
-        display2dCalendar: boolean;
-        display3dCalendar: boolean;
-        bids: string;
-        tids: string;
-        avatarImage: {
-          src: string;
-        };
-        linkCollection: {
-          url: string;
-          linkType: string;
-          location: string;
-          description: String;
-        }[];
-        movablePool: {
-          rawValue: string;
-          field: string;
-        }[];
-        person: {
-          currentStatistic: {}[];
-          yearsStatistic: {}[];
-          projects: {}[];
-          organisations: {}[];
-          languages: {}[];
-        };
-        follows: {
-          title: string;
-          slug: string;
-        }[];
-        followedBy: {
-          title: string;
-          slug: string;
-        }[];
-        likes: {
-          title: string;
-          slug: string;
-        }[];
-        likedBy: {
-          title: string;
-          slug: string;
-        }[];
-        achievements: {
-          id: string;
-          title: string;
-          description: string;
-          image: {
-            stc: string;
-          };
-          points: number;
-        }[];
-      };
+      page: types.GraphQLPersonPage;
     }>("query", queries.getPerson, {
       slug: `p-${runnerOptions.personName}`,
     });
