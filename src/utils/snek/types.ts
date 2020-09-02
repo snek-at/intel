@@ -25,7 +25,7 @@ export interface GraphQLTalk {
       src: string | null;
     } | null;
     title: string | null;
-    slug: string | null;
+    slug: string;
   };
 }
 
@@ -38,7 +38,7 @@ export interface GraphQLComment {
       src: string | null;
     } | null;
     title: string | null;
-    slug: string | null;
+    slug: string;
   };
   text: string | null;
 }
