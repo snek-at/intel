@@ -144,15 +144,15 @@ export interface GraphQLPersonPage {
   status: string | null;
   bio: string | null;
   email: string | null;
-  displayEmail: boolean | null;
+  displayEmail: boolean;
   workplace: string | null;
-  displayWorkpalce: boolean | null;
+  displayWorkpalce: boolean;
   websiteUrl: string | null;
-  location: boolean | null;
-  displayRanking: boolean | null;
-  displayProgrammingLanguages: boolean | null;
-  display2dCalendar: boolean | null;
-  display3dCalendar: boolean | null;
+  location: boolean;
+  displayRanking: boolean;
+  displayProgrammingLanguages: boolean;
+  display2dCalendar: boolean;
+  display3dCalendar: boolean;
   bids: string | null;
   tids: string | null;
   avatarImage: {
