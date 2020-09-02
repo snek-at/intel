@@ -9,32 +9,7 @@ const getTalks = () => {
   try {
     return Provider.client.session
       .customTask<{
-        talks: {
-          id: string | null;
-          title: string | null;
-          description: string | null;
-          path: string | null;
-          url: string | null;
-          talkComments: {
-            id: string | null;
-            createdAt: string | null;
-            updatedAt: string | null;
-            text: string | null;
-            replies: {
-              id: string | null;
-            }[];
-            talk: {
-              id: string | null;
-            };
-          }[];
-          owner: {
-            avatarImage: {
-              src: string | null;
-            } | null;
-            title: string | null;
-            slug: string | null;
-          };
-        }[];
+        talks: types.GraphQLTalk[];
       }>("query", queries.getTalks, {})
       .then((res) => (res.data ? res.data.talks : []));
   } catch {
@@ -70,12 +45,12 @@ const addTalk = (runnerOptions: {
   try {
     return Provider.client.session
       .customTask<{
-        talk: types.GraphQLTalk;
+        addTalk: { talk: types.GraphQLTalk };
       }>("mutation", mutations.addTalk, {
         personName: runnerOptions.personName,
         ...runnerOptions.talkOptions,
       })
-      .then((res) => (res.data ? res.data.talk : null));
+      .then((res) => (res.data ? res.data.addTalk.talk : null));
   } catch {
     throw new Error(`Couldn't successfully add talk`);
   }
@@ -85,11 +60,11 @@ const deleteTalk = (runnerOptions: { talkId: string }) => {
   try {
     return Provider.client.session
       .customTask<{
-        talks: types.GraphQLTalk;
+        deleteTalk: { talks: types.GraphQLTalk[] };
       }>("mutation", mutations.deleteTalk, {
         talkId: runnerOptions.talkId,
       })
-      .then((res) => (res.data ? res.data.talks : []));
+      .then((res) => (res.data ? res.data.deleteTalk.talks : []));
   } catch {
     throw new Error(
       `Couldn't successfully delete talk with Id: ${runnerOptions.talkId}`
@@ -111,12 +86,12 @@ const updateTalk = (runnerOptions: {
   try {
     return Provider.client.session
       .customTask<{
-        talk: types.GraphQLTalk;
+        updateTalk: { talk: types.GraphQLTalk };
       }>("mutation", mutations.updateTalk, {
         talkId: runnerOptions.talkId,
         ...runnerOptions.toUpdate,
       })
-      .then((res) => (res.data ? res.data.talk : null));
+      .then((res) => (res.data ? res.data.updateTalk.talk : null));
   } catch {
     throw new Error(
       `Couldn't successfully update talk with Id: ${runnerOptions.talkId}`
@@ -135,12 +110,12 @@ const addTalkComment = (runnerOptions: {
   try {
     return Provider.client.session
       .customTask<{
-        comment: types.GraphQLComment;
+        addTalkComment: { comment: types.GraphQLComment };
       }>("mutation", mutations.addTalkComment, {
         personName: runnerOptions.personName,
         ...runnerOptions.commentOptions,
       })
-      .then((res) => (res.data ? res.data.comment : null));
+      .then((res) => (res.data ? res.data.addTalkComment.comment : null));
   } catch {
     throw new Error(`Couldn't successfully add comment`);
   }
@@ -150,11 +125,11 @@ const deleteTalkComment = (runnerOptions: { commentId: string }) => {
   try {
     return Provider.client.session
       .customTask<{
-        comments: types.GraphQLComment;
+        deleteTalkComment: { comments: types.GraphQLComment };
       }>("mutation", mutations.deleteTalkComment, {
         talkId: runnerOptions.commentId,
       })
-      .then((res) => (res.data ? res.data.comments : []));
+      .then((res) => (res.data ? res.data.deleteTalkComment.comments : []));
   } catch {
     throw new Error(
       `Couldn't successfully delete comment with Id: ${runnerOptions.commentId}`
@@ -171,12 +146,12 @@ const updateTalkComment = (runnerOptions: {
   try {
     return Provider.client.session
       .customTask<{
-        talk: types.GraphQLComment;
+        updateTalkComment: { talk: types.GraphQLComment };
       }>("mutation", mutations.updateTalkComment, {
         talkId: runnerOptions.commentId,
         ...runnerOptions.toUpdate,
       })
-      .then((res) => (res.data ? res.data.talk : null));
+      .then((res) => (res.data ? res.data.updateTalkComment.talk : null));
   } catch {
     throw new Error(
       `Couldn't successfully update comment with Id: ${runnerOptions.commentId}`

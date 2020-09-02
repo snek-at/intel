@@ -12,7 +12,7 @@ const all = () => {
       .customTask<{
         achievements: types.GraphQLAchievement[];
       }>("query", queries.getAchievements, {})
-      .then((res) => (res.data ? res.data : []));
+      .then((res) => (res.data ? res.data.achievements : []));
   } catch {
     throw new Error(`Couldn't successfully ${type} achievements`);
   }

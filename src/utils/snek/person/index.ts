@@ -9,11 +9,13 @@ import { Reducer } from "../../../reducer";
 
 const get = (runnerOptions: { personName: string }) => {
   try {
-    return Provider.client.session.customTask<{
-      page: types.GraphQLPersonPage;
-    }>("query", queries.getPerson, {
-      slug: `p-${runnerOptions.personName}`,
-    });
+    return Provider.client.session
+      .customTask<{
+        page: types.GraphQLPersonPage;
+      }>("query", queries.getPerson, {
+        slug: `p-${runnerOptions.personName}`,
+      })
+      .then((res) => (res.data ? res.data.page : null));
   } catch {
     throw new Error(
       `Couldn't successfully fetchPerson: ${runnerOptions.personName}`
@@ -64,7 +66,7 @@ const profiles = (runnerOptions: { personName: string }) => {
       }>("mutation", queries.getProfiles, {
         personName: runnerOptions.personName,
       })
-      .then((res) => (res.data ? res.data : null));
+      .then((res) => (res.data ? res.data.personProfiles : []));
   } catch {
     throw new Error(
       `Couldn't successfully fetch profiles of Person: ${runnerOptions.personName}`
@@ -75,8 +77,6 @@ const profiles = (runnerOptions: { personName: string }) => {
 const processProfiles = async (runnerOptions: { personName: string }) => {
   const allProfiles = await profiles({
     personName: runnerOptions.personName,
-  }).then((res) => {
-    return res ? res.personProfiles : [];
   });
 
   const reducer = new Reducer();
@@ -199,7 +199,7 @@ const addProfile = (runnerOptions: {
         sourceType: runnerOptions.source.type,
         accessToken: runnerOptions.source.authorization,
       })
-      .then((res) => (res.data ? res.data : null));
+      .then((res) => (res.data ? res.data.addProfile.profile : null));
   } catch {
     throw new Error(
       `Couldn't successfully add new profile for Person:\
@@ -211,11 +211,13 @@ const addProfile = (runnerOptions: {
 
 const deleteProfile = (runnerOptions: { profileId: number }) => {
   try {
-    return Provider.client.session.customTask<{
-      deleteProfile: { profiles: { id: string }[] };
-    }>("mutation", mutations.deleteProfile, {
-      profileId: runnerOptions.profileId,
-    });
+    return Provider.client.session
+      .customTask<{
+        deleteProfile: { profiles: { id: string }[] };
+      }>("mutation", mutations.deleteProfile, {
+        profileId: runnerOptions.profileId,
+      })
+      .then((res) => (res.data ? res.data.deleteProfile.profiles : []));
   } catch {
     throw new Error(
       `Couldn't successfully delete profile with Id: ${runnerOptions.profileId}`
@@ -268,7 +270,7 @@ const writeVariableStore = (runnerOptions: {
         rawOrganisations: runnerOptions.toStore.organisations,
         rawProjects: runnerOptions.toStore.projects,
       })
-      .then((res) => (res.data ? res.data : null));
+      .then((res) => (res.data ? res.data.variableStore.person : null));
   } catch {
     throw new Error(
       `Couldn't successfully write the variable store of Person: ${runnerOptions.personName}`
