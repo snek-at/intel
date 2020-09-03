@@ -336,7 +336,7 @@ const addMetaLink = async (runnerOptions: {
       personName: runnerOptions.personName,
       ...runnerOptions.linkOptions,
     });
-    return res.data ? res.data : null;
+    return res.data ? res.data.addMetaLink.metaLink : null;
   } catch {
     throw new Error(
       `Couldn't successfully add meta link for Person: ${runnerOptions.personName}`
@@ -351,7 +351,7 @@ const deleteMetaLink = async (runnerOptions: { metaLinkId: string }) => {
     }>("mutation", mutations.deleteMetaLink, {
       metaLinkId: runnerOptions.metaLinkId,
     });
-    return res.data ? res.data : null;
+    return res.data ? res.data.deleteMetaLink.metaLinks : [];
   } catch {
     throw new Error(
       `Couldn't successfully delete meta link with Id: ${runnerOptions.metaLinkId}`
