@@ -116,7 +116,7 @@ const addMetaLink = gql`
     $imgurDeleteHash: String
     $description: String
   ) {
-    link: addPersonPageMetaLink(
+    addMetaLink: addPersonPageMetaLink(
       token: $token
       personName: $personName
       url: $url
@@ -139,7 +139,10 @@ const addMetaLink = gql`
 
 const deleteMetaLink = gql`
   mutation deleteMetaLink($token: String!, $metaLinkId: String!) {
-    links: deletePersonPageMetaLink(token: $token, metaLinkId: $metaLinkId) {
+    deleteMetaLink: deletePersonPageMetaLink(
+      token: $token
+      metaLinkId: $metaLinkId
+    ) {
       metaLinks {
         id
         url
