@@ -106,6 +106,64 @@ const writeVariableStore = gql`
   }
 `;
 
+const updatePersonPage = gql`
+  mutation updatePersonPage(
+    $token: String!
+    $personName: String!
+    $avatarImage: String
+    $bio: String
+    $display2dCalendar: Boolean
+    $display3dCalendar: Boolean
+    $displayEmail: Boolean
+    $displayProgrammingLanguages: Boolean
+    $displayRanking: Boolean
+    $displayWorkplace: Boolean
+    $email: String
+    $firstName: String
+    $lastName: String
+    $location: String
+    $movablePool: JSONString
+    $status: String
+    $websiteUrl: String
+    $workplace: String
+  ) {
+    updatePersonPage(
+      token: $token
+      personName: $personName
+      avatarImage: $avatarImage
+      bio: $bio
+      display2dCalendar: $display2dCalendar
+      display3dCalendar: $display3dCalendar
+      displayEmail: $displayEmail
+      displayProgrammingLanguages: $displayProgrammingLanguages
+      displayRanking: $displayRanking
+      displayWorkplace: $displayWorkplace
+      email: $email
+      firstName: $firstName
+      lastName: $lastName
+      location: $location
+      movablePool: $movablePool
+      status: $status
+      websiteUrl: $websiteUrl
+      workplace: $workplace
+    ) {
+      personPage {
+        ... on PersonPage {
+          slug
+          title
+          firstName
+          lastName
+          status
+          bio
+          avatarImage {
+            src
+          }
+        }
+      }
+    }
+  }
+`;
+
 const addMetaLink = gql`
   mutation addMetaLink(
     $token: String!
@@ -162,6 +220,7 @@ export {
   deleteProfile,
   updateProfile,
   writeVariableStore,
+  updatePersonPage,
   addMetaLink,
   deleteMetaLink,
 };

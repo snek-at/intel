@@ -308,15 +308,37 @@ const writeVariableStore = async (runnerOptions: {
 
 const updateSettings = (runnerOptions: {
   personName: string;
-  settings: {};
+  settings: {
+    avatarImage?: string;
+    bio?: string;
+    display2dCalendar?: string;
+    display3dCalendar?: string;
+    displayEmail?: string;
+    displayProgrammingLanguages?: string;
+    displayRanking?: string;
+    displayWorkplace?: string;
+    email?: string;
+    firstName?: string;
+    lastName?: string;
+    location?: string;
+    movablePool?: string;
+    status?: string;
+    websiteUrl?: string;
+    workplace?: string;
+  };
 }) => {
-  // try {
-  //   return Provider.client.session.customTask<{}>("mutation", mutations.follow, {});
-  // } catch {
-  //   throw new Error(
-  //     `Couldn't successfully update profile settings of Person: ${runnerOptions.personName}`
-  //   );
-  // }
+  try {
+    return Provider.client.session.customTask<{
+      updatePersonPage: { personPage: types.GraphqlPersonPageBrief[] };
+    }>("mutation", mutations.updatePersonPage, {
+      personName: runnerOptions.personName,
+      ...runnerOptions.settings,
+    });
+  } catch {
+    throw new Error(
+      `Couldn't successfully update settings of Person: ${runnerOptions.personName}`
+    );
+  }
 };
 
 const addMetaLink = async (runnerOptions: {
