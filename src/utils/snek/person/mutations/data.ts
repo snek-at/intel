@@ -106,6 +106,52 @@ const writeVariableStore = gql`
   }
 `;
 
+const addMetaLink = gql`
+  mutation addMetaLink(
+    $token: String!
+    $personName: String!
+    $url: String!
+    $location: String
+    $linkType: String
+    $imgurDeleteHash: String
+    $description: String
+  ) {
+    link: addPersonPageMetaLink(
+      token: $token
+      personName: $personName
+      url: $url
+      location: $location
+      linkType: $linkType
+      imgurDeleteHash: $imgurDeleteHash
+      description: $description
+    ) {
+      metaLink {
+        id
+        url
+        linkType
+        location
+        description
+        imgurDeleteHash
+      }
+    }
+  }
+`;
+
+const deleteMetaLink = gql`
+  mutation deleteMetaLink($token: String!, $metaLinkId: String!) {
+    links: deletePersonPageMetaLink(token: $token, metaLinkId: $metaLinkId) {
+      metaLinks {
+        id
+        url
+        linkType
+        location
+        description
+        imgurDeleteHash
+      }
+    }
+  }
+`;
+
 //#region > Exports
 export {
   registration,
@@ -113,5 +159,7 @@ export {
   deleteProfile,
   updateProfile,
   writeVariableStore,
+  addMetaLink,
+  deleteMetaLink,
 };
 //#endregion

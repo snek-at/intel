@@ -331,18 +331,46 @@ const addMetaLink = (runnerOptions: {
   personName: string;
   linkOptions: {
     url: string;
-    link_type: string;
     location: string;
+    linkType: types.MetaLinkType;
+    imgurDeleteHash: string;
     description: string;
   };
 }) => {
-  // try {
-  //   return Provider.client.session.customTask<{}>("mutation", mutations.follow, {});
-  // } catch {
-  //   throw new Error(
-  //     `Couldn't successfully add meta link for Person: ${runnerOptions.personName}`
-  //   );
-  // }
+  try {
+    return Provider.client.session
+      .customTask<{ addMetaLink: { metaLink: types.GraphQLMetaLink } }>(
+        "mutation",
+        mutations.addMetaLink,
+        {
+          personName: runnerOptions.personName,
+          ...runnerOptions.linkOptions,
+        }
+      )
+      .then((res) => (res.data ? res.data : null));
+  } catch {
+    throw new Error(
+      `Couldn't successfully add meta link for Person: ${runnerOptions.personName}`
+    );
+  }
+};
+
+const deleteMetaLink = (runnerOptions: { metaLinkId: string }) => {
+  try {
+    return Provider.client.session
+      .customTask<{ deleteMetaLink: { metaLinks: types.GraphQLMetaLink[] } }>(
+        "mutation",
+        mutations.deleteMetaLink,
+        {
+          metaLinkId: runnerOptions.metaLinkId,
+        }
+      )
+      .then((res) => (res.data ? res.data : null));
+  } catch {
+    throw new Error(
+      `Couldn't successfully delete meta link with Id: ${runnerOptions.metaLinkId}`
+    );
+  }
 };
 
 export {
@@ -356,4 +384,5 @@ export {
   updateProfile,
   updateSettings,
   addMetaLink,
+  deleteMetaLink,
 };

@@ -1,4 +1,14 @@
 /**
+ * Types
+ */
+export type MetaLinkType =
+  | "INSTAGRAM_VIDEO"
+  | "INSTAGRAM_PHOTO"
+  | "PHOTO"
+  | "YOUTUBE"
+  | "OTHER";
+
+/**
  * All graphql response types
  */
 
@@ -203,4 +213,13 @@ export interface GraphqlPersonPageBrief {
 
 export interface GraphQLRegistrationPage {
   supportedGitlabs: { id: string; organisation: string; domain: string }[];
+}
+
+export interface GraphQLMetaLink {
+  id: string;
+  url: string;
+  linkType: MetaLinkType;
+  location: string | null;
+  description: string;
+  imgurDeleteHash: string | null;
 }
