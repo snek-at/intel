@@ -200,3 +200,7 @@ export interface GraphqlPersonPageBrief {
     src: string | null;
   } | null;
 }
+
+export interface GraphQLRegistrationPage {
+  supportedGitlabs: { id: string; organisation: string; domain: string }[];
+}
