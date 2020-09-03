@@ -6,6 +6,7 @@ import * as mutations from "./mutations/data";
 import GithubProvider from "../../github";
 import GtilabProvider from "../../gitlab";
 import { Reducer } from "../../../reducer";
+import { safelyParseJSON } from "../../../toolbox/Parser";
 
 const allBrief = (runnerOptions: {}) => {
   try {
@@ -27,7 +28,30 @@ const get = (runnerOptions: { personName: string }) => {
       }>("query", queries.getPerson, {
         slug: `p-${runnerOptions.personName}`,
       })
-      .then((res) => (res.data ? res.data.page : null));
+      .then((res) => {
+        if (res.data) {
+          let rnt: Omit<
+            types.GraphQLPersonPage,
+            "movablePool" | "tids" | "bids"
+          > & {
+            tids: string[];
+            bids: string[];
+            movablePool: { [x: string]: any[] }[];
+          };
+
+          rnt = {
+            ...res.data.page,
+            tids: safelyParseJSON(res.data.page.tids, []),
+            bids: safelyParseJSON(res.data.page.bids, []),
+            movablePool: res.data.page.movablePool.map((e) => {
+              return { [e.field]: safelyParseJSON(e.rawValue, []) };
+            }),
+          };
+
+          return rnt;
+        }
+        return null;
+      });
   } catch {
     throw new Error(
       `Couldn't successfully fetchPerson: ${runnerOptions.personName}`
