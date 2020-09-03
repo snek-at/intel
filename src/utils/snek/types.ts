@@ -189,3 +189,14 @@ export interface GraphQLPersonPage {
   }[];
   achievements: GraphQLAchievement[];
 }
+
+export interface GraphqlPersonPageBrief {
+  title: string;
+  firstName: string | null;
+  lastName: string | null;
+  status: string | null;
+  bio: string | null;
+  avatarImage: {
+    src: string | null;
+  } | null;
+}

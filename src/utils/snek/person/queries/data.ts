@@ -244,8 +244,28 @@ const getPerson = gql`
     }
   }
 `;
+
+const allUserPagesBrief = gql`
+  query userPages($token: String!) {
+    page(token: $token, slug: "people") {
+      children {
+        ... on PersonPage {
+          slug
+          title
+          firstName
+          lastName
+          status
+          bio
+          avatarImage {
+            src
+          }
+        }
+      }
+    }
+  }
+`;
 //#endregion
 
 //#region > Exports
-export { getProfiles, getPerson };
+export { getProfiles, getPerson, allUserPagesBrief };
 //#endregion

@@ -7,6 +7,18 @@ import GithubProvider from "../../github";
 import GtilabProvider from "../../gitlab";
 import { Reducer } from "../../../reducer";
 
+const allBrief = (runnerOptions: {}) => {
+  try {
+    return Provider.client.session
+      .customTask<{
+        pages: types.GraphqlPersonPageBrief[];
+      }>("query", queries.allUserPagesBrief, {})
+      .then((res) => (res.data ? res.data.pages : []));
+  } catch {
+    throw new Error(`Couldn't successfully fetch all persons brief`);
+  }
+};
+
 const get = (runnerOptions: { personName: string }) => {
   try {
     return Provider.client.session
@@ -310,6 +322,7 @@ const addMetaLink = (runnerOptions: {
 };
 
 export {
+  allBrief,
   get,
   register,
   profiles,
