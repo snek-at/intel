@@ -8,50 +8,46 @@ import GtilabProvider from "../../gitlab";
 import { Reducer } from "../../../reducer";
 import { safelyParseJSON } from "../../../toolbox/Parser";
 
-const allBrief = (runnerOptions: {}) => {
+const allBrief = async (runnerOptions: {}) => {
   try {
-    return Provider.client.session
-      .customTask<{
-        pages: types.GraphqlPersonPageBrief[];
-      }>("query", queries.allUserPagesBrief, {})
-      .then((res) => (res.data ? res.data.pages : []));
+    const res = await Provider.client.session.customTask<{
+      pages: types.GraphqlPersonPageBrief[];
+    }>("query", queries.allUserPagesBrief, {});
+    return res.data ? res.data.pages : [];
   } catch {
     throw new Error(`Couldn't successfully fetch all persons brief`);
   }
 };
 
-const get = (runnerOptions: { personName: string }) => {
+const get = async (runnerOptions: { personName: string }) => {
   try {
-    return Provider.client.session
-      .customTask<{
-        page: types.GraphQLPersonPage;
-      }>("query", queries.getPerson, {
-        slug: `p-${runnerOptions.personName}`,
-      })
-      .then((res) => {
-        if (res.data) {
-          let rnt: Omit<
-            types.GraphQLPersonPage,
-            "movablePool" | "tids" | "bids"
-          > & {
-            tids: string[];
-            bids: string[];
-            movablePool: { [x: string]: any[] }[];
-          };
+    const res = await Provider.client.session.customTask<{
+      page: types.GraphQLPersonPage;
+    }>("query", queries.getPerson, {
+      slug: `p-${runnerOptions.personName}`,
+    });
+    if (res.data) {
+      let rnt: Omit<
+        types.GraphQLPersonPage,
+        "movablePool" | "tids" | "bids"
+      > & {
+        tids: string[];
+        bids: string[];
+        movablePool: { [x: string]: any[] }[];
+      };
 
-          rnt = {
-            ...res.data.page,
-            tids: safelyParseJSON(res.data.page.tids, []),
-            bids: safelyParseJSON(res.data.page.bids, []),
-            movablePool: res.data.page.movablePool.map((e) => {
-              return { [e.field]: safelyParseJSON(e.rawValue, []) };
-            }),
-          };
+      rnt = {
+        ...res.data.page,
+        tids: safelyParseJSON(res.data.page.tids, []),
+        bids: safelyParseJSON(res.data.page.bids, []),
+        movablePool: res.data.page.movablePool.map((e) => {
+          return { [e.field]: safelyParseJSON(e.rawValue, []) };
+        }),
+      };
 
-          return rnt;
-        }
-        return null;
-      });
+      return rnt;
+    }
+    return null;
   } catch {
     throw new Error(
       `Couldn't successfully fetchPerson: ${runnerOptions.personName}`
@@ -85,24 +81,23 @@ const register = (runnerOptions: {
   }
 };
 
-const profiles = (runnerOptions: { personName: string }) => {
+const profiles = async (runnerOptions: { personName: string }) => {
   try {
-    return Provider.client.session
-      .customTask<{
-        personProfiles: {
-          id: string;
-          createdAt: string;
-          updatedAt: string;
-          username: string;
-          accessToken: string;
-          sourceUrl: string;
-          sourceType: string;
-          isActive: boolean;
-        }[];
-      }>("mutation", queries.getProfiles, {
-        personName: runnerOptions.personName,
-      })
-      .then((res) => (res.data ? res.data.personProfiles : []));
+    const res = await Provider.client.session.customTask<{
+      personProfiles: {
+        id: string;
+        createdAt: string;
+        updatedAt: string;
+        username: string;
+        accessToken: string;
+        sourceUrl: string;
+        sourceType: string;
+        isActive: boolean;
+      }[];
+    }>("mutation", queries.getProfiles, {
+      personName: runnerOptions.personName,
+    });
+    return res.data ? res.data.personProfiles : [];
   } catch {
     throw new Error(
       `Couldn't successfully fetch profiles of Person: ${runnerOptions.personName}`
@@ -213,7 +208,7 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
   );
 };
 
-const addProfile = (runnerOptions: {
+const addProfile = async (runnerOptions: {
   personName: string;
   source: {
     URL: string | undefined;
@@ -225,17 +220,16 @@ const addProfile = (runnerOptions: {
   };
 }) => {
   try {
-    return Provider.client.session
-      .customTask<{
-        addProfile: { profile: { id: string; createdAt: string } };
-      }>("mutation", mutations.addProfile, {
-        personName: runnerOptions.personName,
-        username: runnerOptions.source.username,
-        sourceUrl: runnerOptions.source.URL,
-        sourceType: runnerOptions.source.type,
-        accessToken: runnerOptions.source.authorization,
-      })
-      .then((res) => (res.data ? res.data.addProfile.profile : null));
+    const res = await Provider.client.session.customTask<{
+      addProfile: { profile: { id: string; createdAt: string } };
+    }>("mutation", mutations.addProfile, {
+      personName: runnerOptions.personName,
+      username: runnerOptions.source.username,
+      sourceUrl: runnerOptions.source.URL,
+      sourceType: runnerOptions.source.type,
+      accessToken: runnerOptions.source.authorization,
+    });
+    return res.data ? res.data.addProfile.profile : null;
   } catch {
     throw new Error(
       `Couldn't successfully add new profile for Person:\
@@ -245,15 +239,14 @@ const addProfile = (runnerOptions: {
   }
 };
 
-const deleteProfile = (runnerOptions: { profileId: number }) => {
+const deleteProfile = async (runnerOptions: { profileId: number }) => {
   try {
-    return Provider.client.session
-      .customTask<{
-        deleteProfile: { profiles: { id: string }[] };
-      }>("mutation", mutations.deleteProfile, {
-        profileId: runnerOptions.profileId,
-      })
-      .then((res) => (res.data ? res.data.deleteProfile.profiles : []));
+    const res = await Provider.client.session.customTask<{
+      deleteProfile: { profiles: { id: string }[] };
+    }>("mutation", mutations.deleteProfile, {
+      profileId: runnerOptions.profileId,
+    });
+    return res.data ? res.data.deleteProfile.profiles : [];
   } catch {
     throw new Error(
       `Couldn't successfully delete profile with Id: ${runnerOptions.profileId}`
@@ -284,7 +277,7 @@ const updateProfile = (runnerOptions: {
   }
 };
 
-const writeVariableStore = (runnerOptions: {
+const writeVariableStore = async (runnerOptions: {
   personName: string;
   toStore: {
     currentStatistic?: string;
@@ -295,18 +288,17 @@ const writeVariableStore = (runnerOptions: {
   };
 }) => {
   try {
-    return Provider.client.session
-      .customTask<{
-        variableStore: { person: { id: string } };
-      }>("mutation", mutations.writeVariableStore, {
-        personName: runnerOptions.personName,
-        rawCurrentStatistic: runnerOptions.toStore.currentStatistic,
-        rawYearsStatistic: runnerOptions.toStore.yearsStatistic,
-        rawLanguages: runnerOptions.toStore.languages,
-        rawOrganisations: runnerOptions.toStore.organisations,
-        rawProjects: runnerOptions.toStore.projects,
-      })
-      .then((res) => (res.data ? res.data.variableStore.person : null));
+    const res = await Provider.client.session.customTask<{
+      variableStore: { person: { id: string } };
+    }>("mutation", mutations.writeVariableStore, {
+      personName: runnerOptions.personName,
+      rawCurrentStatistic: runnerOptions.toStore.currentStatistic,
+      rawYearsStatistic: runnerOptions.toStore.yearsStatistic,
+      rawLanguages: runnerOptions.toStore.languages,
+      rawOrganisations: runnerOptions.toStore.organisations,
+      rawProjects: runnerOptions.toStore.projects,
+    });
+    return res.data ? res.data.variableStore.person : null;
   } catch {
     throw new Error(
       `Couldn't successfully write the variable store of Person: ${runnerOptions.personName}`
@@ -327,7 +319,7 @@ const updateSettings = (runnerOptions: {
   // }
 };
 
-const addMetaLink = (runnerOptions: {
+const addMetaLink = async (runnerOptions: {
   personName: string;
   linkOptions: {
     url: string;
@@ -338,16 +330,13 @@ const addMetaLink = (runnerOptions: {
   };
 }) => {
   try {
-    return Provider.client.session
-      .customTask<{ addMetaLink: { metaLink: types.GraphQLMetaLink } }>(
-        "mutation",
-        mutations.addMetaLink,
-        {
-          personName: runnerOptions.personName,
-          ...runnerOptions.linkOptions,
-        }
-      )
-      .then((res) => (res.data ? res.data : null));
+    const res = await Provider.client.session.customTask<{
+      addMetaLink: { metaLink: types.GraphQLMetaLink };
+    }>("mutation", mutations.addMetaLink, {
+      personName: runnerOptions.personName,
+      ...runnerOptions.linkOptions,
+    });
+    return res.data ? res.data : null;
   } catch {
     throw new Error(
       `Couldn't successfully add meta link for Person: ${runnerOptions.personName}`
@@ -355,17 +344,14 @@ const addMetaLink = (runnerOptions: {
   }
 };
 
-const deleteMetaLink = (runnerOptions: { metaLinkId: string }) => {
+const deleteMetaLink = async (runnerOptions: { metaLinkId: string }) => {
   try {
-    return Provider.client.session
-      .customTask<{ deleteMetaLink: { metaLinks: types.GraphQLMetaLink[] } }>(
-        "mutation",
-        mutations.deleteMetaLink,
-        {
-          metaLinkId: runnerOptions.metaLinkId,
-        }
-      )
-      .then((res) => (res.data ? res.data : null));
+    const res = await Provider.client.session.customTask<{
+      deleteMetaLink: { metaLinks: types.GraphQLMetaLink[] };
+    }>("mutation", mutations.deleteMetaLink, {
+      metaLinkId: runnerOptions.metaLinkId,
+    });
+    return res.data ? res.data : null;
   } catch {
     throw new Error(
       `Couldn't successfully delete meta link with Id: ${runnerOptions.metaLinkId}`

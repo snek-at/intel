@@ -2,13 +2,12 @@ import Provider from "../index";
 import * as types from "../types";
 import * as queries from "./queries/data";
 
-const getGitlabServer = (runnerOptions: {}) => {
+const getGitlabServer = async (runnerOptions: {}) => {
   try {
-    return Provider.client.session
-      .customTask<{
-        page: types.GraphQLRegistrationPage;
-      }>("query", queries.getGitlabServers, {})
-      .then((res) => (res.data ? res.data.page.supportedGitlabs : []));
+    const res = await Provider.client.session.customTask<{
+      page: types.GraphQLRegistrationPage;
+    }>("query", queries.getGitlabServers, {});
+    return res.data ? res.data.page.supportedGitlabs : [];
   } catch {
     throw new Error(`Couldn't successfully fetch gitlab servers`);
   }
