@@ -44,13 +44,13 @@ const getPerson = gql`
         avatarImage {
           src
         }
-        linkCollection {
-          ... on Meta_Link {
-            url
-            linkType
-            location
-            description
-          }
+        metaLinks {
+          id
+          url
+          linkType
+          location
+          description
+          imgurDeleteHash
         }
         movablePool {
           ... on Movable {

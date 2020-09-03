@@ -158,11 +158,13 @@ export interface GraphQLPersonPage {
   avatarImage: {
     src: string | null;
   } | null;
-  linkCollection: {
+  metaLinks: {
+    id: string;
     url: string | null;
     linkType: string | null;
     location: string | null;
     description: string | null;
+    imgurDeleteHash: string | null;
   }[];
   movablePool: {
     rawValue: string | null;
