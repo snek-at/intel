@@ -201,6 +201,7 @@ export interface GraphQLPersonPage {
 }
 
 export interface GraphqlPersonPageBrief {
+  slug: string;
   title: string;
   firstName: string | null;
   lastName: string | null;
