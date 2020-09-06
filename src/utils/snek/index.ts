@@ -56,7 +56,7 @@ class Provider {
   // person.updateProfile()
   // person.updateSettings()
   // person.addMetaLink()
-  public static talks: typeof talk = require("./talks");
+  public static talk: typeof talk = require("./talk");
   // talk.all()
   // talk.get()
   // talk.add()
