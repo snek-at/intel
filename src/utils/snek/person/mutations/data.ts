@@ -213,6 +213,24 @@ const deleteMetaLink = gql`
   }
 `;
 
+const checkMetaLink = gql`
+  mutation checkMetaLink(
+    $token: String!
+    $personName: String!
+    $linkType: String!
+    $url: String!
+  ) {
+    checkPersonPageMetaLink(
+      token: $token
+      personName: $personName
+      linkType: $linkType
+      url: $url
+    ) {
+      exists
+    }
+  }
+`;
+
 //#region > Exports
 export {
   registration,
@@ -223,5 +241,6 @@ export {
   updatePersonPage,
   addMetaLink,
   deleteMetaLink,
+  checkMetaLink,
 };
 //#endregion

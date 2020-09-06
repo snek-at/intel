@@ -380,6 +380,26 @@ const deleteMetaLink = async (runnerOptions: { metaLinkId: string }) => {
   }
 };
 
+const checkMetaLink = async (runnerOptions: {
+  personName: string;
+  toCheck: {
+    linkType: string;
+    url: string;
+  };
+}) => {
+  try {
+    const res = await Provider.client.session.runner<{
+      checkPersonPageMetaLink: { exists: boolean };
+    }>("mutation", mutations.checkMetaLink, {
+      personName: runnerOptions.personName,
+      ...runnerOptions.toCheck,
+    });
+    return res.data ? res.data.checkPersonPageMetaLink : null;
+  } catch {
+    throw new Error(`Couldn't successfully check meta link`);
+  }
+};
+
 const getInstagramPosts = async (runnerOptions: { personName: string }) => {
   const instagramProfiles = await profiles({
     personName: runnerOptions.personName,
@@ -425,5 +445,6 @@ export {
   updateSettings,
   addMetaLink,
   deleteMetaLink,
+  checkMetaLink,
   getInstagramPosts,
 };
