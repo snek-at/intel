@@ -216,20 +216,48 @@ const getPerson = gql`
           }
         }
         follows {
-          title
           slug
+          title
+          firstName
+          lastName
+          status
+          bio
+          avatarImage {
+            src
+          }
         }
         followedBy {
-          title
           slug
+          title
+          firstName
+          lastName
+          status
+          bio
+          avatarImage {
+            src
+          }
         }
         likes {
-          title
           slug
+          title
+          firstName
+          lastName
+          status
+          bio
+          avatarImage {
+            src
+          }
         }
         likedBy {
-          title
           slug
+          title
+          firstName
+          lastName
+          status
+          bio
+          avatarImage {
+            src
+          }
         }
         achievements {
           id

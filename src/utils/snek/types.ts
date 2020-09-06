@@ -148,6 +148,7 @@ export interface GraphQLPerson {
 }
 
 export interface GraphQLPersonPage {
+  slug: string;
   title: string;
   firstName: string | null;
   lastName: string | null;
@@ -181,22 +182,10 @@ export interface GraphQLPersonPage {
     field: string;
   }[];
   person: GraphQLPerson;
-  follows: {
-    title: string;
-    slug: string;
-  }[];
-  followedBy: {
-    title: string;
-    slug: string;
-  }[];
-  likes: {
-    title: string;
-    slug: string;
-  }[];
-  likedBy: {
-    title: string;
-    slug: string;
-  }[];
+  follows: GraphqlPersonPageBrief[];
+  followedBy: GraphqlPersonPageBrief[];
+  likes: GraphqlPersonPageBrief[];
+  likedBy: GraphqlPersonPageBrief[];
   achievements: GraphQLAchievement[];
 }
 
