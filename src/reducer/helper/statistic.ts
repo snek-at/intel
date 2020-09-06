@@ -25,7 +25,7 @@ interface IStatisticResponse {
    * Current: The current statistic year object.
    *          This can be null if there is no current year in the database.
    */
-  current: IStatistic | null;
+  current: IStatistic | undefined;
   /**
    * Years: A list of statistic year objects.
    */
@@ -76,11 +76,11 @@ interface IStatistic extends models.Statistic {
      * Longest: The streak with the longest difference between
      *          startDate and endDate.
      */
-    longest: models.Streak;
+    longest: models.Streak | undefined;
     /**
      *  Current: A streak which ends today.
      */
-    current: models.Streak;
+    current: models.Streak | undefined;
     /**
      *  Streaks: A list of streak objects.
      */
@@ -105,7 +105,7 @@ interface IStatistic extends models.Statistic {
 async function mergedStatistic(): Promise<IStatisticResponse> {
   let statistic = models.Statistic.getMerged() as IStatistic[];
 
-  let currentYear: IStatistic | null = null;
+  let currentYear: IStatistic | undefined = undefined;
   let yearsList: IStatistic[] = [];
 
   /* Get merged calendar which contains the current and a list of years */
@@ -126,6 +126,7 @@ async function mergedStatistic(): Promise<IStatisticResponse> {
       current,
       streaks,
     };
+
     entry.contributions = entry.getContributions();
     entry.busiestDay = entry.getBusiestDay();
 

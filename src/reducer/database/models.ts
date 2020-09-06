@@ -489,10 +489,6 @@ class Language extends osm.models.LanguageSO implements ILanguage {
       Language.statements.merged
     ) as Language[];
 
-    response = response.map((entry) => {
-      return new Language(entry);
-    });
-
     return response;
   }
 
@@ -769,22 +765,14 @@ class Statistic extends osm.models.StatisticSO implements IStatistic {
    * @description Calculate the current and longest streak of a list of streaks
    */
   getStreakDetail(streaks: Streak[]) {
-    /**
-     * @todo Error handling
-     */
-    let longest: Streak = streaks[0];
-    let current: Streak = new Streak({
-      id: -1,
-      startDate: "-",
-      endDate: "-",
-      totalDays: 0,
-      totalContributions: 0,
-      statisticId: 0,
-    });
+    let longest: Streak | undefined = streaks[0];
+    let current: Streak | undefined;
 
     streaks.forEach((streak) => {
-      if (streak.totalDays >= longest.totalDays) {
-        longest = streak;
+      if (longest) {
+        if (streak.totalDays >= longest.totalDays) {
+          longest = streak;
+        }
       }
 
       if (moment().diff(streak.endDate, "days") === 0) {
@@ -1019,7 +1007,7 @@ class Talk extends osm.models.TalkSO implements ITalk {
           id: repository.ownerId,
         }) as Member;
 
-        repository.owner.render([]);
+        repository.owner?.render([]);
 
         /* Return the existing repository from the database */
         return repository;
