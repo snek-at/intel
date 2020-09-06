@@ -5,6 +5,7 @@ import * as mutations from "./mutations/data";
 
 import GithubProvider from "../../github";
 import GtilabProvider from "../../gitlab";
+import InstagramProvider from "../../instagram";
 import { Reducer } from "../../../reducer";
 import { safelyParseJSON } from "../../../toolbox/Parser";
 
@@ -139,8 +140,6 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
               user: profile.username,
               authorization: profile.accessToken,
             });
-            break;
-          case "INSTAGRAM":
             break;
         }
       } catch {
@@ -381,6 +380,39 @@ const deleteMetaLink = async (runnerOptions: { metaLinkId: string }) => {
   }
 };
 
+const getInstagramPosts = async (runnerOptions: { personName: string }) => {
+  const instagramProfiles = await profiles({
+    personName: runnerOptions.personName,
+  });
+
+  const posts = (
+    await Promise.all(
+      instagramProfiles
+        .filter(
+          (profile) => profile.isActive && profile.sourceType == "INSTAGRAM"
+        )
+        .map(async (profile) => {
+          return {
+            ...(
+              await InstagramProvider.processSource(profile.sourceUrl, {
+                authorization: profile.accessToken,
+              })
+            ).map((res) => {
+              return {
+                profileId: profile.id,
+                /* This is based on the TYPE, URL and personName*/
+                isLinkAlreadyUploaded: false,
+                ...res,
+              };
+            }),
+          };
+        })
+    )
+  ).flat();
+
+  return posts;
+};
+
 export {
   allBrief,
   get,
@@ -393,4 +425,5 @@ export {
   updateSettings,
   addMetaLink,
   deleteMetaLink,
+  getInstagramPosts,
 };
