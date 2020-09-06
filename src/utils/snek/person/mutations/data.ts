@@ -25,10 +25,10 @@ const addProfile = gql`
   mutation addProfile(
     $token: String!
     $personName: String!
-    $accessToken: String!
+    $accessToken: String
     $sourceUrl: String!
     $sourceType: String!
-    $username: String!
+    $username: String
   ) {
     addProfile(
       token: $token

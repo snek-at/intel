@@ -213,9 +213,9 @@ const addProfile = async (runnerOptions: {
     URL: string | undefined;
     type: "GITHUB" | "GITLAB" | "INSTAGRAM";
     /** User: A username of the provided platform */
-    username: string;
+    username?: string;
     /** Authorization: A token for authorizing the client */
-    authorization: string;
+    authorization?: string;
   };
 }) => {
   try {
