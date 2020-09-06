@@ -420,8 +420,6 @@ const getInstagramPosts = async (runnerOptions: { personName: string }) => {
             ).map((res) => {
               return {
                 profileId: profile.id,
-                /* This is based on the TYPE, URL and personName*/
-                isLinkAlreadyUploaded: false,
                 ...res,
               };
             }),
