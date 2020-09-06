@@ -8,7 +8,7 @@ const all = async () => {
   const type = "fetch";
 
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       achievements: types.GraphQLAchievement[];
     }>("query", queries.getAchievements, {});
     return res.data ? res.data.achievements : [];

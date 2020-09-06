@@ -10,7 +10,7 @@ interface RunnerParameters {
 
 const follow = async (runnerOptions: RunnerParameters) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       followPerson: { totalFollowers: number };
     }>("mutation", mutations.follow, {});
     return res.data ? res.data.followPerson : null;
@@ -23,7 +23,7 @@ const follow = async (runnerOptions: RunnerParameters) => {
 
 const unfollow = async (runnerOptions: RunnerParameters) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       unfollowPerson: { totalFollowers: number };
     }>("mutation", mutations.unfollow, {});
     return res.data ? res.data.unfollowPerson : null;
@@ -36,7 +36,7 @@ const unfollow = async (runnerOptions: RunnerParameters) => {
 
 const like = async (runnerOptions: RunnerParameters) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       like: { totalFollowers: number };
     }>("mutation", mutations.unfollow, {});
     return res.data ? res.data.like : null;
@@ -49,7 +49,7 @@ const like = async (runnerOptions: RunnerParameters) => {
 
 const unlike = async (runnerOptions: RunnerParameters) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       unlike: { totalFollowers: number };
     }>("mutation", mutations.unfollow, {});
     return res.data ? res.data.unlike : null;

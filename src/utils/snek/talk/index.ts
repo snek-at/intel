@@ -7,7 +7,7 @@ interface RunnerParameters {}
 
 const getTalks = async () => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       talks: types.GraphQLTalk[];
     }>("query", queries.getTalks, {});
     return res.data ? res.data.talks : [];
@@ -18,7 +18,7 @@ const getTalks = async () => {
 
 const getPersonTalks = async (runnerOptions: { personName: string }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       talks: types.GraphQLTalk[];
     }>("query", queries.getTalks, { personName: runnerOptions.personName });
     return res.data ? res.data.talks : [];
@@ -41,7 +41,7 @@ const addTalk = async (runnerOptions: {
   };
 }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       addTalk: { talk: types.GraphQLTalk };
     }>("mutation", mutations.addTalk, {
       personName: runnerOptions.personName,
@@ -55,7 +55,7 @@ const addTalk = async (runnerOptions: {
 
 const deleteTalk = async (runnerOptions: { talkId: string }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       deleteTalk: { talks: types.GraphQLTalk[] };
     }>("mutation", mutations.deleteTalk, {
       talkId: runnerOptions.talkId,
@@ -80,7 +80,7 @@ const updateTalk = async (runnerOptions: {
   };
 }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       updateTalk: { talk: types.GraphQLTalk };
     }>("mutation", mutations.updateTalk, {
       talkId: runnerOptions.talkId,
@@ -103,7 +103,7 @@ const addTalkComment = async (runnerOptions: {
   };
 }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       addTalkComment: { comment: types.GraphQLComment };
     }>("mutation", mutations.addTalkComment, {
       personName: runnerOptions.personName,
@@ -117,7 +117,7 @@ const addTalkComment = async (runnerOptions: {
 
 const deleteTalkComment = async (runnerOptions: { commentId: string }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       deleteTalkComment: { comments: types.GraphQLComment };
     }>("mutation", mutations.deleteTalkComment, {
       talkId: runnerOptions.commentId,
@@ -137,7 +137,7 @@ const updateTalkComment = async (runnerOptions: {
   };
 }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       updateTalkComment: { talk: types.GraphQLComment };
     }>("mutation", mutations.updateTalkComment, {
       talkId: runnerOptions.commentId,

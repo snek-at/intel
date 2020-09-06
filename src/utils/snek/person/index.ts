@@ -10,7 +10,7 @@ import { safelyParseJSON } from "../../../toolbox/Parser";
 
 const allBrief = async (runnerOptions: {}) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       pages: types.GraphqlPersonPageBrief[];
     }>("query", queries.allUserPagesBrief, {});
     return res.data ? res.data.pages : [];
@@ -21,7 +21,7 @@ const allBrief = async (runnerOptions: {}) => {
 
 const get = async (runnerOptions: { personName: string }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       page: types.GraphQLPersonPage;
     }>("query", queries.getPerson, {
       slug: `p-${runnerOptions.personName}`,
@@ -68,7 +68,7 @@ const register = (runnerOptions: {
 }) => {
   try {
     Provider.client.session
-      .customTask<{ registration: { result: string } }>(
+      .runner<{ registration: { result: string } }>(
         "mutation",
         mutations.registration,
         {
@@ -83,7 +83,7 @@ const register = (runnerOptions: {
 
 const profiles = async (runnerOptions: { personName: string }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       personProfiles: {
         id: string;
         createdAt: string;
@@ -220,7 +220,7 @@ const addProfile = async (runnerOptions: {
   };
 }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       addProfile: { profile: { id: string; createdAt: string } };
     }>("mutation", mutations.addProfile, {
       personName: runnerOptions.personName,
@@ -241,7 +241,7 @@ const addProfile = async (runnerOptions: {
 
 const deleteProfile = async (runnerOptions: { profileId: number }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       deleteProfile: { profiles: { id: string }[] };
     }>("mutation", mutations.deleteProfile, {
       profileId: runnerOptions.profileId,
@@ -263,7 +263,7 @@ const updateProfile = (runnerOptions: {
   };
 }) => {
   try {
-    return Provider.client.session.customTask<{}>(
+    return Provider.client.session.runner<{}>(
       "mutation",
       mutations.updateProfile,
       {
@@ -288,7 +288,7 @@ const writeVariableStore = async (runnerOptions: {
   };
 }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       variableStore: { person: { id: string } };
     }>("mutation", mutations.writeVariableStore, {
       personName: runnerOptions.personName,
@@ -328,7 +328,7 @@ const updateSettings = (runnerOptions: {
   };
 }) => {
   try {
-    return Provider.client.session.customTask<{
+    return Provider.client.session.runner<{
       updatePersonPage: { personPage: types.GraphqlPersonPageBrief[] };
     }>("mutation", mutations.updatePersonPage, {
       personName: runnerOptions.personName,
@@ -352,7 +352,7 @@ const addMetaLink = async (runnerOptions: {
   };
 }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       addMetaLink: { metaLink: types.GraphQLMetaLink };
     }>("mutation", mutations.addMetaLink, {
       personName: runnerOptions.personName,
@@ -368,7 +368,7 @@ const addMetaLink = async (runnerOptions: {
 
 const deleteMetaLink = async (runnerOptions: { metaLinkId: string }) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       deleteMetaLink: { metaLinks: types.GraphQLMetaLink[] };
     }>("mutation", mutations.deleteMetaLink, {
       metaLinkId: runnerOptions.metaLinkId,

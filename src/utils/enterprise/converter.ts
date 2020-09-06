@@ -17,7 +17,7 @@ export const getEnterprisePages = async (session: SnekSession) => {
   `;
 
   return session
-    .customTask<{ page: { children: [] } }>("query", node, {})
+    .runner<{ page: { children: [] } }>("query", node, {})
     .then((res) => res.data?.page.children);
 };
 
@@ -87,7 +87,7 @@ export const getEnterprisePageGeneralContent = async (
   `;
 
   return session
-    .customTask<{ page: { enterpriseCodetransitionStatistic: any[] } }>(
+    .runner<{ page: { enterpriseCodetransitionStatistic: any[] } }>(
       "query",
       node,
       { ...queryArgs }
@@ -150,7 +150,7 @@ export const updateEnterprisePageGeneralContent = (
   `;
 
   return session
-    .customTask<{ enterpriseFormPage: object }>("mutation", node, {
+    .runner<{ enterpriseFormPage: object }>("mutation", node, {
       values: {
         ...queryArgs.imprint,
         ...queryArgs.general,
@@ -237,7 +237,7 @@ export const getEnterprisePageProjectsContent = (
   `;
 
   return session
-    .customTask<{ page: { enterpriseProjects: [] } }>("query", node, {
+    .runner<{ page: { enterpriseProjects: [] } }>("query", node, {
       ...queryArgs,
     })
     .then((res) => {
@@ -299,7 +299,7 @@ export const getEnterprisePageUsersContent = (
   `;
 
   return session
-    .customTask<{ page: { enterpriseContributors: [] } }>("query", node, {
+    .runner<{ page: { enterpriseContributors: [] } }>("query", node, {
       ...queryArgs,
     })
     .then((res) => {
@@ -357,7 +357,7 @@ export const addGitlab = (
   `;
 
   return session
-    .customTask<{ addGitlab: { gitlab: { id: string } } }>("mutation", node, {
+    .runner<{ addGitlab: { gitlab: { id: string } } }>("mutation", node, {
       ...queryArgs,
     })
     .then((res) => {
@@ -378,7 +378,7 @@ export const deleteGitlab = (
   `;
 
   return session
-    .customTask<{ deleteGitlab: { success: boolean } }>("mutation", node, {
+    .runner<{ deleteGitlab: { success: boolean } }>("mutation", node, {
       ...queryArgs,
     })
     .then((res) => {
@@ -430,13 +430,9 @@ export const updateGitlab = (
   `;
 
   return session
-    .customTask<{ updateGitlab: { gitlab: { id: number } } }>(
-      "mutation",
-      node,
-      {
-        ...queryArgs,
-      }
-    )
+    .runner<{ updateGitlab: { gitlab: { id: number } } }>("mutation", node, {
+      ...queryArgs,
+    })
     .then((res) => {
       return res.data?.updateGitlab.gitlab;
     });
@@ -462,7 +458,7 @@ export const getGitlabs = (session: SnekSession) => {
     }
   `;
 
-  return session.customTask<{ gitlabs: [] }>("query", node, {}).then((res) => {
+  return session.runner<{ gitlabs: [] }>("query", node, {}).then((res) => {
     return res.data?.gitlabs;
   });
 };
@@ -499,13 +495,9 @@ export const addPipeline = (
     }
   `;
   return session
-    .customTask<{ addPipeline: { pipeline: { id: string } } }>(
-      "mutation",
-      node,
-      {
-        ...queryArgs,
-      }
-    )
+    .runner<{ addPipeline: { pipeline: { id: string } } }>("mutation", node, {
+      ...queryArgs,
+    })
     .then((res) => {
       return res.data?.addPipeline.pipeline;
     });
@@ -524,7 +516,7 @@ export const deletePipeline = (
   `;
 
   return session
-    .customTask<{ deletePipeline: { success: boolean } }>("mutation", node, {
+    .runner<{ deletePipeline: { success: boolean } }>("mutation", node, {
       ...queryArgs,
     })
     .then((res) => {
@@ -567,7 +559,7 @@ export const updatePipeline = (
   `;
 
   return session
-    .customTask<{ updatePipeline: { pipeline: { id: string } } }>(
+    .runner<{ updatePipeline: { pipeline: { id: string } } }>(
       "mutation",
       node,
       {
@@ -597,11 +589,9 @@ export const getPipelines = (session: SnekSession) => {
     }
   `;
 
-  return session
-    .customTask<{ pipelines: [] }>("query", node, {})
-    .then((res) => {
-      return res.data?.pipelines;
-    });
+  return session.runner<{ pipelines: [] }>("query", node, {}).then((res) => {
+    return res.data?.pipelines;
+  });
 };
 
 //> Connectors
@@ -653,7 +643,7 @@ export const addConnector = (
 
   return session.begin().then(async () => {
     return session
-      .customTask<{ addConnector: { connector: { id: string } } }>(
+      .runner<{ addConnector: { connector: { id: string } } }>(
         "mutation",
         node,
         {
@@ -679,7 +669,7 @@ export const deleteConnector = (
   `;
 
   return session
-    .customTask<{ deleteConnector: { success: boolean } }>("mutation", node, {
+    .runner<{ deleteConnector: { success: boolean } }>("mutation", node, {
       ...queryArgs,
     })
     .then((res) => {
@@ -735,7 +725,7 @@ export const updateConnector = (
   `;
 
   return session
-    .customTask<{ updateConnector: { connector: { id: number } } }>(
+    .runner<{ updateConnector: { connector: { id: number } } }>(
       "mutation",
       node,
       {
@@ -781,11 +771,9 @@ export const getConnectors = (session: SnekSession) => {
     }
   `;
 
-  return session
-    .customTask<{ connectors: [] }>("query", node, {})
-    .then((res) => {
-      return res.data?.connectors;
-    });
+  return session.runner<{ connectors: [] }>("query", node, {}).then((res) => {
+    return res.data?.connectors;
+  });
 };
 
 export const publishEnterprisePageViaConnector = (
@@ -803,11 +791,9 @@ export const publishEnterprisePageViaConnector = (
   `;
 
   return session
-    .customTask<{ publishCompanyPage: { success: boolean } }>(
-      "mutation",
-      node,
-      { ...queryArgs }
-    )
+    .runner<{ publishCompanyPage: { success: boolean } }>("mutation", node, {
+      ...queryArgs,
+    })
     .then((res) => {
       return res.data?.publishCompanyPage.success;
     });

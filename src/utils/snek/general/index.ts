@@ -4,7 +4,7 @@ import * as queries from "./queries/data";
 
 const getGitlabServer = async (runnerOptions: {}) => {
   try {
-    const res = await Provider.client.session.customTask<{
+    const res = await Provider.client.session.runner<{
       page: types.GraphQLRegistrationPage;
     }>("query", queries.getGitlabServers, {});
     return res.data ? res.data.page.supportedGitlabs : [];
