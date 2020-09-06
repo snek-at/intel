@@ -36,8 +36,8 @@ import { SnekClient } from "snek-client";
 
 //#region > Classes
 class Provider {
-  public static client = new SnekClient("https://engine.snek.at/graphql");
-  public static achievements = achievements;
+  // public static client = new SnekClient("https://engine.snek.at/graphql");
+  public static client = new SnekClient("http://localhost:8000/graphql");
   public static achievements: typeof achievement = require("./achievements");
   // achievements.all()
   public static social: typeof social = require("./social");
@@ -49,13 +49,13 @@ class Provider {
   public static person: typeof person = require("./person");
   // person.get() -> person page + merged profile
   // person.profiles() -> get all profiles for the person page
-  // person.addGitHubProfile()
-  // person.addGitLabProfile()
-  // person.addInstagramProfile()
+  // person.processProfiles()
+  // person.addProfile()
   // person.deleteProfile()
   // person.updateProfile()
   // person.updateSettings()
   // person.addMetaLink()
+  // person.getInstagramPosts()
   public static talk: typeof talk = require("./talk");
   // talk.all()
   // talk.get()
