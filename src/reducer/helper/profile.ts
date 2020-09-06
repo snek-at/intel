@@ -81,46 +81,12 @@ async function mergedProfile() {
   let repositories = models.Repository.objects.all() as IRepository[];
   let organizations = models.Organization.objects.all() as IOrganization[];
 
-  platform.sources = models.Platform.getSourceTypes();
-  platform.repositories = repositories.map((repository) => {
-    repository.owner = (models.Member.objects.get({
-      id: repository.ownerId,
-    }) as models.Member).render([]);
-    repository.members = repository.getMembers().map((member) => {
-      return member.render([]);
-    });
-    repository.languages = repository.getLanguages().map((language) => {
-      return language.render([]);
-    });
-
-    return repository.render([]);
-  });
-
-  await Delay(1000);
-
-  platform.organizations = organizations.map((organization) => {
-    organization.members = organization.getMembers().map((member) => {
-      return member.render([]);
-    });
-
-    let repositories = organization.getRepositories() as IRepository[];
-    /*
-     * Set the organization as owner for each repository within
-     * the organization. To render a organization as a member
-     * a list of member keys to render by is defined.
-     * Deep Cloning the organization is required due to
-     * referencing issues.
-     */
-    const owner = cloneDeep(organization).render(
-      /* Including the following field in the owner object */
-      ["avatarUrl", "url", "fullname", "name"],
-      /* Excluding the following field in the owner object */
-      ["repositories", "objects"]
-    );
-
-    organization.repositories = repositories.map((repository) => {
-      /* Pass the organization to member format */
-      repository.owner = owner;
+  if (platform) {
+    platform.sources = models.Platform.getSourceTypes();
+    platform.repositories = repositories.map((repository) => {
+      repository.owner = (models.Member.objects.get({
+        id: repository.ownerId,
+      }) as models.Member)?.render([]);
       repository.members = repository.getMembers().map((member) => {
         return member.render([]);
       });
@@ -131,14 +97,50 @@ async function mergedProfile() {
       return repository.render([]);
     });
 
-    return organization.render([]);
-  });
+    await Delay(1000);
 
-  await Delay(1000);
+    platform.organizations = organizations.map((organization) => {
+      organization.members = organization.getMembers().map((member) => {
+        return member.render([]);
+      });
 
-  platform.render([]);
+      let repositories = organization.getRepositories() as IRepository[];
+      /*
+       * Set the organization as owner for each repository within
+       * the organization. To render a organization as a member
+       * a list of member keys to render by is defined.
+       * Deep Cloning the organization is required due to
+       * referencing issues.
+       */
+      const owner = cloneDeep(organization).render(
+        /* Including the following field in the owner object */
+        ["avatarUrl", "url", "fullname", "name"],
+        /* Excluding the following field in the owner object */
+        ["repositories", "objects"]
+      );
 
-  return platform;
+      organization.repositories = repositories.map((repository) => {
+        /* Pass the organization to member format */
+        repository.owner = owner;
+        repository.members = repository.getMembers().map((member) => {
+          return member.render([]);
+        });
+        repository.languages = repository.getLanguages().map((language) => {
+          return language.render([]);
+        });
+
+        return repository.render([]);
+      });
+
+      return organization.render([]);
+    });
+
+    await Delay(1000);
+
+    platform.render([]);
+
+    return platform;
+  }
 }
 //#endregion
 

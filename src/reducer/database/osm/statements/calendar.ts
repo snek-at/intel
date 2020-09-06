@@ -62,7 +62,7 @@ SELECT id,
        platformId 
 FROM   calendar 
 WHERE  date = ? 
-GROUP  BY date 
+GROUP  BY date
 `;
 //#endregion
 
