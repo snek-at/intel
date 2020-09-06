@@ -2,16 +2,15 @@
  * Types
  */
 export type MetaLinkType =
-  | "INSTAGRAM_VIDEO"
-  | "INSTAGRAM_PHOTO"
+  | "INSTAGRAM"
   | "PHOTO"
   | "YOUTUBE"
+  | "VIMEO"
   | "OTHER";
 
 /**
  * All graphql response types
  */
-
 export interface GraphQLTalk {
   id: string;
   title: string | null;
