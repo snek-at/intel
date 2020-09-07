@@ -12,9 +12,9 @@ import { safelyParseJSON } from "../../../toolbox/Parser";
 const allBrief = async (runnerOptions: {}) => {
   try {
     const res = await Provider.client.session.runner<{
-      pages: types.GraphqlPersonPageBrief[];
+      page: { children: types.GraphqlPersonPageBrief[] };
     }>("query", queries.allUserPagesBrief, {});
-    return res.data ? res.data.pages : [];
+    return res.data ? res.data.page.children : [];
   } catch {
     throw new Error(`Couldn't successfully fetch all persons brief`);
   }
@@ -56,7 +56,7 @@ const get = async (runnerOptions: { personName: string }) => {
   }
 };
 
-const register = (runnerOptions: {
+const register = async (runnerOptions: {
   formValues: {
     /* Values ​​are not camel cases because form values ​​require snake case */
     username: string;
@@ -68,15 +68,12 @@ const register = (runnerOptions: {
   };
 }) => {
   try {
-    Provider.client.session
-      .runner<{ registration: { result: string } }>(
-        "mutation",
-        mutations.registration,
-        {
-          values: runnerOptions.formValues,
-        }
-      )
-      .then((res) => (res.data ? res.data.registration : null));
+    const res = await Provider.client.session.runner<{
+      registration: { result: string };
+    }>("mutation", mutations.registration, {
+      values: runnerOptions.formValues,
+    });
+    return res.data ? res.data.registration : null;
   } catch {
     throw new Error(`Couldn't successfully register new person`);
   }
@@ -253,7 +250,7 @@ const deleteProfile = async (runnerOptions: { profileId: number }) => {
   }
 };
 
-const updateProfile = (runnerOptions: {
+const updateProfile = async (runnerOptions: {
   profileId: number;
   toUpdate: {
     accessToken?: string;
@@ -262,13 +259,15 @@ const updateProfile = (runnerOptions: {
   };
 }) => {
   try {
-    return Provider.client.session.runner<{}>(
-      "mutation",
-      mutations.updateProfile,
-      {
-        ...runnerOptions.toUpdate,
-      }
-    );
+    const res = await Provider.client.session.runner<{
+      updateProfile: {
+        profile: { id: number };
+      };
+    }>("mutation", mutations.updateProfile, {
+      ...runnerOptions.toUpdate,
+    });
+
+    return res.data ? res.data.updateProfile.profile : null;
   } catch {
     throw new Error(
       `Couldn't successfully update profile with Id: ${runnerOptions.profileId}`
@@ -305,7 +304,7 @@ const writeVariableStore = async (runnerOptions: {
   }
 };
 
-const updateSettings = (runnerOptions: {
+const updateSettings = async (runnerOptions: {
   personName: string;
   settings: {
     avatarImage?: string;
@@ -327,12 +326,14 @@ const updateSettings = (runnerOptions: {
   };
 }) => {
   try {
-    return Provider.client.session.runner<{
-      updatePersonPage: { personPage: types.GraphqlPersonPageBrief[] };
+    const res = await Provider.client.session.runner<{
+      updatePersonPage: { personPage: types.GraphqlPersonPageBrief };
     }>("mutation", mutations.updatePersonPage, {
       personName: runnerOptions.personName,
       ...runnerOptions.settings,
     });
+
+    return res.data ? res.data.updatePersonPage.personPage : null;
   } catch {
     throw new Error(
       `Couldn't successfully update settings of Person: ${runnerOptions.personName}`
