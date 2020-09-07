@@ -26,6 +26,7 @@
 //#region > Imports
 //> All social related actions (like, follow,..)
 import * as achievement from "./achievement";
+import * as general from "./general";
 import * as social from "./social";
 import * as person from "./person";
 import * as talk from "./talk";
@@ -40,6 +41,7 @@ class Provider {
   public static client = new SnekClient("http://localhost:8000/graphql");
   public static achievements: typeof achievement = require("./achievements");
   // achievements.all()
+  public static general: typeof general = require("./general");
   public static social: typeof social = require("./social");
   // social.follow()
   // social.unfollow()
