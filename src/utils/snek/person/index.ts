@@ -412,18 +412,19 @@ const getInstagramPosts = async (runnerOptions: { personName: string }) => {
           (profile) => profile.isActive && profile.sourceType == "INSTAGRAM"
         )
         .map(async (profile) => {
-          return {
-            ...(
-              await InstagramProvider.processSource(profile.sourceUrl, {
-                authorization: profile.accessToken,
-              })
-            ).map((res) => {
-              return {
-                profileId: profile.id,
-                ...res,
-              };
-            }),
-          };
+          const posts = await InstagramProvider.processSource(
+            profile.sourceUrl,
+            {
+              authorization: profile.accessToken,
+            }
+          );
+
+          return posts.map((res) => {
+            return {
+              profileId: profile.id,
+              ...res,
+            };
+          });
         })
     )
   ).flat();
