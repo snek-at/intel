@@ -20,8 +20,15 @@ const getGitlabServers = gql`
     }
   }
 `;
+
+const userExists = gql`
+  query userExists($token: String!, $username: String!) {
+    userExists(token: $token, username: $username)
+  }
+`;
+
 //#endregion
 
 //#region > Exports
-export { getGitlabServers };
+export { getGitlabServers, userExists };
 //#endregion
