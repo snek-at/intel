@@ -3,24 +3,24 @@ import * as types from "../types";
 import * as queries from "./queries/data";
 import * as mutations from "./mutations/data";
 
-interface RunnerParameters {}
-
-const getTalks = async () => {
+const getTalk = async (runnerOptions: { id: number }) => {
   try {
     const res = await Provider.client.session.runner<{
-      talks: types.GraphQLTalk[];
-    }>("query", queries.getTalks, {});
-    return res.data ? res.data.talks : [];
+      talk: types.GraphQLTalk;
+    }>("query", queries.getTalks, { ...runnerOptions });
+    return res.data ? res.data.talk : null;
   } catch {
-    throw new Error(`Couldn't successfully fetch talks`);
+    throw new Error(
+      `Couldn't successfully fetch talk with Id: ${runnerOptions.id}`
+    );
   }
 };
 
-const getPersonTalks = async (runnerOptions: { personName: string }) => {
+const getTalks = async (runnerOptions: { personName?: string }) => {
   try {
     const res = await Provider.client.session.runner<{
       talks: types.GraphQLTalk[];
-    }>("query", queries.getTalks, { personName: runnerOptions.personName });
+    }>("query", queries.getTalks, { ...runnerOptions });
     return res.data ? res.data.talks : [];
   } catch {
     throw new Error(
@@ -118,7 +118,7 @@ const addTalkComment = async (runnerOptions: {
 const deleteTalkComment = async (runnerOptions: { commentId: string }) => {
   try {
     const res = await Provider.client.session.runner<{
-      deleteTalkComment: { comments: types.GraphQLComment };
+      deleteTalkComment: { comments: types.GraphQLComment[] };
     }>("mutation", mutations.deleteTalkComment, {
       talkId: runnerOptions.commentId,
     });
@@ -152,8 +152,8 @@ const updateTalkComment = async (runnerOptions: {
 };
 
 export {
+  getTalk,
   getTalks,
-  getPersonTalks,
   addTalk,
   deleteTalk,
   updateTalk,

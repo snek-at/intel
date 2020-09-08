@@ -268,6 +268,45 @@ const getPerson = gql`
           }
           points
         }
+        talks {
+          id
+          title
+          description
+          path
+          url
+          talkComments {
+            id
+            createdAt
+            updatedAt
+            text
+            author {
+              slug
+              title
+              firstName
+              lastName
+              status
+              bio
+              avatarImage {
+                src
+              }
+            }
+            replies {
+              id
+            }
+            talk {
+              id
+            }
+          }
+          owner {
+            avatarImage {
+              src
+            }
+            title
+            slug
+          }
+          displayUrl
+          downloadUrl
+        }
       }
     }
   }

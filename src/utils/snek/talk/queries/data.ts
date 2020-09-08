@@ -5,9 +5,9 @@ import gql from "graphql-tag";
 //#endregion
 
 //#region > Queries
-const getTalks = gql`
-  query talks($token: String!) {
-    talks(token: $token) {
+const getTalk = gql`
+  query talk($token: String!, $id: Int!) {
+    talk(token: $token, id: $id) {
       id
       title
       description
@@ -18,6 +18,17 @@ const getTalks = gql`
         createdAt
         updatedAt
         text
+        author {
+          slug
+          title
+          firstName
+          lastName
+          status
+          bio
+          avatarImage {
+            src
+          }
+        }
         replies {
           id
         }
@@ -38,9 +49,9 @@ const getTalks = gql`
   }
 `;
 
-const getPersonTalks = gql`
-  query personTalks($token: String!, $personName: String!) {
-    personTalks(token: $token, personName: $personName) {
+const getTalks = gql`
+  query talks($token: String!, $personName: String) {
+    talks(token: $token, personName: $personName) {
       id
       title
       description
@@ -51,6 +62,17 @@ const getPersonTalks = gql`
         createdAt
         updatedAt
         text
+        author {
+          slug
+          title
+          firstName
+          lastName
+          status
+          bio
+          avatarImage {
+            src
+          }
+        }
         replies {
           id
         }
@@ -73,5 +95,5 @@ const getPersonTalks = gql`
 //#endregion
 
 //#region > Exports
-export { getTalks, getPersonTalks };
+export { getTalk, getTalks };
 //#endregion

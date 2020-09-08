@@ -22,6 +22,7 @@ export interface GraphQLTalk {
     createdAt: string;
     updatedAt: string;
     text: string | null;
+    author: GraphqlPersonPageBrief;
     replies: {
       id: string | null;
     }[];
@@ -186,6 +187,7 @@ export interface GraphQLPersonPage {
   likes: GraphqlPersonPageBrief[];
   likedBy: GraphqlPersonPageBrief[];
   achievements: GraphQLAchievement[];
+  talks: GraphQLTalk[];
 }
 
 export interface GraphqlPersonPageBrief {
