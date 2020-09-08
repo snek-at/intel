@@ -16,4 +16,5 @@ class OpsProvider extends Provider {
   public static ops: typeof ops = require("./converters/ops");
 }
 
+export { Provider, OpsProvider };
 export default OpsProvider;
