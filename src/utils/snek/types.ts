@@ -17,6 +17,8 @@ export interface GraphQLTalk {
   description: string | null;
   path: string | null;
   url: string | null;
+  createdAt: string;
+  updatedAt: string;
   talkComments: {
     id: string;
     createdAt: string;

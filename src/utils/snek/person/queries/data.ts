@@ -279,6 +279,8 @@ const getPerson = gql`
           description
           path
           url
+          updatedAt
+          createdAt
           talkComments {
             id
             createdAt
