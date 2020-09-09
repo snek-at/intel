@@ -24,6 +24,7 @@ const getPerson = gql`
   query profile($slug: String!, $token: String!) {
     page(slug: $slug, token: $token) {
       ... on PersonPage {
+        slug
         title
         firstName
         lastName
