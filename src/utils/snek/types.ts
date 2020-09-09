@@ -169,6 +169,10 @@ export interface GraphQLPersonPage {
   avatarImage: {
     src: string | null;
   } | null;
+  profiles: {
+    sourceType: string;
+    isActive: boolean;
+  }[];
   metaLinks: {
     id: string;
     url: string | null;

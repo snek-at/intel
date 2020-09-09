@@ -44,6 +44,10 @@ const getPerson = gql`
         avatarImage {
           src
         }
+        profiles {
+          sourceType
+          isActive
+        }
         metaLinks {
           id
           url
