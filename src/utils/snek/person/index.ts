@@ -308,7 +308,7 @@ const writeVariableStore = async (runnerOptions: {
 const updateSettings = async (runnerOptions: {
   personName: string;
   settings: {
-    avatarImage?: string;
+    avatarImage?: File;
     bio?: string;
     display2dCalendar?: string;
     display3dCalendar?: string;

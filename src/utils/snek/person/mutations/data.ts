@@ -110,7 +110,7 @@ const updatePersonPage = gql`
   mutation updatePersonPage(
     $token: String!
     $personName: String!
-    $avatarImage: String
+    $avatarImage: Upload
     $bio: String
     $display2dCalendar: Boolean
     $display3dCalendar: Boolean
@@ -148,16 +148,14 @@ const updatePersonPage = gql`
       workplace: $workplace
     ) {
       personPage {
-        ... on PersonPage {
-          slug
-          title
-          firstName
-          lastName
-          status
-          bio
-          avatarImage {
-            src
-          }
+        slug
+        title
+        firstName
+        lastName
+        status
+        bio
+        avatarImage {
+          src
         }
       }
     }
