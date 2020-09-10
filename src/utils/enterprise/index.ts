@@ -7,7 +7,7 @@ import { SnekClient } from "snek-client";
 import { general, ops } from "./converters/index";
 //#endregion
 
-class Provider extends require("./converter") {
+class Provider {
   public static client = new SnekClient("http://localhost:8000/graphql");
   public static general: typeof general = require("./converters/general");
 }
