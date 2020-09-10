@@ -117,13 +117,13 @@ export interface GraphQLPersonProject {
   owner: {
     avatarUrl: string | null;
     url: string | null;
-    name: string | null;
+    username: string | null;
     fullname: string | null;
   } | null;
   members: {
     avatarUrl: string | null;
     url: string | null;
-    name: string | null;
+    username: string | null;
     fullname: string | null;
   }[];
   languages: GraphQLPersonLanguages[];
@@ -138,7 +138,7 @@ export interface GraphQLOrganisation {
   members: {
     avatarUrl: string | null;
     url: string | null;
-    name: string | null;
+    username: string | null;
     fullname: string | null;
   }[];
   projects: GraphQLPersonProject[];

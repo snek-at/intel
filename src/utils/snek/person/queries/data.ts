@@ -154,7 +154,7 @@ const getPerson = gql`
                   avatarUrl
                   url
                   fullname
-                  name
+                  username
                 }
               }
               members {
@@ -162,7 +162,7 @@ const getPerson = gql`
                   avatarUrl
                   url
                   fullname
-                  name
+                  username
                 }
               }
               languages {
@@ -187,7 +187,7 @@ const getPerson = gql`
                   avatarUrl
                   url
                   fullname
-                  name
+                  username
                 }
               }
               projects {
@@ -201,7 +201,7 @@ const getPerson = gql`
                       avatarUrl
                       url
                       fullname
-                      name
+                      username
                     }
                   }
                   members {
@@ -209,7 +209,7 @@ const getPerson = gql`
                       avatarUrl
                       url
                       fullname
-                      name
+                      username
                     }
                   }
                   languages {
