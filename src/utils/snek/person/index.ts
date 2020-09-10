@@ -180,20 +180,36 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
     }
   };
 
+  const currentStatisticForVariableStore = prepareStatisticForVariableStore(
+    mergedProfiles.statistic.current
+  );
+
   writeVariableStore({
     personName: runnerOptions.personName,
     toStore: {
       currentStatistic: JSON.stringify(
-        prepareStatisticForVariableStore(mergedProfiles.statistic.current)
+        currentStatisticForVariableStore ? currentStatisticForVariableStore : {}
       ),
       yearsStatistic: JSON.stringify(
         mergedProfiles.statistic.years.map((e) =>
           prepareStatisticForVariableStore(e)
         )
       ),
-      languages: JSON.stringify(mergedProfiles.statistic.languages),
-      organisations: JSON.stringify(mergedProfiles.profile?.organizations),
-      projects: JSON.stringify(mergedProfiles.profile?.repositories),
+      languages: JSON.stringify(
+        mergedProfiles.statistic.languages
+          ? mergedProfiles.statistic.languages
+          : ""
+      ),
+      organisations: JSON.stringify(
+        mergedProfiles.profile?.organizations
+          ? mergedProfiles.profile?.organizations
+          : ""
+      ),
+      projects: JSON.stringify(
+        mergedProfiles.profile?.repositories
+          ? mergedProfiles.profile?.repositories
+          : ""
+      ),
     },
   }).then((res) =>
     res
