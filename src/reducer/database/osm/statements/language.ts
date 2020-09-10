@@ -49,9 +49,8 @@ FROM     language l1
 WHERE    repositoryId = ${repositoryId}
 GROUP BY name,
          color
-HAVING name IS NOT NULL
+HAVING count(*) > 0
 ORDER BY size DESC
-
 `;
 
 const merged = `
@@ -63,7 +62,7 @@ SELECT L1.color,
 FROM   language L1
 GROUP  BY name,
           color
-HAVING name IS NOT NULL
+HAVING count(*) > 0
 ORDER  BY size DESC
 `;
 //#endregion
