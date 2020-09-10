@@ -81,7 +81,7 @@ export interface GraphQLPersonStatistic {
   calendar3d: {
     src: string | null;
   } | null;
-  calendar2d: string | null;
+  calendarData: string | null;
   contributionType2d: string | null;
   totalIssueContributions: number | null;
   totalCommitContributions: number | null;

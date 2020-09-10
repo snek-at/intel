@@ -70,7 +70,7 @@ const getPerson = gql`
               calendar3d {
                 src
               }
-              calendar2d
+              calendarData
               contributionType2d
               totalIssueContributions
               totalCommitContributions
@@ -109,7 +109,7 @@ const getPerson = gql`
               calendar3d {
                 src
               }
-              calendar2d
+              calendarData
               contributionType2d
               totalIssueContributions
               totalCommitContributions
