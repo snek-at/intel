@@ -130,7 +130,7 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
           case "GITHUB":
             await GithubProvider.processSource(profile.sourceUrl, {
               user: profile.username,
-              authorization: profile.accessToken,
+              authorization: `Bearer ${profile.accessToken}`,
             });
             break;
           case "GITLAB":
