@@ -89,6 +89,8 @@ const writeVariableStore = gql`
     $rawOrganisations: JSONString
     $rawProjects: JSONString
     $rawYearsStatistic: JSONString
+    $rawCurrentStatisticImage: Upload
+    $rawYearsStatisticCalendarImages: Upload
   ) {
     variableStore(
       token: $token
@@ -98,6 +100,8 @@ const writeVariableStore = gql`
       rawOrganisations: $rawOrganisations
       rawProjects: $rawProjects
       rawYearsStatistic: $rawYearsStatistic
+      rawCurrentStatisticImage: $rawCurrentStatisticImage
+      rawYearsStatisticCalendarImages: $rawYearsStatisticCalendarImages
     ) {
       person {
         id

@@ -284,6 +284,8 @@ const writeVariableStore = async (runnerOptions: {
     languages?: string;
     organisations?: string;
     projects?: string;
+    currentCalendarImage?: File;
+    yearsCalendarImages?: File[];
   };
 }) => {
   try {
@@ -296,6 +298,9 @@ const writeVariableStore = async (runnerOptions: {
       rawLanguages: runnerOptions.toStore.languages,
       rawOrganisations: runnerOptions.toStore.organisations,
       rawProjects: runnerOptions.toStore.projects,
+      rawCurrentStatisticImage: runnerOptions.toStore.currentCalendarImage,
+      rawYearsStatisticCalendarImages:
+        runnerOptions.toStore.yearsCalendarImages,
     });
     return res.data ? res.data.variableStore.person : null;
   } catch {
