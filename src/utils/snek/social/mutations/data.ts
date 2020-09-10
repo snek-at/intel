@@ -26,7 +26,7 @@ const unfollow = gql`
     unfollowPerson(
       token: $token
       person: $person
-      personToFollow: $personToUnfollow
+      personToUnfollow: $personToUnfollow
     ) {
       totalFollowers
     }
@@ -35,7 +35,7 @@ const unfollow = gql`
 
 const like = gql`
   mutation like($token: String!, $person: String!, $personToLike: String!) {
-    likePerson(token: $token, person: $person, personToFollow: $personToLike) {
+    likePerson(token: $token, person: $person, personToLike: $personToLike) {
       totalLikes
     }
   }
@@ -46,7 +46,7 @@ const unlike = gql`
     unlikePerson(
       token: $token
       person: $person
-      personToFollow: $personToUnlike
+      personToUnlike: $personToUnlike
     ) {
       totalLikes
     }

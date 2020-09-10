@@ -12,7 +12,10 @@ const follow = async (runnerOptions: RunnerParameters) => {
   try {
     const res = await Provider.client.session.runner<{
       followPerson: { totalFollowers: number };
-    }>("mutation", mutations.follow, {});
+    }>("mutation", mutations.follow, {
+      person: runnerOptions.invoker,
+      personToFollow: runnerOptions.receiver,
+    });
     return res.data ? res.data.followPerson : null;
   } catch {
     throw new Error(
@@ -25,7 +28,10 @@ const unfollow = async (runnerOptions: RunnerParameters) => {
   try {
     const res = await Provider.client.session.runner<{
       unfollowPerson: { totalFollowers: number };
-    }>("mutation", mutations.unfollow, {});
+    }>("mutation", mutations.unfollow, {
+      person: runnerOptions.invoker,
+      personToUnfollow: runnerOptions.receiver,
+    });
     return res.data ? res.data.unfollowPerson : null;
   } catch {
     throw new Error(
@@ -37,8 +43,11 @@ const unfollow = async (runnerOptions: RunnerParameters) => {
 const like = async (runnerOptions: RunnerParameters) => {
   try {
     const res = await Provider.client.session.runner<{
-      like: { totalFollowers: number };
-    }>("mutation", mutations.unfollow, {});
+      like: { totalLikes: number };
+    }>("mutation", mutations.like, {
+      person: runnerOptions.invoker,
+      personToLike: runnerOptions.receiver,
+    });
     return res.data ? res.data.like : null;
   } catch {
     throw new Error(
@@ -50,8 +59,11 @@ const like = async (runnerOptions: RunnerParameters) => {
 const unlike = async (runnerOptions: RunnerParameters) => {
   try {
     const res = await Provider.client.session.runner<{
-      unlike: { totalFollowers: number };
-    }>("mutation", mutations.unfollow, {});
+      unlike: { totalLikes: number };
+    }>("mutation", mutations.unlike, {
+      person: runnerOptions.invoker,
+      personToUnlike: runnerOptions.receiver,
+    });
     return res.data ? res.data.unlike : null;
   } catch {
     throw new Error(
