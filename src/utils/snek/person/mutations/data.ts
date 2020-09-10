@@ -89,7 +89,7 @@ const writeVariableStore = gql`
     $rawOrganisations: JSONString
     $rawProjects: JSONString
     $rawYearsStatistic: JSONString
-    $rawCurrentStatisticImage: Upload
+    $rawCurrentStatisticCalendarImage: Upload
     $rawYearsStatisticCalendarImages: Upload
   ) {
     variableStore(
@@ -100,7 +100,7 @@ const writeVariableStore = gql`
       rawOrganisations: $rawOrganisations
       rawProjects: $rawProjects
       rawYearsStatistic: $rawYearsStatistic
-      rawCurrentStatisticImage: $rawCurrentStatisticImage
+      rawCurrentStatisticCalendarImage: $rawCurrentStatisticCalendarImage
       rawYearsStatisticCalendarImages: $rawYearsStatisticCalendarImages
     ) {
       person {

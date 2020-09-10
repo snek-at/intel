@@ -299,7 +299,8 @@ const writeVariableStore = async (runnerOptions: {
       rawLanguages: runnerOptions.toStore.languages,
       rawOrganisations: runnerOptions.toStore.organisations,
       rawProjects: runnerOptions.toStore.projects,
-      rawCurrentStatisticImage: runnerOptions.toStore.currentCalendarImage,
+      rawCurrentStatisticCalendarImage:
+        runnerOptions.toStore.currentCalendarImage,
       rawYearsStatisticCalendarImages:
         runnerOptions.toStore.yearsCalendarImages,
     });
