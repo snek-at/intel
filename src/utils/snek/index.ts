@@ -39,7 +39,7 @@ import { SnekClient } from "snek-client";
 class Provider {
   // public static client = new SnekClient("https://engine.snek.at/graphql");
   public static client = new SnekClient("http://localhost:8000/graphql");
-  public static achievements: typeof achievement = require("./achievements");
+  public static achievement: typeof achievement = require("./achievement");
   // achievements.all()
   public static general: typeof general = require("./general");
   public static social: typeof social = require("./social");
