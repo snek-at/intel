@@ -146,7 +146,7 @@ export interface GraphQLOrganisation {
 }
 
 export interface GraphQLPerson {
-  currentStatistic: GraphQLPersonStatistic;
+  currentStatistic: GraphQLPersonStatistic[];
   yearsStatistic: GraphQLPersonStatistic[];
   projects: GraphQLPersonProject[];
   organisations: GraphQLOrganisation[];

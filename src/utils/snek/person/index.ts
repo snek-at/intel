@@ -28,22 +28,39 @@ const get = async (runnerOptions: { personName: string }) => {
       slug: `p-${runnerOptions.personName}`,
     });
     if (res.data) {
+      let person: Omit<types.GraphQLPerson, "currentStatistic"> & {
+        currentStatistic: types.GraphQLPersonStatistic;
+      };
+
       let rnt: Omit<
         types.GraphQLPersonPage,
-        "movablePool" | "tids" | "bids"
+        "movablePool" | "tids" | "bids" | "person"
       > & {
         tids: string[];
         bids: string[];
-        movablePool: { [x: string]: any[] }[];
+        movablePool: { [x: string]: any[] };
+        person: typeof person;
       };
+
+      const movablePool = Object.fromEntries(
+        Object.entries(res.data.page.movablePool).map(([key, val]) => [
+          val.field,
+          safelyParseJSON<{ order: number[] }, { order: number[] }>(
+            val.rawValue,
+            { order: [] }
+          ).order,
+        ])
+      );
 
       rnt = {
         ...res.data.page,
+        person: {
+          ...res.data.page.person,
+          currentStatistic: res.data.page.person.currentStatistic[0],
+        },
         tids: safelyParseJSON(res.data.page.tids, []),
         bids: safelyParseJSON(res.data.page.bids, []),
-        movablePool: res.data.page.movablePool.map((e) => {
-          return { [e.field]: safelyParseJSON(e.rawValue, []) };
-        }),
+        movablePool: movablePool,
       };
 
       return rnt;
