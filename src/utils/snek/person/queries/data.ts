@@ -71,7 +71,7 @@ const getPerson = gql`
                 src
               }
               calendarData
-              contributionType2d
+              contributionTypeData
               totalIssueContributions
               totalCommitContributions
               totalRepositoryContributions
@@ -110,7 +110,7 @@ const getPerson = gql`
                 src
               }
               calendarData
-              contributionType2d
+              contributionTypeData
               totalIssueContributions
               totalCommitContributions
               totalRepositoryContributions

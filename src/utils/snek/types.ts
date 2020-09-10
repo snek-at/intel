@@ -82,7 +82,7 @@ export interface GraphQLPersonStatistic {
     src: string | null;
   } | null;
   calendarData: string | null;
-  contributionType2d: string | null;
+  contributionTypeData: string | null;
   totalIssueContributions: number | null;
   totalCommitContributions: number | null;
   totalRepositoryContributions: number | null;
