@@ -16,6 +16,7 @@ const getProfiles = gql`
       sourceUrl
       sourceType
       isActive
+      isAccessTokenExpired
     }
   }
 `;

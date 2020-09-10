@@ -91,6 +91,7 @@ const profiles = async (runnerOptions: { personName: string }) => {
         sourceUrl: string;
         sourceType: string;
         isActive: boolean;
+        isAccessTokenExpired: boolean;
       }[];
     }>("mutation", queries.getProfiles, {
       personName: runnerOptions.personName,
