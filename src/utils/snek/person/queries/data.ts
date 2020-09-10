@@ -95,6 +95,12 @@ const getPerson = gql`
                   totalDays
                 }
               }
+              busiestDay {
+                ... on _Person_Statistic_Contribution {
+                  date
+                  total
+                }
+              }
             }
           }
           yearsStatistic {
@@ -126,6 +132,12 @@ const getPerson = gql`
                   endDate
                   totalContributions
                   totalDays
+                }
+              }
+              busiestDay {
+                ... on _Person_Statistic_Contribution {
+                  date
+                  total
                 }
               }
             }

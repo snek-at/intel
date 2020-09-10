@@ -172,6 +172,7 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
           statistic.totalRepositoriesWithContributedPullRequests,
         currentStreak: statistic.streak.current,
         longestStreak: statistic.streak.longest,
+        busiestDay: statistic.busiestDay,
       };
     } else {
       return undefined;

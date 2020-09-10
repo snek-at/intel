@@ -103,6 +103,10 @@ export interface GraphQLPersonStatistic {
     totalContributions: number;
     totalDays: number;
   };
+  busiestDay: {
+    date: string;
+    total: number;
+  };
 }
 
 export interface GraphQLPersonProject {
