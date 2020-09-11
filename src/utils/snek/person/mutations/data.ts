@@ -118,6 +118,11 @@ const updatePersonPage = gql`
     $bio: String
     $display2dCalendar: Boolean
     $display3dCalendar: Boolean
+    $displayContributionTypes: Boolean
+    $displayWeekActivity: Boolean
+    $displayImageGallery: Boolean
+    $displayVideoGallery: Boolean
+    $displayMusicGallery: Boolean
     $displayEmail: Boolean
     $displayProgrammingLanguages: Boolean
     $displayRanking: Boolean
@@ -138,6 +143,11 @@ const updatePersonPage = gql`
       bio: $bio
       display2dCalendar: $display2dCalendar
       display3dCalendar: $display3dCalendar
+      displayContributionTypes: $displayContributionTypes
+      displayWeekActivity: $displayWeekActivity
+      displayImageGallery: $displayImageGallery
+      displayVideoGallery: $displayVideoGallery
+      displayMusicGallery: $displayMusicGallery
       displayEmail: $displayEmail
       displayProgrammingLanguages: $displayProgrammingLanguages
       displayRanking: $displayRanking

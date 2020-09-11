@@ -41,6 +41,11 @@ const getPerson = gql`
         displayProgrammingLanguages
         display2dCalendar
         display3dCalendar
+        displayContributionTypes
+        displayWeekActivity
+        displayImageGallery
+        displayVideoGallery
+        displayMusicGallery
         bids
         tids
         avatarImage {

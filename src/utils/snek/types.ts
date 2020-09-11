@@ -3,6 +3,7 @@
  */
 export type MetaLinkType =
   | "INSTAGRAM"
+  | "SOUNDCLOUD"
   | "PHOTO"
   | "YOUTUBE"
   | "VIMEO"
@@ -170,6 +171,11 @@ export interface GraphQLPersonPage {
   displayProgrammingLanguages: boolean;
   display2dCalendar: boolean;
   display3dCalendar: boolean;
+  displayContributionTypes: boolean;
+  displayWeekActivity: boolean;
+  displayImageGallery: boolean;
+  displayVideoGallery: boolean;
+  displayMusicGallery: boolean;
   bids: string | null;
   tids: string | null;
   avatarImage: {
