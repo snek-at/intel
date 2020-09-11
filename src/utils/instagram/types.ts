@@ -1,17 +1,18 @@
-export interface FETCHING_ERROR {
-  error: string;
-  errorMsg: string;
-}
-
 export interface InstagramPost {
-  id?: number;
-  permalink?: string;
-  meta?: {
-    contentLocation: {
-      name: string;
-      lon: string;
-      lat: string;
-    };
-  };
-  error?: FETCHING_ERROR;
+  id: number;
+  permalink: string;
+  resolveLocation: () => Promise<
+    | {
+        name: string;
+        lon: string;
+        lat: string;
+      }
+    | {
+        name: string;
+        lon: undefined;
+        lat: undefined;
+      }
+    | undefined
+  >;
 }
+[];

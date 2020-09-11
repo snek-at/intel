@@ -16,21 +16,19 @@ class Provider {
   ) => {
     const client = new InstagramClient(source.authorization, instagramUrl);
     const runner = await client.session.getRunner();
-    const rate_limit_error: FETCHING_ERROR = {
-      error: "RATE_LIMIT",
-      errorMsg:
-        "You are hitting rate-limits on the node that you are attempting to fetch. Please wait and try again later.",
-    };
 
     /** Get all user posts with id */
     const posts: InstagramPost[] = await runner
       .getJson<{ data: { id: number }[] }>(USER_POSTS_PATH)
       .then(async (res) => {
         return await Promise.all(
-          res.data.map((post) =>
-            runner
-              .getJson<{ permalink: string }>(POST_DATA_PATH(post.id))
-              .then(async (postData) => {
+          res.data.map(async (post) => {
+            const postData = await runner.getJson<{ permalink: string }>(
+              POST_DATA_PATH(post.id)
+            );
+
+            const resolveLocation = async () => {
+              try {
                 const text = await (
                   await fetch(postData.permalink, { method: "GET" })
                 ).text();
@@ -43,7 +41,6 @@ class Provider {
                 const meta = content.querySelectorAll(
                   '[type="application/ld+json"]'
                 );
-                console.log("META", meta);
 
                 for (let data of meta) {
                   const parsedMeta = safelyParseJSON<
@@ -52,54 +49,46 @@ class Provider {
                   >(data.textContent, { contentLocation: undefined });
 
                   if (parsedMeta.contentLocation) {
-                    return await (
-                      await fetch(
-                        "https://nominatim.openstreetmap.org" +
-                          GEO_LOCATION_PATH(parsedMeta.contentLocation.name),
-                        { method: "GET" }
-                      )
-                    )
-                      .json()
-                      .then(
-                        (
-                          res:
-                            | { lon: string; lat: string }
-                            | { lon: string; lat: string }[]
-                        ) => {
-                          return {
-                            id: post.id,
-                            permalink: postData.permalink,
-                            meta: {
-                              contentLocation: {
-                                name: parsedMeta.contentLocation.name,
-                                lon:
-                                  res instanceof Array ? res[0]?.lon : res.lon,
-                                lat:
-                                  res instanceof Array ? res[0]?.lat : res.lat,
-                              },
-                            },
-                          };
-                        }
-                      )
-                      .catch(() => {
-                        return { error: rate_limit_error };
-                      });
+                    try {
+                      const location:
+                        | { lon: string; lat: string }
+                        | { lon: string; lat: string }[] = await (
+                        await fetch(
+                          "https://nominatim.openstreetmap.org" +
+                            GEO_LOCATION_PATH(parsedMeta.contentLocation.name),
+                          { method: "GET" }
+                        )
+                      ).json();
+
+                      return {
+                        name: parsedMeta.contentLocation.name,
+                        lon:
+                          location instanceof Array
+                            ? location[0]?.lon
+                            : location.lon,
+                        lat:
+                          location instanceof Array
+                            ? location[0]?.lat
+                            : location.lat,
+                      };
+                    } catch {
+                      return {
+                        name: parsedMeta.contentLocation.name,
+                      };
+                    }
                   }
                 }
+              } catch {
+                return undefined;
+              }
+            };
 
-                return {
-                  id: post.id,
-                  permalink: postData.permalink,
-                };
-              })
-              .catch(() => {
-                return { error: rate_limit_error };
-              })
-          )
+            return {
+              permalink: postData.permalink,
+              resolveLocation,
+            };
+          })
         );
-      })
-      .catch(() => {
-        return [{ error: rate_limit_error }];
       });
 
     return posts;
