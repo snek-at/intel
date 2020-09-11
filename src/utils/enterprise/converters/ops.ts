@@ -1,7 +1,94 @@
 //#region > Imports
 import gql from "graphql-tag";
 import Provider from "../index";
+import { mergeCodetransition, mergeContributionFeed } from "../tools";
+
 //#endregion
+
+//> Enterprise
+export const getEnterprisePageGeneralContent = async (queryArgs: {
+  slug: string;
+}) => {
+  const node = gql`
+    query enterprisePageContent($slug: String!, $token: String!) {
+      page(slug: $slug, token: $token) {
+        ... on EnterpriseFormPage {
+          name: title
+          handle: slug
+          city
+          zipCode
+          address
+          telephone
+          telefax
+          whatsappTelephone
+          whatsappContactline
+          email
+          vatNumber
+          taxId
+          tradeRegisterNumber
+          courtOfRegistry
+          placeOfRegistry
+          tradeRegisterNumber
+          ownership
+          employeeCount
+          opensourceUrl
+          recruitingUrl
+          description
+          assocConnectors: connectorScpPage {
+            id
+          }
+          enterpriseContributors {
+            id
+          }
+          enterpriseCodelanguageStatistic {
+            name
+            type
+            color
+            primaryExtension
+            insertions
+            deletions
+          }
+          enterpriseCodetransitionStatistic {
+            insertions
+            deletions
+            datetime
+          }
+          enterpriseContributionFeed {
+            type
+            cid
+            datetime
+            message
+            files {
+              insertions
+              deletions
+              path
+              rawChanges
+            }
+          }
+        }
+      }
+    }
+  `;
+  return Provider.client.session
+    .runner<{ page: { enterpriseCodetransitionStatistic: any[] } }>(
+      "query",
+      node,
+      { ...queryArgs }
+    )
+    .then((res) => {
+      const page: any = JSON.parse(JSON.stringify(res?.data?.page));
+
+      page.mergedEnterpriseCodetransitionStatistic = mergeCodetransition(
+        page.enterpriseCodetransitionStatistic
+      );
+
+      page.mergedEnterpriseContributionFeed = mergeContributionFeed(
+        page.enterpriseContributionFeed
+      );
+
+      return page;
+    });
+};
 
 //> Gitlabs
 export const addGitlab = async (queryArgs: {

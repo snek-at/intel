@@ -50,9 +50,6 @@ export const getEnterprisePageGeneralContent = async (queryArgs: {
           opensourceUrl
           recruitingUrl
           description
-          assocConnectors: connectorScpPage {
-            id
-          }
           enterpriseContributors {
             id
           }
@@ -93,7 +90,7 @@ export const getEnterprisePageGeneralContent = async (queryArgs: {
       { ...queryArgs }
     )
     .then((res) => {
-      const page: any = res?.data?.page;
+      const page: any = JSON.parse(JSON.stringify(res?.data?.page));
 
       page.mergedEnterpriseCodetransitionStatistic = mergeCodetransition(
         page.enterpriseCodetransitionStatistic
@@ -240,7 +237,9 @@ export const getEnterprisePageProjectsContent = async (queryArgs: {
     ...queryArgs,
   });
 
-  const projects = res.data?.page.enterpriseProjects;
+  const projects = JSON.parse(
+    JSON.stringify(res.data?.page.enterpriseProjects)
+  );
 
   return projects?.map((project: any) => {
     project.mergedCodetransition = mergeCodetransition(project.codetransition);
@@ -300,7 +299,9 @@ export const getEnterprisePageUsersContent = async (queryArgs: {
     ...queryArgs,
   });
 
-  const users = res.data?.page.enterpriseContributors;
+  const users = JSON.parse(
+    JSON.stringify(res.data?.page.enterpriseContributors)
+  );
 
   return users?.map((user: any) => {
     user.mergedCodetransition = mergeCodetransition(user.codetransition);
