@@ -79,6 +79,7 @@ export interface GraphQLPersonLanguages {
 }
 
 export interface GraphQLPersonStatistic {
+  year: number;
   calendar3d: {
     src: string | null;
   } | null;

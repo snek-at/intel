@@ -72,6 +72,7 @@ const getPerson = gql`
         person {
           currentStatistic {
             ... on _Person_Statistic {
+              year
               calendar3d {
                 src
               }
@@ -111,6 +112,7 @@ const getPerson = gql`
           }
           yearsStatistic {
             ... on _Person_Statistic {
+              year
               calendar3d {
                 src
               }

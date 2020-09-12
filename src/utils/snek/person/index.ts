@@ -174,6 +174,7 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
   ) => {
     if (statistic) {
       return {
+        year: statistic.year !== 0 ? statistic.year : null,
         calendarData: JSON.stringify(statistic.calendar),
         contributionTypeData: JSON.stringify(statistic.contributions),
         totalIssueContributions: statistic.totalIssueContributions,
