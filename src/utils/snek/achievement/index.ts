@@ -20,7 +20,7 @@ const redeem = async (runnerOptions: {
 }) => {
   try {
     const res = await Provider.client.session.runner<{
-      redeemAchievement: { ok: boolean };
+      redeemAchievement: { ok: boolean; achievement: types.GraphQLAchievement };
     }>("query", mutation.redeem, {
       personName: runnerOptions.personName,
       sequence: runnerOptions.sequence,

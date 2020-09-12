@@ -13,6 +13,20 @@ const redeem = gql`
       sequence: $sequence
     ) {
       ok
+      achievement {
+        title
+        description
+        points
+        image {
+          src
+        }
+        collectors {
+          firstName
+          lastName
+          title
+          personName: slug
+        }
+      }
     }
   }
 `;
