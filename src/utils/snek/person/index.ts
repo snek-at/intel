@@ -292,6 +292,7 @@ const updateProfile = async (runnerOptions: {
     accessToken?: string;
     sourceType?: string;
     username?: string;
+    isActive?: string;
   };
 }) => {
   try {
