@@ -1,7 +1,7 @@
 //#region > Imports
 import { InstagramClient } from "snek-client";
 import { USER_POSTS_PATH, POST_DATA_PATH, GEO_LOCATION_PATH } from "./paths";
-import { InstagramPost, FETCHING_ERROR } from "./types";
+import { InstagramPost } from "./types";
 import { safelyParseJSON } from "../../toolbox/Parser";
 //#endregion
 
@@ -84,6 +84,7 @@ class Provider {
             };
 
             return {
+              id: post.id,
               permalink: postData.permalink,
               resolveLocation,
             };
