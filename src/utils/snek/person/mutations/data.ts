@@ -64,7 +64,7 @@ const updateProfile = gql`
     $sourceUrl: String
     $sourceType: String
     $username: String
-    $isActive: String
+    $isActive: Boolean
   ) {
     updateProfile(
       token: $token

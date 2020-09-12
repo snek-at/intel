@@ -292,7 +292,7 @@ const updateProfile = async (runnerOptions: {
     accessToken?: string;
     sourceType?: string;
     username?: string;
-    isActive?: string;
+    isActive?: Boolean;
   };
 }) => {
   try {
@@ -301,6 +301,7 @@ const updateProfile = async (runnerOptions: {
         profile: { id: number };
       };
     }>("mutation", mutations.updateProfile, {
+      profileId: runnerOptions.profileId,
       ...runnerOptions.toUpdate,
     });
 
