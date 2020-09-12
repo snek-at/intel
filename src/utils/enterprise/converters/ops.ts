@@ -15,6 +15,9 @@ export const getEnterprisePageGeneralContent = async (queryArgs: {
         ... on EnterpriseFormPage {
           name: title
           handle: slug
+          avatarImage {
+            src
+          }
           city
           zipCode
           address
