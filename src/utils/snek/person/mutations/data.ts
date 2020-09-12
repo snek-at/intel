@@ -71,7 +71,7 @@ const updateProfile = gql`
       profileId: $profileId
       accessToken: $accessToken
       sourceUrl: $sourceUrl
-      sourceType: $accessToken
+      sourceType: $sourceType
       username: $username
       isActive: $isActive
     ) {
