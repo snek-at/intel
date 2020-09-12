@@ -47,7 +47,7 @@ const addProfile = gql`
 `;
 
 const deleteProfile = gql`
-  mutation deleteProfile($token: String!, $profileId: String!) {
+  mutation deleteProfile($token: String!, $profileId: ID!) {
     deleteProfile(token: $token, profileId: $profileId) {
       profiles {
         id
@@ -59,7 +59,7 @@ const deleteProfile = gql`
 const updateProfile = gql`
   mutation updateProfile(
     $token: String!
-    $profileId: String!
+    $profileId: ID!
     $accessToken: String
     $sourceUrl: String
     $sourceType: String
