@@ -8,6 +8,7 @@ import GtilabProvider from "../../gitlab";
 import InstagramProvider from "../../instagram";
 import { Reducer } from "../../../reducer";
 import { safelyParseJSON } from "../../../toolbox/Parser";
+import { InstagramPost, InstagramPosts } from "../../instagram/types";
 
 const allBrief = async (runnerOptions: {}) => {
   try {
@@ -464,17 +465,38 @@ const getInstagramPosts = async (runnerOptions: { personName: string }) => {
             }
           );
 
-          return posts.map((res) => {
+          posts.posts.map((res) => {
             return {
               profileId: profile.id,
               ...res,
             };
           });
+
+          return posts;
         })
     )
   ).flat();
 
-  return posts;
+  let rtn: {
+    next: (() => Promise<InstagramPosts>)[];
+    posts: InstagramPost[];
+  } = { next: [], posts: [] };
+
+  console.log("POSTS1", posts);
+
+  posts.forEach((e) => {
+    if (e.next) {
+      rtn.next.push(e.next);
+    }
+
+    console.log("POSTS2", e.posts);
+
+    rtn.posts = rtn.posts.concat(e.posts);
+  });
+
+  console.log("POSTS3", rtn);
+
+  return rtn;
 };
 
 export {

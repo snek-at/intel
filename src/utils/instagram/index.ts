@@ -1,7 +1,7 @@
 //#region > Imports
 import { InstagramClient } from "snek-client";
 import { USER_POSTS_PATH, POST_DATA_PATH, GEO_LOCATION_PATH } from "./paths";
-import { InstagramPost } from "./types";
+import { InstagramPost, InstagramPosts } from "./types";
 import { safelyParseJSON } from "../../toolbox/Parser";
 //#endregion
 
@@ -12,16 +12,19 @@ class Provider {
     source: {
       /** Authorization: A token for authorizing the client */
       authorization: string;
-    }
+    },
+    postsPath?: string
   ) => {
     const client = new InstagramClient(source.authorization, instagramUrl);
     const runner = await client.session.getRunner();
 
     /** Get all user posts with id */
-    const posts: InstagramPost[] = await runner
-      .getJson<{ data: { id: number }[] }>(USER_POSTS_PATH)
+    const posts: InstagramPosts = await runner
+      .getJson<{ data: { id: number }[]; paging: { next: string } }>(
+        postsPath ? postsPath : USER_POSTS_PATH
+      )
       .then(async (res) => {
-        return await Promise.all(
+        const posts: InstagramPost[] = await Promise.all(
           res.data.map(async (post) => {
             const postData = await runner.getJson<{
               permalink: string;
@@ -94,6 +97,23 @@ class Provider {
             };
           })
         );
+
+        let next: (() => Promise<InstagramPosts>) | undefined;
+
+        if (res.paging?.next) {
+          next = () => {
+            return Provider.processSource(
+              instagramUrl,
+              source,
+              res.paging.next
+            );
+          };
+        }
+
+        return {
+          posts,
+          next,
+        };
       });
 
     return posts;
