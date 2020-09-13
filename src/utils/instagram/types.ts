@@ -1,6 +1,8 @@
 export interface InstagramPost {
   id: number;
   permalink: string;
+  mediaLink: string;
+  mediaType: string;
   resolveLocation: () => Promise<
     | {
         name: string;
@@ -16,3 +18,8 @@ export interface InstagramPost {
   >;
 }
 [];
+
+export interface InstagramPosts {
+  posts: InstagramPost[];
+  next?: () => Promise<InstagramPosts>;
+}
