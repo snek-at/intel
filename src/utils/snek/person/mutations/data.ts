@@ -183,8 +183,8 @@ const addMetaLink = gql`
     $token: String!
     $personName: String!
     $url: String!
+    $linkType: String!
     $location: String
-    $linkType: String
     $imgurDeleteHash: String
     $description: String
   ) {
