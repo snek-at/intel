@@ -23,9 +23,11 @@ class Provider {
       .then(async (res) => {
         return await Promise.all(
           res.data.map(async (post) => {
-            const postData = await runner.getJson<{ permalink: string }>(
-              POST_DATA_PATH(post.id)
-            );
+            const postData = await runner.getJson<{
+              permalink: string;
+              media_url: string;
+              media_type: string;
+            }>(POST_DATA_PATH(post.id));
 
             const resolveLocation = async () => {
               try {
@@ -86,6 +88,8 @@ class Provider {
             return {
               id: post.id,
               permalink: postData.permalink,
+              mediaLink: postData.media_url,
+              mediaType: postData.media_type,
               resolveLocation,
             };
           })
