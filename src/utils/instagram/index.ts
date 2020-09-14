@@ -13,15 +13,18 @@ class Provider {
       /** Authorization: A token for authorizing the client */
       authorization: string;
     },
-    postsPath?: string
+    paginationPath?: string
   ) => {
-    const client = new InstagramClient(source.authorization, instagramUrl);
+    const client = new InstagramClient(
+      source.authorization,
+      paginationPath ? paginationPath : instagramUrl
+    );
     const runner = await client.session.getRunner();
 
     /** Get all user posts with id */
     const posts: InstagramPosts = await runner
       .getJson<{ data: { id: number }[]; paging: { next: string } }>(
-        postsPath ? postsPath : USER_POSTS_PATH
+        paginationPath ? "" : USER_POSTS_PATH
       )
       .then(async (res) => {
         const posts: InstagramPost[] = await Promise.all(
