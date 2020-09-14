@@ -354,12 +354,18 @@ const updateSettings = async (runnerOptions: {
   settings: {
     avatarImage?: File;
     bio?: string;
-    display2dCalendar?: string;
-    display3dCalendar?: string;
-    displayEmail?: string;
-    displayProgrammingLanguages?: string;
-    displayRanking?: string;
-    displayWorkplace?: string;
+    display2dCalendar?: boolean;
+    display3dCalendar?: boolean;
+    displayContributionTypes?: boolean;
+    displayWeekActivity?: boolean;
+    displayImageGallery?: boolean;
+    displayVideoGallery?: boolean;
+    displayMusicGallery?: boolean;
+    displayMap?: boolean;
+    displayEmail?: boolean;
+    displayProgrammingLanguages?: boolean;
+    displayRanking?: boolean;
+    displayWorkplace?: boolean;
     email?: string;
     firstName?: string;
     lastName?: string;

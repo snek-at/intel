@@ -177,6 +177,7 @@ export interface GraphQLPersonPage {
   displayImageGallery: boolean;
   displayVideoGallery: boolean;
   displayMusicGallery: boolean;
+  displayMap: boolean;
   bids: string | null;
   tids: string | null;
   avatarImage: {

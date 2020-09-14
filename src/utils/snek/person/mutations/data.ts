@@ -125,6 +125,7 @@ const updatePersonPage = gql`
     $displayImageGallery: Boolean
     $displayVideoGallery: Boolean
     $displayMusicGallery: Boolean
+    $displayMap: Boolean
     $displayEmail: Boolean
     $displayProgrammingLanguages: Boolean
     $displayRanking: Boolean
@@ -150,6 +151,7 @@ const updatePersonPage = gql`
       displayImageGallery: $displayImageGallery
       displayVideoGallery: $displayVideoGallery
       displayMusicGallery: $displayMusicGallery
+      displayMap: $displayMap
       displayEmail: $displayEmail
       displayProgrammingLanguages: $displayProgrammingLanguages
       displayRanking: $displayRanking

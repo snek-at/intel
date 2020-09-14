@@ -46,6 +46,7 @@ const getPerson = gql`
         displayImageGallery
         displayVideoGallery
         displayMusicGallery
+        displayMap
         bids
         tids
         avatarImage {
