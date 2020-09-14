@@ -7,7 +7,7 @@ const getTalk = async (runnerOptions: { id: number }) => {
   try {
     const res = await Provider.client.session.runner<{
       talk: types.GraphQLTalk;
-    }>("query", queries.getTalks, { ...runnerOptions });
+    }>("query", queries.getTalk, { ...runnerOptions });
     return res.data ? res.data.talk : null;
   } catch {
     throw new Error(
