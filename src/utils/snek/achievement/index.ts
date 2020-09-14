@@ -25,10 +25,12 @@ const redeem = async (runnerOptions: {
       personName: runnerOptions.personName,
       sequence: runnerOptions.sequence,
     });
-    return res.data ? res.data.redeemAchievement : { ok: false };
+    return res.data ? res.data.redeemAchievement : { ok: false, achievement: null };
   } catch {
     throw new Error(`Couldn't successfully redeem achievement`);
   }
 };
+
+redeem().then(res => res?)
 
 export { all, redeem };
