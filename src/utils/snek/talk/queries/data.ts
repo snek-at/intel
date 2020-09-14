@@ -6,7 +6,7 @@ import gql from "graphql-tag";
 
 //#region > Queries
 const getTalk = gql`
-  query talk($token: String!, $id: Int!) {
+  query talk($token: String!, $id: ID!) {
     talk(token: $token, id: $id) {
       id
       title
@@ -32,6 +32,9 @@ const getTalk = gql`
           }
         }
         replies {
+          id
+        }
+        replyTo {
           id
         }
         talk {
@@ -76,6 +79,9 @@ const getTalks = gql`
           }
         }
         replies {
+          id
+        }
+        replyTo {
           id
         }
         talk {

@@ -29,6 +29,9 @@ export interface GraphQLTalk {
     replies: {
       id: string | null;
     }[];
+    replyTo: {
+      id: string;
+    } | null;
     talk: {
       id: string | null;
     };

@@ -40,6 +40,9 @@ const addTalk = gql`
           replies {
             id
           }
+          replyTo {
+            id
+          }
           talk {
             id
           }
@@ -73,6 +76,9 @@ const deleteTalk = gql`
           updatedAt
           text
           replies {
+            id
+          }
+          replyTo {
             id
           }
           talk {
@@ -126,6 +132,9 @@ const updateTalk = gql`
           updatedAt
           text
           replies {
+            id
+          }
+          replyTo {
             id
           }
           talk {
