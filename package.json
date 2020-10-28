@@ -39,9 +39,9 @@
     "graphql": "^14.6.0",
     "lodash.clonedeep": "^4.5.0",
     "moment": "^2.24.0",
-    "react-scripts": "^3.4.1",
+    "react-scripts": "^4.0.0",
     "react-very-simple-oauth": "^1.1.1",
-    "snek-client": "file:snek-client-0.2.0-rc.6.tgz"
+    "snek-client": "file:snek-client-0.2.0-rc.7.tgz"
   },
   "devDependencies": {
     "@types/lodash.clonedeep": "^4.5.6",
