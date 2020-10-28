@@ -4,7 +4,7 @@ import * as queries from "./queries/data";
 import * as mutations from "./mutations/data";
 
 import GithubProvider from "../../github";
-import GtilabProvider from "../../gitlab";
+import GitlabProvider from "../../gitlab";
 import InstagramProvider from "../../instagram";
 import { Reducer } from "../../../reducer";
 import { safelyParseJSON } from "../../../toolbox/Parser";
@@ -150,9 +150,10 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
               user: profile.username,
               authorization: `Bearer ${profile.accessToken}`,
             });
+            console.info("GITHUB DONE");
             break;
           case "GITLAB":
-            await GtilabProvider.processSource(profile.sourceUrl, {
+            await GitlabProvider.processSource(profile.sourceUrl, {
               user: profile.username,
               authorization: profile.accessToken,
             });
