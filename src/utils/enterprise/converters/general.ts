@@ -1,11 +1,17 @@
 //#region > Imports
+//#PACKAGE "graphql-tag"
+// GQL DocumentNode needed for queries
 import gql from "graphql-tag";
-import Provider from "../index";
 
+//> SNEK enterprise provider
+import Provider from "../index";
+//> Tools
+// Used for merging enterprise data
 import { mergeCodetransition, mergeContributionFeed } from "../tools";
 //#endregion
 
-export const getEnterprisePages = async () => {
+//#region > Functions
+const getEnterprisePages = async () => {
   const node = gql`
     query getAllCompanyPages($token: String!) {
       page(slug: "enterprise-pages", token: $token) {
@@ -22,9 +28,7 @@ export const getEnterprisePages = async () => {
     .then((res) => res.data?.page.children);
 };
 
-export const getEnterprisePageGeneralContent = async (queryArgs: {
-  slug: string;
-}) => {
+const getEnterprisePageGeneralContent = async (queryArgs: { slug: string }) => {
   const node = gql`
     query enterprisePageContent($slug: String!, $token: String!) {
       page(slug: $slug, token: $token) {
@@ -107,7 +111,7 @@ export const getEnterprisePageGeneralContent = async (queryArgs: {
     });
 };
 
-export const updateEnterprisePageGeneralContent = async (queryArgs: {
+const updateEnterprisePageGeneralContent = async (queryArgs: {
   slug: string;
   imprint: {
     city?: string;
@@ -158,7 +162,7 @@ export const updateEnterprisePageGeneralContent = async (queryArgs: {
   return res.data?.enterpriseFormPage;
 };
 
-export const getEnterprisePageProjectsContent = async (queryArgs: {
+const getEnterprisePageProjectsContent = async (queryArgs: {
   slug: string;
 }) => {
   const node = gql`
@@ -254,9 +258,7 @@ export const getEnterprisePageProjectsContent = async (queryArgs: {
   });
 };
 
-export const getEnterprisePageUsersContent = async (queryArgs: {
-  slug: string;
-}) => {
+const getEnterprisePageUsersContent = async (queryArgs: { slug: string }) => {
   const node = gql`
     query enterprisePageContent($slug: String!, $token: String!) {
       page(slug: $slug, token: $token) {
@@ -313,3 +315,14 @@ export const getEnterprisePageUsersContent = async (queryArgs: {
     return user;
   });
 };
+//#endregion
+
+//#region > Exports
+export {
+  getEnterprisePages,
+  getEnterprisePageGeneralContent,
+  updateEnterprisePageGeneralContent,
+  getEnterprisePageProjectsContent,
+  getEnterprisePageUsersContent,
+};
+//#endregion

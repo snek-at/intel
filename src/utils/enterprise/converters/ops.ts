@@ -1,14 +1,17 @@
 //#region > Imports
+//#PACKAGE "graphql-tag"
+// GQL DocumentNode needed for queries
 import gql from "graphql-tag";
-import Provider from "../index";
-import { mergeCodetransition, mergeContributionFeed } from "../tools";
 
+//> SNEK enterprise provider
+import Provider from "../index";
+//> Tools
+// Used for merging enterprise data
+import { mergeCodetransition, mergeContributionFeed } from "../tools";
 //#endregion
 
-//> Enterprise
-export const getEnterprisePageGeneralContent = async (queryArgs: {
-  slug: string;
-}) => {
+//#region > Enterprise Functions
+const getEnterprisePageGeneralContent = async (queryArgs: { slug: string }) => {
   const node = gql`
     query enterprisePageContent($slug: String!, $token: String!) {
       page(slug: $slug, token: $token) {
@@ -92,9 +95,10 @@ export const getEnterprisePageGeneralContent = async (queryArgs: {
       return page;
     });
 };
+//#endregion
 
-//> Gitlabs
-export const addGitlab = async (queryArgs: {
+//#region > Gitlab Functions
+const addGitlab = async (queryArgs: {
   active: boolean;
   description: string;
   enterprisePageSlug: string;
@@ -140,7 +144,7 @@ export const addGitlab = async (queryArgs: {
   return res.data?.addGitlab.gitlab;
 };
 
-export const deleteGitlab = async (queryArgs: { id: number }) => {
+const deleteGitlab = async (queryArgs: { id: number }) => {
   const node = gql`
     mutation deleteGitlab($token: String!, $id: Int!) {
       deleteGitlab(token: $token, id: $id) {
@@ -158,7 +162,7 @@ export const deleteGitlab = async (queryArgs: { id: number }) => {
   return res.data?.deleteGitlab;
 };
 
-export const updateGitlab = async (queryArgs: {
+const updateGitlab = async (queryArgs: {
   id: number;
   active?: boolean;
   description?: string;
@@ -207,7 +211,7 @@ export const updateGitlab = async (queryArgs: {
   return res.data?.updateGitlab.gitlab;
 };
 
-export const getGitlabs = async () => {
+const getGitlabs = async () => {
   const node = gql`
     query getGitlabs($token: String!) {
       gitlabs(token: $token) {
@@ -235,9 +239,10 @@ export const getGitlabs = async () => {
 
   return res.data?.gitlabs;
 };
+//#endregion
 
-//> Pipelines
-export const addPipeline = async (queryArgs: {
+//#region > Pipeline Functions
+const addPipeline = async (queryArgs: {
   enterprisePageSlug: string;
   active: boolean;
   name: string;
@@ -273,7 +278,7 @@ export const addPipeline = async (queryArgs: {
   return res.data?.addPipeline.pipeline;
 };
 
-export const deletePipeline = async (queryArgs: { id: string }) => {
+const deletePipeline = async (queryArgs: { id: string }) => {
   const node = gql`
     mutation deletePipeline($token: String!, $id: String!) {
       deletePipeline(token: $token, id: $id) {
@@ -291,7 +296,7 @@ export const deletePipeline = async (queryArgs: { id: string }) => {
   return res.data?.deletePipeline;
 };
 
-export const updatePipeline = async (queryArgs: {
+const updatePipeline = async (queryArgs: {
   id: number;
   active?: boolean;
   description?: string;
@@ -331,7 +336,7 @@ export const updatePipeline = async (queryArgs: {
   return res.data?.updatePipeline.pipeline;
 };
 
-export const getPipelines = async () => {
+const getPipelines = async () => {
   const node = gql`
     query getPipelines($token: String!) {
       pipelines(token: $token) {
@@ -357,9 +362,10 @@ export const getPipelines = async () => {
 
   return res.data?.pipelines;
 };
+//#endregion
 
-//> Connectors
-export const addConnector = async (queryArgs: {
+//> Connector Functions
+const addConnector = async (queryArgs: {
   active: boolean;
   url: string;
   name: string;
@@ -411,7 +417,7 @@ export const addConnector = async (queryArgs: {
   return res.data?.addConnector.connector;
 };
 
-export const deleteConnector = async (queryArgs: { id: number }) => {
+const deleteConnector = async (queryArgs: { id: number }) => {
   const node = gql`
     mutation deleteConnector($token: String!, $id: Int!) {
       deleteConnector(token: $token, id: $id) {
@@ -429,7 +435,7 @@ export const deleteConnector = async (queryArgs: { id: number }) => {
   return res.data?.deleteConnector;
 };
 
-export const updateConnector = async (queryArgs: {
+const updateConnector = async (queryArgs: {
   id: number;
   active?: boolean;
   connectorToken?: string;
@@ -482,7 +488,7 @@ export const updateConnector = async (queryArgs: {
   return res.data?.updateConnector.connector;
 };
 
-export const getConnectors = async () => {
+const getConnectors = async () => {
   const node = gql`
     query getConnectors($token: String!) {
       connectors(token: $token) {
@@ -525,7 +531,7 @@ export const getConnectors = async () => {
   return res.data?.connectors;
 };
 
-export const publishEnterprisePageViaConnector = async (queryArgs: {
+const publishEnterprisePageViaConnector = async (queryArgs: {
   connectorId: number;
 }) => {
   const node = gql`
@@ -543,4 +549,27 @@ export const publishEnterprisePageViaConnector = async (queryArgs: {
   });
 
   return res.data?.publishCompanyPage.success;
+};
+//#endregion
+
+//#region > Exports
+export {
+  //> Enterprise Functions
+  getEnterprisePageGeneralContent,
+  //> Gitlab Functions
+  addGitlab,
+  deleteGitlab,
+  updateGitlab,
+  getGitlabs,
+  //> Pipeline Functions
+  addPipeline,
+  deletePipeline,
+  updatePipeline,
+  getPipelines,
+  //> Connector Functions
+  addConnector,
+  deleteConnector,
+  updateConnector,
+  getConnectors,
+  publishEnterprisePageViaConnector,
 };

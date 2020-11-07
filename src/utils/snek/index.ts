@@ -1,70 +1,63 @@
-// main registration
-
-// login -> handled via snek client
-// logout -> handled via snek client
-
-// get merged profile
-// -> get cached calendar svg
-
-// GitHub generation
-// GitLab generation
-
-// profile registration (GitHub, GitLab, (ops))
-// profile deletion
-// update profiles -> github, gitlab generation
-
-// update settings
-
-// soundcloud fetch
-
-// instagram fetch
-
-// imagur ?? own utils?
-
-// update person page for settings/upload
-
 //#region > Imports
+//#PACKAGE "snek-client"
+// Contains a graphql client adopted for the SNEK backend
+import { SnekClient } from "snek-client";
+
 //> All social related actions (like, follow,..)
 import * as achievement from "./achievement";
 import * as general from "./general";
 import * as social from "./social";
 import * as person from "./person";
 import * as talk from "./talk";
-//> Clients
-// Contains the clients for API calls to SNEK, Github and GitLab
-import { SnekClient } from "snek-client";
 //#endregion
 
 //#region > Classes
+/**
+ * @class Provider provides access to the snek backend
+ */
 class Provider {
-  // public static client = new SnekClient("https://engine.snek.at/graphql");
+  // Requires a valid instance of a snek engine running on localhost:8000.
+  // The public snek server running on engine.snek.at can also be used.
   public static client = new SnekClient("http://localhost:8000/graphql");
+  // API endpoints:
+  //  achievement.all()
+  //  achievement.redeem()
   public static achievement: typeof achievement = require("./achievement");
-  // achievements.all()
+  // API endpoints:
+  //  general.getGitlabServer()
+  //  general.checkUserExists()
   public static general: typeof general = require("./general");
+  // API endpoints:
+  //  social.follow()
+  //  social.unfollow()
+  //  social.like()
+  //  social.unlike()
   public static social: typeof social = require("./social");
-  // social.follow()
-  // social.unfollow()
-  // social.like()
-  // social.unlike()
-  // social.getAchievements()
+  // API endpoints:
+  //  person.allBrief()
+  //  person.get()
+  //  person.register()
+  //  person.profiles()
+  //  person.processProfiles()
+  //  person.addProfile()
+  //  person.deleteProfile()
+  //  person.updateProfile()
+  //  person.writeVariableStore()
+  //  person.updateSettings()
+  //  person.addMetaLink()
+  //  person.deleteMetaLink()
+  //  person.checkMetaLink()
+  //  person.getInstagramPosts()
   public static person: typeof person = require("./person");
-  // person.get() -> person page + merged profile
-  // person.profiles() -> get all profiles for the person page
-  // person.processProfiles()
-  // person.addProfile()
-  // person.deleteProfile()
-  // person.updateProfile()
-  // person.updateSettings()
-  // person.addMetaLink()
-  // person.getInstagramPosts()
+  // API endpoints:
+  //  talk.getTalk()
+  //  talk.getTalks()
+  //  talk.addTalk()
+  //  talk.deleteTalk()
+  //  talk.addTalkComment()
+  //  talk.deleteTalkComment()
+  //  talk.updateTalkComment()
   public static talk: typeof talk = require("./talk");
-  // talk.all()
-  // talk.get()
-  // talk.add()
-  // talk.delete()
-  // talk.addComment()
-  // talk.deleteComment()
 }
 //#endregion
 

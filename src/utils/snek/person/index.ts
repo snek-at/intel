@@ -1,16 +1,33 @@
+//#region > Imports
+//> Intel reducer
+// Contains the reducer and database models
+import { Reducer } from "../../../reducer";
+//> SNEK provider
 import Provider from "../index";
+//> Github provider
+import GithubProvider from "../../github";
+//> Gitlab provider
+import GitlabProvider from "../../gitlab";
+//> Instagram provider
+import InstagramProvider from "../../instagram";
+//> API response interfaces
 import * as types from "../types";
+//> Instagram util API response interfaces
+import { InstagramPost, InstagramPosts } from "../../instagram/types";
+//> GraphQL request data
 import * as queries from "./queries/data";
 import * as mutations from "./mutations/data";
-
-import GithubProvider from "../../github";
-import GitlabProvider from "../../gitlab";
-import InstagramProvider from "../../instagram";
-import { Reducer } from "../../../reducer";
+//> JSON Parser
+// Contains a functions which parses json to objects.
+// On error, a default value is returned.
 import { safelyParseJSON } from "../../../toolbox/Parser";
-import { InstagramPost, InstagramPosts } from "../../instagram/types";
+//#endregion
 
-const allBrief = async (runnerOptions: {}) => {
+//#region > Functions
+/**
+ * @function allBrief returns a brief list of all persons
+ */
+const allBrief = async () => {
   try {
     const res = await Provider.client.session.runner<{
       page: { children: types.GraphqlPersonPageBrief[] };
@@ -21,6 +38,10 @@ const allBrief = async (runnerOptions: {}) => {
   }
 };
 
+/**
+ * @function get returns a person page
+ * @param runnerOptions Name of a person
+ */
 const get = async (runnerOptions: { personName: string }) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -74,6 +95,10 @@ const get = async (runnerOptions: { personName: string }) => {
   }
 };
 
+/**
+ * @function register creates a new user with the given values
+ * @param runnerOptions Values for the registration form
+ */
 const register = async (runnerOptions: {
   formValues: {
     /* Values ​​are not camel cases because form values ​​require snake case */
@@ -97,6 +122,10 @@ const register = async (runnerOptions: {
   }
 };
 
+/**
+ * @function profiles returns all profiles of a person
+ * @param runnerOptions Name of a person
+ */
 const profiles = async (runnerOptions: { personName: string }) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -122,6 +151,10 @@ const profiles = async (runnerOptions: { personName: string }) => {
   }
 };
 
+/**
+ * @function processProfiles processes each profile of a person individually
+ * @param runnerOptions Name of a person
+ */
 const processProfiles = async (runnerOptions: { personName: string }) => {
   const allProfiles = await profiles({
     personName: runnerOptions.personName,
@@ -242,6 +275,10 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
   );
 };
 
+/**
+ * @function addProfile adds a profile to a person
+ * @param runnerOptions Name of a person and a proper source object
+ */
 const addProfile = async (runnerOptions: {
   personName: string;
   source: {
@@ -273,6 +310,10 @@ const addProfile = async (runnerOptions: {
   }
 };
 
+/**
+ * @function deleteProfile deletes a profile of a person
+ * @param runnerOptions Id of a profile
+ */
 const deleteProfile = async (runnerOptions: { profileId: number }) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -288,6 +329,10 @@ const deleteProfile = async (runnerOptions: { profileId: number }) => {
   }
 };
 
+/**
+ * @function updateProfile updates a profile of a person
+ * @param runnerOptions Id of a profile and values to update
+ */
 const updateProfile = async (runnerOptions: {
   profileId: number;
   toUpdate: {
@@ -315,6 +360,10 @@ const updateProfile = async (runnerOptions: {
   }
 };
 
+/**
+ * @function writeVariableStore updates/writes the variable store of a person
+ * @param runnerOptions Name of a person and values to update
+ */
 const writeVariableStore = async (runnerOptions: {
   personName: string;
   toStore: {
@@ -350,6 +399,10 @@ const writeVariableStore = async (runnerOptions: {
   }
 };
 
+/**
+ * @function updateSettings updates the settings of a person
+ * @param runnerOptions Name of a person and settings to update
+ */
 const updateSettings = async (runnerOptions: {
   personName: string;
   settings: {
@@ -393,6 +446,10 @@ const updateSettings = async (runnerOptions: {
   }
 };
 
+/**
+ * @function addMetaLink adds a meta link to a person
+ * @param runnerOptions Name of a person and link values
+ */
 const addMetaLink = async (runnerOptions: {
   personName: string;
   linkOptions: {
@@ -418,6 +475,10 @@ const addMetaLink = async (runnerOptions: {
   }
 };
 
+/**
+ * @function deleteMetaLink deletes a meta link of a person
+ * @param runnerOptions Id of a meta link
+ */
 const deleteMetaLink = async (runnerOptions: { metaLinkId: string }) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -433,6 +494,11 @@ const deleteMetaLink = async (runnerOptions: { metaLinkId: string }) => {
   }
 };
 
+/**
+ * @function deleteMetaLink check if a meta link already exists for the given
+ *           values.
+ * @param runnerOptions Name of a person and values to check
+ */
 const checkMetaLink = async (runnerOptions: {
   personName: string;
   toCheck: {
@@ -453,6 +519,12 @@ const checkMetaLink = async (runnerOptions: {
   }
 };
 
+/**
+ * @function getInstagramPosts generates a list of instagram posts based on the
+ *           profiles of a person. The next set of posts can be generated by
+ *           calling .next().
+ * @param runnerOptions Name of a person
+ */
 const getInstagramPosts = async (runnerOptions: { personName: string }) => {
   const instagramProfiles = await profiles({
     personName: runnerOptions.personName,
@@ -489,23 +561,19 @@ const getInstagramPosts = async (runnerOptions: { personName: string }) => {
     posts: InstagramPost[];
   } = { next: [], posts: [] };
 
-  console.log("POSTS1", posts);
-
   posts.forEach((e) => {
     if (e.next) {
       rtn.next.push(e.next);
     }
 
-    console.log("POSTS2", e.posts);
-
     rtn.posts = rtn.posts.concat(e.posts);
   });
 
-  console.log("POSTS3", rtn);
-
   return rtn;
 };
+//#endregion
 
+//#region > Exports
 export {
   allBrief,
   get,
@@ -521,3 +589,4 @@ export {
   checkMetaLink,
   getInstagramPosts,
 };
+//#endregion

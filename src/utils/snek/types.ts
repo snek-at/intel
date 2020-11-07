@@ -1,3 +1,4 @@
+//#region > Types
 /**
  * Types
  */
@@ -9,6 +10,9 @@ export type MetaLinkType =
   | "VIMEO"
   | "OTHER";
 
+//#endregion
+
+//#region > GraphQL related types
 /**
  * All graphql response types
  */
@@ -235,3 +239,4 @@ export interface GraphQLMetaLink {
   description: string;
   imgurDeleteHash: string | null;
 }
+//#endregion

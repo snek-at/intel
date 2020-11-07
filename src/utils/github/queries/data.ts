@@ -1,7 +1,7 @@
 //#region > Imports
-//> GQL
-// DocumentNode needed for queries
-import { gql } from "apollo-boost";
+//#PACKAGE "graphql-tag"
+// GQL DocumentNode needed for queries
+import gql from "graphql-tag";
 //#endregion
 
 //#region > Queries

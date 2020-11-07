@@ -1,13 +1,24 @@
+//#region > Imports
+//> SNEK provider
 import Provider from "../index";
+//> GraphQL request data
 import * as mutations from "./mutations/data";
+//#endregion
 
+//#region > Interfaces
 interface RunnerParameters {
   /** A person page which starts the operation */
   invoker: string;
   /** A person page which which the operation aims to */
   receiver: string;
 }
+//#endregion
 
+//#region > Functions
+/**
+ * @function follow creates a follow relationship between invoker and receiver
+ * @param {RunnerParameters} runnerOptions invoker and receiver person name
+ */
 const follow = async (runnerOptions: RunnerParameters) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -24,6 +35,10 @@ const follow = async (runnerOptions: RunnerParameters) => {
   }
 };
 
+/**
+ * @function follow removes a follow relationship between invoker and receiver
+ * @param {RunnerParameters} runnerOptions invoker and receiver person name
+ */
 const unfollow = async (runnerOptions: RunnerParameters) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -40,6 +55,10 @@ const unfollow = async (runnerOptions: RunnerParameters) => {
   }
 };
 
+/**
+ * @function like creates a like relationship between invoker and receiver
+ * @param {RunnerParameters} runnerOptions invoker and receiver person name
+ */
 const like = async (runnerOptions: RunnerParameters) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -56,6 +75,10 @@ const like = async (runnerOptions: RunnerParameters) => {
   }
 };
 
+/**
+ * @function unlike removes a like relationship between invoker and receiver
+ * @param {RunnerParameters} runnerOptions invoker and receiver person name
+ */
 const unlike = async (runnerOptions: RunnerParameters) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -71,5 +94,8 @@ const unlike = async (runnerOptions: RunnerParameters) => {
     );
   }
 };
+//#endregion
 
+//#region > Exports
 export { follow, unfollow, like, unlike };
+//#endregion

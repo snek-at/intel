@@ -1,8 +1,18 @@
+//#region > Imports
+//> SNEK provider
 import Provider from "../index";
+//> API response interfaces
 import * as types from "../types";
+//> GraphQL request data
 import * as queries from "./queries/data";
 import * as mutations from "./mutations/data";
+//#endregion
 
+//#region > Functions
+/**
+ * @function getTalk returns a talk
+ * @param runnerOptions Id of a talk
+ */
 const getTalk = async (runnerOptions: { id: number }) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -16,7 +26,11 @@ const getTalk = async (runnerOptions: { id: number }) => {
   }
 };
 
-const getTalks = async (runnerOptions: { personName?: string }) => {
+/**
+ * @function getTalks returns all talks of a person
+ * @param runnerOptions Id of a talk
+ */
+const getTalks = async (runnerOptions: { personName: string }) => {
   try {
     const res = await Provider.client.session.runner<{
       talks: types.GraphQLTalk[];
@@ -29,6 +43,10 @@ const getTalks = async (runnerOptions: { personName?: string }) => {
   }
 };
 
+/**
+ * @function addTalk adds a new talk to a person
+ * @param runnerOptions Name of a person and talk data
+ */
 const addTalk = async (runnerOptions: {
   personName: string;
   talkOptions: {
@@ -53,6 +71,10 @@ const addTalk = async (runnerOptions: {
   }
 };
 
+/**
+ * @function deleteTalk deletes a talk
+ * @param runnerOptions Id of a talk
+ */
 const deleteTalk = async (runnerOptions: { talkId: string }) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -68,6 +90,10 @@ const deleteTalk = async (runnerOptions: { talkId: string }) => {
   }
 };
 
+/**
+ * @function updateTalk updates the values of a talk
+ * @param runnerOptions Id of a talk and talk values to update
+ */
 const updateTalk = async (runnerOptions: {
   talkId: string;
   toUpdate: {
@@ -94,6 +120,10 @@ const updateTalk = async (runnerOptions: {
   }
 };
 
+/**
+ * @function addTalkComment adds a comment to a existing talk
+ * @param runnerOptions Name of a person who adds the comment and comment values
+ */
 const addTalkComment = async (runnerOptions: {
   personName: string;
   commentOptions: {
@@ -115,6 +145,10 @@ const addTalkComment = async (runnerOptions: {
   }
 };
 
+/**
+ * @function deleteTalkComment deletes a  talk comment
+ * @param runnerOptions Id of a talk and talk values to update
+ */
 const deleteTalkComment = async (runnerOptions: { commentId: string }) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -130,6 +164,10 @@ const deleteTalkComment = async (runnerOptions: { commentId: string }) => {
   }
 };
 
+/**
+ * @function updateTalkComment updates the values of a talk comment
+ * @param runnerOptions Id of a talk comment and talk values to update
+ */
 const updateTalkComment = async (runnerOptions: {
   commentId: string;
   toUpdate: {

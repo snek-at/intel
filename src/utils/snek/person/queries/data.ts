@@ -1,6 +1,6 @@
 //#region > Imports
-//> GQL
-// DocumentNode needed for queries
+//#PACKAGE "graphql-tag"
+// GQL DocumentNode needed for queries
 import gql from "graphql-tag";
 //#endregion
 

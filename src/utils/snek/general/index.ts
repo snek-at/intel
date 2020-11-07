@@ -1,8 +1,18 @@
+//#region > Imports
+//> SNEK provider
 import Provider from "../index";
+//> API response interfaces
 import * as types from "../types";
+//> GraphQL request data
 import * as queries from "./queries/data";
+//#endregion
 
-const getGitlabServer = async (runnerOptions: {}) => {
+//#region > Functions
+/**
+ * @function getGitlabServer Returns all registered gitlab server
+ * @param runnerOptions username
+ */
+const getGitlabServer = async () => {
   try {
     const res = await Provider.client.session.runner<{
       page: types.GraphQLRegistrationPage;
@@ -14,6 +24,10 @@ const getGitlabServer = async (runnerOptions: {}) => {
   }
 };
 
+/**
+ * @function checkUserExists Checks if the user already exists
+ * @param runnerOptions username
+ */
 const checkUserExists = async (runnerOptions: { username: string }) => {
   try {
     const res = await Provider.client.session.runner<{
@@ -25,5 +39,8 @@ const checkUserExists = async (runnerOptions: { username: string }) => {
     throw new Error(`Couldn't successfully fetch gitlab servers`);
   }
 };
+//#endregion
 
+//#region > Exports
 export { getGitlabServer, checkUserExists };
+//#endregion
