@@ -19,7 +19,11 @@
     "eject": "react-scripts eject",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
-    "build": "react-scripts build"
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc --emitDeclarationOnly",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline"
   },
   "browserslist": [
     ">0.2%",
@@ -33,6 +37,7 @@
   },
   "author": "schettn",
   "dependencies": {
+    "@types/node": "^14.14.10",
     "alasql": "^0.5.5",
     "apollo-boost": "^0.4.7",
     "gql": "^1.1.2",
@@ -41,9 +46,16 @@
     "moment": "^2.24.0",
     "react-scripts": "^4.0.0",
     "react-very-simple-oauth": "^1.1.1",
-    "snek-client": "file:snek-client-0.2.0-rc.7.tgz"
+    "snek-client": "file:snek-client-0.2.0-rc.8.tgz"
   },
   "devDependencies": {
+    "@babel/cli": "^7.12.8",
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.7",
+    "@babel/plugin-syntax-bigint": "^7.8.3",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-typescript": "^7.12.7",
     "@types/lodash.clonedeep": "^4.5.6",
     "typescript": "^3.8.3"
   }
