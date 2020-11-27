@@ -237,33 +237,35 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
     mergedProfiles.statistic.current
   );
 
+  const storingInfo = {
+    currentStatistic: JSON.stringify(
+      currentStatisticForVariableStore ? currentStatisticForVariableStore : {}
+    ),
+    yearsStatistic: JSON.stringify(
+      mergedProfiles.statistic.years.map((e) =>
+        prepareStatisticForVariableStore(e)
+      )
+    ),
+    languages: JSON.stringify(
+      mergedProfiles.statistic.languages
+        ? mergedProfiles.statistic.languages
+        : ""
+    ),
+    organisations: JSON.stringify(
+      mergedProfiles.profile?.organizations
+        ? mergedProfiles.profile?.organizations
+        : ""
+    ),
+    projects: JSON.stringify(
+      mergedProfiles.profile?.repositories
+        ? mergedProfiles.profile?.repositories
+        : ""
+    ),
+  };
+
   writeVariableStore({
     personName: runnerOptions.personName,
-    toStore: {
-      currentStatistic: JSON.stringify(
-        currentStatisticForVariableStore ? currentStatisticForVariableStore : {}
-      ),
-      yearsStatistic: JSON.stringify(
-        mergedProfiles.statistic.years.map((e) =>
-          prepareStatisticForVariableStore(e)
-        )
-      ),
-      languages: JSON.stringify(
-        mergedProfiles.statistic.languages
-          ? mergedProfiles.statistic.languages
-          : ""
-      ),
-      organisations: JSON.stringify(
-        mergedProfiles.profile?.organizations
-          ? mergedProfiles.profile?.organizations
-          : ""
-      ),
-      projects: JSON.stringify(
-        mergedProfiles.profile?.repositories
-          ? mergedProfiles.profile?.repositories
-          : ""
-      ),
-    },
+    toStore: storingInfo,
   }).then((res) =>
     res
       ? console.info(
@@ -273,6 +275,8 @@ const processProfiles = async (runnerOptions: { personName: string }) => {
           `Couldn't successfully write variable store for Person: ${runnerOptions.personName}`
         )
   );
+
+  return storingInfo;
 };
 
 /**
